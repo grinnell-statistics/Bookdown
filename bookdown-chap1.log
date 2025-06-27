@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.2)  27 JUN 2025 01:21
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.2)  27 JUN 2025 03:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -835,18 +835,18 @@ Chapter 1.
 
 [5]
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: index_files/figure-latex/graph1-1.pdf Graphic file (type pdf)
+<use index_files/figure-latex/graph1-1.pdf>
+
+
 
 Overfull \hbox (89.23564pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 6 \TU/lmr/m/sl/10 CHAPTER 1.  AN INTRODUCTION TO NONPARAMETRIC METHODS: SCHISTOSOMIASIS
  []
 
 [6]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: index_files/figure-latex/graph1-1.pdf Graphic file (type pdf)
-<use index_files/figure-latex/graph1-1.pdf>
-
 
 
 Overfull \hbox (152.07999pt too wide) has occurred while \output is active
@@ -861,63 +861,57 @@ Overfull \hbox (89.23564pt too wide) has occurred while \output is active
  []
 
 [8]
+Chapter 2.
 
 
-Overfull \hbox (152.07999pt too wide) has occurred while \output is active
-\TU/lmr/m/sl/10 1.1.  \TU/lmr/bx/sl/10 INVESTIGATION: CAN A NEW DRUG REDUCE THE SPREAD OF SCHISTOSOMIASIS? \TU/lmr/m/n/10 9
- []
+[9
 
-[9]
-
-
-Overfull \hbox (94.23564pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 10 \TU/lmr/m/sl/10 CHAPTER 1.  AN INTRODUCTION TO NONPARAMETRIC METHODS: SCHISTOSOMIASIS
- []
+]
 
 [10
 
 ]
-Chapter 2.
-
-
-[11]
-
-[12
-
-]
 Chapter 3.
 
-Overfull \hbox (17.937pt too wide) in paragraph at lines 283--284
+Overfull \hbox (17.937pt too wide) in paragraph at lines 281--282
 []\TU/lmr/m/n/10 To label an un-numbered heading, use: \TU/lmtt/m/n/10 # Hello world {-#nice-label}
  []
 
 
-Underfull \hbox (badness 2512) in paragraph at lines 286--287
+Underfull \hbox (badness 2512) in paragraph at lines 284--285
 []\TU/lmr/m/n/10 Next, reference the labeled heading anywhere in the text using
  []
 
 
 
-[13]
+[11]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 304.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 302.
 File: Chap3_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
 <use Chap3_files/figure-latex/nice-fig-1.pdf>
 
 
-[14]
+[12]
+
+[13]
+
+[14
+
+]
+Chapter 4.
+
+Underfull \hbox (badness 1859) in paragraph at lines 357--358
+[]\TU/lmr/m/n/10 Add an unnumbered part: \TU/lmtt/m/n/10 # (PART\*) Act one {-} \TU/lmr/m/n/10 (followed by \TU/lmtt/m/n/10 # A
+ []
+
+
 
 [15]
 
 [16
 
 ]
-Chapter 4.
-
-Underfull \hbox (badness 1859) in paragraph at lines 359--360
-[]\TU/lmr/m/n/10 Add an unnumbered part: \TU/lmtt/m/n/10 # (PART\*) Act one {-} \TU/lmr/m/n/10 (followed by \TU/lmtt/m/n/10 # A
- []
-
+Chapter 5.
 
 
 [17]
@@ -925,30 +919,22 @@ Underfull \hbox (badness 1859) in paragraph at lines 359--360
 [18
 
 ]
-Chapter 5.
+Chapter 6.
 
 
 [19]
 
-[20
-
-]
-Chapter 6.
-
-
-[21]
-
-[22]
+[20]
 Chapter 7.
 
 
-[23
+[21
 
 ] (./bookdown-chap1.bbl
 
-[24])
+[22])
 
-[25
+[23
 
 ] (./bookdown-chap1.aux)
  ***********
@@ -959,10 +945,10 @@ L3 programming layer <2024-05-27>
 Here is how much of TeX's memory you used:
  19165 strings out of 476238
  348346 string characters out of 5785363
- 1931560 words of memory out of 5000000
+ 1932560 words of memory out of 5000000
  41419 multiletter control sequences out of 15000+600000
  564690 words of font info for 98 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  90i,9n,123p,861b,393s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-chap1.pdf (25 pages).
+Output written on bookdown-chap1.pdf (23 pages).
