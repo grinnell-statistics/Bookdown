@@ -64,16 +64,7 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></li>
-<li><a class="" href="hello-bookdown.html"><span class="header-section-number">2</span> Hello bookdown</a></li>
-<li><a class="" href="cross.html"><span class="header-section-number">3</span> Cross-references</a></li>
-<li><a class="" href="parts.html"><span class="header-section-number">4</span> Parts</a></li>
-<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">5</span> Footnotes and citations</a></li>
-<li><a class="" href="blocks.html"><span class="header-section-number">6</span> Blocks</a></li>
-<li><a class="" href="sharing-your-book.html"><span class="header-section-number">7</span> Sharing your book</a></li>
-<li><a class="" href="references.html">References</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="active" href="index.html"><span class="header-section-number">Chapter 1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
@@ -125,24 +116,59 @@ When values are close or the same, the dots are stacked. Dotplots can be used in
 when the sample size is small. Individual value plots, as shown in Figure 1.1, are used to simultaneously
 display each observation for multiple groups. They can be used instead of boxplots to identify outliers and distribution shape, especially when there are relatively few observations.</p>
 </blockquote>
+</div>
+<div id="activity-describing-the-data" class="section level2 unnumbered">
+<h2>Activity: <em>Describing the Data</em><a class="anchor" aria-label="anchor" href="#activity-describing-the-data"><i class="fas fa-link"></i></a>
+</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Use Figure 1.1 to visually compare the number of worms for the treatment and control groups for both
+the male and the female mice. Does each of the four groups appear to have a similar center and a similar
+spread? Are there any outliers (extreme observations that don’t seem to fit with the rest of the data)?</li>
+<li>Calculate appropriate summary statistics (e.g., the median, mean, standard deviation, and range) for
+each of the four groups. For the female mice, calculate the difference between the treatment and control
+group means. Do the same for the male mice.</li>
+</ol>
+</blockquote>
+<div class="line-block">The descriptive analysis in Questions 1 and 2 points to a positive treatment effect: K11777 appears to have</div>
+<p>reduced the number of parasitic worms in this sample. But descriptive analysis is usually only the first step
+in ascertaining whether an effect is real; we often conduct a significance test or create a confidence interval
+to determine if chance alone could explain the effect.</p>
+<div class="line-block">Most introductory statistics courses focus on hypothesis tests that involve using a normal, t-, chi-square or F-distribution to calculate the p-value. These tests are often based on the central limit theorem. In the</div>
+<p>schistosomiasis study, there are only five observations in each group. This is a much smaller sample size
+than is recommended for the central limit theorem, especially given that Figure 1.1 indicates that the data
+may not be normally distributed. Since we cannot be confident that the sample averages are normally distributed,
+we will use a distribution-free test, also called a nonparametric test. Such tests do not require
+the distribution of our sample statistic to have any specific form and are often useful in studies with very
+small sample sizes.</p>
+<p>
+For any population with mean m and finite standard deviation s, the central limit theorem states that
+the sample mean x from an independent and identically distributed sample tends to follow the normal
+distribution if the sample size is large enough. The mean of x is the same as the population mean, m, while
+the standard deviation of x is s/1n, where n is the sample size.</p>
+<div class="line-block">We will use a form of nonparametric statistical inference known as a randomization hypothesis test to analyze the data from the schistosomiasis study. <strong>Randomization hypothesis</strong> tests are significance tests that simulate the random allocation of units to treatments many times in order to determine the likelihood of observing an outcome at least as extreme as the one found in the actual study.</div>
+<p>
+</p>
+<div class="line-block">We will introduce the basic concepts of randomization tests in a setting where units (mice in this example) are randomly allocated to a treatment or control group. Using a significance test, we will decide if an observed treatment effect (the observed difference between the mean responses in the treatment and control) is “real” or</div>
+<p>if “random chance alone” could plausibly explain the observed effect. The null hypothesis states that “random chance alone” is the reason for the observed effect. In this initial discussion, the alternative hypothesis will be onesided because we want to show that the true treatment mean (mtreatment) is less than the true control mean (mcontrol). Later, we will expand the discussion to consider modifications needed to deal with two-sided alternatives.</p>
 
 </div>
 </div>
 
   <div class="chapter-nav">
 <div class="empty"></div>
-<div class="next"><a href="hello-bookdown.html"><span class="header-section-number">2</span> Hello bookdown</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#an-introduction-to-nonparametric-methods-schistosomiasis"><span class="header-section-number">1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></li>
+<li><a class="nav-link" href="#an-introduction-to-nonparametric-methods-schistosomiasis"><span class="header-section-number">Chapter 1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></li>
 <li><a class="nav-link" href="#investigation-can-a-new-drug-reduce-the-spread-of-schistosomiasis"><span class="header-section-number">1.1</span> Investigation: Can a New Drug Reduce the Spread of Schistosomiasis?</a></li>
+<li><a class="nav-link" href="#activity-describing-the-data">Activity: Describing the Data</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>
@@ -162,34 +188,6 @@ display each observation for multiple groups. They can be used instead of boxplo
   </div>
 
 </div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
-</script>
+</footer>
 </body>
 </html>
