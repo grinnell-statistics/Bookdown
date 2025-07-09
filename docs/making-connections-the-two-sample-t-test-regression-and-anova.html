@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA | A Book Chapter Example</title>
+<meta name="author" content="Your Name">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA | A Book Chapter Example">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA | A Book Chapter Example">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra5  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
+<meta property="og:description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra5  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
+<meta name="twitter:description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra5  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A Book Chapter Example</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></li>
+<li><a class="active" href="making-connections-the-two-sample-t-test-regression-and-anova.html"><span class="header-section-number">2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA</a></li>
+<li><a class="" href="multiple-regression-how-much-is-your-car-worth.html"><span class="header-section-number">3</span> Multiple Regression: How Much Is Your Car Worth?</a></li>
+<li><a class="" href="the-design-and-analysis-of-factorial-experiments-microwave-popcorn.html"><span class="header-section-number">4</span> The Design and Analysis of Factorial Experiments: Microwave Popcorn</a></li>
+<li><a class="" href="investigation-which-microwave-popcorn-is-the-best.html"><span class="header-section-number">5</span> 4.1 Investigation: Which Microwave Popcorn Is the Best?</a></li>
+<li><a class="" href="elements-of-a-well-designed-experiment.html"><span class="header-section-number">6</span> 4.2 Elements of a Well-Designed Experiment</a></li>
+<li><a class="" href="what-can-we-conclude-from-the-popcorn-study.html"><span class="header-section-number">7</span> 4.5 What Can We Conclude from the Popcorn Study?</a></li>
+<li><a class="" href="paper-towels-developing-a-statistical-model-for-a-two-way.html"><span class="header-section-number">8</span> 4.6 Paper Towels: Developing a Statistical Model for a Two-Way</a></li>
+<li><a class="" href="paper-towels-the-relationship-between-effects-and-anova.html"><span class="header-section-number">9</span> 4.7 Paper Towels: The Relationship Between Effects and ANOVA</a></li>
+<li><a class="" href="contrasts-and-multiple-comparisons.html"><span class="header-section-number">10</span> 4.8 Contrasts and Multiple Comparisons</a></li>
+<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">11</span> Footnotes and citations</a></li>
+<li><a class="" href="blocks.html"><span class="header-section-number">12</span> Blocks</a></li>
+<li><a class="" href="sharing-your-book.html"><span class="header-section-number">13</span> Sharing your book</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="making-connections-the-two-sample-t-test-regression-and-anova" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA<a class="anchor" aria-label="anchor" href="#making-connections-the-two-sample-t-test-regression-and-anova"><i class="fas fa-link"></i></a>
+</h1>
+<p><span style="float:right;"> <em>In theory, there’s no difference between theory and practice. In practice, there is.</em></span><br><span style="float:right;"> -Yogi Berra<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Yogi Berra was an American League Baseball player and manager. This quote has also been attributed to computer scientist Jan L. A. van de Snepscheut.&lt;/p&gt;"><sup>5</sup></a>
+</span></p>
+<p><br><br></p>
+<p>Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance (ANOVA) as very distinct approaches to analyzing different types of data. However, this chapter makes connections among these three techniques by focusing on the statistical models. Statistical software has made it easy to calculate statistics and <span class="math inline">\(p\)</span>-values. But without understanding the underlying model assumptions, it is easy to draw incorrect conclusions from the sample data. As studies become more complex, models become fundamental to drawing appropriate conclusions. In this chapter, a simple student experiment involving games and several additional studies are used to do the following:</p>
+<ul>
+<li>Compare the underlying statistical models for the two-sample t-test, linear regression, and
+ANOVA</li>
+<li>Discuss the model assumptions for each of these three tests</li>
+<li>Create and interpret normal probability plots</li>
+<li>Transform data in order to better fit the model assumptions</li>
+<li>Discuss the mathematical details of each hypothesis test and corresponding confidence interval</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<div id="investigation-do-distracting-colors-influence-the-time-to-complete-a-game" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Investigation: Do Distracting Colors Influence the Time to Complete a Game?<a class="anchor" aria-label="anchor" href="#investigation-do-distracting-colors-influence-the-time-to-complete-a-game"><i class="fas fa-link"></i></a>
+</h2>
+<p>In 1935, John Stroop published a paper presenting his research on the reaction time of undergraduate students identifying ink colors.2 He found that students took a longer time identifying ink colors when the ink was used to spell a different color. For example, if the word [[[“yellow”]]] was printed in blue ink, students took longer to identify the blue ink because they automatically read the word “yellow.” Even though students were told only to identify the ink color, the automatized behavior of reading interfered with the task and slowed their reaction time.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that many psychologists would call this procedural knowledge instead of automatized behavior. Both are processes that can be done without conscious thought, but automatized behaviors are processes that cannot be slowed down, do not
+decline with age, and show no gender differences.&lt;/p&gt;"><sup>6</sup></a> <em>Automatized behaviors</em> are behaviors that can be done automatically without carefully thinking through each step in the process. Stroop’s work, demonstrating that automatized behaviors can act as a distracter for other desired behaviors, is so well known that the effect is often called the <em>Stroop effect</em>.</p>
+<p>Several students in an introductory statistics class wanted to develop a final project that would test the impact of distracters. They decided to conduct a study to determine if students at their college would perform differently when a distracting color was incorporated into a computerized game. This game challenges people to place an assortment of shaped pegs into the appropriate spaces as quickly as possible. Before any data were collected, these students developed a clear set of procedures.</p>
+<ul>
+<li>40 students would be randomly selected from the college.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Since it was not possible to force college students to be involved in this study, these researchers randomly selected students from an online college directory until they had 40 students who were willing to play the game.&lt;/p&gt;"><sup>7</sup></a>
+</li>
+<li>20 students would be assigned to the standard game and 20 would be assigned to a game with a color
+distracter. The student researchers would flip a coin to randomly assign subjects to a treatment. Once
+20 subjects had been assigned to either group, the rest would automatically be assigned to play the
+other game.</li>
+<li>Subjects would see a picture of the game and have the rules clearly explained to them before they
+played the game. An example of both games is shown in Figure 2.1.</li>
+<li>Subjects would play the game in the same area with similar background noise to control for other
+possible distractions.</li>
+<li>The response variable would be the time in seconds from when the participant pressed the “start
+game” button to when he or she won the game.</li>
+</ul>
+<p>[[[Insert Figure 2.1]]]</p>
+<p><strong>Figure 2.1</strong> A black and white image of the electronic Shapesplosion game
+with and without color distracters. The instructions for the game were to
+click and drag each peg to the space with the matching shape.</p>
+<blockquote>
+<p><strong>NOTE</strong>
+It is important to recognize that each subject in this study was assigned to exactly one treatment, either the standard game or the color distracter game. Some researchers may point out that a paired design (where each subject was assigned to both treatments) might have been more efficient. However, for the purposes of this chapter, this study will be treated as the students originally designed it: a study comparing two independent samples.</p>
+</blockquote>
+<div id="understanding-the-study-design" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> Understanding the Study Design<a class="anchor" aria-label="anchor" href="#understanding-the-study-design"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li><p>For this study, identify the units, the population for which conclusions can be drawn, the explanatory variable, and the response variable.</p></li>
+<li><p>Is this study an experiment or an observational study? Explain.</p></li>
+<li><p>The researchers hoped to determine if distracting colors influenced college students’ response times when playing a computerized game. Write out in words and symbols appropriate null and alternative hypotheses. Let <span class="math inline">\(\mu_1\)</span> represent the true mean response time of the color group and <span class="math inline">\(\mu_2\)</span> the true mean response time of the standard group. Use a two-sided alternative hypothesis for this question.</p></li>
+<li><p>Create an individual value plot or a boxplot of the Games1 data from this study. Describe the graph. For example, does it look as if the groups have equal means or equal standard deviations? Are there any unusual observations in the data set? Calculate the mean and standard deviation of the color distracter responses, <span class="math inline">\(\bar{y}_1\)</span> and <span class="math inline">\(s_1\)</span> , as well as the mean and standard deviation of the standard game responses, <span class="math inline">\(\bar{y}_2\)</span> and <span class="math inline">\(s_2\)</span>.</p></li>
+</ol>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div id="the-two-sample-t-test-to-compare-population-means" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> The Two-Sample t-Test to Compare Population Means<a class="anchor" aria-label="anchor" href="#the-two-sample-t-test-to-compare-population-means"><i class="fas fa-link"></i></a>
+</h2>
+<div id="the-statistical-model" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> The Statistical Model<a class="anchor" aria-label="anchor" href="#the-statistical-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>Generally, <strong>statistical models</strong> have the following form:</p>
+<p style="text-align: center;">
+observed value = mean response + random error
+</p>
+<p>The statistical model describes each observed value in a data set as the sum of a mean response for some subgroup of interest (often called a group mean) and a random error term. The mean response is fixed for each group, while the random error term is used to model the uncertainty of each individual outcome. The random error term for each individual outcome cannot be predicted, but in the long run there is a regular pattern that can be modeled with a distribution (such as the normal distribution).</p>
+<p>The key question in this study is whether or not the two types of games have different average completion times. The two-sample t-test starts with the assumption that the two group means are equal. This is often written as the null hypothesis <span class="math inline">\(H_0 : \mu_1 - \mu_2 = 0\)</span> or, equivalently, <span class="math inline">\(H_0 : \mu_1 = \mu_2\)</span>.</p>
+<p>The underlying model used in the two-sample t-test is designed to account for these two group means (<span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>) and random error. The statistical model for the first population, the color distracter group, is:</p>
+<p>[[[Eq 2.1]]]</p>
+<p>where j is used to represent each observation in the sample from the first population. For example, <span class="math inline">\(y_{1, 9}\)</span> represents the 9th observation in the first group (the color distracter group). In this data set, there were 20 observations taken from the first population; thus, <span class="math inline">\(n_1\)</span> = 20.</p>
+<p>This model states that the color distracter game is expected to be centered at the constant value <span class="math inline">\(\mu_1\)</span> . In addition, each observation is expected to have some variability (random error) that is typically modeled by a normal distribution with a mean equal to zero and a fixed variance s2. Similarly, each observation from the second group, the standard game, can be modeled as the sum of <span class="math inline">\(\mu_2\)</span> plus a random error term, <span class="math inline">\(\epsilon_{2, j}\)</span>:</p>
+<p><span class="math inline">\(y_{2, j} = \mu_2 + \epsilon_{2, j}\)</span> for <span class="math inline">\(j = 1, 2, ... ,n_2\)</span></p>
+<p>where <span class="math inline">\(n_2 = 20\)</span>, <span class="math inline">\(\mu_2\)</span> is the mean of the standard group, and the <span class="math inline">\(\epsilon_{2, j}\)</span> are random variables (typically from a
+normal distribution) with a mean equal to zero and variance <span class="math inline">\(\sigma^2\)</span> . Often, this statistical model is more succinctly written as:</p>
+<p><span class="math inline">\(y_{i, j} = \mu_i + \epsilon_{i, j}\)</span> for <span class="math inline">\(j = 1, 2\)</span> and <span class="math inline">\(j = 1, 2, ... ,n_2\)</span> where <span class="math inline">\(\epsilon_{i, j} \sim N(0,\sigma^2)\)</span></p>
+<blockquote>
+<p><strong>MATHMATICAL NOTE</strong>
+You may recall from your introductory statistics course that adding a constant to each random variable in a population does not change the shape or spread of the population. Since each mean response (<span class="math inline">\(\mu_i\)</span>) is fixed (i.e., a constant value), Equation (2.1) can be used to show that <span class="math inline">\(y_{i, j} \sim N(\mu_i,\sigma^2)\)</span>.</p>
+</blockquote>
+<p>This model has one assumption that you may not have made when previously conducting a two-sample t-test. Equation (2.1) states that all <span class="math inline">\(\epsilon_{i, j}\)</span> come from a normally distributed population with a mean of zero and
+variance s2 . This is called the equal variance assumption. Some introductory statistics courses discuss only a two-sample t-test that does not require the equal variance assumption. The equal variance assumption is
+made here because it makes sense for this experiment, the data support it (<span class="math inline">\(s_1\)</span> is close to <span class="math inline">\(s_2\)</span>), and it allows a direct comparison to ANOVA and regression models.</p>
+<p>In Equation (2.1), the mean response of the model is the population mean (<span class="math inline">\(\mu_1\)</span> or <span class="math inline">\(\mu_2\)</span>). Just as a sample mean, <span class="math inline">\(\bar{y}_i\)</span>, is used to estimate the population means, <span class="math inline">\(\mu_i\)</span>, residuals are used to estimate the random error terms. <strong>Residuals</strong> are the difference between the observed response and the estimated mean response. For example, the random error term <span class="math inline">\(\epsilon_{1, 12} = + \bar{y}_{1, 12} - \mu_1\)</span> is estimated by <span class="math inline">\(\hat{\epsilon}_{1, 12} = + \bar{y}_{1, 12} - \bar{y}_1\)</span>.</p>
+<blockquote>
+<p><strong>NOTE</strong>
+A <strong>statistic</strong> is any mathematical function of the sample data. <strong>Parameters</strong> are actual population values that cannot be known unless the entire population is sampled. The mean response is based on population parameters. If a sample data set is used, we do not know the population parameters. Sample statistics (such as the sample mean, <span class="math inline">\(\bar{y}\)</span>, and the sample standard deviation, <span class="math inline">\(s\)</span>) are used to estimate population parameters (<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>). Statisticians often use a hat on top of a parameter to represent an estimate of that parameter. For example, an estimate of the population standard deviation is written <span class="math inline">\(s = \hat{\sigma}\)</span> , and an estimate for a mean is written <span class="math inline">\(\bar{y}_1 = \hat{\mu}_1\)</span> or <span class="math inline">\(\bar{y}_2 = \hat{\mu}_2\)</span>.</p>
+</blockquote>
+</div>
+<div id="statistical-models-for-the-two-sample-t-test" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Statistical Models for the Two-Sample t-Test<a class="anchor" aria-label="anchor" href="#statistical-models-for-the-two-sample-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<ol start="5" style="list-style-type: decimal">
+<li>Assume that we have two very small populations that can be written as
+<span class="math inline">\(y_{1,1} = 15\)</span>, <span class="math inline">\(y_{1,2} = 17\)</span>, <span class="math inline">\(y_{1,3} = 16\)</span>, <span class="math inline">\(y_{2,1} = 11\)</span>, <span class="math inline">\(y_{2,2} = 9\)</span>, <span class="math inline">\(y_{2,3} = 10\)</span>. Find <span class="math inline">\(\mu_1\)</span>, <span class="math inline">\(\mu_2\)</span>, <span class="math inline">\(\epsilon_{1, 1}\)</span>, <span class="math inline">\(\epsilon_{1, 3}\)</span>, and <span class="math inline">\(\epsilon_{2, 1}\)</span>.</li>
+</ol>
+<p>Notice the double subscripts on the observed responses: <span class="math inline">\(y_{1,1}\)</span> is read as “y one one.” The first subscript tells us that the observation was from the first group, and the second subscript tells us the observation number. For example, <span class="math inline">\(y_{1,j}\)</span> is the jth observation from the first group.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Use the game study and the data in the file Games1 to identify <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>, <span class="math inline">\(y_{1,12}\)</span> , <span class="math inline">\(y_{2,12}\)</span> , <span class="math inline">\(\epsilon_{1, 12}\)</span>, and <span class="math inline">\(\epsilon_{2, 12}\)</span>,
+where <span class="math inline">\(y_{1,12}\)</span> represents the 12th observation from group 1 (the color distracter group). Note that since this is a sample, not a population, we do not know <span class="math inline">\(\mu_1\)</span> or <span class="math inline">\(\mu_2\)</span> , but we can estimate them with <span class="math inline">\(\bar{y}_1 = \hat{\mu}_1\)</span> and <span class="math inline">\(\bar{y}_2 = \hat{\mu}_2\)</span>.</li>
+</ol>
+</div>
+<div id="model-assumptions-for-the-two-sample-t-test" class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> Model Assumptions for the Two-Sample t-Test<a class="anchor" aria-label="anchor" href="#model-assumptions-for-the-two-sample-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Several implicit assumptions are built into the model for the two-sample t-test shown in Equation (2.1):</p>
+<ul>
+<li>Constant parameters: The population values in this model (<span class="math inline">\(\mu_1\)</span> , <span class="math inline">\(\mu_2\)</span> , and <span class="math inline">\(\sigma\)</span>) do not change throughout the study.</li>
+<li>Additive terms: The model described in Equation (2.1) shows that the observed responses are the sum of our parameters and error terms. For example, we are not considering models such as
+<span class="math inline">\(y_{i, j} = \mu_i * \epsilon_{i, j}\)</span> .</li>
+<li>
+<span class="math inline">\(\epsilon_{i, j} \sim N(0,\sigma^2)\)</span>. This assumption has many key components:</li>
+<li>The error terms are independent and identically distributed (iid).</li>
+<li>The error terms follow a normal probability distribution.</li>
+<li>The error terms have a mean of zero. This implies that the average of several observed values will tend to be close to the true mean. In essence, there is no systematic bias in the error terms.</li>
+<li>The population variance <span class="math inline">\(\sigma^2\)</span> is the same for both groups (color distracter and standard games) being tested.</li>
+</ul>
+<p>The first assumption tells us about the mean response. The parameter estimate (<span class="math inline">\(\bar{y}_i\)</span>) would not be meaningful if the true parameter value (<span class="math inline">\(\mu_i\)</span>) were not constant throughout the study. The second assumption simply states the types of models we are building. In later chapters with more complex models, we will discuss how to use residual plots to determine if the model is appropriate. In this chapter, we will focus on the assumptions about the error terms</p>
+<blockquote>
+<p><strong>MATHMATICAL NOTE</strong>
+In later chapters, we will show that a curved pattern in a residual versus fit plot suggests that an additive model may not be appropriate. In this example, there are only two fitted values (i.e., expected values), so we cannot see any curved patterns. When the additive assumption is violated, residual plots may also indicate different standard deviations, a nonnormal distribution, or lack of independence. Transforming the data to a new scale can often make the additivity assumption (and several of the other assumptions) more appropriate.</p>
+</blockquote>
+<p>The statistical model described in Equation (2.1) assumes that <span class="math inline">\(\epsilon_{i, j}\)</span> are modeled as <strong>independent and identically distributed</strong> (iid) random variables. The independent error term assumption states that there is no relationship between one observation and the next. For example, knowing that the 8th subject in a group played the game more quickly than average does not provide any information about whether the 7th or 9th person in the group will be above or below the average.</p>
+<p>The identically distributed assumption states that each error is assumed to come from the same population distribution. Thus, each subject from a particular group is from the same population. If any error term
+based on a particular observation comes from a different population, the two-sample t-test will not be valid. For example, elementary school students may have different expected completion times for the Shapesplosion game than college students. It would be inappropriate to include younger students in a study where the population was assumed to be college students</p>
+<p>Model assumptions for the residuals should always be checked with plots of the data. The extended activities will describe normality tests in more detail, but in most situations a simple graph of the residuals will
+suffice. The two sample t-test actually requires only that the sample means (each <span class="math inline">\(\bar{y}_{i,j}\)</span>) be normally distributed. The central limit theorem allows us to assume this is true if group sample sizes are similar and large (<span class="math inline">\(n_1 \ge 15\)</span> and <span class="math inline">\(n_2 \ge 15\)</span>) and there does not appear to be any extreme skewness or outliers in the residuals.</p>
+<p>Since residuals are defined as the difference between each observed value and the corresponding group mean, they should always sum to zero. Thus, we cannot check residuals to determine whether each of the error
+terms is centered at zero. The assumption that the error terms are centered at zero is really stating that there are no other sources of variability that may be biasing our results. In essence, the only difference between the two population means is explained by the mean response.</p>
+<p>To check the assumption that the two populations have the same variance, an informal test can be used. If the ratio of the sample standard deviations is less than 2, we can proceed with the analysis.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Some texts suggest rejecting the equal variance assumption when the ratio is greater than 3 instead of 2. If the ratio is close to 2 (or 3), many statisticians would suggest conducting a more formal F-test for equal variances.&lt;/p&gt;"><sup>8</sup></a></p>
+<p><strong>Informal Test for Equal Variances</strong></p>
+<p>[[[ ]]]</p>
+<p>then we do not have enough evidence to conclude that the population variances are different.</p>
+<p>Several key observations should be made about the individual value plot shown in Figure 2.2:</p>
+<ul>
+<li>The mean completion time is higher for the color distracter group than for the standard group.</li>
+<li>Neither group appears to have clear outliers, skewness, or large gaps.</li>
+<li>The spread (variance) of the two groups appears to be similar.</li>
+</ul>
+<blockquote>
+<p><strong>Key Concept</strong>
+Every statistical hypothesis test has basic underlying conditions that need to be checked before any valid conclusions can be drawn.</p>
+</blockquote>
+<p>[[[]]]
+<strong>Figure 2.2</strong> Individual value plot of the data from the color distracter and standard games.</p>
+</div>
+<div id="checking-assumptions-for-the-t-test" class="section level3 unnumbered">
+<h3>Checking Assumptions for the t-Test<a class="anchor" aria-label="anchor" href="#checking-assumptions-for-the-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<ol start="7" style="list-style-type: decimal">
+<li>Calculate the residuals in the Games1 data. Plot a histogram of the residuals (or create a normal probability plot of the residuals). Do the residuals appear to be somewhat normally distributed?</li>
+<li>Use the informal test to determine if the equal variance assumption is appropriate for this study.</li>
+<li>The variable StudentID represents the order in which the games were played. Plot the residuals versus the order of the data to determine if any patterns exist that may indicate that the observations are
+not independent.</li>
+<li>Use statistical software to conduct a two-sample t-test (assuming equal variances) and find the <span class="math inline">\(p\)</span>-value corresponding to this statistic. In addition, use software to calculate a 95% confidence interval for
+the difference between the two means (<span class="math inline">\(\mu_1\)</span> - <span class="math inline">\(\mu_2\)</span> ). Equation (2.7) and the extended activities provide details on conducting these calculations by hand. If H0 : <span class="math inline">\(\mu_1\)</span> = <span class="math inline">\(\mu_2\)</span> is true, the <strong><span class="math inline">\(p\)</span>-value</strong> states how likely it is that random chance alone would create a difference between two sample means (<span class="math inline">\(\bar{y}_1 - \bar{y}_2\)</span>) at least as large as the one observed. Based on the <span class="math inline">\(p\)</span>, what can you conclude about these two types of
+games?</li>
+</ol>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div id="the-regression-model-to-compare-population-means" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> The Regression Model to Compare Population Means<a class="anchor" aria-label="anchor" href="#the-regression-model-to-compare-population-means"><i class="fas fa-link"></i></a>
+</h2>
+<div id="the-linear-regression-model" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> The Linear Regression Model<a class="anchor" aria-label="anchor" href="#the-linear-regression-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>The simple linear regression model discussed in introductory statistics courses typically has the followingcform:</p>
+<p><span class="math display">\[\begin{equation}
+y_i = \beta_0 + \beta_1x_i + \epsilon_i ~\text{ for } i = 1, 2, ... , n ~\text{ where } \epsilon_i \sim N(0,\sigma^2)
+\tag{2.2}
+\end{equation}\]</span></p>
+<p>[[[add eq number (2.2)]]]</p>
+<p>A <strong>simple linear regression</strong> model is a straight-line regression model with a single explanatory variable and a single response variable. For this linear regression model, the mean response (<span class="math inline">\(\beta_0 + \beta_1x_i\)</span>) is a function of two parameters, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, and an explanatory variable, <span class="math inline">\(x\)</span>. The random error terms, <span class="math inline">\(\epsilon_i\)</span>, are assumed to be independent and to follow a normal distribution with mean zero and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>In Equation (2.1), we used double subscripts: <span class="math inline">\(i = 1, 2\)</span> was used to show that there were two distinct groups and <span class="math inline">\(j = 1, 2, ... , n_i\)</span> was used to identify each of the <span class="math inline">\(n_1 = n_2 = 20\)</span> items within the two groups. In the regression model, there is only one set of subscripts: <span class="math inline">\(i = 1, 2, ..., n\)</span>, where <span class="math inline">\(n = 40 = n_1 + n_2\)</span>. Instead of having two distinct means in the model (<span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>), as in the two-sample t-test, we have one regression model where the parameters, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, are fixed. The categorical explanatory variable, <span class="math inline">\(x\)</span>, indicates game type.</p>
+<p>A procedure commonly used to incorporate categorical explanatory variables, such as the game type, into a regression model is to define <strong>indicator variables</strong>, also called <strong>dummy variables</strong>, that will take on the role of the x variable in the model. Creating dummy variables is a process of mapping the column of categorical data into 0 and 1 data. For example, the indicator variable will have the value 1 for every observation from the color distracter game and 0 for every observation from the standard game. Most statistical software packages have a command for automatically creating dummy variables.</p>
+<blockquote>
+<p><strong>NOTE</strong>
+Typically an indicator variable is created for each category. Thus, there would be an indicator variable called Color equal to 1 for the color distracter game and 0 otherwise and another indicator variable called Standard equal to 1 for the standard game and 0 for all other categories. Notice that there is complete redundancy between the two indicator variables: Knowing the value of the Color variable automatically tells us the value of the Standard variable for each subject. Thus, only one of the indicator variables is needed in this model. Although this study has only two categories of games (color and standard), it is common for a categorical explanatory variable to have more than two categories. Chapter 3 provides the opportunity to use indicator variables when there are multiple categories.</p>
+</blockquote>
+<blockquote>
+<p><strong>Key Concept</strong>
+Indicator variables can be created to incorporate categorical explanatory variables into a regression model.</p>
+</blockquote>
+</div>
+<div id="calculating-a-regression-model-and-hypothesis-test-for-the-slope" class="section level3 unnumbered">
+<h3>Calculating a Regression Model and Hypothesis Test for the Slope<a class="anchor" aria-label="anchor" href="#calculating-a-regression-model-and-hypothesis-test-for-the-slope"><i class="fas fa-link"></i></a>
+</h3>
+<ol start="11" style="list-style-type: decimal">
+<li><p>Use the software instructions and the Games1 data to create indicator variables where <span class="math inline">\(x = 1\)</span> represents the color distracter game and <span class="math inline">\(x = 0\)</span> represents the standard game. Develop a regression model using Time as the response and the indicator variable as the explanatory variable.</p></li>
+<li><p>Use statistical software to calculate the t-statistic and <span class="math inline">\(p\)</span>-value for the hypothesis tests <span class="math inline">\(H_0 : \beta_1 = 0\)</span> versus <span class="math inline">\(H_1 : \beta_1 \ne 0\)</span>. In addition, construct a 95% confidence interval for <span class="math inline">\(\beta_1\)</span> . Based on these statistics, can you conclude that the coefficient, <span class="math inline">\(\beta_1\)</span>, is significantly different from zero? Details for calculating these statistics by hand are provided in the extended activities.</p></li>
+<li><p>Repeat the two previous questions, but use an indicator variable where <span class="math inline">\(x = 1\)</span> represents the standard game and <span class="math inline">\(x = 0\)</span> represents the color distracter game. Compare the regression line, hypothesis test, and <span class="math inline">\(p\)</span>-value to those from the previous questions. When there are only two categories (color distracter and standard), does the choice of indicator variable impact your conclusions? Why or why not?</p></li>
+</ol>
+<p>In the previous questions, we assigned <span class="math inline">\(x\)</span> to be the dummy variable that indicates the type of game. Notice that the mean response is still a constant (nonrandom) value for each of the two game categories. In other
+words, when <span class="math inline">\(x = 1\)</span> the mean response is a fixed value, and when <span class="math inline">\(x = 0\)</span> the mean response is a fixed value. In addition, the “slope” coefficient (<span class="math inline">\(\beta_1\)</span>) can be considered as an estimate of the average amount by which the response variable will change from the standard game (<span class="math inline">\(x = 0\)</span>) to the color distracter game (<span class="math inline">\(x = 1\)</span>).</p>
+<p>Although the notation has changed, the regression model and the model used in the two-sample t-test are mathematically equivalent. When a subject is from the color distracter group, the mean response is <span class="math inline">\(\mu_1\)</span> in the t-test and the mean response sets <span class="math inline">\(x = 1\)</span> in the regression model. Thus,</p>
+<p><span class="math inline">\(\mu_1 = \beta_0 + \beta_1(1) = \beta_0 + \beta_1\)</span><br>
+[[[add eq(2.3)]]]</p>
+<p>When a subject is from the standard group, the mean response is <span class="math inline">\(\mu_2\)</span> in the t-test and the mean response sets <span class="math inline">\(x = 0\)</span> in regression. Thus,</p>
+<p><span class="math inline">\(\mu_2 = \beta_0 + \beta_1(0) = \beta_0\)</span><br>
+[[[add eq(2.4)]]]</p>
+<p>Equations (2.3) and (2.4) can be combined to show the relationship between the two-sample t-test and regression hypotheses.</p>
+<p><span class="math inline">\(\mu_1 - \mu_2 = (\beta_0 + \beta_1) - \beta_0 = \beta_1\)</span>
+[[[eq (2.5)]]]</p>
+<p>Thus, stating that <span class="math inline">\(\mu_1 - \mu_2 = 0\)</span> is equivalent to stating that <span class="math inline">\(\beta_1 = 0\)</span></p>
+<blockquote>
+<p><strong>Key Concept</strong>
+In testing the difference in two population means, testing the null hypothesis <span class="math inline">\(H_0 : \beta_1 = 0\)</span> for a regression model is equivalent to testing the two-sample t-test hypothesis <span class="math inline">\(H_0 : \mu_1 - \mu_2 = 0\)</span> <em>when using the equal variance assumption</em>.</p>
+</blockquote>
+</div>
+<div id="model-assumptions-for-regression" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Model Assumptions for Regression<a class="anchor" aria-label="anchor" href="#model-assumptions-for-regression"><i class="fas fa-link"></i></a>
+</h3>
+<p>While no distributional assumptions are needed to create estimates of b0 and b1 , it is necessary to check the same model assumptions when conducting a hypothesis test for b1. Just as in the two-sample t-test, the model assumes that the parameters b0 , b1 , and <span class="math inline">\(\sigma^2\)</span> are constant. In addition, Equation (2.2) shows that our model consists of the mean response plus the error term. The regression model also assumes that <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span>.</p>
+<p>This expression represents the following four assumptions:</p>
+<ul>
+<li>The error terms are independent and identically distributed (iid).</li>
+<li>The error terms follow a normal probability distribution.</li>
+<li>The error terms have a mean of zero .</li>
+<li>The error terms in the regression model are assumed to come from a single population with variance <span class="math inline">\(\sigma^2\)</span> (i.e., the variance does not depend on <span class="math inline">\(x\)</span>).</li>
+</ul>
+<p>In regression, assumptions about the error terms are also checked by residual plots. Here, <span class="math inline">\(y_i\)</span> represents each observed response and <span class="math inline">\(\hat{y}_i = b_0 + b_1x_i\)</span> represents the estimated mean response. So the residuals are simply the observed value minus the estimated value: <span class="math inline">\(\hat{\epsilon}_i = y_i - \hat{y}_i\)</span></p>
+<p>Figure 2.3 shows a histogram of the residuals and a plot of the residuals by type of game. The histogram shows that the residuals approximately follow the shape of a normal distribution. The residual versus game type graph shows that there are no obvious outliers and that the spread of both groups is roughly equivalent. Since residuals are just the mean response subtracted from the observed value, the center of the residual plots has shifted to zero. However, the spread of the residual versus game plot is identical to the spread of the individual value plot in Figure 2.2.</p>
+<p>[[[Fig 2.3]]]
+<strong>Figure 2.3</strong> Histogram of residuals and plot of residuals versus color.</p>
+<blockquote>
+<p><strong>Key Concept</strong>
+No assumptions are needed about the error terms to calculate estimates (<span class="math inline">\(b_1 = \hat{\beta}_1\)</span> and <span class="math inline">\(b_0 = \hat{\beta}_0\)</span>) of the slope and intercept of the regression line. These estimates are simply well-known mathematical calculations. However, all the model assumptions should be satisfied in order to properly conduct a hypothesis test or create a confidence interval for <span class="math inline">\(\beta_1\)</span>.</p>
+</blockquote>
+</div>
+<div id="checking-model-assumptions" class="section level3 unnumbered">
+<h3>Checking Model Assumptions<a class="anchor" aria-label="anchor" href="#checking-model-assumptions"><i class="fas fa-link"></i></a>
+</h3>
+<ol start="14" style="list-style-type: decimal">
+<li><p>Calculate the residuals from the regression line in Question 11. Plot a histogram of the residuals (or create a normal probability plot of the residuals). In addition, create a residual versus order plot and use the informal test to determine if the equal variance assumption is appropriate for this study. Compare these plots to the residual plots created for the two-sample t-test. Why are these graphs so similar?</p></li>
+<li><p>Create a scatterplot with the regression line in Question 11. Use the graph to give an interpretation of the slope and y-intercept, b1 and b0, in the context of the game study.</p></li>
+</ol>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div id="anova-to-compare-population-means" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> ANOVA to Compare Population Means<a class="anchor" aria-label="anchor" href="#anova-to-compare-population-means"><i class="fas fa-link"></i></a>
+</h2>
+<p>The term <strong>ANOVA</strong> is an acronym for <strong>ANalysis Of VAriance</strong>. ANOVA models often describe categorical explanatory variables in terms of factors and levels. The explanatory variable, also called a factor, in
+this study is the type of game; the two conditions, the two levels of the factor, are color distracter and standard.</p>
+<div id="the-anova-model" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> The ANOVA Model<a class="anchor" aria-label="anchor" href="#the-anova-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>The ANOVA model for the game study can be written as</p>
+<p><span class="math inline">\(y_{i,j} = \mu + \alpha_i + \epsilon_{i,j}\)</span> for <span class="math inline">\(i = 1, 2\)</span> and <span class="math inline">\(j = 1, 2, ... , n\)</span> where <span class="math inline">\(\epsilon_{i,j} \sim N(0,\sigma^2)\)</span>
+[[[add eq number 2.6]]]</p>
+<p>The mean response in the ANOVA model is <span class="math inline">\(\mu + \alpha_1\)</span> for the color distracter group and <span class="math inline">\(\mu + \alpha_2\)</span> for the standard group, where <span class="math inline">\(\mu\)</span> is the mean of all the completion times in the study. This overall mean is often called the grand mean or the benchmark value; <span class="math inline">\(\alpha_1\)</span> is the <strong>effect</strong>, or <strong>main effect</strong>, of the color distracter group. <strong>Effects</strong> are a measure of differences between group means. The effect <span class="math inline">\(\alpha_1\)</span> represents the change in the response from the grand mean to the color distracter group mean.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In this text m is always considered the overall mean of the data. Also throughout this chapter, we are always assuming balanced data.&lt;/p&gt;"><sup>9</sup></a></p>
+<p>To summarize, here is what the symbols in the model represent:</p>
+<ul>
+<li>
+<span class="math inline">\(y_{i,j}\)</span>: observed completion time for subject j from group i</li>
+<li>
+<span class="math inline">\(\mu\)</span>: overall mean (the benchmark value)</li>
+<li>
+<span class="math inline">\(\alpha_i\)</span>: effect of group i (i = 1, 2)</li>
+<li>
+<span class="math inline">\(\epsilon_{i,j}\)</span>: error for the jth subject ( <span class="math inline">\(j = 1, 2, ... , 20\)</span>) from the ith group (<span class="math inline">\(i = 1, 2\)</span>)</li>
+</ul>
+<p>Although the notation varies, the mean response for the ANOVA model is mathematically equivalent to the mean response in the t-test.</p>
+<ul>
+<li>
+<span class="math inline">\(\mu_1 = \mu + \alpha_1\)</span>: population mean for the color distracter games</li>
+<li>
+<span class="math inline">\(\mu_2 = \mu + \alpha_2\)</span>: population mean for the standard games</li>
+</ul>
+</div>
+<div id="the-anova-model-1" class="section level3 unnumbered">
+<h3>The ANOVA Model<a class="anchor" aria-label="anchor" href="#the-anova-model-1"><i class="fas fa-link"></i></a>
+</h3>
+<ol start="16" style="list-style-type: decimal">
+<li>Explain (or use equations to show) why the ANOVA hypothesis H0 : <span class="math inline">\(\alpha_1\)</span> = <span class="math inline">\(\alpha_2\)</span> is equivalent to the two- sample t-test hypothesis H0 : <span class="math inline">\(\mu_1\)</span> = <span class="math inline">\(\mu_2\)</span> .
+*In this text m is always considered the overall mean of the data. Also throughout this chapter, we are always assuming balanced data.</li>
+</ol>
+<blockquote>
+<p><strong>Key Concept</strong>
+In the ANOVA model, there is the appearance that we are describing two means (<span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>) using three parameters (<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\alpha_1\)</span> , and <span class="math inline">\(\alpha_2\)</span>). Since it can be shown that <span class="math inline">\(\alpha_2 = -\alpha_1\)</span>, there are actually just two parameters (<span class="math inline">\(\mu\)</span> and <span class="math inline">\(alpha_1\)</span>) that are estimated. Thus, the null hypothesis stating no effect size can also be written as <span class="math inline">\(H_0: \alpha_1 = \alpha_2 = 0\)</span> or <span class="math inline">\(H_0: \mu_1 = \mu_2 = \mu\)</span>.</p>
+</blockquote>
+<ol start="17" style="list-style-type: decimal">
+<li><p>Write the proper ANOVA model [provide the appropriate ij subscripts as in Equation (2.6)] for the observation representing the 3rd subject from the color distracter group. Also give the notation for the observation representing the 20th subject from the standard group.</p></li>
+<li><p>Why doesn’t <span class="math inline">\(\mu\)</span> have any subscript in the ANOVA model?</p></li>
+</ol>
+<p>After the data have been collected, the averages for all three meaningful groupings of the data can be calculated. The following mathematical notation is often used to represent the calculated sample averages:</p>
+<ul>
+<li>
+<span class="math inline">\(\bar{y}_{..}\)</span>: <strong>grand mean</strong> (the overall average of the combined results)</li>
+<li>
+<span class="math inline">\(\bar{y}_{1.}\)</span>: average for the color distracter game sample results</li>
+<li>
+<span class="math inline">\(\bar{y}_{2.}\)</span>: average for the standard game sample results</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>
+Throughout this chapter, <span class="math inline">\(\bar{y}_{1.} = \bar{y}_{1}\)</span> and <span class="math inline">\(\bar{y}_{2.} = \bar{y}_{2}\)</span>. The dot notation is often used with more complex models
+to indicate that the average was taken over all values of that subscript. For example, <span class="math inline">\(bar{y}_{2.}\)</span> averages over all
+<span class="math inline">\(j = 1, 2, 3, ... , n_2\)</span>, observations from the standard game sample results.</p>
+</blockquote>
+<p>The effect of the color distracter game, <span class="math inline">\(\alpha_1\)</span> , can be estimated by <span class="math inline">\(\hat{\alpha}_1 = \bar{y}_{1.} - \bar{y}_{..}\)</span>. Similarly, <span class="math inline">\(\hat{\alpha}_2 = \bar{y}_{2.} - \bar{y}_{..}\)</span>
+estimates the standard game effect, <span class="math inline">\(\alpha_2\)</span>. As in regression and the two-sample t-test, each residual <span class="math inline">\(\hat{\epsilon}_{ij}\)</span> is the
+difference between an observed value and the corresponding mean response.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\epsilon}_{ij}  
+  &amp;= \text{observed} - (\text{grand mean} + \text{effect of group}_i)\\
+  &amp;= y_{i,j} - [\bar{y}_{..} + \hat{\alpha}_i]\\
+  &amp;= y_{i,j} - [\bar{y}_{..} + (\bar{y}_{i.} - \bar{y}_{..})]\\
+  &amp;= y_{i,j} - \bar{y}_{i.}\\
+\end{aligned}  
+\]</span></p>
+
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></div>
+<div class="next"><a href="multiple-regression-how-much-is-your-car-worth.html"><span class="header-section-number">3</span> Multiple Regression: How Much Is Your Car Worth?</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#making-connections-the-two-sample-t-test-regression-and-anova"><span class="header-section-number">2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA</a></li>
+<li>
+<a class="nav-link" href="#investigation-do-distracting-colors-influence-the-time-to-complete-a-game"><span class="header-section-number">2.1</span> Investigation: Do Distracting Colors Influence the Time to Complete a Game?</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#understanding-the-study-design"><span class="header-section-number">2.1.1</span> Understanding the Study Design</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#the-two-sample-t-test-to-compare-population-means"><span class="header-section-number">2.2</span> The Two-Sample t-Test to Compare Population Means</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-statistical-model"><span class="header-section-number">2.2.1</span> The Statistical Model</a></li>
+<li><a class="nav-link" href="#statistical-models-for-the-two-sample-t-test"><span class="header-section-number">2.2.2</span> Statistical Models for the Two-Sample t-Test</a></li>
+<li><a class="nav-link" href="#model-assumptions-for-the-two-sample-t-test"><span class="header-section-number">2.2.3</span> Model Assumptions for the Two-Sample t-Test</a></li>
+<li><a class="nav-link" href="#checking-assumptions-for-the-t-test">Checking Assumptions for the t-Test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#the-regression-model-to-compare-population-means"><span class="header-section-number">2.3</span> The Regression Model to Compare Population Means</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-linear-regression-model"><span class="header-section-number">2.3.1</span> The Linear Regression Model</a></li>
+<li><a class="nav-link" href="#calculating-a-regression-model-and-hypothesis-test-for-the-slope">Calculating a Regression Model and Hypothesis Test for the Slope</a></li>
+<li><a class="nav-link" href="#model-assumptions-for-regression"><span class="header-section-number">2.3.2</span> Model Assumptions for Regression</a></li>
+<li><a class="nav-link" href="#checking-model-assumptions">Checking Model Assumptions</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#anova-to-compare-population-means"><span class="header-section-number">2.4</span> ANOVA to Compare Population Means</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-anova-model"><span class="header-section-number">2.4.1</span> The ANOVA Model</a></li>
+<li><a class="nav-link" href="#the-anova-model-1">The ANOVA Model</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/Chap2.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/Chap2.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A Book Chapter Example</strong>" was written by Your Name. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
