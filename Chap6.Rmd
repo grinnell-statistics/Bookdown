@@ -1,3 +1,220 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+# switch ggplot text to Latin Modern Roman
+theme_set(
+  theme_minimal(base_family = "Latin Modern Roman") +
+    theme(
+      plot.title = element_text(size = 24, face = "bold"),
+      axis.title = element_text(size = 12),
+      plot.caption = element_text(size = 10, hjust = 0)
+    )
+)
+```
+
+# Categorical Data Analysis: Is a Tumor Malignant or Benign?
+
+*It is commonly believed that anyone who tabulates numbers is a statistician. This is like believing that anyone who owns a scalpel is a surgeon.*
+—Robert Hooke1
+
+This chapter introduces inference techniques for data in which both the explanatory and
+response variables are categorical. The term categorical data analysis often refers to
+analysis of data in which the response variable is categorical. However, in this chapter
+we will restrict our focus to cases where both the explanatory and the response variables are
+categorical and where there is no natural ordering to the categories.
+
+Most of the hypothesis tests discussed in previous chapters use the normal distribution to
+model the mean response. In this chapter, proportions, odds ratios, and relative risk will be
+used to summarize categorical data. We will start by looking at cancer cell data to determine
+if there is a relationship between the shape of the cell nuclei and the proportion of malignant
+cells. In this chapter, we will discuss how to do the following:
+
+* Conduct a simulation study, chi-square test, and Fisher’s exact test
+* Calculate and properly interpret summary statistics such as relative risk and the odds ratio
+* Determine which test to use based on various sampling schemes and questions of interest
+
+## **Investigation: Is Cell Shape Associated with Malignancy?**
+
+Cancer is a disease that occurs when abnormal cells grow in the body. When DNA (a substance in every
+cell) is damaged, normal cells will often repair the damaged DNA. Cancer cells are cells in which the
+DNA is not repaired. DNA can be damaged by many things, including viruses, tobacco smoke, alcohol,
+and too much sunlight. Cells with damaged DNA can also be inherited. Cancer cells can continue to grow
+and divide and usually form tumors (a lump or mass) somewhere in the body. Cancer cells can also outlive
+It is important to note that not all tumors are cancerous. If a lump is detected, part of it can be removed
+surgically and a biopsy conducted to determine if the mass is benign or malignant. Benign tumors are scar
+tissue or abnormal growths that do not spread and are typically harmless. Malignant (or invasive) cancer
+cells are cells that can travel, typically through the bloodstream or lymph nodes, and begin to replace normal
+cells in other parts of the body. If a tumor is malignant, it is essential to remove or destroy all cancerous cells
+in order to keep them from spreading. If a tumor is benign, surgery is typically not needed and the harmless
+tumor can remain.
+
+A biopsy requires surgery to remove a section (or all) of the tumor and will leave a scar. Fine needle
+aspiration (FNA) is a technique in which a small sample of the tumor is taken using a needle and visually
+inspected through a microscope. Since many tumors are benign, it is often preferable to have an FNA, which
+is less invasive and less traumatic than a biopsy.
+
+Breast cancer is the second leading cause of cancer death among women in the United States. The
+American Cancer Society estimated that, in the United States in 2010, 39,840 women and 390 men died from
+breast cancer and 207,090 women were diagnosed with breast cancer.2 This type of cancer is often detected
+by finding a lump (or mass) in the breast.
+
+Wolberg and Mangasarian developed a technique to accurately diagnose breast masses using only visual
+characteristics of the cells within the tumor.3 This system is used at University of Wisconsin hospitals to assist
+doctors in diagnosis of breast cancer.4 Each FNA sample is placed on a slide, and characteristics of the cellular
+nuclei within the tumor are examined under a microscope. Several measurements, such as size, shape, and
+texture, are collected for each of the nuclei visible on the slide, and then an algorithm is used to determine the
+likelihood that a mass is benign or malignant.
+
+In this chapter, we will focus on just a few characteristics from a relatively small data set that was col-
+lected at University of Wisconsin hospitals in Madison. We will start by determining if the shape of a cell
+nucleus can help us to determine whether a tumor is malignant or benign.
+Typically, healthy cell nuclei have round or ellipsoid shapes.Figure 6.1 shows a sample of malignant cells that appear to have grown such that the perimeters of the cell nuclei have somewhat concave points.
+
+Figure 6.1 An image of malignant cells where nuclei are outlined with a curve-fitting program.  Reprinted by permission. Mangasarian, Street & Wolberg, “Breast Cancer Diagnosis and Prognosis via Linear Programming,” INFORMS Journal Operations Research, 43.4, 1995. © 1995, Institute for Operations Research and the Management Sciences (INFORMS).
+
+## **Summarizing Categorical Data**
+
+Table 6.1 shows data from 37 FNA slide samples. Slides with smooth ellipsoid-shaped nuclei were classified
+as round, and slides with poorly shaped cell nuclei were classified as concave. A biopsy was also conducted
+on each of these samples to determine if each was malignant or benign.
+
+In Table 6.1, both the variables are categorical. A categorical variable is one for which the measurement
+consists of categories, such as college major, political affiliation, personality type, gender, or pass/fail grade.
+When a variable is categorical, each subject or unit must fit in one and only one category. A binary variable
+is a special type of categorical variable that has just two possible categories.
+
+Summarizing quantitative data such as age, weight, and income often includes calculating the mean value.
+However, Table 6.1 cannot be used to calculate the mean Shape or mean Type value. Since these categorical
+variables have no ordinal or interval meaning, it is not appropriate to focus on the mean response; rather, we
+focus on the proportion (or percent) of responses that fall into each category.
+
+A table that counts the number of observations in each group, such as Table 6.1, is called a **contingency table** (or cross-tabulation table). A contingency table with two variables is called a **two-way contingency table**. Table 6.1 is also called a **2 x 2 table**, since there are two row groups and two column groups. In Table
+6.1, the Shape of the cell is called the **row variable**, since each horizontal row represents one shape group.
+Similarly, the Type of the cell is called the **column variable**.
+
+Note
+Categorical data that have a natural ordering, such as level of agreement (strongly disagree, disagree,
+indifferent, agree, strongly agree) or evaluation of a product (poor, fair, good, or excellent), are called
+**ordinal data**. Categorical data that do not have a natural ordering, such as gender or major, are called
+**nominal data**. Techniques for nominal data will give identical results for any ordering of the categories,
+whereas results based on techniques for ordinal data do depend on the ordering of the data. This chapter
+is restricted to examples of nominal data analysis techniques
+
+Key Concept
+Analysis of categorical response variables requires calculating the proportion of responses in each
+category rather than calculating means.
+
+Descriptive Statistics and Graphs
+1. Identify the observational units, the explanatory variable, and the response variable in the cancer cell
+data in Table 6.1.
+
+2. Calculate the proportion of round cell samples that are malignant and the proportion of concave cell
+samples that are malignant.
+
+3. Create a segmented bar graph using Table 6.1. Typically, the explanatory variable should be along the
+horizontal axis. Assuming this is a random sample from a larger population, does the graph show evi-
+dence that nucleus shape is related to the likelihood of a cell being malignant? Explain.
+
+Bar graphs are often useful in comparing two categorical variables. Figure 6.1 shows a **segmented bar graph** (also called a stacked bar graph) for the cancer cell data. This graph shows the conditional percentages
+for each nucleus shape. About 80% of the concave nuclei are malignant, whereas about 45% of the round
+nuclei are malignant.
+
+## **A Simulation Study: How Likely Is It That the Observed Sample Would Occur by Chance?**
+
+Figure 6.1 shows that our sample of 37 slides indicates a relationship between the shape of the cell nuclei and malignancy. However, statistical inference is needed to draw conclusions about the entire population from which these samples were selected. In this section, we will conduct a hypothesis test to determine if the sample data provide evidence that the proportion of malignant cells is greater for concave nuclei than for round nuclei.
+
+The hypothesis test in this example is one-sided because we have a medical reason to suspect that concave nuclei are more likely to be malignant. For this example, the null and alternative hypotheses can be written as
+
+\begin{align}
+H_0: p_C = p_R \\quad\\text{vs.}\\quad H_a: p_C > p_R 
+\\tag{6.1}
+\\end{align}
+
+where $p_C$ is the true proportion of concave nuclei that are malignant and $p_R$ is the true proportion of round nuclei that are malignant.
+
+If the null hypothesis, $H_0$, is true, the two populations (of concave and round cells) have the same proportion of malignant cells and the observed difference between round and concave cells in our sample is due simply to the random sampling process. In other words, the samples just randomly happened to have more malignant cells in the concave nucleus population than in the round nucleus group.
+
+The $p$-value for this test is the probability of obtaining a difference in sample proportions ($\\hat p_C - \\hat p_R$) as large as or larger than the one observed in this sample when the null hypothesis is true. If the $p$-value is small, it is unlikely that the null hypothesis is true and we conclude that the alternative hypothesis ($p_C > p_R$) is true.
+
+One way to estimate this $p$-value is to simulate taking samples many times under the following three conditions:
+
+• Assume that malignancy is unrelated to cell nucleus shape (i.e., assume that both cell nucleus shapes have the same proportion of malignant cells).  
+• A total of 13 benign and 24 malignant cells were observed.  
+• A total of 16 round cell nuclei and 21 concave cell nuclei were observed.
+
+
+Activity: Conducting a Simulation Study with Cards
+4. Use 37 index cards to represent this sample of 37 cancer cells. On 24 of the cards write M for “malig-
+nant,” and on 13 of the cards write B for “benign.” Shuffle the cards and randomly select 21 cards. These
+21 cards can represent the concave nucleus group. How many of the 21 concave cards are also malignant?
+
+5. Repeat the simulation process in Question 4 nine more times. Does it seem likely that 17 or more
+malignant cells would occur in the concave group by chance alone?
+
+While simulations can be done by hand with cards, this process is very time consuming, as a large number
+of simulations are needed to get a true feel for the likelihood of an outcome (many statisticians suggest
+10,000 simulations). Instead of repeating the above process 10,000 times by hand, we will use a computer
+program to conduct a simulation.
+
+Activity: Computer Simulation
+6. Use the technology instructions provided on the CD to conduct one simulation. In this simulation, you
+should have one column listing 24 malignant and 13 benign cells. Randomly select 21 rows to represent
+the concave nucleus shapes. Count the number of observations that fall into the concave malignant group.
+
+7. Repeat the computer simulation process in Question 6 nine more times, each time recording the num-
+ber of malignant cells you sampled in the concave nucleus group. How does this simulation compare to
+your index card simulation? Would you expect to get exactly the same number of samples with 17 or
+more malignant cells? Why or why not?
+
+8. Use the software instructions to repeat the computer-simulated randomization process a total of 10,000
+times. Create a histogram of the 10,000 simulated counts in the concave malignant group. Estimate the
+p-value by dividing the number of counts greater than or equal to 17 by 10,000.
+
+[[[Table 6.2]]]
+
+Table 6.2 shows 10,000 simulated trials, based on Question 8. This simulation had 220 observations
+greater than or equal to 17, providing a p-value of $P(X \geq 17)= 0.022$, where X is the number of concave
+malignant cells. Thus, we can conclude that if the null hypothesis were true (the proportion of malignant cells
+was the same for cells with round and concave nuclei), the likelihood of finding 17 or more malignant cells
+out of the 21 cells with concave nuclei would be approximately 220 out of 10,000. This small p-value shows
+that the difference in our sample proportions is so large that it is unlikely to have occurred by chance. Thus,
+we reject the null hypothesis and conclude that cells with concave nuclei are more likely to be malignant than
+cells with round nuclei.
+
+Using simulations to approximate p-values has many advantages. Often simple programs or mac-
+ros can be written to quickly simulate thousands of samples. Computer programs can be modified to
+fit a variety of situations, while parametric tests with theoretical assumptions can be somewhat rigid
+and require large sample sizes. Simulations only provide approximate p-values. However, increasing
+the number of simulations improves the precision of the p-value; 10,000 simulations usually provides
+precise p-values.
+
+Note
+This simulation study is an example of a permutation test. Chapter 1 describes that permutation hypothesis
+tests are significance tests that simulate the act of randomly rearranging units into groups.
+
+Key Concept
+Simulation studies are gaining in popularity because computer simulations can quickly and easily find
+accurate p-values. In addition, unlike most tests that have distributional assumptions, simulation studies
+do not have minimum sample size requirements and are often more accurate than distribution-based
+tests for studies with small sample sizes.
+
+## **Fisher’s Exact Test**
+
+
+Table 6.3, x represents the event of interest (observing 17 concave malignant cells), N= 37 represents the
+total number of observations, M= 24 is the total number of malignant cells (number of successes), and n is
+the total number of observations in the concave group.
+
+
+
 # Categorical Data
 
 ## Equations
