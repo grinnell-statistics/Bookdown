@@ -87,7 +87,29 @@ Table 6.1 shows data from 37 FNA slide samples. Slides with smooth ellipsoid-sha
 as round, and slides with poorly shaped cell nuclei were classified as concave. A biopsy was also conducted
 on each of these samples to determine if each was malignant or benign.
 
-[[[Table 6.1]]]
+```{r tab6.1, echo=FALSE, results='asis'}
+tab6.1 <- data.frame(
+  Shape     = c("Round",      "Concave",      "Total"),
+  Benign    = c(9,            4,              13),
+  Malignant = c(7,           17,              24),
+  Total     = c(16,          21,              37),
+  check.names      = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    tab6.1,
+    format    = "latex",
+    booktabs  = TRUE,
+    escape    = FALSE,
+    caption   = "Table 6.1 The numbers of benign and malignant tumors for round and concave cell nuclei.",
+    align     = c("l","r","r","r")
+  ) %>%
+  add_header_above(c(" "=1, "Type"=2, " "=1)) %>%
+  kable_styling(latex_options="HOLD_position")
+)
+```
 
 In Table 6.1, both the variables are categorical. A **categorical variable** is one for which the measurement
 consists of categories, such as college major, political affiliation, personality type, gender, or pass/fail grade.
@@ -132,7 +154,7 @@ Bar graphs are often useful in comparing two categorical variables. Figure 6.1 s
 for each nucleus shape. About 80% of the concave nuclei are malignant, whereas about 45% of the round
 nuclei are malignant.
 
-[[[Figure 6.2]]]
+[[[Figure 6.1]]]
 
 ## **A Simulation Study: How Likely Is It That the Observed Sample Would Occur by Chance?**
 
@@ -182,7 +204,35 @@ more malignant cells? Why or why not?
 times. Create a histogram of the 10,000 simulated counts in the concave malignant group. Estimate the
 p-value by dividing the number of counts greater than or equal to 17 by 10,000.
 
-[[[Table 6.2]]]
+```{r tab6.2, echo=FALSE, results='asis'}
+cols <- c("0", "...", "7", "8", "9", "10", "11", "12",
+          "13","14","15","16","17","18","19","20","21")
+row1 <- c("0","...","0","1","8","118","551","1508",
+          "2483","2655","1734","722","197","21","2","0","0")
+df6.2 <- rbind(
+  "Concave Malignant Cells"   = row1,
+  "Observed Number of Trials" = row1
+)
+colnames(df6.2) <- cols
+
+raw_tbl <- kable(
+  df6.2,
+  format   = "latex",
+  booktabs = TRUE,
+  escape   = FALSE,
+  col.names= rep("", ncol(df6.2)),
+  align    = c("l", rep("r", ncol(df6.2))), 
+  caption   = paste0(
+      "Table 6.2 10,000 simulated trials based on Question 8. ",
+      "The $p$–value is $P(X\\ge17)=0.022=(2+21+197)/10,000$, where $X$ ",
+      "is the number of concave malignant cells.")
+)
+
+lines <- strsplit(raw_tbl, "\n")[[1]]
+lines <- lines[!grepl("^\\s*&", lines)]
+cat(paste(lines, collapse="\n"), "\n")
+```
+
 
 Table 6.2 shows 10,000 simulated trials, based on Question 8. This simulation had 220 observations
 greater than or equal to 17, providing a p-value of $P(X \geq 17)= 0.022$, where X is the number of concave
@@ -222,7 +272,29 @@ Just as in the simulation study, we are interested in testing $H_0: p_C = p_R$ v
 
 In any 2 × 2 table, there are a total of $N$ observations that can be classified as either a success or a failure. $M$ represents the number of success, and thus $N - M$ is the number of failures. We are interesting in finding the probability of observing $x$ successes in a random selection of $n$ observations. For the cancer cell data in
 
-[[[Table 6.3]]]
+```{r tab6.3, echo=FALSE, results='asis'}
+tab6.3 <- data.frame(
+  Shape     = c("Round",           "Concave",            "Total"),
+  Benign    = c("9",               "4",                  "13"),
+  Malignant = c("7",               "$17 = x$",           "$24 = M$"),
+  Total     = c("16",              "$21 = n$",           "$37 = N$"),
+  check.names      = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    tab6.3,
+    format    = "latex",
+    booktabs  = TRUE,
+    escape    = FALSE,
+    caption   = "Table 6.3 The numbers of benign and malignant tumors for round and concave cell nuclei.",
+    align     = c("l","r","r","r")
+  ) %>%
+  add_header_above(c(" "=1, "Type"=2, " "=1)) %>%
+  kable_styling(latex_options="HOLD_position")
+)
+```
 
 Table 6.3, $x$ represents the event of interest (observing 17 concave malignant cells), $N = 37$ represents the total number of observations, $M = 24$ is the total number of malignant cells (number of successes), and $n$ is the total number of observations in the concave group.
 
@@ -359,12 +431,79 @@ H_0: p_C &= p_R \quad\text{vs.}\quad H_a: p_C \neq p_R
 
 *? For 2 × 2 tables, the chi-square test statistic is identical to the square of the Z-statistic when testing for equal population proportions. In addition, the $p$-values for the two tests will be identical.
 
+The null hypothesis is equivalent to stating that the distributions (of malignant cells) are the same
+across all groups of nucleus shapes. This test is often called a test of homogeneity.
 
+\large
+\textbf{MATHEMATICAL NOTE:}
+Some texts suggest using the chi-square test for homogeneity if separate samples are selected from
+more than one population and using the chi-square test for independence when data are collected from
+a single sample. Even though this study is based on one sample of 37 slides, the extended activities will
+show that both the test of homogeneity and the test of independence are appropriate. The calculations
+for both tests are identical; however, the hypotheses and conclusions are different. We choose to present
+the test of homogeneity in this section so that the hypotheses and conclusions coincide with those for the
+two-sided permutation tests.
+\normalsize
 
+**Step 2: Calculate the test statistic:**
 
+The chi-square test statistic is a measure of the difference between the observed counts in Table 6.1
+and the expected counts that are calculated under the assumption that the null hypothesis is true (shown
+in Table 6.4).
 
+In this study, 7 out of the 16 round nuclei were malignant ($\hat p_R = 7/16= 0.4375$) and 17 out of the
+21 concave nuclei were malignant ($\hat p_C = 17/21= 0.8095$). Assuming that the proportion of malignant
+cells is the same for both nucleus shapes, the best estimate of the overall proportion of cells that are
+malignant is $(7 + 17)/(16 + 21)= 24/37= 0.64865$.
 
+Each expected cell count is calculated by multiplying the estimated proportion times the
+­ appropriate sample size (the total number of concave nuclei or total number of round nuclei).
+There are 16 round nuclei in our study, so the expected count of round malignant cell nuclei is
+$16(24/37)= 10.38$. In general, the expected counts are calculated as row total $\times$ column total/
+overall total.
 
+## Activity: Calculating Expected Counts {-}
+> 17. Calculate the expected count of concave malignant cell nuclei.  
+> 18. Assuming the null hypothesis is true, what is the estimated proportion of benign cells in the population? If you select a sample with 16 round cells, what is the expected count of round benign cells?
+
+Table 6.4 shows a table of expected counts under the assumption that the null hypothesis is true: the different cell nucleus shapes have the same proportion of malignant cells. Where:
+
+\begin{align}
+\text{expected count} \;=\; \frac{\text{row total} \times \text{column total}}{\text{overall total}}.
+\notag
+\end{align}
+
+For example:
+
+\begin{align}
+10.38 = \frac{16 \times 24}{37}, \notag
+\quad
+5.62 = \frac{16 \times 13}{37}. \notag
+\end{align}
+
+```{r tab6.4, echo=FALSE, results='asis'}
+library(knitr)
+library(kableExtra)
+
+# Table 6.4: expected counts
+tab6.4 <- data.frame(
+  Shape     = c("Round",    "Concave", "Total"),
+  Benign    = c(  5.62,       7.38,     13),
+  Malignant = c( 10.38,      13.62,     24),
+  Total     = c( 16,      21,     37),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+kable(
+  tab6.4,
+  format   = "latex",
+  booktabs = TRUE,
+  caption  = "Table 6.4 Table of expected counts for the cancer cell study.",
+  align    = c("l","r","r","r","r"),
+  escape   = FALSE
+) 
+```
 
 \large  
 \textbf{NOTE:}  
@@ -524,6 +663,7 @@ Data set: Table 6.1
 The odds ratio does not depend on the choice of success or failure. In addition, the odds ratio provides identical results when the explanatory and response variables are switched.  
 \normalsize
 
+
 ## Cautions About Relative Risk Reduction in Medical Studies {-}
 
 Zocor is a drug used to lower cholesterol in order to reduce the chances of a heart attack. A five-year study was conducted to investigate the effectiveness of Zocor, using 4444 people.$^6$ People in this study were aged 35-70 and had a high risk of heart attack. In addition, all the subjects were Caucasian and 81% were males. Based on this study, television and print advertisements stated, “A clinical study among people with high cholesterol and heart disease found 41% fewer deaths from heart attack among those taking Zocor.$^7$
@@ -547,9 +687,420 @@ d. Calculate and interpret the relative risk of death from a heart attack.
 
 The difference between the two percentages calculated in Question 27b, 8.5% - 5% = 3.5%, is called the **absolute risk reduction**. The 41% fewer deaths is actually calculated as
 
+
 \begin{align}
 \frac{8.5\% - 5\%}{8.5\%} \approx 41\% 
 \notag
 \end{align}
 
+
 The statistic 41% is called the **relative risk reduction**. While both statistics, 3.5% and 41%, are appropriate, it is important to recognize how easily these numbers can be misunderstood. The advertisement states things so as to make the reduction in deaths due to heart attacks appear greater than it is in absolute terms: a reduction of 8.5% to 5% for the risk of death from heart attack for the next five years for a restricted sample of people with heart disease.
+
+## **Sampling Designs**
+
+Contingency tables are widely used and easy to interpret. However, it is important to recognize that the appropriate statistical analysis cannot be determined simply by looking at a table of data; it is determined by how the data were collected. While there are numerous ways to collect data, this section will focus on three key sampling designs often used in observational studies.
+
+1. In **cross‑classification studies**, information is collected simultaneously on both variables in the study. This often occurs when all data are collected from one sample and then placed into a classification table. The row totals and the column totals are not known prior to the data collection. The total sample size, N, may or may not be known before the data are collected.  
+2. In **cohort studies**, individuals (or units) who differ with respect to a certain explanatory variable are selected (or assigned to groups) and then a response variable is measured. These predetermined groups are called cohorts, and if the response variable is measured over time the design is called a prospective design.* In cohort studies, the totals corresponding to the explanatory variable are known before the responses are collected.  
+3. In **case‑control studies**, individuals (or units) are selected according to a response variable (and often called the cases and the controls). Then the individuals are classified according to some explanatory variable. Case‑control studies are often retrospective studies, since historical data are typically used to collect information on the explanatory variable. In case‑control studies, the totals corresponding to the response variable are known before data are collected on the explanatory variable.  
+
+Prospective studies typically provide stronger evidence of a relationship between the explanatory variable and the response variable. However, they tend to be expensive, to require a long time to gather data, and to be sensitive to attrition. When responses can be rare, such as getting lung cancer, case‑control studies are preferred over cohort studies because case‑control studies can ensure a large enough sample size within each group of responses. However, when data are selected based on the response variable, such as in case‑control studies, studies can be particularly susceptible to difficulties with confounding.
+
+## Extended Activity: Retrospective Studies and the Odds Ratio {-}
+
+In a retrospective study of lung cancer patients in 20 London hospitals, Richard Doll identified a relationship between smoking and lung cancer.$^8$ Table 6.5 shows a partial set of data from his study. The data were collected on 60 female patients with lung cancer and 60 control females.
+
+```{r tab6.5, echo=FALSE, results='asis'}
+library(knitr)
+library(kableExtra)
+
+# Table 6.5: Doll’s case‐control smoking data
+tab6.5 <- data.frame(
+  Females = c("Smoker", "Nonsmoker", "Total"),
+  Yes  = c(41, 19, 60),
+  No   = c(28, 32, 60),
+  Total= c(69, 51,120),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+kable(
+  tab6.5,
+  format   = "latex",
+  booktabs = TRUE,
+  caption  = "Table 6.5 Data from Richard Doll’s case‐control study on smoking and lung cancer.",
+  align    = c("l","r","r","r"),
+  escape   = FALSE
+) %>%
+  add_header_above(c(" "=1, "Have Lung Cancer"=3)) %>%
+  kable_styling(latex_options="hold_position")
+```
+
+28. What is the proportion of females in this study who have lung cancer? What is the proportion of smokers who got lung cancer? What is the proportion of nonsmokers who got lung cancer? What is the relative risk when having lung cancer is defined as a success?  
+29. Notice that Doll predetermined the distribution of the response variable (this is done in case‑control studies). Explain why each of the proportions in Question 28 cannot appropriately be extended to a larger population. (Hint: Is it appropriate to conclude that 60/120 = 50% of female patients in the 20 London hospitals have lung cancer? Is it appropriate to assume that a good estimate of the percentage of female nonsmoking patients in the hospitals who have lung cancer is 37.2%?)  
+
+Note that tests for equal proportions are not appropriate if the response totals are fixed prior to the study. In addition, the next section will show that since the response totals are not random, a test of independence should not be used. Fisher’s exact test and a simulation study could be used. The following questions will show why it is appropriate to conduct a hypothesis test about the odds ratio.
+
+*?Retrospective cohort studies also exist. In these designs, past (medical) records are often used to collect data. As with prospective cohort studies, the objective is to first establish groups based on an explanatory variable. However, since these are past records data on the response variable can be collected at the same time.
+
+30. Calculate the odds of lung cancer for smokers. Calculate the odds of lung cancer for nonsmokers. Calculate and interpret the odds ratio of lung cancer. Does the odds ratio indicate a relationship between smoking and lung cancer?  
+31. Calculate and interpret the odds ratio of being a smoker. Does the odds ratio depend on what variable is considered the response?
+
+\Large
+\textbf{\textcolor{red}{Key Concept:}}
+\textcolor{red}{The statistics used to estimate an overall proportion (and risk) cannot be interpreted or generalized to a larger population in studies where the response totals (i.e., the distribution of the response variable) are fixed by the researcher. Thus, the conditional proportions and relative risk cannot be generalized to a larger population. Since the odds ratio is invariant to the choice of explanatory and response variables, it can be used when the totals of the response variable are controlled by the researcher. For 2 × 2 contingency tables, Fisher’s exact test can be used with any sampling design and any sample size.}
+\normalsize
+
+## Tests for the Homogeneity of Odds {-}
+
+Questions 28–31 showed that when the response variable totals are fixed before the study is conducted, the proportions are not representative of a larger population. Thus, tests for the homogeneity of proportions are not appropriate. This section shows the steps in a test for the homogeneity of odds using the data in Table 6.5.
+
+**Step 1: State the null and alternative hypotheses:**
+
+\begin{align}
+H_0: \frac{\theta_S}{\theta_N} &= 1 \notag \\ 
+H_a: \frac{\theta_S}{\theta_N} &> 1 \notag
+\end{align}
+
+**Step 2: Calculate the test statistic:**
+
+We calculate the odds of cancer for the smoking group to be
+
+\begin{align}
+\hat\theta_S = \frac{\hat p_S}{1 - \hat p_S} = 1.46 \notag
+\end{align}
+
+Similarly, the odds of cancer for the nonsmoking group are
+
+\begin{align}
+\hat\theta_N = \frac{\hat p_N}{1 - \hat p_N} = 0.594 \notag
+\end{align}
+
+The odds ratio is $\frac{\hat\theta_S}{\hat\theta_N} = 2.466.$
+
+It can be shown (in more advanced texts) that when sample sizes are large, the natural log of the odds ratio is approximately normal with the following standard deviation:
+
+\begin{align}
+S_{LO} 
+&= \sqrt{\frac{1}{n_S\,\hat p\,(1 - \hat p)} + \frac{1}{n_N\,\hat p\,(1 - \hat p)}} 
+= \sqrt{\frac{1}{69(0.5)(0.5)} + \frac{1}{51(0.5)(0.5)}} = 0.3693
+\notag
+\end{align}
+
+where $n_S$ and $n_N$ are the total number of smokers and the total number of nonsmokers in the study, respectively, and $\hat p$ is the overall proportion of people with lung cancer in the study. Also recall that testing whether $\theta_S/\theta_N = 1$ is equivalent to testing whether $\ln(\theta_S/\theta_N) = 0$.
+
+Thus, a test statistic is calculated as
+
+\begin{align}
+Z 
+&= \frac{\ln\bigl(\hat\theta_S / \hat\theta_N\bigr) - 0}{S_{LO}}
+= \frac{0.90266}{0.3693} = 2.44 \notag
+\end{align}
+
+**Step 3: Calculate the p-value:**
+
+\begin{align}
+P(Z > 2.44) = 0.0073
+\end{align}
+
+**Step 4: Check model assumptions:**
+
+It is reasonable to assume that each patient in the study is independent of the others. A general rule is that as long as the sample size in each cell is greater than or equal to 5, the normality assumption is appropriate.
+
+**Step 5: Draw conclusions within the context of the study:**
+
+In this study, the small p-value leads us to reject the null hypothesis and conclude that the odds ratio is greater than one. In other words, if the population odds of cancer were identical for both smokers and nonsmokers, a sample odds ratio as large or larger than 2.466 was very unlikely to occur by random chance. This study is not an experiment; thus, it is inappropriate to conclude that smoking causes larger odds of cancer. This is not a true random sample of patients in the 20 London hospitals. However, it is reasonable to cautiously expect that these patients are representative of all hospital patients in the 20 London hospitals.
+
+## **Comparing Tests of Homogeneity and Independence**
+
+The calculations involved in the tests of homogeneity and independence are identical; however the type of question asked will impact the conclusions that can be drawn.
+
+The **test of homogeneity** is used to determine if proportions are equal across two or more populations. The hypothesis test related to the cancer cell study
+
+\begin{align}
+H_0: p_L &= p_H \notag \\ 
+H_a: p_L &\neq p_H \notag
+\end{align}
+
+fits this situation. Tests of homogeneity are appropriate whenever one of the variables is clearly defined as the response variable. As shown in the previous section, a test of homogeneity of proportions is not acceptable when the response totals are known in advance. However, a test of the homogeneity of odds is appropriate even if the response totals are fixed.
+
+The **test of independence** is used to determine if two random variables within a population are independent. It is not necessary to determine which variable is the explanatory variable and which is the response variable. If any of the marginal (i.e., row or column) totals are known (fixed) in advance, at least one of the variables is not random, and thus the test of independence is not appropriate. The null and alternative hypotheses can be written as
+
+\begin{flalign*}
+  &H_0:\;\text{the row and column variables are independent (more specifically, }H_0:\text{ nucleus shape and malign-} && \\
+  & \text{ancy are independent)} &&\\
+  &H_a:\;\text{the two variables are not independent} &&
+\end{flalign*}
+
+\large
+\textbf{NOTE:}
+Tests of homogeneity and independence are not restricted to chi-square tests. For example, the two-proportion z-test is also a test of homogeneity.
+\normalsize
+
+In both tests, the null hypothesis is that there is no relationship between the row variable and the column variable. Tests of independence are essentially testing if the probability of a success for one variable depends on the value of a second variable. They are appropriate whenever both the row and the column variables are random (e.g., the column totals are not predetermined by the researcher), as in cross-classification studies.
+
+Tests of homogeneity are appropriate whenever it is clear that one variable should be treated as the response and the other as the explanatory variable. Thus, tests of homogeneity can be used with all three study designs listed earlier. However, case-control study designs (where the response totals are fixed) are appropriate only for testing homogeneity of odds (not homogeneity of proportions). Table 6.6 summarizes the appropriate hypothesis tests for each sampling design. Specific examples of each type of sampling design are provided in the end-of-chapter exercises.
+
+
+```{r tab6.6, echo=FALSE, results='asis'}
+tab6.6 <- data.frame(
+  `Marginal Totals`                     = c(
+    "Total N Fixed", "Response Totals Fixed", "Explanatory Totals Fixed","Hypothesis Test",
+    "Test of Independence","Test of Homogeneity of Proportions","Test of Homogeneity of Odds","Fisher's Exact Test"
+  ),
+  `Cross-Classification` = c("Either is OK","No","No","Cross-Classification","Yes","Yes","Yes","Yes"),
+  `Cohort`     = c("Yes","No","Yes","Cohort","No","Yes","Yes","Yes"),
+  `Case-Control`  = c("Yes","Yes","No","Case-Control","No","No","Yes","Yes"),
+  `Hypergeometric Experiment` = c("Yes","Yes","Yes","Hypergeometric Experiment","No","No","No","Yes"),
+  `Randomized Experiment` = c("Yes","No","Yes","Randomized Experiment","No","Yes","Yes","Yes"),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+kable(
+  tab6.6,
+  format   = "latex",
+  booktabs = TRUE,
+  caption  = "Table 6.6 Sampling designs and appropriate hypothesis tests.",
+  align    = c("l", rep("c", ncol(tab6.6)-1)),
+  escape   = FALSE
+) %>%
+  add_header_above(c(" "=1, "Sampling Designs"=5), bold = TRUE) %>%
+  column_spec(1, width = "2cm") %>%    
+  column_spec(5, width = "3cm") %>%    
+  column_spec(6, width = "2.5cm") %>%   
+  row_spec(4, bold = TRUE) %>%   
+  kable_styling(latex_options="hold_position")
+
+```
+
+In the cancer cells study, we concluded that different cell nucleus shapes are associated with different
+proportions of malignant cells. In this study, the researchers had a clear explanatory variable ($Shape$) and
+response variable ($Type$). Thus, the test of homogeneity is appropriate. However, a test of independence is
+also appropriate, since each subject was selected from one larger population: patients with suspicious tumors
+at the University of Wisconsin hospitals. After the patients were selected, the biopsy and FNA were conducted
+and each observed slide was classified as either malignant or benign and either round or concave.
+
+\Large
+\textbf{\textcolor{red}{Key Concept:}}
+\textcolor{red}{Although chi-square tests homogeneity and independence involve exactly the same mathematical calculations, the conclusions can be different. The choice of test is based on (1) how the sampling was conducted and (2) whether there are clearly defined explanatory and response variables. A test of homogeneity is appropriate whenever the response variable is clearly defined from the beginning of the study. If one sample is selected from one population and each observation is grouped into categories for both variables (i.e., neither explanatory nor response totals are known in advance), the test of independence is appropriate.}
+\normalsize
+
+While the chi-square test of independence is frequently used, the conclusions from this test are not very
+informative. The test does not prove that two variables are independent, but only identifies that we have
+significant evidence that two variables are dependent. No measurement of the degree of independence (or
+indication of whether this level of dependence is of practical importance) is given.
+
+## **Chi-Square Goodness-of-Fit Tests**
+
+Many statistical techniques are based on specific model assumptions. For example, many procedures discussed throughout this text for calculating hypothesis tests and confidence intervals assume that the error terms follow a normal distribution. If the model assumptions are violated, the tests should not be considered reliable.
+
+Goodness-of-fit tests are used to determine how well our observed data “fit” the model assumptions. In other words, we want to determine how “close” the observed values are to those values that we would expect under a specific (theoretical) distribution.
+
+Before a goodness-of-fit test can be used, we need some prior knowledge (or benchmark values) about a theoretical model. The chi-square goodness-of-fit test is applied to data that are placed into groups. Sample data are placed into classes (observed groups), and a theoretical model is used to calculate the expected number of observations in each group. In this section, we will use goodness-of-fit tests to determine if the observed counts (or proportions) are consistent with hypothetical counts (or proportions).
+
+\Large
+\textbf{\textcolor{red}{Key Concept:}}
+\textcolor{red}{In a chi-square goodness-of-fit test with $n$ observations:}
+
+\textcolor{red}{$\bullet$ Each of the $n$ observations fits into exactly one of $G$ categories.}   
+\textcolor{red}{$\bullet$ The null hypothesis specifies the expected probability ($p_i$) for each cell.}   
+\textcolor{red}{$\bullet$ Expected counts are calculated as $n$ × $p_i$.}  
+\textcolor{red}{$\bullet$ The test statistic is $\chi^2 = \sum \frac{(\text{observed count} - \text{expected count})^2}{\text{expected count}}$.}   
+\textcolor{red}{$\bullet$ If each of the expected cell counts is at least 5, the $p$-value is calculated from the chi-square distribution with $G$ – 1 degrees of freedom.}
+\normalsize
+
+## Extended Activity: Playing a Dice Game {-}
+
+Your friend offers to play a simple game with you. He has a six‑sided die and will roll it 30 times. Each time he rolls a 5 or 6, you will pay him \$5. Each time he rolls a 1, 2, 3, or 4, he will pay you \$5. The results of your friend’s 30 rolls for this game are shown in Table 6.7.
+
+[[[Table 6.7]]]
+
+
+If you had agreed to play this game, you would have owed your friend some money. Table 6.7 is called a one-way table with six cells. We can consider these results a random sample from all possible rolls of this die, and we can assume that each roll is independent. If the die was fair, we would assume (our null hypothesis would be) that each of the six outcomes was equally likely.
+
+32. From visual inspection of the results, do you have any reason to suspect the die wasn’t fair? Explain.  
+33. In this example, there are *G* = 6 groups (cells). Assuming the die is fair, the probability that a roll results in a 1 is $p_1 = 1/6$, the probability that a roll results in a 2 is $p_2 = 1/6$, etc. In goodness-of-fit tests, the expected values are found from some hypothesized distribution that determines the probability for each of the *G* groups.  
+
+In this case, we assume $p_1 = p_2 = p_3 = p_4 = p_5 = p_6 = 1/6$. The expected count for each of the 6 groups can be found from *n* × *p*<sub>i</sub>. Assuming all outcomes are equally likely, fill out the expected counts in Table 6.8.
+
+[[[Table 6.8]]]
+
+34. Conduct a chi-square test to determine if there is a significant difference between what was observed and what was expected.  
+a. State the null and alternative hypotheses in words.  
+b. Calculate the chi-square statistic using Equation (6.3).  
+c. In goodness-of-fit tests such as this, where all parameters are well defined, the *degrees of freedom is equal to the number of cells minus 1*. In this example, if we know how many 1s, 2s, 3s, 4s, and 5s were rolled, the number of 6s is fixed. Calculate the *p*-value for this study.  
+d. Are there enough observations to assume the chi-square distribution is appropriate?  
+e. Do you have evidence to believe your friend used an unfair die? Clearly state your conclusions.
+
+\large
+\textbf{CAUTION:}
+The chi-square goodness-of-fit test is applied to grouped data (i.e., data put into classes). Continuous data can easily be placed into groups. However, it is important to recognize that the value of the chi-square test statistic depends on how the data are grouped.
+\normalsize
+
+## **Chapter Summary**
+
+This chapter focused on analyzing and drawing conclusions from categorical data. Fisher’s exact test, simulation studies, and chi-square tests were used to analyze various data sets. Like most hypothesis tests, each of these tests is valid only if care is taken to ensure that the appropriate assumptions are met. All tests assume that the observations are independent.
+
+**Fisher’s exact test** is appropriate for any sample size and any sampling design involving 2 × 2 contingency tables. **Simulation studies** are used to approximate Fisher’s exact test. While simulation studies are approximate, conducting 10,000 iterations will typically provide precise p‑values.
+
+Simulation studies have the advantage of being very adaptable. For example, they can easily be modified to any number of categories within a study. (The research project at the end of the chapter provides an example of a simulation study where the independent observation assumption is violated.)
+
+When sample sizes are large enough, the chi-square test statistic will follow the chi-square distribution. In order for the p‑values from **chi-square tests** to be appropriate, the following conditions should be satisfied:   
+
+* For 2 × 2 contingency tables, the sample size should be large enough that the expected count in each cell of the table is at least 5.
+* For tables with more than two rows or two columns, all expected counts should be greater than 1 and the average expected count should be greater than or equal to 5.
+
+Chi-square tests are always two‑sided hypothesis tests. However, they can be easily extended to contingency tables with more than two rows and two columns. If there are more than two rows and two columns, the chi-square test does not specifically test the significance of each cell. However, the end‑of‑chapter exercises show that it is reasonable to look at each cell’s contribution to the chi-square statistic.
+
+Three key sampling designs were described in this chapter.   
+
+* In a **cross-classified design**, information is collected simultaneously on both variables in the study. The row totals and the column totals are not known prior to the data collection.
+* In **cohort studies**, the totals corresponding to the explanatory variable are known before the responses are collected.
+* In **case-control studies**, the totals corresponding to the response variable are known before data are collected on the explanatory variable.
+
+Testing the **equivalence of two proportions** ($H_0: p_1 = p_2$) is mathematically equivalent to testing whether the **odds ratio** is equal to 1 ($H_0: \theta_1/\theta_2 = 1$), where $p$ represents the proportion successful and $\theta$ represents the odds of success for any two groups (labeled 1 and 2). However, when the proportions of interest are very small, it may be more appropriate to look at the odds ratio than at the proportions. Tests for equal proportions are not appropriate for case-control studies, because the fixed response totals cause the sample proportions to not accurately represent the population.
+
+Chi-square tests for homogeneity and independence involve exactly the same mathematical calculations; however, the hypotheses and conclusions are different. A **test of homogeneity of proportions** is appropriate whenever the explanatory and response variables are clearly defined from the beginning of the study. While the explanatory totals may be known in advance, the response totals cannot be fixed before the data are collected. **Tests of independence** are appropriate if one sample is selected from one population, and thus neither explanatory nor response totals are known in advance (i.e., both explanatory and response totals can be considered random).
+
+This chapter was limited to studies involving only one categorical explanatory variable and one categorical response variable. Additional tests such as the Mantel–Haenszel procedure can be used to test for equal proportions or odds with two explanatory variables. The following chapters discuss more general procedures, using logistic and Poisson regression to analyze data with a categorical response variable and multiple categorical or quantitative explanatory variables.
+
+## **Exercises**{-}
+\vspace{-2em}
+\noindent\rule{\linewidth}{0.4pt}
+
+\newcounter{excount}
+\renewcommand{\theexcount}{E\arabic{excount}}
+
+\begin{list}{\theexcount.}{\usecounter{excount} \setlength{\itemsep}{0.5em}}
+
+  \item \textbf{Cancer and Smoking: Fisher’s Exact Test and Simulation Studies}    
+
+  Data set: Table 6.5    
+
+  Answer the following questions for the data displayed in Table 6.5.  
+  \begin{enumerate}
+    \item Was either the explanatory (row) or the response (column) variable fixed before the study was conducted?
+    \item Is this an example of an experiment or an observational study?
+    \item Is this a cross-classification, cohort, or case-control study? Explain.
+    \item Create a segmented bar chart for the data.
+    \item Create a simulation study to test the one-sided hypothesis that smokers are more likely to have lung cancer. Provide a \textit{p}-value and state your conclusions.
+    \item Use Fisher’s exact test to test the one-sided hypothesis that smokers are more likely to have lung cancer. Provide a \textit{p}-value and state your conclusions.
+  \end{enumerate}
+
+  \item \textbf{Statistics Enrollment for Humanities and Science Majors}    
+
+  Data set: Table 6.9    
+
+  A study was conducted by introductory statistics students to see whether majors in the sciences are as likely to take a statistics course as majors in the humanities. They sampled 50 seniors from among humanities majors and another 50 seniors from among science majors and asked if they had taken a statistics course or were scheduled to take one before they graduated. Their data are provided in Table 6.9.  
+  \begin{enumerate}
+    \item Was either the explanatory (row) or the response (column) variable fixed before the study was conducted?
+    \item Is this an example of an experiment or an observational study?
+    \item Is this a cross-classification, cohort, or case-control study?
+    \item Create a segmented bar chart for the data.
+    \item Create a simulation study to test the one-sided hypothesis that science majors are more likely to take a statistics course. Provide a \textit{p}-value. Assuming that students took care to collect a simple random sample of seniors from each division, what conclusions can be drawn?
+    \item Use Fisher’s exact test to test the one-sided hypothesis that science majors are more likely to take a statistics course. Provide a \textit{p}-value. Assuming that students took care to collect a simple random sample of seniors from each division, what conclusions can be drawn?
+  \end{enumerate}
+
+  \item \textbf{Statistics Enrollment for Humanities and Science Majors 2}    
+
+  Data set: Table 6.9    
+  \begin{enumerate}
+    \item Use Exercise E2 to determine if a chi-square test of homogeneity or a test of independence is appropriate for the data in Table 6.9. Give an explanation for your answer.
+    \item Use the data in Table 6.9 to determine if the same proportion of humanities and science majors take a statistics course. Assuming that students took care to collect a simple random sample of seniors from each division, what conclusions can be drawn?
+    \item Use a simulation study to determine if a difference in proportions at least as large as the one in the sample data is likely to occur by chance (using a two-sided hypothesis test). Assuming that students took care to collect a simple random sample of seniors from each division, what conclusions can be drawn?
+  \end{enumerate}
+
+  \item \textbf{A Lady Tasting Tea}    
+
+  Data set: Table 6.10    
+
+  At a summer tea party in the late 1920s, a lady claimed that she could determine by taste if tea had been poured into the milk or if milk had been poured into the tea. Sir Ronald Fisher discussed how to test this lady’s claim. The lady was asked to taste several cups in random order and identify each as tea first or milk first. Although the actual results were not published, rumor has it that the lady correctly identified every single cup. 
+  
+  Let’s assume that the lady was given 14 cups in random order. She was told that half the cups had tea first and the other half had milk first. Table 6.10 provides hypothetical results.  
+  
+  [[[Table 6.10]]]
+  
+  Note that the study was designed with exactly seven tea first and seven milk first cups; thus, the row
+totals are fixed. In addition, since the lady was told this, it is reasonable to set her answers to have
+exactly seven tea first guesses and seven milk first guesses. Thus, the column totals are also fixed.
+
+  \begin{enumerate}
+    \item Use Table 6.6 to determine the name of this type of study design.
+    \item Which type of statistical tests can be used with this study design?
+    \item Conduct a hypothesis test to determine if the lady could correctly identify the order in which items were poured into a cup. Submit a \textit{p}-value and clearly state your conclusions.
+    \item Conduct a hypothesis test to determine if the lady could correctly identify the order in which items were poured into a cup. However, instead of using Table 6.10, assume she made four mistakes: two mistakes in each direction. Based on these new data, submit a \textit{p}-value and clearly state your conclusions.
+  \end{enumerate}
+
+  \item \textbf{Donner Party}    
+
+  Data set: Table 6.11    
+
+  Members of the Donner party attempted a new route between Fort Bridger, Wyoming, and the Humboldt River, Nevada. This new route took much longer than expected, and the entire party was trapped in the Sierra Nevada in the winter of 1846–1847. By the time they were rescued in the spring, many members had died. Table 6.11 lists the gender and survival status of all adults who were trapped during this trip.  
+  \begin{enumerate}
+    \item Plot the data with a segmented bar graph. Describe the overall patterns seen in the data.
+    \item Is this an example of an experiment or an observational study?
+    \item Is this a cross-classification, cohort, or case-control study?
+    \item Create a simulation study to test the one-sided hypothesis that females were more likely to survive. Provide a \textit{p}-value and clearly state your conclusions.
+    \item Use Fisher’s exact test to test the one-sided hypothesis that females were more likely to survive. Provide a \textit{p}-value and clearly state your conclusions.
+    \item D. K. Grayson stated, “The differential fate of the members of the Donner Party lends strong support to the argument that females are better able than males to withstand conditions marked by famine and extreme cold.” Does the small \textit{p}-value lead us to conclude that females have stronger survival abilities than males? Can you suggest any other reasonable explanation?
+  \end{enumerate}
+
+  \item \textbf{Statistics Enrollment: Testing for Homogeneity of Odds}    
+
+  Data set: Table 6.9    
+  
+  \begin{enumerate}
+    \item Calculate and interpret the odds ratio for the data in Table 6.9.
+    \item Use the data from Table 6.9 and define taking a statistics course (yes) as a success. Conduct a hypothesis test for the homogeneity of odds. State the one-sided null and alternative hypotheses.
+    \item Calculate the test statistic (the \textit{Z} statistic).
+    \item Provide the \textit{p}-value and state your conclusions within the context of the study.
+  \end{enumerate}
+
+  \item \textbf{Cancer Cells: Testing for Homogeneity of Odds}    
+
+  Data set: Table 6.1    
+  
+  Use the data from Table 6.1 and define a benign cell as a success. Conduct a hypothesis test for the homogeneity of odds.  
+  \begin{enumerate}
+    \item State the null and alternative hypotheses.
+    \item Calculate the odds ratio and the test statistic (the \textit{Z} statistic).
+    \item Provide the \textit{p}-value and state your conclusions within the context of the study.
+  \end{enumerate}
+
+  \item \textbf{Playing a Dice Game}    
+
+  In the extended activity in Section 6.10, you conducted a goodness-of-fit test to determine if the die was fair. Now conduct a simulation study to determine if there is a significant difference between what was observed and what was expected. Simulate rolling 30 dice 10,000 times. Count the number of times you have 17 or more 5s and 6s in the 30 rolls. Calculate a \textit{p}-value and explain why it is not surprising that the \textit{p}-value is very different than what was observed in Question 34.
+
+  \item \textbf{Comparing Treatments for Drug Addiction: A 3 × 2 Contingency Table}    
+
+  Data set: Table 6.12    
+  
+  Many people with cocaine addictions also suffer from mood disorders like depression or a manic-depressive disorder. To aid in the process of trying to break a patient’s addiction to cocaine, a common antidepressant known as lithium is often given to patients in drug treatment centers. A randomized, comparative experiment was performed to determine whether another commonly prescribed antidepressant, desipramine, could be used to reduce the likelihood of patients’ using cocaine again or whether antidepressant therapy helped at all. The 72 patients selected for study over a 3-year period were randomly assigned to one of three treatments: desipramine, lithium, or a placebo. After the end of the 6-week treatment period, these patients were interviewed to determine if they had been successful in stopping their cocaine habit. A success was defined as having stopped using cocaine for 3 weeks or more during the 6-week treatment period. The data from the study are shown in Table 6.12.  
+  
+  The null and alternative hypotheses can be written as  
+  \begin{flalign*}
+  &H_0: p_D = p_L = p_C&& \\
+  &H_a: \text{at least one treatment group has a different proportion of successes than the others}&&
+  \end{flalign*}
+  
+[[[Table 6.12]]]
+
+  where $p_D$, $p_L$, and $p_C$ represent the true proportions of successes in the D, L, and C groups,
+respectively.
+  \begin{enumerate}
+    \item Was either the explanatory (row) or the response (column) variable fixed before the study was conducted?
+    \item Is this an example of an experiment or an observational study?
+    \item Use Part A to determine if a chi-square test of homogeneity or a test of independence is appropriate for this study.
+    \item Create a segmented bar chart for the data.
+    \item Conduct a chi-square test to determine if this difference between success rates is likely to occur by chance. Calculate a table of expected counts assuming that the null hypothesis is true. (If the
+treatment group makes no difference in the success or failure of the patient in remaining free
+from cocaine, we would expect the success rates of all thgit ree groups to be the same.)
+    \item Are the sample sizes large enough to assume that the chi-square distribution is appropriate? Explain.
+    \item What are the test statistic, the degrees of freedom, and the \textit{p}-value?
+    \item Can we conclude that for this group of 72 people the treatment did cause a difference in success rates?
+    \item These 72 people were not randomly selected from a larger population. Can we conclude that these results hold for a larger group of people?
+  \end{enumerate}
+
+
+\end{list}
