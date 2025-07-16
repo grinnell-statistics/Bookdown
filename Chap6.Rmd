@@ -89,22 +89,22 @@ on each of these samples to determine if each was malignant or benign.
 
 ```{r tab6.1, echo=FALSE, results='asis'}
 tab6.1 <- data.frame(
-  Shape     = c("Round",      "Concave",      "Total"),
-  Benign    = c(9,            4,              13),
-  Malignant = c(7,           17,              24),
-  Total     = c(16,          21,              37),
-  check.names      = FALSE,
+  Shape = c("Round","Concave","Total"),
+  Benign = c(9,4, 13),
+  Malignant = c(7, 17, 24),
+  Total = c(16, 21, 37),
+  check.names = FALSE,
   stringsAsFactors = FALSE
 )
 
 cat(
   kable(
     tab6.1,
-    format    = "latex",
-    booktabs  = TRUE,
-    escape    = FALSE,
-    caption   = "Table 6.1 The numbers of benign and malignant tumors for round and concave cell nuclei.",
-    align     = c("l","r","r","r")
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 6.1 The numbers of benign and malignant tumors for round and concave cell nuclei.",
+    align = c("l","r","r","r")
   ) %>%
   add_header_above(c(" "=1, "Type"=2, " "=1)) %>%
   kable_styling(latex_options="HOLD_position")
@@ -127,12 +127,12 @@ Similarly, the Type of the cell is called the **column variable**.
 
 \large
 \textbf{NOTE:}
-\textcolor{black}{Categorical data that have a natural ordering, such as level of agreement (strongly disagree, disagree,
+Categorical data that have a natural ordering, such as level of agreement (strongly disagree, disagree,
 indifferent, agree, strongly agree) or evaluation of a product (poor, fair, good, or excellent), are called
 **ordinal data**. Categorical data that do not have a natural ordering, such as gender or major, are called
 **nominal data**. Techniques for nominal data will give identical results for any ordering of the categories,
 whereas results based on techniques for ordinal data do depend on the ordering of the data. This chapter
-is restricted to examples of nominal data analysis techniques.}
+is restricted to examples of nominal data analysis techniques.
 \normalsize
 
 \Large
@@ -210,29 +210,28 @@ cols <- c("0", "...", "7", "8", "9", "10", "11", "12",
 row1 <- c("0","...","0","1","8","118","551","1508",
           "2483","2655","1734","722","197","21","2","0","0")
 df6.2 <- rbind(
-  "Concave Malignant Cells"   = row1,
+  "Concave Malignant Cells"   = cols,
   "Observed Number of Trials" = row1
 )
 colnames(df6.2) <- cols
 
 raw_tbl <- kable(
   df6.2,
-  format   = "latex",
+  format = "latex",
   booktabs = TRUE,
-  escape   = FALSE,
-  col.names= rep("", ncol(df6.2)),
-  align    = c("l", rep("r", ncol(df6.2))), 
-  caption   = paste0(
+  escape = FALSE,
+  col.names = rep("", ncol(df6.2)),
+  align = c("l", rep("r", ncol(df6.2))), 
+  caption = paste0(
       "Table 6.2 10,000 simulated trials based on Question 8. ",
       "The $p$–value is $P(X\\ge17)=0.022=(2+21+197)/10,000$, where $X$ ",
       "is the number of concave malignant cells.")
-)
+) %>% column_spec(1, width = "2cm") 
 
 lines <- strsplit(raw_tbl, "\n")[[1]]
 lines <- lines[!grepl("^\\s*&", lines)]
 cat(paste(lines, collapse="\n"), "\n")
 ```
-
 
 Table 6.2 shows 10,000 simulated trials, based on Question 8. This simulation had 220 observations
 greater than or equal to 17, providing a p-value of $P(X \geq 17)= 0.022$, where X is the number of concave
@@ -274,10 +273,10 @@ In any 2 × 2 table, there are a total of $N$ observations that can be classifie
 
 ```{r tab6.3, echo=FALSE, results='asis'}
 tab6.3 <- data.frame(
-  Shape     = c("Round",           "Concave",            "Total"),
-  Benign    = c("9",               "4",                  "13"),
-  Malignant = c("7",               "$17 = x$",           "$24 = M$"),
-  Total     = c("16",              "$21 = n$",           "$37 = N$"),
+  Shape     = c("Round", "Concave", "Total"),
+  Benign    = c("9", "4", "13"),
+  Malignant = c("7", "$17 = x$", "$24 = M$"),
+  Total     = c("16", "$21 = n$", "$37 = N$"),
   check.names      = FALSE,
   stringsAsFactors = FALSE
 )
@@ -285,11 +284,11 @@ tab6.3 <- data.frame(
 cat(
   kable(
     tab6.3,
-    format    = "latex",
-    booktabs  = TRUE,
-    escape    = FALSE,
-    caption   = "Table 6.3 The numbers of benign and malignant tumors for round and concave cell nuclei.",
-    align     = c("l","r","r","r")
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 6.3 The numbers of benign and malignant tumors for round and concave cell nuclei.",
+    align = c("l","r","r","r")
   ) %>%
   add_header_above(c(" "=1, "Type"=2, " "=1)) %>%
   kable_styling(latex_options="HOLD_position")
@@ -304,32 +303,30 @@ In this section, we simply discuss how to conduct Fisher’s exact test with sta
 \normalsize
 
 \begin{align}
-\frac{\text{number of ways to select $x$ successes and $n - x$ failures}}
-{\text{number of ways to select $n$ subjects}}
-&=
-\frac{\binom{M}{x}\,\binom{N - M}{n - x}}{\binom{N}{n}}
+\frac{\text{number of ways to select $x$ successes and $n - x$ failures}}{\text{number of ways to select $n$ subjects}}
+ &= \frac{\binom{M}{x}\,\binom{N - M}{n - x}}{\binom{N}{n}} \notag
 \end{align}
 
 where $\binom{M}{x} = M \text{“choose”} x = \frac{M!}{x!(M - x)!}$. Similar calculations hold for $\binom{N - M}{n - x}$ and $\binom{N}{n}$."
 
 ## Activity: Calculating Fisher’s Exact Test {-}
->9. In this cancer study, assume N= 37 observations with M= 24 successes. If n = 21 observations
+>9. In this cancer study, assume N= 37 observations with M = 24 successes. If n = 21 observations
 are selected, use the technology instructions provided on the CD to calculate the exact probabilities
-P(X= 17), P(X= 18), P(X= 19), P(X= 20), and P(X= 21).
+P(X = 17), P(X = 18), P(X = 19), P(X = 20), and P(X= 21).
 10. Assuming N= 37, M= 24 successes, and n = 21, create a histogram of the probabilities for x. Com-
 pare the probabilities in Question 9 to the probabilities in Question 8. Since Question 8 was a simula-
 tion of the hypergeometric distribution, these histograms should look very similar.
-11. What is the exact p-value P(X Ú 17)? How does this exact p-value compare to the simulated
+11. What is the exact p-value P(X $\geq$ 17)? How does this exact p-value compare to the simulated
 p-value?
 12. There is nothing special about how a success or failure is defined. Assume we have a table of
-N= 37 observations with M= 13 successes (here a benign cell is considered a success). For a
-sample of size 16 (round nuclei), find P(X Ú 9). How does this answer compare to your answer in
+N = 37 observations with M = 13 successes (here a benign cell is considered a success). For a
+sample of size 16 (round nuclei), find P(X $\geq$ 9). How does this answer compare to your answer in
 Question 11?
-13. Assume we have a table of N= 37 observations with M= 13 successes (here a benign cell is consid-
-ered a success). For a sample of size 21 (concave nuclei), find P(X … 4). How does this answer com-
+13. Assume we have a table of N = 37 observations with M = 13 successes (here a benign cell is consid-
+ered a success). For a sample of size 21 (concave nuclei), find P(X $\geq$ 4). How does this answer com-
 pare to your answer in Question 11?
 
-*?For any positive integer, the notation n! is read “n factorial” and is defined as $n!= n(n- 1)(n- 2) g (3)(2)(1)$.
+*?For any positive integer, the notation n! is read “n factorial” and is defined as $n!= n(n- 1)(n- 2) \cdot\cdot\cdot (3)(2)(1)$.
 For example, “3 factorial” is $3 \times 2 \times 1= 6$ and “four factorial” is $4!= 4 \times 3 \times 2 \times 1= 24$. In addition, $0!= 1$.
 
 Both the simulation in Section 6.3 and Fisher’s exact test can be considered permutation tests. The simu-
@@ -346,12 +343,13 @@ tion about the null hypothesis. Both tests were completed under the assumption t
 benign and 24 malignant cells and that these totals would be the same in every randomization. Statisti-
 cians call this a **conditional test of independence**. In other words, both the row and the column totals
 are known (fixed) before the study is conducted. However, the extended activities will show that Fisher’s
-exact test can be used for any 2 * 2 table, even when the margin totals are not fixed.$^5$
+exact test can be used for any 2 $\times$ 2 table, even when the margin totals are not fixed.$^5$
 \normalsize 
 
 \Large
 \textbf{\textcolor{red}{Key Concept:}}
-\textcolor{red}{Fisher’s exact test uses the hypergeometric distribution to provide exact p-values even for small sample sizes and success$\slash$failure proportions near 0% or 100%.}
+\color{red}Fisher’s exact test uses the hypergeometric distribution to provide exact p-values even for small sample sizes and succes/failure proportions near 0% or 100%
+\color{black}
 \normalsize
 
 ## **Two-Sided Hypothesis Tests**
@@ -371,7 +369,7 @@ Question 14 helps to show that the difference in proportions, $\hat p_C - \hat p
 
 \begin{align}
 \text{p-value}
-&= P(\hat p_C - \hat p_R \le -0.372) + P(\hat p_C - \hat p_R \ge 0.372) \\ \notag
+&= P(\hat p_C - \hat p_R \le -0.372) + P(\hat p_C - \hat p_R \ge 0.372) \notag \\ \notag
 &= P(X \le 10) + P(X \ge 17) \\ \notag 
 &= \frac{1 + 8 + 118 + 197 + 21 + 2}{10{,}000} \\ \notag
 &= 0.0347 \notag
@@ -487,21 +485,21 @@ library(kableExtra)
 
 # Table 6.4: expected counts
 tab6.4 <- data.frame(
-  Shape     = c("Round",    "Concave", "Total"),
-  Benign    = c(  5.62,       7.38,     13),
+  Shape = c("Round",    "Concave", "Total"),
+  Benign = c(  5.62,       7.38,     13),
   Malignant = c( 10.38,      13.62,     24),
-  Total     = c( 16,      21,     37),
+  Total= c( 16,      21,     37),
   check.names = FALSE,
   stringsAsFactors = FALSE
 )
 
 kable(
   tab6.4,
-  format   = "latex",
+  format = "latex",
   booktabs = TRUE,
-  caption  = "Table 6.4 Table of expected counts for the cancer cell study.",
-  align    = c("l","r","r","r","r"),
-  escape   = FALSE
+  caption = "Table 6.4 Table of expected counts for the cancer cell study.",
+  align = c("l","r","r","r","r"),
+  escape = FALSE
 ) 
 ```
 
@@ -717,8 +715,8 @@ library(kableExtra)
 # Table 6.5: Doll’s case‐control smoking data
 tab6.5 <- data.frame(
   Females = c("Smoker", "Nonsmoker", "Total"),
-  Yes  = c(41, 19, 60),
-  No   = c(28, 32, 60),
+  Yes = c(41, 19, 60),
+  No = c(28, 32, 60),
   Total= c(69, 51,120),
   check.names = FALSE,
   stringsAsFactors = FALSE
@@ -726,11 +724,11 @@ tab6.5 <- data.frame(
 
 kable(
   tab6.5,
-  format   = "latex",
+  format = "latex",
   booktabs = TRUE,
-  caption  = "Table 6.5 Data from Richard Doll’s case‐control study on smoking and lung cancer.",
-  align    = c("l","r","r","r"),
-  escape   = FALSE
+  caption = "Table 6.5 Data from Richard Doll’s case‐control study on smoking and lung cancer.",
+  align = c("l","r","r","r"),
+  escape = FALSE
 ) %>%
   add_header_above(c(" "=1, "Have Lung Cancer"=3)) %>%
   kable_styling(latex_options="hold_position")
@@ -800,7 +798,8 @@ Z
 **Step 3: Calculate the p-value:**
 
 \begin{align}
-P(Z > 2.44) = 0.0073
+P(Z > 2.44) = 0.0073 
+\notag
 \end{align}
 
 **Step 4: Check model assumptions:**
@@ -844,13 +843,13 @@ Tests of homogeneity are appropriate whenever it is clear that one variable shou
 
 ```{r tab6.6, echo=FALSE, results='asis'}
 tab6.6 <- data.frame(
-  `Marginal Totals`                     = c(
+  `Marginal Totals` = c(
     "Total N Fixed", "Response Totals Fixed", "Explanatory Totals Fixed","Hypothesis Test",
     "Test of Independence","Test of Homogeneity of Proportions","Test of Homogeneity of Odds","Fisher's Exact Test"
   ),
   `Cross-Classification` = c("Either is OK","No","No","Cross-Classification","Yes","Yes","Yes","Yes"),
-  `Cohort`     = c("Yes","No","Yes","Cohort","No","Yes","Yes","Yes"),
-  `Case-Control`  = c("Yes","Yes","No","Case-Control","No","No","Yes","Yes"),
+  `Cohort` = c("Yes","No","Yes","Cohort","No","Yes","Yes","Yes"),
+  `Case-Control`= c("Yes","Yes","No","Case-Control","No","No","Yes","Yes"),
   `Hypergeometric Experiment` = c("Yes","Yes","Yes","Hypergeometric Experiment","No","No","No","Yes"),
   `Randomized Experiment` = c("Yes","No","Yes","Randomized Experiment","No","Yes","Yes","Yes"),
   check.names = FALSE,
@@ -859,11 +858,11 @@ tab6.6 <- data.frame(
 
 kable(
   tab6.6,
-  format   = "latex",
+  format= "latex",
   booktabs = TRUE,
-  caption  = "Table 6.6 Sampling designs and appropriate hypothesis tests.",
-  align    = c("l", rep("c", ncol(tab6.6)-1)),
-  escape   = FALSE
+  caption = "Table 6.6 Sampling designs and appropriate hypothesis tests.",
+  align = c("l", rep("c", ncol(tab6.6)-1)),
+  escape = FALSE
 ) %>%
   add_header_above(c(" "=1, "Sampling Designs"=5), bold = TRUE) %>%
   column_spec(1, width = "2cm") %>%    
@@ -914,8 +913,26 @@ Before a goodness-of-fit test can be used, we need some prior knowledge (or benc
 
 Your friend offers to play a simple game with you. He has a six‑sided die and will roll it 30 times. Each time he rolls a 5 or 6, you will pay him \$5. Each time he rolls a 1, 2, 3, or 4, he will pay you \$5. The results of your friend’s 30 rolls for this game are shown in Table 6.7.
 
-[[[Table 6.7]]]
+```{r tab6.7, echo=FALSE, results='asis'}
+# Table 6.7: one‐row table
+df6.7 <- data.frame(
+  `1` = 2, `2` = 5, `3` = 3,
+  `4` = 3, `5` = 8, `6` = 9,
+  check.names = FALSE
+)
+rownames(df6.7) <- "Observed"
 
+kable(
+  df6.7,
+  format = "latex",
+  booktabs  = TRUE,
+  caption = "Table 6.7 Observed results of 30 rolls of a die.",
+  align = c("l", rep("r", 6)),
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position")
+```
 
 If you had agreed to play this game, you would have owed your friend some money. Table 6.7 is called a one-way table with six cells. We can consider these results a random sample from all possible rolls of this die, and we can assume that each roll is independent. If the die was fair, we would assume (our null hypothesis would be) that each of the six outcomes was equally likely.
 
@@ -924,7 +941,30 @@ If you had agreed to play this game, you would have owed your friend some money.
 
 In this case, we assume $p_1 = p_2 = p_3 = p_4 = p_5 = p_6 = 1/6$. The expected count for each of the 6 groups can be found from *n* × *p*<sub>i</sub>. Assuming all outcomes are equally likely, fill out the expected counts in Table 6.8.
 
-[[[Table 6.8]]]
+```{r tab6.8, echo=FALSE, results='asis'}
+# Table 6.8: two‐row table (Observed vs Expected)
+df6.8 <- data.frame(
+  `1` = c(2, ""),
+  `2` = c(5, ""),
+  `3` = c(3, ""),
+  `4` = c(3, ""),
+  `5` = c(8,""),
+  `6` = c(9, ""),
+  check.names = FALSE
+)
+rownames(df6.8) <- c("Observed", "Expected")
+
+kable(
+  df6.8,
+  format  = "latex",
+  booktabs = TRUE,
+  caption = "Table~6.8 Observed and expected results of 30 rolls of a die.",
+  align = c("l", rep("r", 6)),
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position")
+```
 
 34. Conduct a chi-square test to determine if there is a significant difference between what was observed and what was expected.  
 a. State the null and alternative hypotheses in words.  
@@ -976,7 +1016,7 @@ This chapter was limited to studies involving only one categorical explanatory v
 
   \item \textbf{Cancer and Smoking: Fisher’s Exact Test and Simulation Studies}    
 
-  Data set: Table 6.5    
+  Data set: Table 6.5    
 
   Answer the following questions for the data displayed in Table 6.5.  
   \begin{enumerate}
@@ -990,9 +1030,31 @@ This chapter was limited to studies involving only one categorical explanatory v
 
   \item \textbf{Statistics Enrollment for Humanities and Science Majors}    
 
-  Data set: Table 6.9    
+  Data set: Table 6.9    
 
-  A study was conducted by introductory statistics students to see whether majors in the sciences are as likely to take a statistics course as majors in the humanities. They sampled 50 seniors from among humanities majors and another 50 seniors from among science majors and asked if they had taken a statistics course or were scheduled to take one before they graduated. Their data are provided in Table 6.9.  
+  A study was conducted by introductory statistics students to see whether majors in the sciences are as likely to take a statistics course as majors in the humanities. They sampled 50 seniors from among humanities majors and another 50 seniors from among science majors and asked if they had taken a statistics course or were scheduled to take one before they graduated. Their data are provided in Table 6.9.  
+  
+```{r tab6.9, echo=FALSE, results='asis'}
+# Table 6.9: enrollment study
+df6.9 <- data.frame(
+  Yes = c(23, 32),
+  No  = c(27, 18),
+  check.names = FALSE
+)
+rownames(df6.9) <- c("Humanities Major", "Science Major")
+
+kable(
+  df6.9,
+  format = "latex",
+  booktabs  = TRUE,
+  caption = "Table 6.9 Results from the statistics enrollment study.",
+  align = c("l", "r", "r"),
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position")
+```
+
   \begin{enumerate}
     \item Was either the explanatory (row) or the response (column) variable fixed before the study was conducted?
     \item Is this an example of an experiment or an observational study?
@@ -1019,8 +1081,27 @@ This chapter was limited to studies involving only one categorical explanatory v
   
   Let’s assume that the lady was given 14 cups in random order. She was told that half the cups had tea first and the other half had milk first. Table 6.10 provides hypothetical results.  
   
-  [[[Table 6.10]]]
-  
+```{r tab6.10, echo=FALSE, results='asis'}
+df6.10 <- data.frame(
+  `Lady Guesses Tea First` = c( 7, 0,  7),
+  `Lady Guesses Milk First` = c( 0, 7,  7),
+  Total = c( 7, 7, 14),
+  check.names = FALSE
+)
+rownames(df6.10) <- c("Tea First", "Milk First", "Total")
+
+kable(
+  df6.10,
+  format = "latex",
+  booktabs = TRUE,
+  caption = "Table 6.10 Results of the hypothetical tea‐tasting study.",
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position") %>%
+  column_spec(2, width = "2.5cm") %>% 
+  column_spec(3, width = "2.5cm")   
+```  
   Note that the study was designed with exactly seven tea first and seven milk first cups; thus, the row
 totals are fixed. In addition, since the lady was told this, it is reasonable to set her answers to have
 exactly seven tea first guesses and seven milk first guesses. Thus, the column totals are also fixed.
@@ -1041,7 +1122,28 @@ exactly seven tea first guesses and seven milk first guesses. Thus, the column t
     \item Plot the data with a segmented bar graph. Describe the overall patterns seen in the data.
     \item Is this an example of an experiment or an observational study?
     \item Is this a cross-classification, cohort, or case-control study?
-    \item Create a simulation study to test the one-sided hypothesis that females were more likely to survive. Provide a \textit{p}-value and clearly state your conclusions.
+    \item Create a simulation study to test the one-sided hypothesis that females were more likely to survive. Provide a \textit{p}-value and clearly state your conclusions
+```{r tab6.11, echo=FALSE, results='asis'}
+# Table 6.11: survivor status of Donner party
+df6.11 <- data.frame(
+  Survived = c(23, 25, 48),
+  Died     = c(30,  9, 39),
+  Total    = c(53, 34, 87),
+  check.names = FALSE
+)
+rownames(df6.11) <- c("Male", "Female", "Total")
+
+kable(
+  df6.11,
+  format = "latex",
+  booktabs = TRUE,
+  caption = "Table 6.11 Survival status of Donner party members.",
+  align = c("l", "c", "c", "c"),
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position")
+```
     \item Use Fisher’s exact test to test the one-sided hypothesis that females were more likely to survive. Provide a \textit{p}-value and clearly state your conclusions.
     \item D. K. Grayson stated, “The differential fate of the members of the Donner Party lends strong support to the argument that females are better able than males to withstand conditions marked by famine and extreme cold.” Does the small \textit{p}-value lead us to conclude that females have stronger survival abilities than males? Can you suggest any other reasonable explanation?
   \end{enumerate}
@@ -1084,23 +1186,278 @@ exactly seven tea first guesses and seven milk first guesses. Thus, the column t
   &H_a: \text{at least one treatment group has a different proportion of successes than the others}&&
   \end{flalign*}
   
-[[[Table 6.12]]]
+```{r tab6.12, echo=FALSE, results='asis'}
+# Table 6.12: antidepressant study
+df6.12 <- data.frame(
+  Success = c(14,  6,  4, 24),
+  Failure = c(10, 18, 20, 48),
+  Total   = c(24, 24, 24, 72),
+  check.names = FALSE
+)
+rownames(df6.12) <- c(
+  "Disipramine (D)",
+  "Lithium (L)",
+  "Placebo/Control (C)",
+  "Total"
+)
+
+cat(
+  kable(
+    df6.12,
+    format   = "latex",
+    booktabs = TRUE,
+    escape   = FALSE,
+    caption  = "Table 6.12 Results from a study of the effect of treatment with different antidepressant drugs (or a placebo) on the success of cocaine addicts in remaining drug-free for at least 3 weeks during a 6-week treatment period.",
+    align    = c("l", "c", "c", "c"),
+    row.names= TRUE
+  ) %>%
+  kable_styling(latex_options="hold_position")
+)
+```
 
   where $p_D$, $p_L$, and $p_C$ represent the true proportions of successes in the D, L, and C groups,
 respectively.
   \begin{enumerate}
     \item Was either the explanatory (row) or the response (column) variable fixed before the study was conducted?
     \item Is this an example of an experiment or an observational study?
-    \item Use Part A to determine if a chi-square test of homogeneity or a test of independence is appropriate for this study.
+    \item Use Part (a) to determine if a chi-square test of homogeneity or a test of independence is appropriate for this study.
     \item Create a segmented bar chart for the data.
     \item Conduct a chi-square test to determine if this difference between success rates is likely to occur by chance. Calculate a table of expected counts assuming that the null hypothesis is true. (If the
 treatment group makes no difference in the success or failure of the patient in remaining free
-from cocaine, we would expect the success rates of all thgit ree groups to be the same.)
+from cocaine, we would expect the success rates of all three groups to be the same.)
     \item Are the sample sizes large enough to assume that the chi-square distribution is appropriate? Explain.
     \item What are the test statistic, the degrees of freedom, and the \textit{p}-value?
     \item Can we conclude that for this group of 72 people the treatment did cause a difference in success rates?
     \item These 72 people were not randomly selected from a larger population. Can we conclude that these results hold for a larger group of people?
   \end{enumerate}
 
+  \item \textbf{Friday Night Collisions: Drawing Conclusions from a Goodness-of-Fit Test}    
 
+  Data set: Table 6.13    
+  
+  A local organization conducted a traffic study to determine if traffic collisions were more likely on Friday and Saturday nights than on other nights. The city council was considering a proposal that bars in a specific district be closed earlier in an effort to reduce late-night accidents in the area. The assumption was that a larger number of traffic accidents would correspond to the heaviest bar traffic (which occurred on the weekends). Table 6.13 shows data collected on traffic accidents that had occurred in that district over the past two years.  
+  
+```{r tab6.13, echo=FALSE, results='asis'}
+# Table 6.13: collision study
+df6.13 <- data.frame(
+  Sun = 5,
+  Mon = 7,
+  Tues = 3,
+  Wed = 11,
+  Thurs = 8,
+  Fri = 16,
+  Sat = 12,
+  check.names = FALSE
+)
+rownames(df6.13) <- "Observed Collisions"
+
+cat(
+  kable(
+    df6.13,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 6.13 Results from the collision study.",
+    align = c("l", rep("r", 7)),
+    row.names= TRUE
+  ) %>%
+  kable_styling(latex_options="hold_position")
+)
+```
+  \begin{enumerate}
+    \item Conduct a chi-square test to determine if the proportion of accidents is the same each day of the week. Write the null and alternative hypotheses and clearly state your conclusions. Do we have evidence to show that weekends are more likely to have accidents than other days?
+    \item Which day contributes most to the chi-square statistic? In other words, of the seven days, which day has the largest \((\text{observed} - \text{expected})^2/\text{expected}\) value? Note that taking the square root of
+this value has some similarities to calculating standardized residuals.
+    \item Another way to conduct the study would be to start with the null hypothesis that weekends are twice as likely to have accidents as weekdays. Thus, the null hypothesis states that 1/9 of the accidents occur on each weekday, 2/9 of the accidents occur on Friday, and 2/9 of the accidents occur on Saturday. Conduct a chi-square test and clearly state your conclusions.
+  \end{enumerate}
+
+  \item \textbf{Zocor Again}    
+
+  Data set: Table 6.14    
+  
+  The extended activities in Section 6.7 discussed a clinical study on Zocor, a drug used in lowering cholesterol, to determine if there was a difference between the treatment (Zocor) and the placebo in reducing the number of deaths from heart attacks. Table 6.14 shows the original data from this study.  
+  
+```{r tab6.14, echo=FALSE, results='asis'}
+# Table 6.14: Zocor study
+df6.14 <- data.frame(
+  Died = c(189, 111, 300),
+  Survived = c(2034, 2110, 4144),
+  Total = c(2223, 2221, 4444),
+  check.names = FALSE
+)
+rownames(df6.14) <- c("Placebo", "Treatment", "Total")
+
+cat(
+  kable(
+    df6.14,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 6.14 Results of the Zocor study.",
+    align = c("l", "r", "r", "r"),
+    row.names = TRUE
+  ) %>%
+  kable_styling(latex_options="hold_position")
+)
+```
+  
+  \begin{enumerate}
+    \item Conduct a chi-square test to test the hypothesis that the proportion of deaths is different depending on the drug (treatment or placebo). Write the null and alternative hypotheses and clearly state your conclusions.
+    \item The extended activities showed that the percentage of deaths from heart attacks only changed from 8.5\% to 5\% over a five-year time period. Is this difference of 3.5\% too small to be of practical importance? Why or why not?
+  \end{enumerate}
+
+  \item \textbf{The Pill Scare: Understanding Relative Risk Reduction}    
+
+  Data set: Table 6.15 
+  
+  In October 1995, the United Kingdom Committee on Safety of Medicines (CSM) issued a warning to 190,000 general practitioners, pharmacists, and directors of public health about oral contraceptive pills containing gestodene or desogestrel. The warning, based on three unpublished epidemiological research studies, stated, “It is well known that the pill may rarely produce thrombosis (blood clots) involving veins of the legs. New evidence has become available indicating that the chance of thrombosis occurring in a vein increases about two-fold for some types of pills compared to others.”$^{12}$ Table 6.15 provides data from one of the studies.  
+
+```{r tab6.15, echo=FALSE, results='asis'}
+# Table 6.15: venous thrombosis
+df6.15 <- data.frame(
+  Yes = c(127, 132, 259),
+  No = c(249, 402, 651),
+  Total = c(376, 534, 910),
+  check.names = FALSE
+)
+rownames(df6.15) <- c(
+  "Third Generation Pill\n(contains gestodene or desogestrel)",
+  "Second Generation Pill\n(does not contain gestodene or desogestrel)",
+  "Total"
+)
+
+cat(
+  kable(
+    df6.15,
+    format  = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 6.15 Impact of third generation contraceptive pills on venous thrombosis.",
+    align = c("l", "r", "r", "r"),
+    row.names = TRUE
+  ) %>%
+  add_header_above(c(" "=1, "Venous Thrombosis"=2, " "=1)) %>%
+  kable_styling(latex_options="hold_position") %>%
+  column_spec(1, width = "6cm")  
+)
+```
+
+Since the occurrence of venous thrombosis is very rare (1 in 7000 for people using the second
+generation pill),$^{13}$ 259 subjects were selected who had thrombosis and 651 similar subjects (from
+hospitals and community) who did not have thrombosis. Then these subjects were classified by the
+type of contraceptive they used.
+
+  \begin{enumerate}
+    \item Was either the explanatory (row) or the response (column) variable fixed before the study was conducted?
+    \item Is this an example of an experiment or an observational study?
+    \item Is this a cross-classification, cohort, or case-control study?
+    \item Create a segmented bar chart for the data.
+    \item Use a two-sided hypothesis and Fisher’s exact test to determine if the type of contraceptive impacts the likelihood of thrombosis. Do you expect that researchers took care to collect a simple random sample of subjects? What conclusions can be drawn?
+    
+    The warning contained no numerical information other than the fact that the chance of blood clots
+was likely to double when birth control pills contained gestodene or desogestrel. This warning was
+widely publicized throughout the press, and evidence suggests that, as a result of this warning, many
+women ceased contraception altogether. Evidence shows a strong association between the warn-
+ing and an increase in the number of unintended pregnancies and abortions (especially in women
+younger than 20 years old). This resulted in an estimated increase in cost of £21 million for maternity
+care and £4 to £6 million for abortion provision.$^{14}$
+    \item Remember that the actual occurrence of venous thrombosis is only 1 in 7000. If third-generation pills double the chances of venous thrombosis, the likelihood of occurrence is still only 2 in 7000. Explain the difference between absolute risk reduction and relative risk reduction in this study.
+    \item Death from venous thrombosis related to third-generation pills is estimated to be 1 in 11 million, much lower than the probability of death resulting from pregnancy.$^{15}$ In 2005, the lifetime risk of maternal death in developed countries was 1 in 7300.$^{16}$ The CSM warning did suggest that patients see a doctor before altering their contraceptives; however, it appears that many women simply stopped taking any contraceptives. Write a brief statement to the press, general practitioners, pharmacists, and directors of public health about this study.
+  \end{enumerate}
+
+  \item \textbf{Baby Weights: Goodness-of-Fit Tests with Quantitative Data}    
+
+  Data set: \texttt{BabyWeight}    
+  
+  The file \texttt{BabyWeight} provides newborn weights for a simple random sample of 135 infants born in the United States in 1995. Can we conclude that the population from which this sample came is normally distributed?  
+  \begin{enumerate}
+    \item Find the 10th, 20th, 30th, … percentiles of the standard normal distribution. For example, the 10th percentile of the standard normal distribution is –1.28155.
+    \item Standardize the sample data (subtract the sample mean and divide by the sample standard deviation). Place the sample data into categories based on the standard normal percentile groups, and report the number of data values in each category. For example, in the first group you would count the number of standardized sample observations that are less than or equal to –1.28155 to get the observed number of data points for that group. How many data points would you expect in each group?
+    \item Conduct a chi-square goodness-of-fit test and clearly state your conclusions.
+    
+    With this goodness-of-fit test, we are testing the form of the distribution instead of particular param-
+eter values. Before doing many types of hypothesis tests or calculating confidence intervals, it is
+appropriate to determine if the data fit certain model assumptions, such as a certain distributional
+form. Often this process includes determining if the data were sampled from a normal distribution, as
+in this question. The steps in conducting a goodness-of-fit tests are as follows:
+  
+  $\bullet$ Group the observed responses ( y) into k arbitrarily chosen classes. In this exercise, we used evenly
+  spaced percentiles of the normal distribution to create classes, but other classes (and more or fewer
+  classes) could also be used. Classes must be distinct so that each observation can fall into only one
+  class. If the result of the test is very sensitive to the choice of classes, then you cannot have much
+  confidence in your conclusions.
+  
+  $\bullet$ Calculate the expected frequencies based on some theoretical assumption about the distribution of
+  the population (the random variable Y).
+  
+  $\bullet$ Calculate the chi-square statistic. If the observed frequencies are very different from the expected frequencies, the test       statistic will be large and we can reject the theoretical model.
+  
+  Note that we can never prove that the population actually follows a normal (or any other theoretical)
+  model. We can only prove that a proposed model is wrong or fail to reject the model. Care should be
+  taken not to state that we have proven that any population actually follows a particular distribution.
+
+  \end{enumerate}
+
+  \item \textbf{Simulating the Chi-Square Distribution}    
+
+  Data set: Table 6.1    
+  
+  \begin{enumerate}
+    \item Calculate the chi-square test statistic for the simulated table in Question 20. Since the table cell counts (at least for the concave malignant group) were assumed to be randomly generated, this test statistic can be thought of as one random sample drawn from a chi-square distribution with 1 degree of freedom.
+    \item Use software to generate 10,000 possible counts for the concave malignant group, using the cancer cell data. Calculate the chi-square test statistic for each of the 10,000 simulations. Create a histogram of the 10,000 chi-square test statistics. Describe the shape of this simulated chi-square distribution with 1 degree of freedom. Since 37 observations is still a fairly small sample size, the simulated distribution does not look completely like the theoretical chi-square distribution. Larger sample sizes will cause the simulated distribution to look much more like the true chi-square distribution.
+    \item Use statistical software to randomly generate 10,000 values from a chi-square distribution with 1 degree of freedom. Compare this distribution to the one generated in Part (b). Do they look the same?
+    \item Repeat Part (b) for a larger sample size. Assume that there are 160 round and 210 concave nuclei. In
+addition, assume that there are 240 malignant and 130 benign cells. As in Part (b), generate 10,000
+possible counts for the concave malignant group for this new table. Calculate the chi-square test
+statistic for each of the 10,000 simulations. Create a histogram of the 10,000 chi-square test statis-
+tics. Describe the shape of this simulated chi-square distribution with 1 degree of freedom.
+The theoretical chi-square distribution is continuous. As shown in Part (b) and (c), when the
+number of counts in each cell is small, the test statistic does not accurately follow a chi-square
+distribution. While the chi-square test works best with large sample sizes, most statisticians agree
+that the cell counts in Part (b) are sufficient to be modeled by the chi-square distribution.
+  \end{enumerate}
+  
 \end{list}
+
+## Endnotes {-}
+
+\begin{enumerate}
+
+\item R. Hooke (1918–2003) from his book How to Tell the Liars from the Statisticians (New York: Marcel-Dekker, 1983),
+\item American Cancer Society, Cancer Facts and Figures 2008, Atlanta, GA, http://www.cancer.org/acs/groups/con-
+tent/@epidemiologysurveilance/documents/document/acspc026210.pdf? accessed 2/25/11.
+\item W. Wolberg and O. Mangasarian, “Multisurface Method of Pattern Separation for Medical Diagnosis Applied to
+Breast Cytology,” Proceedings of the National Academy of Sciences of the United States of America, 87.23 (Dec.
+1990): 9193–9196.
+\item N. Street, W. Wolberg, and O. Mangasarian, “Nuclear Feature Extraction for Breast Tumor Diagnosis,” International
+Symposium on Electronic Imaging: Science and Technology, 1905 (1993): 861–870.
+\item For a more complete discussion of sampling schemes and appropriate tests see F. Ramsey and D. Schafer, The
+Statistical Sleuth (Pacific Grove, CA: Duxbury, 2002) or A. Agresti, “A Survey of Exact Inference for Contingency
+Tables,” Statistical Science, 7. 1 (1992): 131–177.
+\item T. R. Pedersen et al., “Randomized Trial of Cholesterol Lowering in 4444 Patients with Coronary Heart Disease:
+The Scandinavian Simvastatin Survival Study (4S),” Lancet, 344 (1994): 1383–1389.
+\item S. Woloshin, L. Schwartz, and H. G. Welch, Know Your Chances: Understanding Health Statistics (Berkeley: Uni-
+versity of California Press, 2008), p. 42.M06\_KUIP6018\_01\_SE\_C06.indd 202 18/08/11 3:59 PM Endnotes 203
+\item R. Doll and A. B. Hill, “Smoking and Carcinoma of the Lung: Preliminary Report,” British Medical Journal, 2.4682
+(1950): 739–748.
+\item D. Salsburg, The Lady Tasting Tea (New York: Freeman, 2001).
+\item “Donner Party Deaths: A Demographic Assessment,” Journal of Anthropological Research, 46 (1990): 223–242.
+\item D. M. Barnes, “Breaking the Cycle of Addiction,” Science, 241 (1988): 1029–1030.
+\item A. Furdei, “The Public Health Implications of the 1995 ‘Pill Scare,’” Human Reproduction Update, 5.6 (1999): 621–626.
+\item G. Gigerenzer et al., “Helping Doctors and Patients Make Sense of Health Statistics,” Psychological Science in the
+Public Interest, Oct. 8, 2008.
+\item A. Furdei, “The Public Health Implications of the 1995 ‘Pill Scare,’” Human Reproduction Update, 5.6 (1999):
+621–626.
+\item Ibid.
+\item Maternal Mortality in 2005, http://www.who.int/whosis/mme\_2005.pdf, accessed 11/3/10.
+\item N. J. Gotelli and G. R. Graves, Null Models in Ecology (Washington, DC: Smithsonian Institution Press, 1996).
+Gotelli and Graves define their concept this way: “[A] null model is a pattern-generating model that is based on
+randomization of ecological data or random sampling from a known or imagined distribution. The null model is
+designed with respect to some ecological or evolutionary process of interest. Certain elements of the data are held
+constant, and others allowed to vary stochastically to create assemblage patterns. The randomization is designed to
+produce a pattern that would be expected in the absence of a particular ecological mechanism” (pp. 3–4). Gotelli
+and Graves motivate the scientist’s interest in null models, stating that if the data are consistent with a properly
+constructed null model, we can infer that the biological mechanism is not operating, but if the data are inconsistent
+with the null model, “this provides some positive evidence in favor of the mechanism” (p. 6).
+
+\end{enumerate}

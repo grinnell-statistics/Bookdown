@@ -1,29 +1,583 @@
-# Sharing your book
+---
+title: "Ch6"
+output:
+  pdf_document: default
+    keep_tex: true
+  html_document: default
+date: "2025-07-11"
+---
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+# switch ggplot text to Latin Modern Roman
+theme_set(
+  theme_minimal(base_family = "Latin Modern Roman") +
+    theme(
+      plot.title = element_text(size = 24, face = "bold"),
+      axis.title = element_text(size = 12),
+      plot.caption = element_text(size = 10, hjust = 0)
+    )
+)
+```
 
-## Publishing
+# Logistic Regression: The Space Shuttle Challenger
 
-HTML books can be published online, see: https://bookdown.org/yihui/bookdown/publishing.html
+*The best thing about being a statistician is that you get to play in everyone’s backyard.*  
+—John Tukey$^1$
 
-## 404 pages
+There are many investigations where a researcher is interested in developing a regression model when the response variable is dichotomous (has only two categories). Dichotomous responses can be represented with binary data (data with values of only zero or one). Logistic regression is used to examine the relationship between one or more explanatory variables and a binary response variable.
 
-By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a `_404.Rmd` or `_404.md` file to your project root and use code and/or Markdown syntax.
+In this chapter, we will look at several studies, including O-ring failure data provided by the National Aeronautics and Space Administration (NASA) after the space shuttle Challenger disaster, in order to introduce the following logistic regression techniques:
 
-## Metadata for sharing
+* Calculating and interpreting the logistic regression model  
+* Using the Wald statistic and likelihood ratio tests to determine the significance of individual explanatory variables  
+* Calculating the log-odds function and maximum likelihood estimates  
+* Conducting goodness-of-fit tests to evaluate model appropriateness  
+* Assessing regression model performance by looking at a classification table, showing correct and incorrect classification of the response variable  
+* Extending logistic regression to cases with multiple explanatory variables  
 
-Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the `index.Rmd` YAML. To setup, set the `url` for your book and the path to your `cover-image` file. Your book's `title` and `description` are also used.
+## **Investigation: Did Temperature Influence the Likelihood of an O-Ring Failure?**
+
+On January 28, 1986, the NASA space shuttle program launched its 25th shuttle flight from Kennedy Space Center in Florida. Seventy-three seconds into the flight, the external fuel tank collapsed and spilled liquid oxygen and hydrogen. These chemicals ignited, destroying the shuttle and killing all seven crew members on board. Reports to President Reagan and videos of the event are available at the Kennedy Space Center website.*  
+
+Investigations showed that an O-ring seal in the right solid rocket booster failed to isolate the fuel supply. Figure 7.1 shows the space shuttle Challenger just after ignition with the fuel tank and two 149.16-foot-long solid rocket boosters. Figure 7.2 shows a diagram of a solid rocket booster. Because of its size, the rocket boosters were built and shipped in separate sections. A forward, center and aft field joint connected the sections. Two O-rings (one primary and one secondary), which resemble giant rubber bands 0.28 inch thick but 37 feet in diameter, were used to seal the field joints between each of the sections.
+
+An O-ring seal was used to stop the gases inside the solid rocket booster from escaping. However, the cold outside air temperature caused the O-rings to become brittle and fail to seal properly. Gases at 5800 °F escaped and burned a hole through the side of the rocket booster.
+
+[[[Figure 7.1]]]
+Picture of the space shuttle Challenger just after ignition. Each solid rocket booster had six O-rings, two at each field joint. The O-rings at the right aft field joint failed.
+
+*The Report of the Presidential Commission on the Space Shuttle Challenger Accident*, also known as the Rogers’ Commission Report, states:
+
+> ““O-ring resiliency is directly related to its temperature. . . . A warm O-ring that has been compressed
+will return to its original shape much quicker than will a cold O-ring when compression is relieved.
+. . . A compressed O-ring at 75 degrees Fahrenheit is five times more responsive in returning to its
+uncompressed shape than a cold O-ring at 30 degrees Fahrenheit. . . . At the cold launch temperature
+experienced, the O-ring would be very slow in returning to its normal rounded shape. . . . It would
+remain in its compressed position in the O-ring channel and not provide a space between itself and the
+upstream channel wall. Thus, it is probable the O-ring would not . . . seal the gap in time to preclude
+joint failure due to blow-by and erosion from hot combustion gases. . . . Of 21 launches with ambient 
+temperatures of 61 degrees Fahrenheit or greater, only four showed signs of O-ring thermal distress:
+i.e., erosion or blow-by and soot. Each of the launches below 61 degrees Fahrenheit resulted in one
+or more O-rings showing signs of thermal distress.”$^2$
+
+[[[Figure 7.2]]]
+Diargam of a solid rocket booster
+
+A lamentable aspect of this disaster is that the problem with the O-rings was already understood by
+some engineers prior to the Challenger launch. In February 1984, the Marshall Configuration Control
+Board sent a memo about the O-ring erosion that occurred on STS 41-B (the 10th space shuttle flight and
+the 4th mission for the Challenger shuttle). Messages continued to increase in intensity, as evidenced by
+a 1985 internal memo from Thiokol Corporation, the company that designed the O-ring. Employees from
+Thiokol wrote the following to their Vice President of Engineering: “This letter is written to ensure that
+management is fully aware of the seriousness of the current O-Ring erosion problem in the SRM joints
+from an engineering standpoint.”$^3$
+
+With the temperature on January 28, 1986, expected to be 31°F, Thiokol Corporation recommended
+against the Challenger launch. However, this flight was getting significant publicity because a high school
+teacher, Christa McAuliffe, was on the flight. The flight had already been delayed several times, and there
+was no quick solution to the O-ring concern. The engineers were overruled, and the decision was made to go
+ahead with the launch. The eventual presidential investigation stated,
+>“The decision to launch the Challenger was flawed. Those who made that decision were unaware of
+the recent history of problems concerning the O-rings and the joint and were unaware of the initial
+written recommendation of the contractor advising against the launch at temperatures below 53
+degrees Fahrenheit and the continuing opposition of the engineers at Thiokol after the management
+reversed its position. They did not have a clear understanding of Rockwell’s concern that it was not
+safe to launch because of ice on the pad. If the decision makers had known all of the facts, it is highly
+unlikely that they would have decided to launch 51-L on January 28, 1986.”$^4$
+
+It seems that even though some engineers did comprehend the severity of the problem, they were unable
+to properly communicate the results. Prior to the ill-fated Challenger flight, the solid rocket boosters for 24
+shuttle launches were recovered and inspected for damage. Even though O-ring damage was present in some
+of the flights, the O-rings were not damaged enough to allow any gas to escape. Since damage was very
+minimal, all 24 prior flights were considered a success by NASA.
 
 
-This `bs4_book` provides enhanced metadata for social sharing, so that each chapter shared will have a unique description, auto-generated based on the content.
 
-Specify your book's source repository on GitHub as the `repo` in the `_output.yml` file, which allows users to view each chapter's source file or suggest an edit. Read more about the features of this output format here:
 
-https://pkgs.rstudio.com/bookdown/reference/bs4_book.html
 
-Or use:
+```{r tab7.1, echo=FALSE, results='asis'}
+# Table 7.1: O‑ring damage on 24 space shuttle launches
+df7.1 <- data.frame(
+  `Flight Number` = 1:24,
+  Date = c(
+    "4/12/1981", "11/12/1981", "3/22/1982", "6/27/1982",
+    "11/11/1982", "4/4/1983",  "6/18/1983", "8/30/1983",
+    "11/28/1983","2/3/1984",  "4/6/1984",  "8/30/1984",
+    "10/5/1984", "11/8/1984", "1/24/1985","4/12/1985",
+    "4/29/1985","6/17/1985","7/29/1985","8/27/1985",
+    "10/3/1985","10/30/1985","11/26/1985","1/12/1986"
+  ),
+  `Ambient Temperature (°F)` = c(
+    66,70,69,80,68,67,72,73,70,57,63,70,78,67,53,67,75,70,81,76,79,75,76,58
+  ),
+  `Successful Launch` = c(
+    1,0,1,"*",1,1,1,1,1,0,0,0,1,1,0,1,1,1,1,1,1,0,1,0
+  ),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+cat(
+  kable(
+    df7.1,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption  = "Table 7.1 O‑ring damage on 24 space shuttle launches.",
+    align = c("c","c","c","c")
+  ) %>%
+  column_spec(1, width = "2cm")  %>%
+  column_spec(3, width = "3cm")  %>%
+  column_spec(4, width = "2cm")  %>%
+  kable_styling(latex_options="hold_position"),
+  "\n\n* Flight 4 is a missing data point because the rockets were lost at sea.\n"
+)
+```
 
-```{r eval=FALSE}
-?bookdown::bs4_book
+```{r tab7.2, echo=FALSE, results='asis'}
+# Table 7.2: The Bernoulli model
+tab <- data.frame(
+  "Value of y" = "Probability",
+  "0" = "$1 - \\pi$",
+  "1" = "$\\pi$",
+  check.names  = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    tab,
+    format  = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 7.2 The Bernoulli model.",
+    align = c("l", "c", "c")
+  ) %>%
+  kable_styling(latex_options = "hold_position")
+)
+
+```
+
+```{r tab7.3, echo=FALSE, results='asis'}
+# Table 7.3: Cancer cell data by radius group
+df7.3 <- data.frame(
+  i = c("1","2","3","4","5",""),
+  `Median radius $(x_i)$` = c("2.5","3.5","4","4.5","6.5","Total"),
+  `Benign $(n_i - y_i)$` = c("113","140","85","17","2","357"),
+  `Malignant $(y_i)$`  = c("2","12","34","43","121","212"),
+  `Total $(n_i)$` = c("115","152","119","60","123","569"),
+  `Proportion Malignant` = c("0.017","0.079","0.286","0.717","0.984",""),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    df7.3,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 7.3 Cancer cell data classified into groups based on the size of the radius.",
+    align = c("r","r","r","r","r","r"),
+    row.names = FALSE
+  ) %>%
+  kable_styling(latex_options="hold_position")
+)
+```
+
+```{r tab7.4, echo=FALSE, results='asis'}
+# Table 7.4: Observed vs. expected under logistic regression
+df7.4 <- data.frame(
+  i                   = c("1","2","3","4","5",""),
+  `Median radius`     = c("2.5","3.5","4","4.5","6.5","Total"),
+  `Benign`   = c("113","140","85","17","2","357"),
+  `Malignant`= c("2","12","34","43","121","212"),
+  `Total`    = c("115","152","119","60","123","569"),
+  `Benign`   = c(
+    "115($1-\\hat\\pi_1$) = 113.967",
+    "","", "","", "357"
+  ),
+  `Malignant`= c(
+    "115($\\hat\\pi_1$) = 115(0.00898) = 1.033",
+    "$152\\hat\\pi_2 = 16.13$", "", "", "", "212"
+  ),
+  `Total`    = c("115","152","119","60","123","569"),
+  check.names     = FALSE,
+  stringsAsFactors= FALSE
+)
+
+cat(
+  kable(
+    df7.4,
+    format    = "latex",
+    booktabs  = TRUE,
+    escape    = FALSE,
+    caption   = paste0(
+      "Table 7.4 Observed and expected values using the logistic regression model ",
+      "for the Cancercells data, where $\\hat\\pi_i$ is estimated from the ",
+      "logistic regression model $\\hat\\pi_i = e^{b_0 + b_1 x_i}/(1 + e^{b_0 + b_1 x_i})$."
+    ),
+    align        = c(rep("c",8)),
+    row.names    = FALSE
+  ) %>%
+  add_header_above(c(" "=2, "Observed"=3, "Expected"=3)) %>%
+  kable_styling(latex_options="hold_position") %>%
+  column_spec(2, width = "2cm") %>%
+  column_spec(6, width = "2.5cm") %>%
+  column_spec(7, width = "2.5cm")  
+)
 ```
 
 
+```{r fig7.3, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.3 Space shuttle data with a simple linear regression model and a logistic regression model."}
+shuttle <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+ggplot(shuttle, aes(x = Temperature, y = Success)) +
+  geom_jitter(width = 0, height = 0.02, size = 2, shape = 21, fill = "black", color = "black") +
+  # logistic fit
+  stat_smooth(
+    aes(color = "logistic model"),
+    method = "glm",
+    method.args = list(family = "binomial"),
+    se = FALSE,
+    size = 1
+  ) +
+  # simple linear fit
+  stat_smooth(
+    aes(color = "simple linear model"),
+    method = "lm",
+    se = FALSE,
+    size = 1
+  ) +
+  # legend colors
+  scale_color_manual(
+    "",
+    values = c(
+      "logistic model" = "#00BFC4",
+      "simple linear model" = "black"
+    )
+  ) +
+  # labels and y‐axis limits
+  labs(
+    x = "Ambient Temperature",
+    y = "Probability of a Successful Launch"
+  ) +
+  scale_y_continuous(limits = c(-0.05, 1.05), expand = c(0, 0)) +
+  theme_minimal(base_family = "serif") +
+  theme(
+    # graph
+    panel.background = element_rect(fill = "grey95", colour = "black", linewidth = 1),
+    panel.border = element_rect(fill = NA, colour = "black", linewidth = 1),
+    # background
+    plot.background = element_rect(fill = "grey90", colour = "black", linewidth = 1),
+    legend.position = c(0.2, 0.8),
+    # legend & text
+    legend.background = element_rect(fill = "white", colour = "black"),
+    plot.title = element_text(size = 16, hjust = 0.5),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 15, unit = "pt")
+  )
 
+```
+
+
+```{r fig7.4, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.4 A scatterplot of the residuals from the space shuttle logistic regression model and a sample of what a scatterplot of normally distributed residuals might look like."}
+# install.packages("pactchwork")
+library(patchwork)
+# fit logistic model and compute residuals
+shuttle <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+log_mod <- glm(Success ~ Temperature, data = shuttle, family = binomial)
+shuttle$resid <- shuttle$Success - predict(log_mod, type = "response")
+set.seed(42)
+df_norm <- data.frame(
+  Temperature = shuttle$Temperature,
+  Resid       = rnorm(
+    nrow(shuttle),
+    mean = mean(shuttle$resid),
+    sd   = sd(shuttle$resid)
+  )
+)
+# theme
+base_theme <- theme_minimal(base_family = "serif") +
+  theme(
+    panel.background = element_rect(fill = "white", colour = "black", linewidth = 1),
+    panel.border = element_rect(fill = NA,      colour = "black", linewidth = 1),
+    plot.background  = element_rect(fill = "grey90", colour = "black", linewidth = 1),
+    plot.title = element_text(size = 16, hjust = 0.5),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 15, unit = "pt")
+  )
+
+# 1. Residual plot for the logistic model
+p1 <- ggplot(shuttle, aes(x = Temperature, y = resid)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0) +
+  labs(
+    title = "Residual Plot for the\nLogistic Model",
+    x = "Ambient Temperature",
+    y = "Residuals"
+  ) +
+  scale_y_continuous(limits = c(-1, 1), expand = c(0, 0)) +
+  base_theme
+
+# 2. Normally distributed residuals 
+p2 <- ggplot(df_norm, aes(x = Temperature, y = Resid)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0) +
+  labs(
+    title = "Normally Distributed\nResiduals",
+    x = "Ambient Temperature",
+    y = "Residuals"
+  ) +
+  scale_y_continuous(limits = c(-2, 2), expand = c(0, 0)) +
+  base_theme
+
+# combine side by side
+p1 + p2 + plot_layout(ncol = 2)
+```
+
+```{r fig7.7, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.7 A scatterplot of the observed data and estimated probabilities for both round cells (Concave= 0) and concave cells (Concave= 1)."}
+library(tidyr)
+# fut two logistic models
+df <- read.csv("Cancer2.csv", stringsAsFactors = FALSE)
+mod_round  <- glm(Malignant ~ radius,
+                  data   = df,
+                  family = binomial,
+                  subset = (concavity == 0))
+mod_concav <- glm(Malignant ~ radius,
+                  data   = df,
+                  family = binomial,
+                  subset = (concavity == 1))
+grid <- data.frame(radius = seq(min(df$radius), max(df$radius), length.out = 200))
+grid$`Round Cells`  <- predict(mod_round, newdata = grid, type = "response")
+grid$`Concave Cells`<- predict(mod_concav, newdata = grid, type = "response")
+pred <- pivot_longer(
+  grid,
+  cols      = c("Round Cells", "Concave Cells"),
+  names_to  = "Type",
+  values_to = "Probability"
+)
+
+# plot
+ggplot() +
+  # two logistic curves
+  geom_line(
+    data = pred,
+    aes(x = radius, y = Probability, color = Type),
+    size = 1
+  ) +
+  # observed Malignant (0/1) points
+  geom_point(
+    data  = df,
+    aes(x = radius, y = Malignant, color = "Observations"),
+    shape = 23, size = 3, fill = "black"
+  ) +
+  # legend
+  scale_color_manual(
+    "",
+    breaks = c("Round Cells", "Concave Cells", "Observations"),
+    values = c(
+      "Round Cells"    = "lightblue",
+      "Concave Cells"  = "#00BFC4",
+      "Observations"   = "black"
+    ),
+    guide = guide_legend(
+      override.aes = list(
+        linetype = c(1, 1, 0),  # lines for the two curves, not for points
+        shape = c(NA, NA, 23) # the diamond for observations
+      )
+    )
+  ) +
+  # axis labels
+  labs(
+    x = "Radius",
+    y = "Estimated Probabilities"
+  ) +
+  # theme
+  theme_minimal(base_family = "serif") +
+  theme(
+    panel.background  = element_rect(fill = "white",  colour = "black", linewidth = 1),
+    panel.border = element_rect(fill = NA,       colour = "black", linewidth = 1),
+    plot.background  = element_rect(fill = "grey90", colour = "black", linewidth = 1),
+    legend.background = element_rect(fill = "white",  colour = "black"),
+    legend.position = c(0.75, 0.25), 
+    plot.margin = margin(t = 20, r = 20, b = 15, l = 15, unit = "pt")
+  )
+```
+
+
+```{r fig7.9, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.9 A logistic regression model, with $\\hat \\pi_i$ estimated from Equation (7.8) using maximum likelihood estimates, plotted with the observed probability of malignancy for the grouped data in Table 7.3."}
+# fit model
+df <- read.csv("CancercellsTable.csv", stringsAsFactors = FALSE)
+mod <- glm(cbind(Malignant, Benign) ~ Median.Radius,
+           data = df,
+           family = binomial)
+radius_grid <- seq(min(df$Median.Radius), max(df$Median.Radius), length = 200)
+pred_df <- data.frame(Median.Radius = radius_grid)
+pred_df$predicted <- predict(mod, newdata = pred_df, type = "response")
+
+# plot
+ggplot() +
+  # logistic curve
+  geom_line(
+    data = pred_df,
+    aes(x = Median.Radius, y = predicted),
+    color = "#00BFC4",
+    linetype = "dashed",
+    size = 1
+  ) +
+  # observed group proportions
+  geom_point(
+    data = df,
+    aes(x = Median.Radius, y = Proportion.Malignant),
+    size = 3
+  ) +
+  # labels
+  labs(
+    title = "Observed Cancer Cell Probabilities\nwith a Logistic Regression Model",
+    x = "Radius",
+    y = "Probability of Malignancy"
+  ) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0)) +
+  # theme
+  theme_minimal(base_family = "serif") +
+  theme(
+    plot.title       = element_text(size = 16, face = "bold", hjust = 0.5, lineheight = 1.1),
+    panel.background = element_rect(fill = "white", colour = "black", linewidth = 1),
+    panel.border     = element_rect(fill = NA,  colour = "black", linewidth = 1),
+    plot.background  = element_rect(fill = "grey90",  colour = "black", linewidth = 1),
+    axis.title       = element_text(face = "bold"),
+    legend.position  = "none"
+  )
+```
+
+
+```{r fig7.11, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.11 Scatterplots of delta deviance, delta chi-square, and delta beta values versus the expected probabilities from the space shuttle data. Circled values represent launches at 75°F."}
+library(patchwork)
+
+# fit model
+df <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+mod_full <- glm(Success ~ Temperature, data = df, family = binomial)
+
+# compute values
+dev_full <- mod_full$deviance
+chisq_full <- sum(residuals(mod_full, type = "pearson")^2)
+beta_full  <- coef(mod_full)["Temperature"]
+temps <- sort(unique(df$Temperature))
+diag_list <- lapply(temps, function(t) {
+  df2  <- subset(df, Temperature != t)
+  m2 <- glm(Success ~ Temperature, data = df2, family = binomial)
+  dev2 <- m2$deviance
+  ch2 <- sum(residuals(m2, type = "pearson")^2)
+  b2 <- coef(m2)["Temperature"]
+  pi_t <- predict(mod_full,
+                  newdata = data.frame(Temperature = t),
+                  type    = "response")
+  data.frame(
+    Temperature = t,
+    prob  = pi_t,
+    delta_dev   = abs(dev_full   - dev2),
+    delta_chisq = abs(chisq_full - ch2),
+    delta_beta  = abs(beta_full  - b2)
+  )
+})
+diag_df <- do.call(rbind, diag_list)
+
+# find max pt
+highlight_devmax <- diag_df[which.max(diag_df$delta_dev),   , drop = FALSE]
+highlight_chisqmax <- diag_df[which.max(diag_df$delta_chisq), , drop = FALSE]
+highlight_betamax  <- diag_df[which.max(diag_df$delta_beta),  , drop = FALSE]
+
+# theme
+my_theme <- theme_minimal(base_family = "serif") +
+  theme(
+    panel.border = element_rect(fill = NA,       colour = "black", linewidth = 1),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+
+# plot 1: Delta Deviance vs Probability
+p1 <- ggplot(diag_df, aes(x = prob, y = delta_dev)) +
+  geom_point(size = 2) +
+  geom_point(
+    data = highlight_devmax,
+    aes(x = prob, y = delta_dev),
+    shape  = 21, fill = NA, color = "#00BFC4",
+    size = 4, stroke = 1.2
+  ) +
+  labs(x = "Probability", y = "Delta Deviance") +
+  my_theme
+
+# plot 2: Delta Chi‑Square vs Probability
+p2 <- ggplot(diag_df, aes(x = prob, y = delta_chisq)) +
+  geom_point(size = 2) +
+  geom_point(
+    data = highlight_chisqmax,
+    aes(x = prob, y = delta_chisq),
+    shape = 21, fill = NA, color = "#00BFC4",
+    size = 4, stroke = 1.2
+  ) +
+  labs(x = "Probability", y = "Delta Chi‑Square") +
+  my_theme
+
+# plot 3: Delta Beta vs Probability
+p3 <- ggplot(diag_df, aes(x = prob, y = delta_beta)) +
+  geom_point(size = 2) +
+  geom_point(
+    data = highlight_betamax,
+    aes(x = prob, y = delta_beta),
+    shape = 21, fill = NA, color = "#00BFC4",
+    size = 4, stroke = 1.2
+  ) +
+  labs(x = "Probability", y = "Delta Beta") +
+  my_theme
+
+# combine to grid
+(p1 | p2) /
+(p3 | plot_spacer())
+```
+
+
+```{r fig7.12, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.12 Scatterplots of delta chi-square and delta beta values versus leverage from the space shuttle data. The extreme value along the y-axis represents the launches at 75°F. There do not appear to be any extreme leverage values."}
+library(ggplot2)
+library(patchwork)
+# fit regression
+df <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+mod <- glm(Success ~ Temperature, data = df, family = binomial)
+df$hat           <- hatvalues(mod)
+df$delta_chisq   <- residuals(mod, type = "deviance")^2
+df$delta_beta    <- abs(dfbeta(mod)[, "Temperature"])
+
+# theme
+my_theme <- theme_minimal(base_family = "serif") +
+  theme(
+    panel.border     = element_rect(fill = NA,       colour = "black", linewidth = 1),
+    panel.background = element_blank(),
+    plot.background  = element_blank(),
+    panel.grid.major = element_line(color = "grey80"),
+    panel.grid.minor = element_blank(),
+    axis.title       = element_text(face = "bold"),
+    plot.margin      = margin(10, 10, 10, 10)
+  )
+
+# plot 1: Delta Chi‑Square vs Leverage
+p1 <- ggplot(df, aes(x = hat, y = delta_chisq)) +
+  geom_point(size = 2) +
+  labs(x = "Leverage", y = "Delta Chi‑Square") +
+  my_theme
+
+# plot 2: Delta Beta vs Leverage
+p2 <- ggplot(df, aes(x = hat, y = delta_beta)) +
+  geom_point(size = 2) +
+  labs(x = "Leverage", y = "Delta Beta") +
+  my_theme
+
+# combine to grid
+p1 | p2
+
+```
