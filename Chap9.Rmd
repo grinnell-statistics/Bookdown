@@ -1,5 +1,198 @@
 ---
-title: "Chap9"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+# switch ggplot text to Latin Modern Roman
+theme_set(
+  theme_minimal(base_family = "Latin Modern Roman") +
+    theme(
+      plot.title = element_text(size = 24, face = "bold"),
+      axis.title = element_text(size = 12),
+      plot.caption = element_text(size = 10, hjust = 0)
+    )
+)
+```
 
+```{r tab9.1, echo=FALSE, results='asis'}
+df9.1 <- rbind(
+  Student = as.character(1:7),
+  Time = as.character(c(35, 30, 60, 45, 25, 55, 30))
+)
+
+kable(
+  df9.1,
+  format = "latex",
+  booktabs = TRUE,
+  caption = "Table 9.1 Hypothetical chocolate chip melting times for a sample of 7 students.",
+  col.names = rep("", 7),
+  align = c("l", rep("c", 7)),
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position")
+```
+
+```{r tab9.2, echo=FALSE, results='asis'}
+df9.2 <- rbind(
+  Student = as.character(1:7),
+  Time = c("35+", "30", "60+", "45", "25", "55", "30+")
+)
+
+kable(
+  df9.2,
+  format = "latex",
+  booktabs = TRUE,
+  caption = "Table 9.2 Hypothetical chocolate chip melting times for a sample of 7 students, with incomplete times for students 1, 3, and 7.",
+  col.names = rep("", 7),
+  align = c("l", rep("c", 7)),
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position")
+```
+
+```{r tab9.3, echo=FALSE, results='asis'}
+df9.3 <- data.frame(
+  `Interval i` = c(0, 1, 2, 3, 4),
+  `Time Interval` = c("[0,25)","[25,30)","[30,45)","[45,55)","[55,60)"),
+  `Number at Risk $(n_i)$`= c("7","7","6","",""),
+  `Number Censored` = c("0","0","2","",""),
+  `Number of Events that Occured $(d_i)$` = c("0","1","1","",""),
+  `$\\hat{p}_i$`= c("0/7","1/7",  "1/6","",""),
+  `$1 - \\hat{p}_i$` = c("1","6/7","5/6","",""),
+  `$\\hat{S}(t)_{KM}$` = c("1","6/7","5/7","",""),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+kable(
+  df9.3,
+  format = "latex",
+  booktabs = TRUE,
+  caption = "Table 9.3 Counts and estimated probabilities of melting for melting times.",
+  align = c("r", "l", rep("c", 6)),
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position") %>%
+  column_spec(5, width = "2.5cm") 
+
+```
+
+```{r tab9.4, echo=FALSE, results='asis'}
+df9.4 <- rbind(
+  `Group 1 (milk chocolate)` = c("35+", "30", "60+", "45", "25", "55", "30+", "", ""),
+  `Group 2 (white chocolate)` = c("45+", "35", "48", "64+", "72", "42", "55+", "43", "62")
+)
+colnames(df9.4) <- rep("", ncol(df9.4))
+
+kable(
+  df9.4,
+  format = "latex",
+  booktabs = TRUE,
+  caption = "Table 9.4 Hypothetical melting times of the milk and white chocolate chips.",
+  align = c("l", rep("c", ncol(df9.4))),
+  row.names = TRUE,
+  escape = FALSE
+) %>%
+  kable_styling(latex_options = "hold_position")
+```
+
+```{r tab9.5, echo=FALSE, results='asis'}
+df9.5 <- data.frame(
+  `Interval i` = 1:10,
+  `Time Interval` = c(
+    "[25, 30)", "[30, 35)", "[35, 42)", "[42, 43)",
+    "[43, 45)", "[45, 48)", "[48, 55)", "[55, 62)",
+    "[62, 72)", "[72, 72]"
+  ),
+  `$n_i$` = c(16, 15, 13, 11, 10, 9, "", "", "", ""),
+  `Number Censored` = c(0, 1, 1, 0, 0, 1, "", "", "", ""),
+  `$d_i$` = c(1, 1, 1, 1, 1, 1, "", "", "", ""),
+  `$d_{1i}$` = c(1, 1, 0, 0, 0, 1, "", "", "", ""),
+  `$d_i/n_i$` = c("1/16", "1/15", "1/13", "1/11", "1/10", "1/9", "", "", "", ""),
+  `$n_{1i}$` = c(7, 6, 4, 3, 3, 3, "", "", "", ""),
+  `$n_{2i}$` = c(9, 9, 9, 8, 7, 6, "", "", "", ""),
+  `$E_{1i}$` = c("7/16", "6/15", "4/13", "3/11", "3/10", "3/9", "", "", "0", "0"),
+  `$V_{1i}$` = c("0.246", "0.240", "0.213", "0.198", "0.210", "0.222", "", "", "0", "0"),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    df9.5,
+    format = "latex",
+    booktabs = TRUE,
+    caption = "Table 9.5 Selected quantities for the combined groups of chocolate chips.",
+    align = c("r", "l", rep("c", ncol(df9.5) - 2)),
+    escape = FALSE
+  ) %>%
+  kable_styling(latex_options = "hold_position")
+)
+```
+
+```{r tab9.6, echo=FALSE, results='asis'}
+df9.6 <- data.frame(
+  `Interval i` = 0:4,
+  `Time Interval` = c("[0, 25)", "[25, 30)", "[30, 45)", "[45, 55)", "[55, 60)"),
+  `$n_i$` = c(7, 7, 6, "", ""),
+  `Number Censored` = c(0, 0, 2, "", ""),
+  `$d_i$` = c(0, 1, 1, "", ""),
+  `$\\hat{p}_i$` = c("0", "1/7", "1/6", "", ""),
+  `$1 - \\hat{p}_i$` = c("1", "6/7", "5/6", "", ""),
+  `$\\hat{S}(t)_{KM}$` = c("1", "6/7", "5/7", "", ""),
+  `$t_{i+1} - t_i$` = c("25", "5", "15", "", ""),
+  `$\\hat{h}(t)_{KM}$` = c("0", "0.0286", "0.0111", "", "NA"),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    df9.6,
+    format = "latex",
+    booktabs = TRUE,
+    caption = "Table 9.6 Selected quantities for calculating the estimated hazard rates.",
+    align = c("r", "l", rep("c", ncol(df9.6) - 2)),
+    escape = FALSE
+  ) %>%
+  kable_styling(latex_options = "hold_position")
+)
+```
+
+```{r tab9.7, echo=FALSE, results='asis'}
+df9.7 <- data.frame(
+  `i` = 0:7,
+  `Interval` = c(
+    "[0, 9)", "[9, 13)", "[13, 18)", "[18, 23)",
+    "[23, 31)", "[31, 34)", "[34, 48)", "[48, 161)"
+  ),
+  `$t_i$` = c(0, 9, 13, 18, 23, 31, 34, 48),
+  `$n_i$` = c(11, 11, 10, 8, 7, 5, 4, 2),
+  `$d_i$` = c(0, 1, 1, 1, 1, 1, 1, 1),
+  `$n_i - d_i$` = c("", "", "", "", "", "", "", ""),
+  `$\\hat{p}_i$` = c("", "", "", "", "", "", "", ""),
+  `$\\hat{S}(t)_{KM}$` = c("", "", "", "", "", "", "", ""),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    df9.7,
+    format = "latex",
+    booktabs = TRUE,
+    caption = "Table 9.7 Quantities associated with patients with AML who received maintenance chemotherapy.",
+    align = c("r", "l", rep("c", ncol(df9.7) - 2)),
+    escape = FALSE
+  ) %>%
+  kable_styling(latex_options = "hold_position")
+)
+```
