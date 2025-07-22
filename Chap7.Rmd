@@ -1,25 +1,35 @@
----
-title: "Ch7"
+--- 
+title: "Chapter 7"
+author: "Your Name"
 output:
-  pdf_document: default
-  keep_tex: true
-  html_document: default
-header-includes:
-  \usepackage{float}
-date: "2025-07-11"
+  bookdown::pdf_book:
+    latex_engine: xelatex
+    number_sections: true
+    toc: true
+    toc_depth: 2
+    keep_tex: true
+documentclass: report
+bibliography:
+  - book.bib
+  - packages.bib
+biblio-style: apalike
+csl: "chicago-fullnote-bibliography.csl"
+site: bookdown::bookdown_site
+
 ---
----
-output:
-  pdf_document: default
-  html_document: default
----
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+```{r setup,include=FALSE,warning=FALSE,message=FALSE}
+knitr::opts_chunk$set(echo=FALSE)
 library(dplyr)
-library(ggplot2)
+library(readr)
 library(knitr)
 library(kableExtra)
-# switch ggplot text to Latin Modern Roman
+library(ggplot2)
+library(tidyverse)
+library(devtools)
+library(plotly)
+install_github("Tanvi-Jindal/myfirstpackage")
+library(myfirstpackage)
 theme_set(
   theme_minimal(base_family = "Latin Modern Roman") +
     theme(
@@ -230,6 +240,58 @@ In Chapter 6, the odds of an outcome are defined as $\pi/(1 - \pi)$, the probabi
 Similarly, the odds are 6 to 1 against Saturday being selected (any day but Saturday is a success).
 \normalsize
 
+
+```{r fig7.3, warning=FALSE, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.3 Space shuttle data with a simple linear regression model and a logistic regression model."}
+#shuttle <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+data("C7Shuttle")
+shuttle<-C7Shuttle
+ggplot(shuttle, aes(x = Temperature, y = Success)) +
+  geom_jitter(width = 0, height = 0.02, size = 2, shape = 21, fill = "black", color = "black") +
+  # logistic fit
+  stat_smooth(
+    aes(color = "logistic model"),
+    method = "glm",
+    method.args = list(family = "binomial"),
+    se = FALSE,
+    size = 1
+  ) +
+  # simple linear fit
+  stat_smooth(
+    aes(color = "simple linear model"),
+    method = "lm",
+    se = FALSE,
+    size = 1
+  ) +
+  # legend colors
+  scale_color_manual(
+    "",
+    values = c(
+      "logistic model" = "#00BFC4",
+      "simple linear model" = "black"
+    )
+  ) +
+  # labels and y‐axis limits
+  labs(
+    x = "Ambient Temperature",
+    y = "Probability of a Successful Launch"
+  ) +
+  scale_y_continuous(limits = c(-0.05, 1.05), expand = c(0, 0)) +
+  theme_minimal(base_family = "serif") +
+  theme(
+    # graph
+    panel.background = element_rect(fill = "grey95", colour = "black", linewidth = 1),
+    panel.border = element_rect(fill = NA, colour = "black", linewidth = 1),
+    # background
+    plot.background = element_rect(fill = "grey90", colour = "black", linewidth = 1),
+    legend.position = c(0.2, 0.8),
+    # legend & text
+    legend.background = element_rect(fill = "white", colour = "black"),
+    plot.title = element_text(size = 16, hjust = 0.5),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 15, unit = "pt")
+  )
+
+```
+
 *?Throughout this chapter, we will use terms such as \textit{log-odds} or \textit{log-likelihood}, but we actually use natural logs (ln) in
 our calculations.
 
@@ -249,6 +311,62 @@ It is possible to use least squares regression techniques to estimate $\beta_0$ 
 Residuals (observed values minus expected values) are used to estimate the error terms. Visual inspection of residual plots is often used to check for normality. Recall from previous work in regression that if the residuals are normally distributed, the scatterplot of the residuals versus the explanatory variable should resemble a randomly scattered oval of points. For example, it should resemble the random scatter you would see if you happened to drop 23 coins (one for each residual value).
 
 In logistic regression, the residuals are $y_i - \hat\pi_i$. If the observed response $y_i = 0$, then the residual value is $-\hat\pi_i$. If the observed response $y_i = 1$, then the residual value is $1 - \hat\pi_i$. This leads to the two curves shown in Figure 7.4. When the temperature is low in the space shuttle data (around 55°F, as seen in Figure 7.3), the observed responses tend to be zero and the predicted responses ($\hat\pi_i$’s) are small positive numbers. Thus, the residual values ($-\hat\pi_i$’s) are negative and close to zero. When the temperature is high, the observed responses tend to be one, the predicted responses are close to one, and the residual values are positive and close to zero.
+
+```{r fig7.4, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.4 A scatterplot of the residuals from the space shuttle logistic regression model and a sample of what a scatterplot of normally distributed residuals might look like."}
+# install.packages("pactchwork")
+library(patchwork)
+# fit logistic model and compute residuals
+# shuttle <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+data("C7Shuttle")
+shuttle<-C7Shuttle
+log_mod <- glm(Success ~ Temperature, data = shuttle, family = binomial)
+shuttle$resid <- shuttle$Success - predict(log_mod, type = "response")
+set.seed(42)
+df_norm <- data.frame(
+  Temperature = shuttle$Temperature,
+  Resid       = rnorm(
+    nrow(shuttle),
+    mean = mean(shuttle$resid),
+    sd   = sd(shuttle$resid)
+  )
+)
+# theme
+base_theme <- theme_minimal(base_family = "serif") +
+  theme(
+    panel.background = element_rect(fill = "white", colour = "black", linewidth = 1),
+    panel.border = element_rect(fill = NA,      colour = "black", linewidth = 1),
+    plot.background  = element_rect(fill = "grey90", colour = "black", linewidth = 1),
+    plot.title = element_text(size = 16, hjust = 0.5),
+    plot.margin = margin(t = 20, r = 20, b = 20, l = 15, unit = "pt")
+  )
+
+# 1. Residual plot for the logistic model
+p1 <- ggplot(shuttle, aes(x = Temperature, y = resid)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0) +
+  labs(
+    title = "Residual Plot for the\nLogistic Model",
+    x = "Ambient Temperature",
+    y = "Residuals"
+  ) +
+  scale_y_continuous(limits = c(-1, 1), expand = c(0, 0)) +
+  base_theme
+
+# 2. Normally distributed residuals 
+p2 <- ggplot(df_norm, aes(x = Temperature, y = Resid)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0) +
+  labs(
+    title = "Normally Distributed\nResiduals",
+    x = "Ambient Temperature",
+    y = "Residuals"
+  ) +
+  scale_y_continuous(limits = c(-2, 2), expand = c(0, 0)) +
+  base_theme
+
+# combine side by side
+p1 + p2 + plot_layout(ncol = 2)
+```
 
 \Large
 \textbf{\textcolor{red}{Key Concept:}}
@@ -600,336 +718,34 @@ Figure 7.7 provides the expected probabilities for the model created in Question
 The logic for determining whether additional terms should be in a logistic regression model is essentially the same as for the LRT discussed in connection with the space shuttle study. The log-likelihood (or deviance) can be used to measure how well any model fits the data. If a full model with two explanatory variables, $x_1$ and $x_2$, has a much better fit than a restricted model with just one explanatory variable, $x_1$, we can conclude that $x_2$ is significant and should be included in the model.
 
 If the LRT shows no significant difference between the full and the restricted model, the coefficient of
-the second variable, x2, can be set to zero and we can conclude that including the additional variable in the
+the second variable, $x_2$, can be set to zero and we can conclude that including the additional variable in the
 model does not improve our ability to estimate the probability of success (in this case, success represents a
 malignant cell).
 
 In the cancer study, we can compare the full log-likelihood (or deviance) from the two-term model in
 Question 15 to the restricted log-likelihood (or deviance) from the one-term model in Question 16.
 
+\begin{align}
+G &= 2 \times \text{log-likelihood (full model)} - 2 * \text{log-likelihood (restricted model)} \notag \\
+&= 2(-112.008) - 2(-165.005) \notag \\
+&= \text{null (restricted model) deviance} - \text{residual (full model) deviance} \notag \\
+&= 105.994 \tag{7.16}
+\end{align}
+
 Just as in the LRT described in connection with the shuttle example, degrees of freedom are calculated as the
 number of parameters in the full model minus the number of parameters in the restricted model. Thus, we can
-test whether Concave (x2) should be included in the model by finding the p-value, which is the percentage of
-the x2 distribution with 3 - 2 = 1 degree of freedom that exceeds G. The p-value corresponding to Equation
-(7.16) is less than 0.0001. We have strong evidence that the explanatory variable, Concave, is important in
-the model when Radius is already included. Thus, the logistic regression model in Question 15 is preferred
+test whether $Concave$ ($x_2$) should be included in the model by finding the $p$-value, which is the percentage of
+the $\chi^2$ distribution with 3 - 2 = 1 degree of freedom that exceeds $G$. The $p$-value corresponding to Equation
+(7.16) is less than 0.0001. We have strong evidence that the explanatory variable, $Concave$, is important in
+the model when $Radius$ is already included. Thus, the logistic regression model in Question 15 is preferred
 over the model in Question 16.
-
-\Large
-\textbf{Key Concept:}
-\color{red}
-To use the drop-in-deviance test to determine if $x_i$ should be included in a model:
-
-1. Calculate the deviance (or $-2 \times$ log-likelihood) for the full (i.e., unrestricted) model with all variables of interest.
-2. Calculate the deviance (or $-2 \times$ log-likelihood) for the reduced (i.e., restricted) model (e.g., the model including all the variables in step 1 except for $x_i$).
-3. Calculate $G = 2 \times$ log-likelihood (full model) $-2 \times$ log-likelihood (restricted model) = deviance (restricted model) $-$ deviance (full model).
-4. Calculate the degrees of freedom, the number of parameters in the full model minus the number of parameters in the restricted model.
-5. Find the $p$-value, the percentage of the $\chi^2$ distribution that exceeds $G$.
-6. If the $p$-value is small, reject $H_0: \beta_i = 0$ and conclude that $x_i$ should be included in the model. If the $p$-value is large, the explanatory variable, $x_i$, can be eliminated from the model.
-\color{black}
-\normalsize
-\color{black}
-
-## **Measures of Association**
-
-When sample sizes are small, a model may have a strong association (a clear pattern is visible) but not have enough evidence to show that the independent variable is significant. Conversely, if there were thousands of observations in a data set, a hypothesis test might conclude that an independent variable was significant even though there was only a very weak association. Thus, researchers typically report both significance tests and a measure of association when discussing results. While there is no widely accepted equivalent to $R^2$ in logistic regression, this section will describe calculations that can be used to measure the strength of association.
-
-To measure the strength of association in the space shuttle logistic regression model, pair each observed success with every observed failure. In the shuttle example, there are 16 successes and 7 failures; thus, there are $16 \times 7 = 112$ pairs. For each pair, use the logistic regression model to estimate the probability of success for both the observed success and the observed failure. If the observation corresponding to a success has a higher estimated probability, the pair is called a concordant pair. If the observation corresponding to a success has a lower estimated probability, the pair is called a discordant pair. Tied pairs occur when the observed success has the same estimated probability as the observed failure.
-
-\begin{itemize}
-  \item To find Somers’ $D$, take the number of concordant pairs minus the number of discordant pairs and then divide by the total number of pairs.
-  \item To find Goodman-Kruskal gamma (also called Goodman and Kruskal’s gamma), take the number of concordant pairs minus the number of discordant pairs and then divide by the total number of pairs excluding ties.
-  \item To find Kendall’s tau-a, take the number of concordant pairs minus the number of discordant pairs and then divide by the total number of pairs of observations including pairs with the same response value.
-\end{itemize}
-
-If all possible pairs were concordant, then Somers’ $D$ would equal 1. If the model had no predictive power, we would expect half the pairs to be concordant and half to be discordant. This would correspond to Somers’ $D = 0$. Thus, a value of 0 for Somers’ $D$ (as well as Goodman and Kruskal’s gamma) indicates no effect of the explanatory variable on the response variable.
-
-## Extended Activity: Measures of Association {-}
-
-Data set: Shuttle
-
-19. The first and eleventh launches form a pair, since at 63°F there was an O-ring failure and at 66°F there was a success (no O-ring failure). This is a concordant pair, since the probability of success is higher when there was an observed success. Estimate the probability of success for each temperature.
-20. Calculate the expected probabilities of the first (66°F) and 22nd (75°F) observations. Is this a concordant or discordant pair?
-21. Identify two launches in the space shuttle data that represent a tied pair.
-22. Various statistical software packages tend to provide different measures of association. Use statistical software to calculate the Goodman-Kruskal gamma, Somers’ $D$, or Kendall’s tau-a for the space shuttle data.
-
-## **Review of Means and Variances of Binary and Binomial Data**
-
-If you have worked with discrete probability models, you will recognize that binary data follow a Bernoulli distribution if the following conditions are true:
-
-\begin{itemize}
-  \item Each observation, $y_i$, is independent.
-  \item Each $y_i$ falls into exactly one of two categories represented by either a 0 or a 1.
-  \item The probability of success, $P(Y_i = 1) = \pi_i$, is constant for each observation.
-\end{itemize}
-
-The Bernoulli distribution can be displayed as in Table 7.2. Table 7.2 is often represented with the following mathematical function to model the Bernoulli distribution:
-
-\begin{align}
-P(Y = k) &= \pi^k(1 - \pi)^{1-k} \quad \text{for } k = 0,1 \tag{7.17}
-\end{align}
-
-The expected value (mean) of $y$ is the average outcome:
-
-\begin{align}
-E(Y) &= 0 \times P(Y = 0) + 1 \times P(Y = 1) = 0 \times (1 - \pi) + 1 \times \pi = \pi \tag{7.18}
-\end{align}
-
-Note that each outcome is not equally likely. Thus, each outcome is weighted by its probability. The variance of $y$ is the average value of the squared deviation of the observed value, $y$, and the expected value, $\pi$:
-
-\begin{align}
-\mathrm{Var}(Y) &= E[(Y - \pi)^2] = (0 - \pi)^2 \times P(Y = 0) + (1 - \pi)^2 \times P(Y = 1) = \pi(1 - \pi) \tag{7.19}
-\end{align}
-
-In the above equations, $\pi$ is the same for every observational unit and the results for each observational unit are independent of each other. However, in regression we focus on the expected value of $y$ given $x$, $E(Y \mid x_i)$. This represents the expectation that the probability of success depends on an explanatory variable. In the space shuttle example, the expected probability of a successful launch will change depending on the temperature. For any given temperature value, $x_i$, the probability of success is constant, $\pi_i$, and the observations are independent. Thus, for a particular $x_i$, the corresponding mean and variance are:
-
-\begin{align}
-E(Y \mid x_i) &= \pi_i \\
-\mathrm{Var}(Y \mid x_i) &= \pi_i(1 - \pi_i) \tag{7.20}
-\end{align}
-
-Thus, in logistic regression with Bernoulli response variables, the variance of $Y$ will depend on $x$. This violates the key assumption of constant variance in least squares regression models.
-
-Logistic regression is also appropriate when the response is a count of the number of successes. A count follows a binomial distribution if the following conditions are true:
-
-\begin{itemize}
-  \item There are $n_i$ independent observations at a given level of $x$ ($x_i$).
-  \item $\pi_i = P(Y_i = 1 \mid x_i)$ is the probability of success, and this probability is constant for any given $x_i$ ($0 \le \pi_i \le 1$).
-  \item Each response has only two possible outcomes. However, instead of recording a 0 or a 1 value for each outcome, we typically record $Y$ as the count of successes (or proportion of successes) at a particular $x_i$ value.
-\end{itemize}
-
-Many introductory textbooks show that if the data follow a binomial distribution, the probability that there are $k$ successes in $n_i$ independent observations is:
-
-\begin{align}
-P(Y = k \mid x_i) &= \binom{n_i}{k} \pi^k(1 - \pi)^{n_i-k} \quad \text{for } k = 0,1,\dots,n_i \tag{7.21}
-\end{align}
-
-where $\binom{n_i}{k} = \frac{n_i!}{k!(n_i-k)!}$ is called the binomial coefficient and is read as “$n_i$ choose $k$. ”
-
-Using a technique similar to that for the Bernoulli distribution, it can be shown that the conditional mean (probability of success) and variance of binomial response variables are:
-
-\begin{align}
-E(Y \mid x_i) &= n_i \times \pi_i \\
-\mathrm{Var}(Y \mid x_i) &= n_i \times \pi_i(1 - \pi_i) \tag{7.22}
-\end{align}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```{r tab7.2, echo=FALSE, results='asis'}
-# Table 7.2: The Bernoulli model
-tab <- data.frame(
-  "Value of y" = "Probability",
-  "0" = "$1 - \\pi$",
-  "1" = "$\\pi$",
-  check.names  = FALSE,
-  stringsAsFactors = FALSE
-)
-
-cat(
-  kable(
-    tab,
-    format  = "latex",
-    booktabs = TRUE,
-    escape = FALSE,
-    caption = "Table 7.2 The Bernoulli model.",
-    align = c("l", "c", "c")
-  ) %>%
-  kable_styling(latex_options = "hold_position")
-)
-
-```
-
-```{r tab7.3, echo=FALSE, results='asis'}
-# Table 7.3: Cancer cell data by radius group
-df7.3 <- data.frame(
-  i = c("1","2","3","4","5",""),
-  `Median radius $(x_i)$` = c("2.5","3.5","4","4.5","6.5","Total"),
-  `Benign $(n_i - y_i)$` = c("113","140","85","17","2","357"),
-  `Malignant $(y_i)$`  = c("2","12","34","43","121","212"),
-  `Total $(n_i)$` = c("115","152","119","60","123","569"),
-  `Proportion Malignant` = c("0.017","0.079","0.286","0.717","0.984",""),
-  check.names = FALSE,
-  stringsAsFactors = FALSE
-)
-
-cat(
-  kable(
-    df7.3,
-    format = "latex",
-    booktabs = TRUE,
-    escape = FALSE,
-    caption = "Table 7.3 Cancer cell data classified into groups based on the size of the radius.",
-    align = c("r","r","r","r","r","r"),
-    row.names = FALSE
-  ) %>%
-  kable_styling(latex_options="hold_position")
-)
-```
-
-```{r tab7.4, echo=FALSE, results='asis'}
-# Table 7.4: Observed vs. expected under logistic regression
-df7.4 <- data.frame(
-  i                   = c("1","2","3","4","5",""),
-  `Median radius`     = c("2.5","3.5","4","4.5","6.5","Total"),
-  `Benign`   = c("113","140","85","17","2","357"),
-  `Malignant`= c("2","12","34","43","121","212"),
-  `Total`    = c("115","152","119","60","123","569"),
-  `Benign`   = c(
-    "115($1-\\hat\\pi_1$) = 113.967",
-    "","", "","", "357"
-  ),
-  `Malignant`= c(
-    "115($\\hat\\pi_1$) = 115(0.00898) = 1.033",
-    "$152\\hat\\pi_2 = 16.13$", "", "", "", "212"
-  ),
-  `Total`    = c("115","152","119","60","123","569"),
-  check.names     = FALSE,
-  stringsAsFactors= FALSE
-)
-
-cat(
-  kable(
-    df7.4,
-    format    = "latex",
-    booktabs  = TRUE,
-    escape    = FALSE,
-    caption   = paste0(
-      "Table 7.4 Observed and expected values using the logistic regression model ",
-      "for the Cancercells data, where $\\hat\\pi_i$ is estimated from the ",
-      "logistic regression model $\\hat\\pi_i = e^{b_0 + b_1 x_i}/(1 + e^{b_0 + b_1 x_i})$."
-    ),
-    align        = c(rep("c",8)),
-    row.names    = FALSE
-  ) %>%
-  add_header_above(c(" "=2, "Observed"=3, "Expected"=3)) %>%
-  kable_styling(latex_options="hold_position") %>%
-  column_spec(2, width = "2cm") %>%
-  column_spec(6, width = "2.5cm") %>%
-  column_spec(7, width = "2.5cm")  
-)
-```
-
-
-```{r fig7.3, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.3 Space shuttle data with a simple linear regression model and a logistic regression model."}
-shuttle <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
-ggplot(shuttle, aes(x = Temperature, y = Success)) +
-  geom_jitter(width = 0, height = 0.02, size = 2, shape = 21, fill = "black", color = "black") +
-  # logistic fit
-  stat_smooth(
-    aes(color = "logistic model"),
-    method = "glm",
-    method.args = list(family = "binomial"),
-    se = FALSE,
-    size = 1
-  ) +
-  # simple linear fit
-  stat_smooth(
-    aes(color = "simple linear model"),
-    method = "lm",
-    se = FALSE,
-    size = 1
-  ) +
-  # legend colors
-  scale_color_manual(
-    "",
-    values = c(
-      "logistic model" = "#00BFC4",
-      "simple linear model" = "black"
-    )
-  ) +
-  # labels and y‐axis limits
-  labs(
-    x = "Ambient Temperature",
-    y = "Probability of a Successful Launch"
-  ) +
-  scale_y_continuous(limits = c(-0.05, 1.05), expand = c(0, 0)) +
-  theme_minimal(base_family = "serif") +
-  theme(
-    # graph
-    panel.background = element_rect(fill = "grey95", colour = "black", linewidth = 1),
-    panel.border = element_rect(fill = NA, colour = "black", linewidth = 1),
-    # background
-    plot.background = element_rect(fill = "grey90", colour = "black", linewidth = 1),
-    legend.position = c(0.2, 0.8),
-    # legend & text
-    legend.background = element_rect(fill = "white", colour = "black"),
-    plot.title = element_text(size = 16, hjust = 0.5),
-    plot.margin = margin(t = 20, r = 20, b = 20, l = 15, unit = "pt")
-  )
-
-```
-
-
-```{r fig7.4, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.4 A scatterplot of the residuals from the space shuttle logistic regression model and a sample of what a scatterplot of normally distributed residuals might look like."}
-# install.packages("pactchwork")
-library(patchwork)
-# fit logistic model and compute residuals
-shuttle <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
-log_mod <- glm(Success ~ Temperature, data = shuttle, family = binomial)
-shuttle$resid <- shuttle$Success - predict(log_mod, type = "response")
-set.seed(42)
-df_norm <- data.frame(
-  Temperature = shuttle$Temperature,
-  Resid       = rnorm(
-    nrow(shuttle),
-    mean = mean(shuttle$resid),
-    sd   = sd(shuttle$resid)
-  )
-)
-# theme
-base_theme <- theme_minimal(base_family = "serif") +
-  theme(
-    panel.background = element_rect(fill = "white", colour = "black", linewidth = 1),
-    panel.border = element_rect(fill = NA,      colour = "black", linewidth = 1),
-    plot.background  = element_rect(fill = "grey90", colour = "black", linewidth = 1),
-    plot.title = element_text(size = 16, hjust = 0.5),
-    plot.margin = margin(t = 20, r = 20, b = 20, l = 15, unit = "pt")
-  )
-
-# 1. Residual plot for the logistic model
-p1 <- ggplot(shuttle, aes(x = Temperature, y = resid)) +
-  geom_point(size = 2) +
-  geom_hline(yintercept = 0) +
-  labs(
-    title = "Residual Plot for the\nLogistic Model",
-    x = "Ambient Temperature",
-    y = "Residuals"
-  ) +
-  scale_y_continuous(limits = c(-1, 1), expand = c(0, 0)) +
-  base_theme
-
-# 2. Normally distributed residuals 
-p2 <- ggplot(df_norm, aes(x = Temperature, y = Resid)) +
-  geom_point(size = 2) +
-  geom_hline(yintercept = 0) +
-  labs(
-    title = "Normally Distributed\nResiduals",
-    x = "Ambient Temperature",
-    y = "Residuals"
-  ) +
-  scale_y_continuous(limits = c(-2, 2), expand = c(0, 0)) +
-  base_theme
-
-# combine side by side
-p1 + p2 + plot_layout(ncol = 2)
-```
 
 ```{r fig7.7, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.7 A scatterplot of the observed data and estimated probabilities for both round cells (Concave= 0) and concave cells (Concave= 1)."}
 library(tidyr)
 # fut two logistic models
-df <- read.csv("Cancer2.csv", stringsAsFactors = FALSE)
+# df <- read.csv("Cancer2.csv", stringsAsFactors = FALSE)
+data("C7Cancer2")
+df<-C7Cancer2
 mod_round  <- glm(Malignant ~ radius,
                   data   = df,
                   family = binomial,
@@ -995,10 +811,265 @@ ggplot() +
   )
 ```
 
+When the LRT is used for variable selection, it is often called the **change-in-deviance test** or **drop-in-deviance test**. This test is valid only when the restricted model is nested within the full model. A
+restricted model is **nested** in a full model when every explanatory variable in the restricted model is also
+in the full model.
+
+\Large
+\textbf{\textcolor{red}{Key Concept:}}
+\textcolor{red}{To use the drop-in-deviance test to determine if $x_i$ should be included in a model:}
+
+\textcolor{red}{1. Calculate the deviance (or $-2 \times$ log-likelihood) for the full (i.e., unrestricted) model with all variables of interest.}
+
+\textcolor{red}{2. Calculate the deviance (or $-2 \times$ log-likelihood) for the reduced (i.e., restricted) model (e.g., the model including all the variables in step 1 except for $x_i$).}
+
+\textcolor{red}{3. Calculate $G = 2 \times$ log-likelihood (full model) $-2 \times$ log-likelihood (restricted model) = deviance (restricted model) $-$ deviance (full model).}
+
+\textcolor{red}{4. Calculate the degrees of freedom, the number of parameters in the full model minus the number of parameters in the restricted model.}
+
+\textcolor{red}{5. Find the $p$-value, the percentage of the $\chi^2$ distribution that exceeds $G$.}
+
+\textcolor{red}{6. If the $p$-value is small, reject $H_0: \beta_i = 0$ and conclude that $x_i$ should be included in the model. If the $p$-value is large, the explanatory variable, $x_i$, can be eliminated from the model.}
+\normalsize
+
+\large
+\textbf{MATHEMATICAL NOTE:}
+The drop-in-deviance can also be used to simultaneously test multiple variables. For example, let’s assume
+that there were four Shape measurements (round, slightly concave, moderately concave, and severely
+concave). These four levels would be used to create three indicator variables. If we are interested in
+testing whether $Shape$ is important, we should test all three coefficients simultaneously. The steps in
+testing three coefficients simultaneously are identical to the steps listed above except that instead of
+just testing for $x_j$, we are simultaneously testing for $x_2$, $x_3$, and $x_4$. Then the null hypothesis would be
+$H0: \beta_2 = \beta_3 = \beta_4 = 0$, where each of these coefficients corresponds to one $Shape$ indicator variable
+in the full model.
+\normalsize 
+
+Drop-in-deviance tests are often used in combination with stepwise regression techniques in order to
+identify the best model for prediction. In the end-of-chapter exercises, backward elimination procedures
+analogous to those used in multiple least squares regression will be used to find an appropriate model. The
+procedure starts with all explanatory variables of interest in the model. Variables that do not appear to be
+significant (or do not significantly reduce the size of the residuals) are removed in a stepwise process. The
+process is continued until all variables in the model are significant (or the model consists of only variables
+that are important in reducing the size of the residuals).
+
+Just as in least squares regression, there is often no “best” multivariate logistic regression model. Differ-
+ent stepwise procedures, sampling variability, the desired balance between the accuracy and the simplicity
+of the model, and choice of terms tested all can influence the final model that is selected. While there should
+be careful justification for selecting a final model, caution should be used before stating that any selected
+model is “the best.”
+
+\large
+\textbf{CAUTION:}
+Recall that stepwise techniques are useful for developing models if the goal is to estimate or predict a
+response. However, they are not appropriate if the goal of developing a regression model is theory test-
+ing. Stepwise procedures involve multiple testing on the same variables. This leads to unreliable p-values
+when testing the coefficients of individual explanatory variables. Thus, it is inappropriate to use stepwise
+procedures to find a good model and then test each coefficient on your final model to determine if the
+individual explanatory variables are significant.
+\normalsize 
+
+\large
+\textbf{NOTE:}
+Some software packages have programs that will automatically suggest a model for logistic regression
+(just as is done for stepwise procedures in least squares regression). While this chapter focuses only on
+the drop-in-deviance test, there are other techniques that can be used in variable selection.
+\begin{align}
+\textbf{Akaike’s Information Criterion (AIC)} &= -2 \times \text{log-likelihood} + 2 \times p \notag \\
+\textbf{Bayesian Information Criterion (BIC)} &= -2 \times \text{log-likelihood} + p \times ln(n) \notag
+\end{align}
+where p is the number of estimated parameters (the number of explanatory variables plus 1) and n is the
+sample size. Both the AIC and the BIC adjust for the number of parameters in the model and are more
+likely to select models with fewer variables than the drop-in-deviance test. Both techniques suggest choos-
+ing a model with the smallest AIC or BIC value
+\normalsize 
+
+## **Measures of Association**
+
+When sample sizes are small, a model may have a strong association (a clear pattern is visible) but not have enough evidence to show that the independent variable is significant. Conversely, if there were thousands of observations in a data set, a hypothesis test might conclude that an independent variable was significant even though there was only a very weak association. Thus, researchers typically report both significance tests and a measure of association when discussing results. While there is no widely accepted equivalent to $R^2$ in logistic regression, this section will describe calculations that can be used to measure the strength of association.
+
+To measure the strength of association in the space shuttle logistic regression model, pair each observed success with every observed failure. In the shuttle example, there are 16 successes and 7 failures; thus, there are $16 \times 7 = 112$ pairs. For each pair, use the logistic regression model to estimate the probability of success for both the observed success and the observed failure. If the observation corresponding to a success has a higher estimated probability, the pair is called a **concordant pair**. If the observation corresponding to a success has a lower estimated probability, the pair is called a **discordant pair**. **Tied pairs** occur when the observed success has the same estimated probability as the observed failure.
+
+\begin{itemize}
+  \item To find \textbf{Somers’ $D$}, take the number of concordant pairs minus the number of discordant pairs and then divide by the total number of pairs.
+  \item To find \textbf{Goodman-Kruskal gamma} (also called Goodman and Kruskal’s gamma), take the number of concordant pairs minus the number of discordant pairs and then divide by the total number of pairs excluding ties.
+  \item To find \textbf{Kendall’s tau-a}, take the number of concordant pairs minus the number of discordant pairs and then divide by the total number of pairs of observations including pairs with the same response value.
+\end{itemize}
+
+If all possible pairs were concordant, then Somers’ $D$ would equal 1. If the model had no predictive power, we would expect half the pairs to be concordant and half to be discordant. This would correspond to Somers’ $D = 0$. Thus, a value of 0 for Somers’ $D$ (as well as Goodman and Kruskal’s gamma) indicates no effect of the explanatory variable on the response variable.
+
+## Extended Activity: Measures of Association {-}
+
+Data set: $Shuttle$
+
+19. The first and eleventh launches form a pair, since at 63°F there was an O-ring failure and at 66°F there was a success (no O-ring failure). This is a concordant pair, since the probability of success is higher when there was an observed success. Estimate the probability of success for each temperature.
+20. Calculate the expected probabilities of the first (66°F) and 22nd (75°F) observations. Is this a concordant or discordant pair?
+21. Identify two launches in the space shuttle data that represent a tied pair.
+22. Various statistical software packages tend to provide different measures of association. Use statistical software to calculate the Goodman-Kruskal gamma, Somers’ $D$, or Kendall’s tau-a for the space shuttle data.
+
+Minitab output for the space shuttle data is provided in Figure 7.8. The output shows that 75.9% of the pairs
+were concordant, while 19.6% of the pairs were discordant. This provides some evidence of association
+between temperature and probability of a successful launch.
+
+\begin{align}
+\text{Somers’ D} &= (85 - 22)/112 = 0.56 \notag \\
+\text{Goodman-Kruskal gamma} &= (85 - 22)/(112 - 5) = 0.59 \notag \\
+\text{Kendall’s Tau-a} &= (85 - 22)/(253) = 0.25 \notag \\
+\text{where } 253 &= 23 \times 22/2, \text{the total number of pairs} \notag
+\end{align}
+
+Somers’ D and the Goodman-Kruskal gamma are very close to each for other because there are very
+few tied pairs. There are no $p$-values corresponding to these measures, but they are useful for compar-
+ing different models with different explanatory variables or comparing models based on different link
+functions.
+
+[[[Figure 7.8]]]
+
+## **Review of Means and Variances of Binary and Binomial Data**
+
+If you have worked with discrete probability models, you will recognize that binary data follow a Bernoulli distribution if the following conditions are true:
+
+- Each observation, $y_i$, is independent.
+- Each $y_i$ falls into exactly one of two categories represented by either a zero or a one.
+- The probability of success, $P(Y_i = 1) = \pi_i$, is constant for each observation.
+
+The Bernoulli distribution can be displayed as in Table 7.2. 
+Table 7.2 is often represented with the following mathematical function to model the Bernoulli distribution:
+
+\begin{align}
+P(Y = k) &= \pi^k (1 - \pi)^{1-k} \quad \text{for } k = 0, 1 \tag{7.17}
+\end{align}
+
+The expected value (mean) of $y$ is the average outcome:
+
+\begin{align}
+E(Y) &= 0 \times P(Y = 0) + 1 \times P(Y = 1) = 0 \times (1 - \pi) + 1 \times \pi = \pi \tag{7.18}
+\end{align}
+
+Note that each outcome is not equally likely. Thus, each outcome is weighted by its probability. The variance of $y$ is the average value of the squared deviation of the observed value, $y$, and the expected value, $\pi$:
+
+\begin{align}
+\mathrm{Var}(Y) &= E[(Y - \pi)^2] = (0 - \pi)^2 \times P(Y = 0) + (1 - \pi)^2 \times P(Y = 1) = \pi (1 - \pi) \tag{7.19}
+\end{align}
+
+```{r tab7.2, echo=FALSE, results='asis'}
+# Table 7.2: The Bernoulli model
+tab <- data.frame(
+  "Value of y" = "Probability",
+  "0" = "$1 - \\pi$",
+  "1" = "$\\pi$",
+  check.names  = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    tab,
+    format  = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 7.2 The Bernoulli model.",
+    align = c("l", "c", "c")
+  ) %>%
+  kable_styling(latex_options = "hold_position")
+)
+
+```
+
+In the above equations, $\pi$ is the same for every observational unit and the results for each observational unit are independent of each other. However, in regression we focus on the expected value of $y$ given $x$, $E(Y \mid x_i)$. This represents the expectation that the probability of success depends on an explanatory variable. In the space shuttle example, the expected probability of a successful launch will change depending on the temperature. For any given temperature value, $x_i$, the probability of success is constant, $\pi_i$, and the observations are independent. Thus, for a particular $x_i$, the corresponding mean and variance are
+
+\begin{align}
+E(Y \mid x_i) &= \pi_i \quad \text{and} \quad \mathrm{Var}(Y \mid x_i) = \pi_i (1 - \pi_i) 
+\tag{7.20}
+\end{align}
+
+Thus, in logistic regression with Bernoulli response variables, the variance of $Y$ will depend on $x$. This violates
+the key assumption of constant variance in least squares regression models.
+
+Logistic regression is also appropriate when the response is a count of the number of successes. A count follows a binomial distribution if the following conditions are true:
+
+- There are $n_i$ independent observations at a given level of $x$ ($x_i$).
+- $\pi_i = P(Y_i = 1 \mid x_i)$ is the probability of success, and this probability is constant for any given $x_i$ ($0 \le \pi_i \le 1$).
+- Each response has only two possible outcomes. However, instead of recording a 0 or a 1 value for each outcome, we typically record $Y$ as the count of successes (or proportion of successes) at a particular $x_i$ value.
+
+Many introductory textbooks show that if the data follow a binomial distribution, the probability that there are $k$ successes in $n_i$ independent observations is:
+
+\begin{align}
+P(Y = k \mid x_i) &= \binom{n_i}{k} \,\pi_i^k (1 - \pi_i)^{n_i - k} \quad \text{for } k = 0, 1, \dots, n_i \tag{7.21}
+\end{align}
+
+where $\displaystyle \binom{n_i}{k} = \frac{n_i!}{k!\,(n_i - k)!}$ is called the binomial coefficient and is read as “$n_i$ choose $k$.”
+
+Using a technique similar to that for the Bernoulli distribution, it can be shown that the conditional mean (probability of success) and variance of binomial response variables are
+
+\begin{align}
+E(Y \mid x_i) &= n_i \times \pi_i \quad \text{and} \quad \mathrm{Var}(Y \mid x_i) = n_i \times \pi_i (1 - \pi_i) 
+\tag{7.22}
+\end{align}
+
+## Extended Activity: Understanding the Binomial Distribution {-}
+
+23. Assume that for a particular temperature $x_i = 70^\circ\mathrm{F}$ the true probability of success is $\pi_i = 0.75$. If there are four launches made at $x_i = 70^\circ\mathrm{F}$, use Equation (7.21) to find the probability that all four launches are successful, $P(Y_i = 4 \mid x_i = 70)$. Also find the probability that one of the four launches is successful, $P(Y_i = 1 \mid x_i = 70)$.
+
+24. When there are four observations ($n_i = 4$) and $\pi_i = 0.75$, use the basic formula for calculating means  
+to find  
+\begin{flalign*}
+E(Y_i \mid x_i) &= \mu_{x_i} = \sum_{k=0}^{4} k \times P(Y_i = k \mid x_i).
+\end{flalign*}
+
+25. When $n_i = 4$ and $\pi_i = 0.75$, find $\mathrm{Var}(Y_i \mid x_i)$.
+
+## Calculating Logistic Regression Models for Binomial Counts
+
+In the previous examples, $y$ was considered a binary random variable (either 0 or 1). In this example, logistic regression will be used when the response is a count of the number of successes (i.e., the response is binomial). Table 7.3 shows the cancer cell data with the $Radius$ variable grouped into five levels. Clearly grouping is not necessary for logistic regression, but this grouping is done to demonstrate how to conduct logistic regression when the response is binomial.
+
+```{r tab7.3, echo=FALSE, results='asis'}
+# Table 7.3: Cancer cell data by radius group
+df7.3 <- data.frame(
+  i = c("1","2","3","4","5",""),
+  `Median radius $(x_i)$` = c("2.5","3.5","4","4.5","6.5","Total"),
+  `Benign $(n_i - y_i)$` = c("113","140","85","17","2","357"),
+  `Malignant $(y_i)$`  = c("2","12","34","43","121","212"),
+  `Total $(n_i)$` = c("115","152","119","60","123","569"),
+  `Proportion Malignant` = c("0.017","0.079","0.286","0.717","0.984",""),
+  check.names = FALSE,
+  stringsAsFactors = FALSE
+)
+
+cat(
+  kable(
+    df7.3,
+    format = "latex",
+    booktabs = TRUE,
+    escape = FALSE,
+    caption = "Table 7.3 Cancer cell data classified into groups based on the size of the radius.",
+    align = c("r","r","r","r","r","r"),
+    row.names = FALSE
+  ) %>%
+  kable_styling(latex_options="hold_position")
+)
+```
+
+## Extended Activity: Binomial Logistic Regression {-}
+
+Data set: Table 7.3
+
+26. Create a logistic regression model based on Equation (7.8) to predict the probability of a malignant cell from the grouped radius data in Table 7.3.  
+a. What are the maximum likelihood estimates $b_0$ and $b_1$?  
+b. Substitute $b_0$ and $b_1$ into Equation (7.9) to estimate the probability of malignancy when the radius is 4.5.  
+c. Use Wald’s test and the $G$-statistic to determine if this model provides evidence that the probability of malignancy is related to cell radius.
+
+Figure 7.9 plots the observed percentages of malignant cells and the corresponding logistic regression model.
+Notice that the observed and expected probabilities are fairly close. However, the observed percentage of
+malignant cells was higher than expected when the cell radius was 4.5.
 
 ```{r fig7.9, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.9 A logistic regression model, with $\\hat \\pi_i$ estimated from Equation (7.8) using maximum likelihood estimates, plotted with the observed probability of malignancy for the grouped data in Table 7.3."}
 # fit model
-df <- read.csv("CancercellsTable.csv", stringsAsFactors = FALSE)
+#df <- read.csv("CancercellsTable.csv", stringsAsFactors = FALSE)
+data("C7CancercellsTable")
+df<-C7CancercellsTable
+names(df) <- make.names(names(df))
+#names(df)[names(df) == "Median Radius"] <- "Median.Radius"
+#names(df)[names(df) == "Porportion Malignant"] <- "Proportion.Malignant"
 mod <- glm(cbind(Malignant, Benign) ~ Median.Radius,
            data = df,
            family = binomial)
@@ -1042,12 +1113,243 @@ ggplot() +
   )
 ```
 
+## Calculating Residuals for Logistic Models with Binomial Counts
+
+When the response variable follows a binomial distribution as in Table 7.3, Pearson residuals and
+deviance residuals are often calculated. These residuals are calculated to evaluate how well a model
+fits the data. 
+
+Using our estimate $\hat\pi_i = \frac{e^{b_0 + b_1 x_i}}{1 + e^{b_0 + b_1 x_i}}$ for $\pi_i$, we find the Pearson residual by taking the number of observed successes ($y_i$) minus the estimated number of expected successes ($n_i \times \hat\pi_i$) and then dividing by the estimated standard deviation:
+
+\begin{align}
+\text{Pearson residual for the $i$th radius value}
+= \frac{y_i - n_i \,\hat\pi_i}{\sqrt{n_i \,\hat\pi_i\,(1 - \hat\pi_i)}}
+\tag{7.23}
+\end{align}
+
+Since the variance is not constant, each residual is weighted by its own estimated standard deviation.
+
+\large  
+\textbf{NOTE:}
+We can calculate the Pearson residual using count data because we know that for any individual radius, $x_i$, the response variable, $y_i$, follows a binomial distribution with an estimated mean $n_i \times \hat\pi_i$ and variance $n_i \times \hat\pi_i \times (1 - \hat\pi_i)$.  
+\normalsize
+
+## Extended Activity: Evaluating Residuals in Binomial Logistic Regression {-}
+
+Data set: Table 7.3
+
+27. Create a logistic regression model to predict the probability of a malignant cell from the grouped radius data in Table 7.3.  
+a. Use software to calculate the Pearson residuals.  
+b. Create a histogram and/or a normal probability plot of these residuals. Are the residuals normally distributed?  
+c. Create a scatterplot of the Pearson residuals versus radius. How accurate are the estimates when radius is 2.5 and when radius is 4.5?
+
+28. For each observation, the deviance residual measures the change in deviance from the full to the null model. Each deviance residual is the square root of the deviance goodness–of–fit statistic for each cell (or distinct radius value). The deviance residual is
+\begin{align}
+D_i \,\pm\, \sqrt{2 \Bigl[
+y_i \ln\bigl(\tfrac{y_i}{n_i\,\hat\pi_i}\bigr)
+\;+\;(n_i - y_i)\ln\bigl(\tfrac{n_i - y_i}{n_i - n_i\,\hat\pi_i}\bigr)
+\Bigr]}
+\tag{7.24}
+\end{align}
+where the sign is positive if the observed $y_i$ is higher than the estimated mean and negative if the
+observed $y_i$ is less than the estimated mean. Repeat Question 27 but use the deviance residual instead
+of the Pearson residual.
+
+## **Assessing the Fit of a Logistic Regression Model with Binomial Counts**
+
+A goodness‐of‐fit test measures how well a model fits the observed data. We will discuss three goodness‐of‐fit tests for logistic regression based on the chi‐square distribution. As discussed in Chapter 6, a chi‐square goodness‐of‐fit test is an asymptotic test that measures the accumulated distance between observed values and expected values (i.e., values predicted by our model). In each of the three tests, the null and alternative hypotheses are
+
+\begin{align}
+H_0:\;&\text{the logistic regression model provides an adequate fit to the data} \notag \\
+H_a:\;&\text{the model does not adequately fit the data} \notag
+\end{align}
+
+If the predicted values in the model are relatively close to the observed data values (i.e., the model is a good fit for the data), then the test statistic will be small and the $p$-value will be large. If the test statistic is large, it suggests “lack of fit”; $H_0$ should be rejected and other models should be tried to better fit the data.
+
+\large  
+\textbf{\textcolor{red}{Key Concept:}}  
+\color{red}
+Goodness‐of‐fit tests assess the overall fit of a logistic regression model. If $H_0$ is rejected, the model is not a good fit. Failing to reject $H_0$ does not guarantee that the model is a “best fit” or even a good fit, but rather that we simply don’t have enough evidence to prove that it’s a poor fit.  
+\color{black}
+\normalsize
+
+Test 1: The **Pearson chi‐square goodness‐of‐fit test** is the traditional chi‐square goodness‐of‐fit test seen in many introductory statistics courses. Degrees of freedom are calculated as the number of groups (classes) minus the number of parameters being estimated. In our case, groups are classified by median radius; we have five groups and are estimating two parameters ($\beta_0$ and $\beta_1$), so there are $5 - 2 = 3$ degrees of freedom.
+
+Test 2: The **deviance goodness‐of‐fit test** (also called the likelihood ratio chi‐square test) is based on the sum of squared deviance residuals. The test statistic follows a chi‐square probability distribution where the degrees of freedom are calculated as the number of groups minus the number of parameters being estimated. The Pearson test statistic and the deviance test statistic tend to be similar. For determining a model, the deviance goodness‐of‐fit test is preferred over the Pearson test.$^9$
+
+\large  
+\textbf{NOTE:}  
+The sum of squared Pearson residuals is equal to the Pearson chi‐square test statistic. When there is one explanatory variable, the likelihood ratio test is equivalent to the deviance goodness‐of‐fit test. The residual deviance and the degrees of freedom given in R are identical to those given in the deviance goodness‐of‐fit test statistic in Minitab.  
+\normalsize
+
+Test 3: Hosmer and Lemeshow developed a test similar to the Pearson chi‐square goodness‐of‐fit test. The key distinction is that the groups are formed differently. While the Pearson test uses the *explanatory variable* to form groups, the **Hosmer‐Lemeshow test** uses the *predicted values* to sort the data and form groups (the default is 10 groups). In Table 7.3, we predetermined the five groups, so the Pearson and Hosmer‐Lemeshow tests are identical in this example. However, when the explanatory variable is continuous (not grouped), the Hosmer‐Lemeshow test is more reliable than the Pearson chi‐square goodness‐of‐fit test.
+
+## Extended Activity: Calculating Residuals by Hand {-}
+
+Data set: $Cancercells$
+
+29. Calculate the Pearson chi‐square goodness‐of‐fit test by hand for the Cancercells data.  
+   a. Complete Table 7.4 by using the logistic regression model from Question 26 to calculate the expected (predicted) cell counts.  
+```{r tab7.4, echo=FALSE, results='asis'}
+# Table 7.4: Observed vs. expected under logistic regression
+df7.4 <- data.frame(
+  i                   = c("1","2","3","4","5",""),
+  `Median radius`     = c("2.5","3.5","4","4.5","6.5","Total"),
+  `Benign`   = c("113","140","85","17","2","357"),
+  `Malignant`= c("2","12","34","43","121","212"),
+  `Total`    = c("115","152","119","60","123","569"),
+  `Benign`   = c(
+    "115($1-\\hat\\pi_1$) = 113.967",
+    "","", "","", "357"
+  ),
+  `Malignant`= c(
+    "115($\\hat\\pi_1$) = 115(0.00898) = 1.033",
+    "$152\\hat\\pi_2 = 16.13$", "", "", "", "212"
+  ),
+  `Total`    = c("115","152","119","60","123","569"),
+  check.names     = FALSE,
+  stringsAsFactors= FALSE
+)
+
+cat(
+  kable(
+    df7.4,
+    format    = "latex",
+    booktabs  = TRUE,
+    escape    = FALSE,
+    caption   = paste0(
+      "Table 7.4 Observed and expected values using the logistic regression model ",
+      "for the Cancercells data, where $\\hat\\pi_i$ is estimated from the ",
+      "logistic regression model $\\hat\\pi_i = e^{b_0 + b_1 x_i}/(1 + e^{b_0 + b_1 x_i})$."
+    ),
+    align        = c(rep("c",8)),
+    row.names    = FALSE
+  ) %>%
+  add_header_above(c(" "=2, "Observed"=3, "Expected"=3)) %>%
+  kable_styling(latex_options="hold_position") %>%
+  column_spec(2, width = "2cm") %>%
+  column_spec(6, width = "2.5cm") %>%
+  column_spec(7, width = "2.5cm")  
+)
+```
+   b. Calculate the Pearson chi‐square test statistic:  
+ \begin{align}
+ \chi^2 &= \sum \frac{(\text{observed count} - \text{expected count})^2}{\text{expected count}}
+ \tag{7.25}
+ \end{align}
+   using the observed count and expected count from Table 7.4. Note that there are 10 observed and 10 expected cells.  
+   c. Find the $p$-value by using software or looking up the statistic in a chi‐square probability distribution table.  
+   d. Interpret the results and clearly state how your conclusions are impacted by random sampling and random allocation to treatments in the original study design. Remember that a small $p$-value provides evidence that the model is *not* a good fit.
+
+30. Calculate the deviance chi‐square goodness‐of‐fit test by hand for the Cancercells data given in Table 7.3. Expected counts, degrees of freedom, and $p$-values are found the same way as in the Pearson test. The only difference is in the calculation of the test statistic:  
+   \begin{align}
+   \text{Deviance chi-square test statistic} = D^2 = 2 \times \sum \biggl[\text{observed count} \times \ln\bigl(\frac{\text{observed count}}{\text{expected count}}\bigr)\biggr]
+   \tag{7.26}
+   \end{align}
+   Describe differences (if any) between your conclusions here and those from the Pearson test in Question 29.
+
+Figure 7.10 shows the Minitab output for the logistic regression model fit and the three goodness-of-fit tests.
+Note that all three goodness-of-fit tests show small p-values, indicating that we can reject $H_0$ and con-
+clude that the model is *not a good fit*. In addition, the cell counts shown in Question 29 reveal that the sample
+size is large enough for us to believe the tests are reliable. Thus, other models should be tried. The logistic
+regression model shown in Figure 7.10 looks reasonable, but there are many possible explanations as to why
+the data are not considered a good fit:
+
+* The groups based on median radius may not be appropriate. For example, radii of 1.51 and 2.49 were
+considered part of the same group. We could create more groups with smaller class sizes. Clearly we lose
+information whenever data are grouped into categories, so using the original data is likely the best option.
+
+* Additional explanatory variables may need to be included in the model. Just as in ordinary regres-
+sion, it may be appropriate to include interaction terms or transformations (such as the square, cube,
+or log) of the explanatory variable(s).
+
+* The binomial model may not appropriately model the response variable or a transformation other
+than the logit transformation may need to be tried. *Notice that the logit model assumes symmetry; the curves in the S are the same shape and symmetric around the midpoint of the data.*   
+[[[Figure 7.10]]]
+* A few outliers may be significantly influencing the results. For example, when the median radius is
+4.5, the observed probability is not very close to the expected value. This point greatly contributes to
+the large chi-square statistics in Questions 29 and 30.
+
+Since chi-square tests are based on asymptotic theory, the p-values are not reliable unless there is a large
+enough sample size. A general rule for analyzing a 2 $\times$ 2 table of counts is that the expected count for each
+cell must be at least 5. For larger tables, the expected counts for all cells must be at least 1, and the average
+of expected cell counts should be greater than 5.
+
+When the data are sparse (the observed, and therefore the expected, cell counts are too small), chi-square
+tests may tend to fail to reject the null hypothesis which states that the model is a good fit for the data.$^10$ In other
+words, these tests may not have good power for detecting particular types of lack of fit. The Hosmer-Lemeshow
+test is designed to correct for this problem (when there are continuous explanatory variables) by grouping
+the data. Hosmer and Lemeshow suggest that you have a sample size of at least 400 before using their test.$^11$
+
+## Extended Activity: Goodness‐of‐Fit Tests for Continuous Explanatory Variables {-}
+
+Data set: $Cancer2$
+
+31. Use computer software to create a logistic regression model to predict the probability of a malignant cell using the continuous variable $Radius$ as the explanatory variable. Conduct the three goodness‐of‐fit tests for this model.
+
+The goodness-of-fit tests in Question 31 look very different from those calculated with the grouped data
+in Figure 7.10. Remember that for goodness-of-fit tests, the degrees of freedom are calculated as the number of
+groups minus the number of parameters being estimated. There are two parameters estimated, and the stated 454
+degrees of freedom for the Pearson and deviance tests indicate that 456 groups were formed (based on each distinct
+radius value given in the data). Since there are 569 observations in this data set, the Pearson and deviance goodness-
+of-fit tests do not meet the sample size requirements for a reliable test (most of the cells have only one observation).
+In Question 31, the Pearson and deviance goodness-of-fit tests fail to reject $H_0$: the logistic regression
+model provides an adequate fit to the data. However, the violation of the sample size requirement makes these
+tests inappropriate to use.
+
+The Hosmer-Lemeshow test in Question 31 has only 8 degrees of freedom, since the default is to form 10
+groups based on the fitted values. To form the groups, statistical software sorts the estimated probabilities and
+then attempts to create 10 groups of equal size. The observed and expected values are given in the software
+output. Notice that there are still two cells with expected values less than 1. Recent studies have shown that
+the Hosmer-Lemshow test is somewhat sensitive to the way groups are formed, and other more specific tests
+have been developed.$^12$ However, since the p-value is much bigger than $\alpha = 0.05$, there does not appear to
+be strong evidence that the model is not a good fit.
+
+Hosmer and Lemeshow state that slight violations of the sample size requirements are acceptable.$^13$ They
+suggest that if there is a sample size concern, you simply group a few columns. For example, in Question
+31, grouping columns 1 and 2 and grouping columns 9 and 10 would satisfy the sample size requirements.
+
+## Extended Activity: Goodness‐of‐Fit Tests for Continuous Explanatory Variables {-}
+
+Data set: $Cancer2$
+
+32. Conduct the Hosmer‐Lemeshow goodness‐of‐fit test again, but this time adjust the group size (or number of groups) so that the sample size requirement is not violated. Did the $p$-value of this new Hosmer‐Lemeshow test change your conclusions?
+
+\large  
+\textbf{\textcolor{red}{Key Concept:}}  
+\color{red}
+The Pearson, deviance, and Hosmer‐Lemeshow tests assess model fit with chi‐square tests. When one or more explanatory variables are continuous (which is often the case), the deviance and Pearson chi‐square tests are not useful because there are not enough observations in each observed and expected cell (the number of distinct values of the explanatory variable is nearly equal to the number of observations). The Hosmer‐Lemeshow test can be used with continuous explanatory variables because it uses the predicted values to group the data. 
+\color{black}
+\normalsize
+
+## **Diagnostic Plots**
+
+Just as in least squares regression, residual plots are useful in understanding logistic models. Goodness‐of‐fit tests are useful, but, as stated earlier, they tend to fail to reject the null hypothesis even when the model is not appropriate. When these chi‐square tests fail to conclude that a model is inappropriate, residual plots can be used to verify that the model fit is appropriate. In addition, if the goodness‐of‐fit tests do reject the null hypothesis (conclude that the model is not appropriate), residual plots can help identify where the issues of model fit occur.
+
+Large residual values are useful in identifying observations that are not explained well by the model. In addition to residuals, several scatterplots can be used to identify outliers and influential observations. Before creating these plots, we will need to define a few additional terms.
+
+A **covariate pattern** is a set of all observations with identical explanatory variables. In the space shuttle example, there are four observations where the temperature is 70°F. These four observations form a covariate pattern. In the Cancer2 data set, a covariate pattern is a group of observations with both the same *Radius* value and the same *Concave* value.
+
+**Delta chi-square** ($\Delta \chi^2$) is a measure of the change in the Pearson goodness-of-fit statistic (x2) when a
+particular observation (or covariate pattern if there is more than one observation with the same explanatory
+values) is eliminated. In other words, for a particular xi value, delta chi-square is $\Delta \chi^2_i = \chi^2 \;-\;\chi^2_{(i)}$, where $\chi^2_{(i)}$ is the Pearson goodness‐of‐fit statistic with the $i$th observation (or covariate pattern) eliminated. 
+
+**Delta deviance** ($\Delta D^2$) is a measure of the change in the deviance goodness-of-fit statistic (D2) when a
+particular observation (or covariate pattern) is eliminated. In other words, for a particular $x_i$ value, delta chi-
+square is $\Delta D^2_i = D^2 \;-\; D^2_{(i)}$, where $D^2_{(i)}$ is the deviance goodness‐of‐fit statistic with the $i$th observation (or covariate pattern) eliminated.
+
+**Delta beta** measures the difference in the regression coefficient when a particular observation (or covariate pattern) is removed.
+
+Figure 7.11 shows the delta chi‐square, delta deviance, and delta beta values plotted against the expected probabilities ($\hat\pi_i$). The determination as to whether or not an observation (covariate pattern) is an outlier or overly influential is somewhat subjective. Outliers typically appear as extreme values in the upper corners of the scatterplot. As a rough estimate, $\Delta\chi^2$ or $\Delta D^2$ greater than 4 and delta beta values greater than 1 may be considered unusual observations. With large sample sizes, $\Delta\chi^2$ and $\Delta D^2$ approximately follow the chi‐square distribution, and the 95th percentile of the chi‐square distribution with 1 degree of freedom equals 3.84. Figure 7.11 has one covariate pattern that has a fairly large $\Delta\chi^2$ and $\Delta D^2$ values. It corresponds to the two launches that occurred at 75°F. Notice in Figure 7.11 that a failure at 75°F appears to be somewhat unusual. In this example, the $\Delta\chi^2$ and $\Delta D^2$ values are not extreme enough to be of major concern (all values are close to or less than 4).
+
 
 ```{r fig7.11, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.11 Scatterplots of delta deviance, delta chi-square, and delta beta values versus the expected probabilities from the space shuttle data. Circled values represent launches at 75°F."}
 library(patchwork)
 
 # fit model
-df <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+# df <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+data("C7Shuttle")
+df<-C7Shuttle
 mod_full <- glm(Success ~ Temperature, data = df, family = binomial)
 
 # compute values
@@ -1127,12 +1429,15 @@ p3 <- ggplot(diag_df, aes(x = prob, y = delta_beta)) +
 (p3 | plot_spacer())
 ```
 
+Figure 7.12 shows the delta chi‐square and delta beta values plotted against the **leverage** values. Leverages are values between 0 and 1 that depend only on the explanatory variables (not the response). Large leverage values indicate that the observation (covariate pattern) has extreme explanatory values and may have a large influence on the regression coefficients.
 
 ```{r fig7.12, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 7.12 Scatterplots of delta chi-square and delta beta values versus leverage from the space shuttle data. The extreme value along the y-axis represents the launches at 75°F. There do not appear to be any extreme leverage values."}
 library(ggplot2)
 library(patchwork)
 # fit regression
-df <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+#df <- read.csv("Shuttle.csv", stringsAsFactors = FALSE)
+data("C7Shuttle")
+df<-C7Shuttle
 mod <- glm(Success ~ Temperature, data = df, family = binomial)
 df$hat           <- hatvalues(mod)
 df$delta_chisq   <- residuals(mod, type = "deviance")^2
@@ -1166,3 +1471,130 @@ p2 <- ggplot(df, aes(x = hat, y = delta_beta)) +
 p1 | p2
 
 ```
+
+\large  
+\textbf{\textcolor{red}{Key Concept:}}  
+\color{red}
+The contribution of a single observation depends on both its residual and its leverage. The delta chi‐square and delta deviance values can be used to detect observations that have a strong influence on the goodness‐of‐fit statistics. A large delta beta value indicates a covariate pattern with large leverage and/or large residual values.  
+\color{black}
+\normalsize
+
+## Extended Activity: Identifying Outliers and Influential Observations {-}
+
+Data set: $Cancer2$
+
+33. Run a logistic regression model with both explanatory variables *Radius* and *Concave*.  
+   a. Create histograms of the standardized Pearson residuals and deviance residuals.  
+   b. Create scatterplots of delta deviance, delta chi‐square, and delta beta (standardized) versus the expected probabilities.  
+   c. Create scatterplots of delta deviance, delta chi‐square, and delta beta (standardized) versus the leverage.  
+   d. Identify any observations (covariate patterns) that appear to be outliers or influential observations.
+
+## **Maximum Likelihood Estimation in Logistic Regression***  
+
+Maximum likelihood estimation is a fairly complex topic. The goal of this section is simply to provide an example of how to calculate maximum likelihood estimates with binomial data. After completing this section, you should have a better understanding of how the LRT and the deviance test are calculated. However, as stated earlier, maximum likelihood estimates are very computationally intensive and are best left to computer algorithms.
+
+\large  
+\textbf{MATHEMATICAL NOTE}  
+When the assumptions about the residuals in the least squares regression model described in Section 7.2 are satisfied, the maximum likelihood estimates of $\beta_0$ and $\beta_1$ are identical to the least squares estimates.  
+\normalsize
+
+## Maximum Likelihood Estimator for Binary Data {-}
+
+Consider a set of independent binary responses $y_1, y_2, \dots, y_n$. Since each observed response is independent and follows the Bernoulli distribution shown in Equation (7.17), the probability of a particular outcome can be found as  
+
+\begin{align}
+P(Y_1 = k_1,\,Y_2 = k_2,\,\dots,\,Y_n = k_n) 
+&= P(Y_1 = k_1)\,P(Y_2 = k_2)\,\cdots\,P(Y_n = k_n) \notag \\
+&= \pi^{k_1}(1 - \pi)^{1-k_1}\,\pi^{k_2}(1 - \pi)^{1-k_2}\,\cdots\,\pi^{k_n}(1 - \pi)^{1-k_n} \notag \\
+&= \pi^{\sum_{i=1}^n k_i}\,(1 - \pi)^{\sum_{i=1}^n (1 - k_i)}
+\tag{7.27}
+\end{align}
+
+where $k_1, k_2, \dots, k_n$ represent a particular observed series of 0 or 1 outcomes and $\pi$ is a probability, $0 \le \pi \le 1$. Once $k_1, k_2, \dots, k_n$ have been observed, they are fixed values. Maximum likelihood estimates are functions of sample data that are derived by finding the value of $\pi$ that maximizes the likelihood function. For a given observed data set $y_1, y_2, \dots, y_n$, when Equation (7.27) is a function of $\pi$, it is called the likelihood function and denoted $L(\pi)$.
+
+\large  
+\textbf{NOTE}  
+Equation (7.27) is often called a joint probability function when considered as a function of the data. However, when the data are assumed to be fixed and Equation (7.27) is considered a function of $\pi$, it is called a likelihood function.  
+\normalsize
+
+The **maximum likelihood estimate** is the value of $\pi = P(Y = 1)$ that maximizes Equation (7.27). For simplicity, it is common to find the value of $\pi$ that maximizes the log of the likelihood function. Recall that the value of $\pi$ that maximizes the likelihood function, $L(\pi)$, will also maximize the log-likelihood function, $\ln L(\pi)$.
+
+\begin{align}
+\ln L(\pi)
+&= \ln\!\bigl(\pi^{\sum_{i=1}^n k_i}\,(1 - \pi)^{\sum_{i=1}^n (1 - k_i)}\bigr) \notag \\
+&= \sum_{i=1}^n k_i \ln(\pi)\;+\;\bigl(n - \sum_{i=1}^n k_i\bigr)\ln(1 - \pi)
+\tag{7.28}
+\end{align}
+
+\large  
+\textbf{Key Concept:}  
+The principle of maximum likelihood estimation is to choose a value of $\pi$ such that the observed data set is most likely to occur (i.e., the likelihood function is maximized).  
+\normalsize
+
+To find the maximum value of $\ln L(\pi)$, we take the derivative of $\ln L(\pi)$ and set the first derivative equal to 0:
+
+\begin{align}
+\frac{d[\ln L(\pi)]}{d\pi}
+&= \sum_{i=1}^n k_i \,\frac{1}{\pi} \;+\;\bigl(n - \sum_{i=1}^n k_i\bigr)\,\frac{-1}{(1 - \pi)} = 0
+\tag{7.29}
+\end{align}
+
+*?Calculus required
+
+Then we solve the following equivalent equation in terms of $\pi$:
+
+\begin{align}
+(1 - \pi)\sum_{i=1}^n k_i \;-\;\pi\bigl(n - \sum_{i=1}^n k_i\bigr) = 0
+\tag{7.30}
+\end{align}
+
+This provides the maximum likelihood estimator of $\pi = P(Y = 1)$:
+
+\begin{align}
+\displaystyle \hat{\pi} = \frac{\sum_{i=1}^n k_i}{n}
+\tag{7.31}
+\end{align}
+
+In this example, the maximum likelihood estimator is the same as our well-known frequentist approach to estimating $\pi = P(Y = 1)$. However, this is not always the case.
+
+\large  
+\textbf{MATHEMATICAL NOTE:}  
+The second derivative of $\ln L(\pi)$ can also be calculated to show that the function is concave down. Thus, $\hat{\pi}$ is a local maximum and not a local minimum. Likelihood functions with just one parameter typically have only one critical value, which is the maximum value. When more than one parameter is involved, more care needs to be taken to ensure that the critical values are actually maximum likelihood estimates.  
+\normalsize
+
+## Extended Activity: Calculating Maximum Likelihood Estimates {-}
+
+34. For binomial response data that follow the binomial distribution, the log-likelihood function for one observation ($y_1$) is  
+\begin{align}
+\ln[P(Y_1 = k)]
+&= \ln\!\bigl(\binom{n_1}{k}\,\pi_1^k\,(1 - \pi_1)^{n_1 - k}\bigr) \notag \\
+&= C \;+\;k\ln(\pi_1)\;+\;(n_1 - k)\ln(1 - \pi_1)
+\tag{7.32}
+\end{align}
+Where $C$ is a constant that does not influence $\pi_1$, we can drop $C$ from the above equation without any impact on the maximum likelihood estimate. Assume that you observed $y_1 = 5$ malignant cells out of a sample of $n_1 = 12$. Substituting these values into Equation (7.32) and dropping $C$ simplifies the log-likelihood function to $\ln[P(Y_1 = 5)] = 5\ln(\pi_1) + 7\ln(1 - \pi_1).$
+a. Plot the log-likelihood function for several values of $\pi_1$ between 0 and 1. Use the plot to estimate the value of $\pi_1$ that will maximize the log-likelihood function.  
+b. If you have had calculus, set the derivative of the log-likelihood function to 0 and solve for $\pi_1$. What is the maximum likelihood estimate for $\pi_1$?
+
+### Maximum Likelihood Estimator for Logistic Regression Models
+
+The previous example did not address cases in logistic regression where the observations depend on one or more explanatory variables. To use maximum likelihood estimation in logistic regression, from Equation (7.6) we see that  
+
+\[
+\pi_i = \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}.
+\]  
+
+Replacing this value for $\pi$ in Equation (7.28) gives  
+
+\begin{align}
+\ln L(\beta_0, \beta_1)
+&= \sum_{i=1}^n k_i \ln\!\bigl(\tfrac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}\bigr)
+\;+\;\bigl(n - \sum_{i=1}^n k_i\bigr)\ln\!\Bigl[1 - \bigl(\tfrac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}\bigr)\Bigr]
+\tag{7.33}
+\end{align}
+
+To find the maximum likelihood estimates of $\beta_0$ and $\beta_1$, take the derivative of Equation (7.33) with respect to $\beta_0$ and respect to $\beta_1$. This will provide two equations and two unknowns. However, the two equations will not be linear and cannot be solved directly.
+
+\large  
+\textbf{MATHEMATICAL NOTE:}  
+Finding estimates for $\beta_0$ and $\beta_1$ that maximize the log-likelihood function is an iterative technique that quickly becomes complex even for small data sets and is not typically done by hand. Iterative techniques start with initial estimates of $\beta_0$ and $\beta_1$. An iterative technique such as the Newton–Raphson method repeatedly provides new estimates for $\beta_0$ or $\beta_1$ that increase the log-likelihood until the log-likelihood does not notably change.$^{15}$  
+\normalsize
