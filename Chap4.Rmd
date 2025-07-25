@@ -1166,6 +1166,28 @@ Orthogonal contrasts allow multiple comparisons of linear combinations of group 
 There are a few other common techniques for multiple comparisons. **Scheffé’s method** produces simultaneous confidence intervals for any and all contrasts, including contrasts suggested by the data (this is often called post hoc data exploration). Instead of the traditional formula for confidence intervals, Scheffé suggested using a wider confidence interval (i.e., one less likely to reject the null hypothesis) to account for the multiple testing. This method often fails to reject null hypotheses even when there are differences between groups, but it can be useful when other pairwise comparison tests are not appropriate. Remember from your introductory statistics course: If zero is in the confidence interval, you fail to reject the corresponding hypothesis test; if zero is not in the confidence interval, you should reject the corresponding hypothesis test. **Tukey’s honest significant difference (HSD)** uses a studentized range distribution instead of the F-distribution to create confidence intervals for differences between meaningful pairs. When there are a large number of pairwise comparisons, Tukey’s method is typically preferred over Bonferroni’s method.$^6$
 \normalsize
 
+## **Chapter Summary**{-}
+
+This chapter emphasized the importance of a well-designed experiment. A statistician often needs to communicate with people in other fields in order to properly define the research question, choose appropriate factors and levels, and determine the number of samples needed for the study.
+
+A $p$-value never tells the whole story; $p$-values can be meaningless if assumptions are not met or if there are extraneous variables in the data. Before any conclusions are drawn from a statistical analysis using ANOVA, it is important to use graphs or formal tests to validate the the equal variance and normality assumptions.
+
+When equal variance or normality assumptions are violated, the $F$-statistics do not follow an $F$-distribution and the $p$-values may not be accurate. Empirical studies have shown that ANOVA tends to be fairly “robust” to departures from the assumptions of equal variances and normality. If the model assumptions are not met, researchers should try transforming the data to better fit the model assumptions. If no transformation appears to help, researchers should clearly explain that the $p$-values may not be reliable.
+
+The independence and identically distributed assumptions are also essential. A good experimental design has the following characteristics:
+\begin{itemize}
+    \item It avoids systematic error (bias is minimized by controlling for extraneous variables and using randomization).
+    \item It has broad validity (results hold for more than just the units tested in the study).
+    \item It allows for direct comparison between treatment conditions.
+    \item It is precise (the chance unit-to-unit variability is small).
+    \item It allows estimation of unit-to-unit variability.
+    \item It can show causation (most observational studies cannot).
+\end{itemize}
+
+ANOVA tables are used to test for differences in means among meaningful groups of data. The analysis is called an analysis of variance because each mean square value is an estimate of a meaningful group within the data. The extended activities demonstrated how to calculate an ANOVA table; they emphasized main effects and interaction effects. An interaction between two variables occurs when the effect of one variable depends on the second variable. While this chapter emphasized a two-factor ANOVA, the same process holds for all completely randomized designs with fixed factors.
+
+This chapter introduced the basics of a very powerful statistical technique. The ability to simultaneously test for the effects of multiple variables on a response allows statisticians to better model real-world situations. A well-designed experiment can test multiple hypotheses with a relatively small sample size. If used properly, these techniques efficiently and reliably help us better understand the world we live in. The end-of-chapter exercises and future chapters provide the opportunity for you to experience for yourself how these techniques are used in biology, chemistry, engineering, psychology, and many other disciplines.
+
 ### This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
