@@ -1,6 +1,5 @@
 --- 
 title: "Chapter 4"
-author: "Your Name"
 output:
   bookdown::pdf_book:
     latex_engine: xelatex
@@ -253,44 +252,33 @@ Factorial designs are efficient because much more information can be calculated,
 
 Table 4.2 shows the `Popcorn` data set organized by the *Brand* and *Time* factors. Each of the four treatment combinations has eight observations. The data are also provided in the file `Popcorn`.
 
-```{r fig4.1, warning=FALSE, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Individual value plot of the PopRate (100 $\times$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible."}
-library(readr)
-library(dplyr)
+```{r fig4.1, warning=FALSE, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, fig.cap="Figure 4.1 Individual value plot of the PopRate (100 $\times$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible."}
 library(ggplot2)
-
-#df <- read_csv("Popcorn2.csv", show_col_types = FALSE)
+#pop <- read.csv("Popcorn2.csv")
 data("C4Popcorn")
 df<-C4Popcorn
-df <- df %>%
-  mutate(Time = factor(Time))
 
-ggplot(df, aes(x = Time, y = PopRate)) +
-  geom_jitter(
-    width = 0.1,
-    height = 0,
-    size  = 2,
-    shape = 21,
-    color = "black",
-    fill = "black"
-  ) +
-  facet_wrap(~ Brand, nrow = 1, strip.position = "bottom") +
+pop$Brand <- factor(pop$Brand, levels = c("Fastco", "Pop Secret"))
+pop$Time <- factor(pop$Time, levels = c(105, 135))
+
+ggplot(pop, aes(x = interaction(Brand, Time, sep = "\n"), y = PopRate)) +
+  geom_jitter(width = 0.17, size = 2.6) +
   labs(
     title = "Individual Value Plot of PopRate",
-    x = "Time",
-    y = "PopRate"
+    y = "PopRate",
+    x = "Time\nBrand"
   ) +
+  scale_y_continuous(limits = c(65, 95), breaks = seq(65, 95, 5)) +
   theme_minimal(base_family = "serif") +
   theme(
+    plot.title = element_text(size = 18, hjust = 0.5),
+    axis.title.x = element_text(size = 13),
+    axis.title.y = element_text(size = 15),
+    axis.text.x = element_text(size = 13),
+    axis.text.y = element_text(size = 12),
     panel.background = element_rect(fill = "white", colour = "black", linewidth = 1),
-    panel.border = element_rect(fill = NA,       colour = "black", linewidth = 1),
-    plot.background = element_rect(fill = "grey90",  colour = "black", linewidth = 1),
-    strip.placement = "outside",
-    strip.background = element_blank(),
-    strip.text = element_text(face = "bold"),
-    plot.title = element_text(face = "bold", hjust = 0.5),
-    axis.title = element_text(face = "bold"),
-    panel.spacing.x = unit(2, "lines"),
-    plot.margin = margin(20, 20, 20, 20)
+    plot.background = element_rect(fill = "grey90", colour = "black", linewidth = 1),
+    panel.border = element_rect(fill = NA, colour = "black", linewidth = 1)
   )
 ```
 
