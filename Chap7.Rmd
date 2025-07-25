@@ -64,8 +64,9 @@ Investigations showed that an O-ring seal in the right solid rocket booster fail
 
 An O-ring seal was used to stop the gases inside the solid rocket booster from escaping. However, the cold outside air temperature caused the O-rings to become brittle and fail to seal properly. Gases at 5800 °F escaped and burned a hole through the side of the rocket booster.
 
-[[[Figure 7.1]]]
-Picture of the space shuttle Challenger just after ignition. Each solid rocket booster had six O-rings, two at each field joint. The O-rings at the right aft field joint failed.
+```{r fig7.1, echo=FALSE, out.width="100%", fig.align="center", fig.cap="Picture of the space shuttle Challenger just after ignition. Each solid rocket booster had six O-rings, two at each field joint. The O-rings at the right aft field joint failed."}
+knitr::include_graphics("docs/Fig7_1Rocket.png")
+```
 
 *The Report of the Presidential Commission on the Space Shuttle Challenger Accident*, also known as the Rogers’ Commission Report, states:
 
@@ -81,8 +82,9 @@ temperatures of 61 degrees Fahrenheit or greater, only four showed signs of O-ri
 i.e., erosion or blow-by and soot. Each of the launches below 61 degrees Fahrenheit resulted in one
 or more O-rings showing signs of thermal distress.”$^2$
 
-[[[Figure 7.2]]]
-Diargam of a solid rocket booster
+```{r fig7.2, echo=FALSE, out.width="100%", fig.align="center", fig.cap="Diargam of a solid rocket booster."}
+knitr::include_graphics("docs/Fig7_2Rocket2.png")
+```
 
 A lamentable aspect of this disaster is that the problem with the O-rings was already understood by
 some engineers prior to the Challenger launch. In February 1984, the Marshall Configuration Control
@@ -394,52 +396,6 @@ Logistic regression is a special case of what is known as a generalized linear m
 \begin{itemize}
   \item \textbf{A linear predictor:} In the shuttle example, there is only one explanatory variable, $x = \text{Temperature}$, so the linear predictor in Equation (7.5) is $\beta_0 + \beta_1 x$. However, just as in other multiple regression models, the linear predictor can include many explanatory variables, including indicator variables and interaction terms as well as other transformed variables.
   \item \textbf{A random component:} Each error term is assumed to be independent. However, in generalized linear models, the error terms are not required to follow a normal distribution. In addition, generalized linear models do not require that the variability of the error terms be constant.
-  \item \textbf{A link function:} A link function is a function that fits the expected response value to a linear predictor. In Equation (7.5), the link function is the log-odds function, $\ln\bigl[\pi/(1 - \pi)\bigr]$. The link function depends on the distribution of the response variable. In logistic regression, the response variable is binary. Other link functions for binary response data do exist, but the log-odds function is the most common because it is the easiest to interpret.
-\end{itemize}
-
-Generalized linear models can also be used when the response variable follows other distributions. For example, $y$ may follow a Poisson or gamma distribution. Textbooks on generalized linear models derive link functions for each of these types of response variables. In least squares regression where the response has a normal distribution, as in Equation (7.1), the link function is simply the identity function. In other words, the response needs no transformation in simple linear regression models.
-
-Clearly the logistic regression model in Figure 7.3 is nonlinear. So it may seem somewhat surprising to consider logistic regression as a generalized linear model. The reason we still call this model linear is that the link function, the log-odds transformation, is modeled with a linear predictor, $\beta_0 + \beta_1 x$.
-
-Instead of using least squares estimates, generalized linear models use the method of maximum likelihood to estimate the coefficients $\beta_0$ and $\beta_1$. The extended activities provide more detail on calculating maximum likelihood estimates in logistic regression. In the space shuttle example, we will simply use a computer software package to find maximum likelihood estimates of $\beta_0$ and $\beta_1$.
-
-\large
-\textbf{NOTE:} In least squares regression, we often transform the response variable ($y$) so that the data fit model assumptions. In addition to linearizing data, transforming $y$ impacts the variability and the distribution of the error terms. In generalized linear models, the link function transforms the expected response ($\pi$) to fit a linear predictor. For those who have had calculus, link functions are also differentiable and invertible.
-\normalsize
-
-## Activity: Using Software to Calculate Maximum Likelihood Estimates {-}
->4. Solve Equation (7.5) for $\pi_i$ to show that Equation (7.6) is true.  
->5. Use Equation (7.6) to create six graphs. In each graph, plot the explanatory variable ($x$) versus the expected probability of success ($\pi$) using $\beta_0 = -10$ and $-5$ and $\beta_1 = 0.5$, $1$, and $1.5$. Repeat the process for $\beta_0 = 10$ and $5$ and $\beta_1 = -0.5$, $-1$, and $-1.5$.  
-   a. Do not submit the graphs, but explain the impact of changing $\beta_0$ and $\beta_1$.  
-   b. For all of these graphs, what value of $\pi$ appears to have the steepest slope?  
->6. Use statistical software to calculate the maximum likelihood estimates of $\beta_0$ and $\beta_1$. Compare the maximum likelihood estimates to the least squares estimates in Question 3.
-
-Figure 7.3 shows a logistic regression model using maximum likelihood estimates of $\beta_0$ and $\beta_1$. Using Equation (7.6) and the maximum likelihood estimates from Question 6, we can estimate the probability that a launch has no O-ring damage at temperature $x_i$:
-
-\begin{align}
-\hat\pi_i &= \frac{e^{b_0 + b_1 x_i}}{1 + e^{b_0 + b_1 x_i}} 
-           = \frac{e^{-15.043 + 0.232 x_i}}{1 + e^{-15.043 + 0.232 x_i}}
-           \quad \text{for } i = 1,2,3,\dots,n \tag{7.9}
-\end{align}
-
-Notice that $\pi$ in Equation (7.6) has been replaced by $\hat\pi$ in Equation (7.9) because the parameters in the linear regression model ($\beta_0$ and $\beta_1$) have been estimated with our sample data; $b_0 = \hat\beta_0 = -15.043$ and $b_1 = \hat\beta_1 = 0.232$.
-
-### Activity: Estimating the Probability of Success with Maximum Likelihood Estimates
->7. Use Equation (7.9) to predict the probability that a launch has no O-ring damage when the temperature is 31°F, 50°F, and 75°F.
-
-At this point, it seems reasonable to question why the O-rings were not considered a higher risk at the time of the 1986 Challenger launch. After all, the odds of a successful launch (no O-ring damage) at the expected temperature of 31°F are about 1 to 2555 and the predicted odds change dramatically based on temperature. It is important to recognize that the previous launches did not result in the same disaster as the Challenger launch because the O-rings showed only “minor” damage. This wasn’t enough for gas to escape—only an indicator that the O-rings might not be as resilient as expected.
-
-\large
-\textbf{CAUTION:} Estimating a value for a temperature of 31°F is extrapolating beyond our data set. Just as in least squares regression, caution should be used when making predictions outside the range of explanatory variables that are available.
-\normalsize
-
-## **The Logistic Regression Model Using Maximum Likelihood Estimates**
-
-Logistic regression is a special case of what is known as a generalized linear model. Generalized linear models expand linear regression models to cases where the normal assumptions do not hold. All generalized linear models have three components:
-
-\begin{itemize}
-  \item \textbf{A linear predictor:} In the shuttle example, there is only one explanatory variable, $x = \text{Temperature}$, so the linear predictor in Equation (7.5) is $\beta_0 + \beta_1 x$. However, just as in other multiple regression models, the linear predictor can include many explanatory variables, including indicator variables and interaction terms as well as other transformed variables.
-  \item \textbf{A random component:} Each error term is assumed to be independent. However, in generalized linear models, the error terms are not required to follow a normal distribution. In addition, generalized linear models do not require that the variability of the error terms be constant.
   \item \textbf{A link function:} A link function is a function that fits the expected response value to a linear predictor. In Equation (7.5), the link function is the log-odds function, $\ln[\pi/(1 - \pi)]$. The link function depends on the distribution of the response variable. In logistic regression, the response variable is binary. Other link functions for binary response data do exist, but the log-odds function is the most common because it is the easiest to interpret.
 \end{itemize}
 
@@ -471,7 +427,7 @@ Figure 7.3 shows a logistic regression model using maximum likelihood estimates 
 
 Notice that $\pi$ in Equation (7.6) has been replaced by $\hat\pi$ in Equation (7.9) because the parameters in the linear regression model ($\beta_0$ and $\beta_1$) have been estimated with our sample data; $b_0 = \hat\beta_0 = -15.043$ and $b_1 = \hat\beta_1 = 0.232$.
 
-## Activity: Estimating the Probability of Success with Maximum Likelihood Estimates
+## Activity: Estimating the Probability of Success with Maximum Likelihood Estimates {-}
 >7. Use Equation (7.9) to predict the probability that a launch has no O-ring damage when the temperature is 31°F, 50°F, and 75°F.
 
 At this point, it seems reasonable to question why the O-rings were not considered a higher risk at the time of the 1986 Challenger launch. After all, the odds of a successful launch (no O-ring damage) at the expected temperature of 31°F are about 1 to 2555 and the predicted odds change dramatically based on temperature. It is important to recognize that the previous launches did not result in the same disaster as the Challenger launch because the O-rings showed only “minor” damage. This wasn’t enough for gas to escape—only an indicator that the O-rings might not be as resilient as expected.
@@ -520,7 +476,7 @@ The slope in a logistic regression model is typically described in terms of the 
 \color{black}
 \normalsize
 
-## Activity: Interpreting a Logistic Regression Model
+## Activity: Interpreting a Logistic Regression Model {-}
 >8. Calculate the odds of a launch with no O-ring damage when the temperature is 60°F and when the temperature is 70°F.  
 >9. When $x_i$ increases by 10, state in terms of $e^{b_1}$ how much you would expect the odds to change.  
 >10. The difference between the odds of success at 60°F and 59°F is about 0.3285 – 0.2605 = 0.068. Would you expect the difference between the odds at 52°F and 51°F to also be about 0.068? Explain why or why not.  
@@ -586,7 +542,7 @@ reject the null hypotheses and conclude that the odds of a successful launch do 
 Even though computer software provided a small p-value and a confidence interval that does not include 1, it
 is important to note that there are only 23 observations in this study. While Wald’s test is reasonable with very
 large sample sizes, with smaller sample sizes it is known to have a tendency to result in a type II error—failing
-to reject the null hypothesis when it should be rejected.$^5$
+to reject the null hypothesis when it should be rejected.^[?Recall that Z in Equation (7.13) is a statistic calculated from the sample data and Z* in Equation (7.11) is called a critical value. Z* represents a value based on a desired level of confidence. Z* is known before the data are collected, while Z is based on the sample data]
 
 We can also calculate the odds ratio of a successful launch between 60°F and 70°F. When $x_i$
 increases by 10°F, the odds are multiplied by $(e^{b_1})10 = 1.2613^{10} = 10.19$. Thus, we have approximately
@@ -607,13 +563,11 @@ b. How did the regression coefficients change?
 c. How did the odds ratio change?
 d. Create a 95% Wald confidence interval for the new odds ratio and interpret the results.
 
-[[[Figure 7.5]]]
+```{r fig7.5, echo=FALSE, out.width="100%", fig.align="center", fig.cap="Minitab output for the space shuttle study."}
+knitr::include_graphics("docs/Fig7_5Minitab.png")
+```
 
-?Recall that Z in Equation (7.13) is a statistic calculated from the sample data and Z* in Equation (7.11) is called a critical
-value. Z* represents a value based on a desired level of confidence. Z* is known before the data are collected, while Z is
-based on the sample data
-
-## **The Likelihood Ratio Test**
+## The Likelihood Ratio Test {-}
 
 The **likelihood ratio test (LRT)** is derived by calculating the difference between the adequacy of the full and restricted log-likelihood models. A **full model** (sometimes called an **unrestricted model**) includes all parameters under consideration in the model. In this example, there are only two parameters, $\beta_0$ and $\beta_1$, but the full model could include more parameters if more explanatory variables were in the model. The **restricted model** (also called a **reduced model**) is a model with fewer terms than the full model. In our example, only $\beta_0$ is in the restricted model (no explanatory variables are in this model). When no explanatory variables are in the restricted model, the restricted model is also called a **null model**. If the full model has a significantly better fit (the expected values are closer to the observed values) than the restricted model, we reject the null hypothesis $H_0: \beta_1 = 0$ and conclude that $H_a: \beta_1 \neq 0$.
 
@@ -922,7 +876,10 @@ few tied pairs. There are no $p$-values corresponding to these measures, but the
 ing different models with different explanatory variables or comparing models based on different link
 functions.
 
-[[[Figure 7.8]]]
+```{r fig7.8, echo=FALSE, out.width="100%", fig.align="center", fig.cap="Minitab output showing measures of association for the space shuttle data."}
+knitr::include_graphics("docs/Fig7_8MinitabPairs.png")
+```
+
 
 ## **Review of Means and Variances of Binary and Binomial Data**
 
@@ -1006,7 +963,7 @@ E(Y \mid x_i) &= n_i \times \pi_i \quad \text{and} \quad \mathrm{Var}(Y \mid x_i
 \tag{7.22}
 \end{align}
 
-## Extended Activity: Understanding the Binomial Distribution {-}
+## Extended Activity: Understanding the Binomial Distribution{-}
 
 23. Assume that for a particular temperature $x_i = 70^\circ\mathrm{F}$ the true probability of success is $\pi_i = 0.75$. If there are four launches made at $x_i = 70^\circ\mathrm{F}$, use Equation (7.21) to find the probability that all four launches are successful, $P(Y_i = 4 \mid x_i = 70)$. Also find the probability that one of the four launches is successful, $P(Y_i = 1 \mid x_i = 70)$.
 
@@ -1265,7 +1222,11 @@ or log) of the explanatory variable(s).
 
 * The binomial model may not appropriately model the response variable or a transformation other
 than the logit transformation may need to be tried. *Notice that the logit model assumes symmetry; the curves in the S are the same shape and symmetric around the midpoint of the data.*   
-[[[Figure 7.10]]]
+
+```{r fig7.10, echo=FALSE, out.width="100%", fig.align="center", fig.cap="Minitab output for the Cancercells study"}
+knitr::include_graphics("docs/Fig7_10MinitabLog.png")
+```
+
 * A few outliers may be significantly influencing the results. For example, when the median radius is
 4.5, the observed probability is not very close to the expected value. This point greatly contributes to
 the large chi-square statistics in Questions 29 and 30.
@@ -1599,6 +1560,7 @@ To find the maximum likelihood estimates of $\beta_0$ and $\beta_1$, take the de
 Finding estimates for $\beta_0$ and $\beta_1$ that maximize the log-likelihood function is an iterative technique that quickly becomes complex even for small data sets and is not typically done by hand. Iterative techniques start with initial estimates of $\beta_0$ and $\beta_1$. An iterative technique such as the Newton–Raphson method repeatedly provides new estimates for $\beta_0$ or $\beta_1$ that increase the log-likelihood until the log-likelihood does not notably change.$^{15}$  
 \normalsize
 
+### This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
 \noindent\rule{\linewidth}{0.4pt}
@@ -1795,3 +1757,44 @@ Number of SAG wins
   \end{enumerate}
 
 \end{list}
+
+
+### This part not working. All the text under the heading is not showing up
+## **Endnotes**{-}
+
+\begin{enumerate}
+
+\item D. Leonhardt, “John Tukey, 85, Statistician, Coined the Word ‘Software’,” New York Times Archives on the Web, 7/28/2000, stat.bell-labs.com/who/tukey/nytimes.html. John Tukey (1915–2000) had a formal background in chemistry and mathematics. Conducting data analysis during World War II peaked his interest in statistics, and he became one of the most influential statisticians of the 20th century.
+\item \textit{Report of the Presidential Commission on the Space Shuttle Challenger Accident, in Compliance with Executive Order 12546 of February 3, 1986}, http://science.ksc.nasa.gov/shuttle/missions/51-l/docs/rogers-commission/table-of-contents.html.
+\item \textit{Report of the Presidential Commission on the Space Shuttle Challenger Accident}, http://history.nasa.gov/
+rogersrep/v4part7.htm.
+\item \textit{Report of the Presidential Commission on the Space Shuttle Challenger Accident}, http://history.nasa.gov/
+rogersrep/v1ch5.htm.
+\item See S. Menard, \textit{Applied Logistic Regression Analysis}, 2nd ed. (Thousand Oaks, CA: Sage Publications, 2002).
+\item See A. Agresti, \textit{An Introduction to Categorical Data Analysis}, 2nd ed. (New York: Wiley, 2007) or D. W. Hosmer and S. Lemeshow, \textit{Applied Logistic Regression}, 2nd ed. (New York: Wiley, 2007).
+\item J. S. Long, \textit{Regression Models for Categorical and Limited Dependent Variables} (Thousand Oaks, CA: Sage Publications, 1997). Other texts will show that sometimes exact logistic regression models can be created in data sets with only a small number of observations for binary outcomes.
+\item W. Wolberg and O. Mangasarian, “Multisurface Method of Pattern Separation for Medical Diagnosis Applied to Breast Cytology,” \textit{Proceedings of the National Academy of Sciences of the United States of America}, 87.23 (Dec. 1990): 9193–9196.
+\item S. Menard, \textit{Applied Logistic Regression Analysis}, 2nd ed. (Thousand Oaks, CA: Sage Publications, 2002).
+\item A. Agresti, \textit{An Introduction to Categorical Data Analysis}, 2nd ed. (New York: Wiley, 2007).
+\item D. W. Hosmer and S. Lemeshow, \textit{Applied Logistic Regression}, 2nd ed. (New York: Wiley, 2000).
+\item D. W. Hosmer, T. Hosmer, S. Le Cessie, S. Lemeshow, “A Comparison of Goodness-of-fit Tests for the logistic Regression Model,” Stat Med, 16 (1997): 965–980.
+\item D. W. Hosmer and S. Lemeshow, \textit{Applied Logistic Regression} (New York: Wiley, 1989), p. 143.
+\item Ibid.
+\item For more details, see D. C. Montgomery, E. A. Peck, and G. G. Vining, \textit{Introduction to Linear Regression Analysis}, 4th ed. (Hoboken, NJ: Wiley, 2006), Appendix C.14.1.
+\item D. K. Grayson, “Donner Party Deaths: A Demographic Assessment,” \textit{Journal of Anthropological Research}, 46, 3 (1990). Also see http://www.xmission.com/\~octa/DonnerParty/Roster.htm.
+\item S. Wilson and B. Mandelbrote, “Drug Rehabilitation and Criminality,” \textit{British Journal of Criminology}, 18 (1978): 381–386.
+\item P. K. van Vliet, and J. M. Gupta, “Sodium Bicarbonate in Idiopathic Respiratory Distress Syndrome,” \textit{Archives of Disease in Childhood}, 48 (1973): 249–255.
+\item Data are modified from A. D. Lunn and D. R. McNeil, \textit{The SPIDA Manual} (Sydney: Statistical Computing Laboratory, 1988).
+\item P. A. Holst, D. Kromhout, and R. Brand, “For Debate: Pet Birds as an Independent Risk Factor for Lung Cancer,” \textit{British Medical Journal}, 297.6659 (1988): 6659 1319–1321.
+\item J. Fan, N. E. Heckman, and M. P. Wand, “Local Polynomial Kernel Regression for Generalised Linear Models and Quasi-Likelihood Functions,” \textit{Journal of the American Statistical Association}, 90 (1995): 47 141–150.
+\item “Young Americans Say Alcohol, Marijuana, Cigarettes, and Lottery Tickets Are Easily Accessible,” Annenberg Public Policy Center of the University of Pennsylvania, http://www.appcpenn.org/Downloads/
+Adolescent\_Risk/Tobacco/risk\_report.pdf, accessed 11/30/07.
+\item G. C. Homans, “Social Behavior as Exchange,” in Peter Kivisto, ed., \textit{Social Theory: Roots and Branches}, 2nd ed. (Los Angeles: Roxbury, 2003), pp. 295–304.
+\item Ibid, p. 297.
+\item 2005 Iowa Youth Survey Report, http://www.iowayouthsurvey.org/images/2005\_county\_reports/79.Poweshiek.pdf, accessed 9/9/07.
+\item D. L. Franko, D. Thompson, S. G. Affenito, B. A. Barton, and R. H. Striegel-Moore, “What Mediates the Relationship Between Family Meals and Adolescent Health issues?” \textit{Health Psychology}, 27.2 (2008): S109–S117.
+\item Ibid, p. 3.
+\item Ibid, p. 5.
+
+\end{enumerate}
+

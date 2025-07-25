@@ -1,6 +1,5 @@
 --- 
-title: "Chapter 6"
-author: "Your Name"
+title: "Chapter 4"
 output:
   bookdown::pdf_book:
     latex_engine: xelatex
@@ -97,7 +96,10 @@ lected at University of Wisconsin hospitals in Madison. We will start by determi
 nucleus can help us to determine whether a tumor is malignant or benign.
 Typically, healthy cell nuclei have round or ellipsoid shapes.Figure 6.1 shows a sample of malignant cells that appear to have grown such that the perimeters of the cell nuclei have somewhat concave points.
 
-[[[Figure 6.1]]]
+```{r fig6.1, echo=FALSE, out.width="80%", fig.align="center", fig.cap="Segmented bar graph of nucleus shape and malignancy."}
+knitr::include_graphics("docs/Fig6_1Cells.png")
+```
+
 Figure 6.1 An image of malignant cells where nuclei are outlined with a curve-fitting program.  Reprinted by permission. Mangasarian, Street & Wolberg, “Breast Cancer Diagnosis and Prognosis via Linear Programming,” INFORMS Journal Operations Research, 43.4, 1995. © 1995, Institute for Operations Research and the Management Sciences (INFORMS).
 
 ## **Summarizing Categorical Data**
@@ -160,7 +162,7 @@ is restricted to examples of nominal data analysis techniques.
 category rather than calculating means.}
 \normalsize
 
-# Activity: Descriptive Statistics and Graphs
+## Activity: Descriptive Statistics and Graphs {-}
 >1. Identify the observational units, the explanatory variable, and the response variable in the cancer cell
 data in Table 6.1.
 2. Calculate the proportion of round cell samples that are malignant and the proportion of concave cell
@@ -365,7 +367,7 @@ In this section, we simply discuss how to conduct Fisher’s exact test with sta
  &= \frac{\binom{M}{x}\,\binom{N - M}{n - x}}{\binom{N}{n}} \notag
 \end{align}
 
-where $\binom{M}{x} = M \text{“choose”} x = \frac{M!}{x!(M - x)!}$. Similar calculations hold for $\binom{N - M}{n - x}$ and $\binom{N}{n}$."
+where $\binom{M}{x} = M \text{“choose”} x = \frac{M!}{x!(M - x)!}$.^[For any positive integer, the notation n! is read “n factorial” and is defined as $n!= n(n- 1)(n- 2) \cdot\cdot\cdot (3)(2)(1)$. For example, “3 factorial” is $3 \times 2 \times 1= 6$ and “four factorial” is $4!= 4 \times 3 \times 2 \times 1= 24$. In addition, $0!= 1$.] Similar calculations hold for $\binom{N - M}{n - x}$ and $\binom{N}{n}$."
 
 ## Activity: Calculating Fisher’s Exact Test {-}
 >9. In this cancer study, assume N= 37 observations with M = 24 successes. If n = 21 observations
@@ -384,8 +386,6 @@ Question 11?
 ered a success). For a sample of size 21 (concave nuclei), find P(X $\geq$ 4). How does this answer com-
 pare to your answer in Question 11?
 
-*?For any positive integer, the notation n! is read “n factorial” and is defined as $n!= n(n- 1)(n- 2) \cdot\cdot\cdot (3)(2)(1)$.
-For example, “3 factorial” is $3 \times 2 \times 1= 6$ and “four factorial” is $4!= 4 \times 3 \times 2 \times 1= 24$. In addition, $0!= 1$.
 
 Both the simulation in Section 6.3 and Fisher’s exact test can be considered permutation tests. The simu-
 lation study provides an approximation to Fisher’s exact test. Fisher’s exact test provides a $p$-value for this
@@ -461,8 +461,7 @@ chi-square test statistic will resemble the chi-square distribution.
 
 \Large
 \textbf{\textcolor{red}{Key Concept:}}
-\textcolor{red}{The steps to conduct a chi-square test are similar to those for the hypothesis tests discussed in most
-introductory statistics classes.* To conduct a chi-square test you will need to do the following:}
+\textcolor{red}{The steps to conduct a chi-square test are similar to those for the hypothesis tests discussed in most introductory statistics classes.^[For 2 × 2 tables, the chi-square test statistic is identical to the square of the Z-statistic when testing for equal population proportions. In addition, the $p$-values for the two tests will be identical.] To conduct a chi-square test you will need to do the following:}
 
 \textcolor{red}{$\bullet$ State the null and alternative hypotheses.}
 
@@ -485,7 +484,6 @@ H_0: p_C &= p_R \quad\text{vs.}\quad H_a: p_C \neq p_R
 \notag
 \end{align}
 
-*? For 2 × 2 tables, the chi-square test statistic is identical to the square of the Z-statistic when testing for equal population proportions. In addition, the $p$-values for the two tests will be identical.
 
 The null hypothesis is equivalent to stating that the distributions (of malignant cells) are the same
 across all groups of nucleus shapes. This test is often called a test of homogeneity.
@@ -764,7 +762,7 @@ Prospective studies typically provide stronger evidence of a relationship betwee
 
 ## Extended Activity: Retrospective Studies and the Odds Ratio {-}
 
-In a retrospective study of lung cancer patients in 20 London hospitals, Richard Doll identified a relationship between smoking and lung cancer.$^8$ Table 6.5 shows a partial set of data from his study. The data were collected on 60 female patients with lung cancer and 60 control females.
+In a retrospective study of lung cancer patients in 20 London hospitals, Richard Doll identified a relationship between smoking and lung cancer.^[Retrospective cohort studies also exist. In these designs, past (medical) records are often used to collect data. As with prospective cohort studies, the objective is to first establish groups based on an explanatory variable. However, since these are past records data on the response variable can be collected at the same time.] Table 6.5 shows a partial set of data from his study. The data were collected on 60 female patients with lung cancer and 60 control females.
 
 ```{r tab6.5, echo=FALSE, results='asis'}
 library(knitr)
@@ -797,7 +795,6 @@ kable(
 
 Note that tests for equal proportions are not appropriate if the response totals are fixed prior to the study. In addition, the next section will show that since the response totals are not random, a test of independence should not be used. Fisher’s exact test and a simulation study could be used. The following questions will show why it is appropriate to conduct a hypothesis test about the odds ratio.
 
-*?Retrospective cohort studies also exist. In these designs, past (medical) records are often used to collect data. As with prospective cohort studies, the objective is to first establish groups based on an explanatory variable. However, since these are past records data on the response variable can be collected at the same time.
 
 30. Calculate the odds of lung cancer for smokers. Calculate the odds of lung cancer for nonsmokers. Calculate and interpret the odds ratio of lung cancer. Does the odds ratio indicate a relationship between smoking and lung cancer?  
 31. Calculate and interpret the odds ratio of being a smoker. Does the odds ratio depend on what variable is considered the response?
@@ -1063,6 +1060,7 @@ Chi-square tests for homogeneity and independence involve exactly the same mathe
 
 This chapter was limited to studies involving only one categorical explanatory variable and one categorical response variable. Additional tests such as the Mantel–Haenszel procedure can be used to test for equal proportions or odds with two explanatory variables. The following chapters discuss more general procedures, using logistic and Poisson regression to analyze data with a categorical response variable and multiple categorical or quantitative explanatory variables.
 
+### This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
 \noindent\rule{\linewidth}{0.4pt}
@@ -1477,38 +1475,39 @@ that the cell counts in Part (b) are sufficient to be modeled by the chi-square 
   
 \end{list}
 
+### This part not working. All the text under the heading is not showing up
 ## Endnotes {-}
 
 \begin{enumerate}
 
-\item R. Hooke (1918–2003) from his book How to Tell the Liars from the Statisticians (New York: Marcel-Dekker, 1983),
-\item American Cancer Society, Cancer Facts and Figures 2008, Atlanta, GA, http://www.cancer.org/acs/groups/con-
+\item R. Hooke (1918–2003) from his book \textit{How to Tell the Liars from the Statisticians} (New York: Marcel-Dekker, 1983),
+\item American Cancer Society, \textit{Cancer Facts and Figures 2008}, Atlanta, GA, http://www.cancer.org/acs/groups/con-
 tent/@epidemiologysurveilance/documents/document/acspc026210.pdf? accessed 2/25/11.
 \item W. Wolberg and O. Mangasarian, “Multisurface Method of Pattern Separation for Medical Diagnosis Applied to
-Breast Cytology,” Proceedings of the National Academy of Sciences of the United States of America, 87.23 (Dec.
+Breast Cytology,” \textit{Proceedings of the National Academy of Sciences of the United States of America}, 87.23 (Dec.
 1990): 9193–9196.
-\item N. Street, W. Wolberg, and O. Mangasarian, “Nuclear Feature Extraction for Breast Tumor Diagnosis,” International
-Symposium on Electronic Imaging: Science and Technology, 1905 (1993): 861–870.
-\item For a more complete discussion of sampling schemes and appropriate tests see F. Ramsey and D. Schafer, The
-Statistical Sleuth (Pacific Grove, CA: Duxbury, 2002) or A. Agresti, “A Survey of Exact Inference for Contingency
-Tables,” Statistical Science, 7. 1 (1992): 131–177.
+\item N. Street, W. Wolberg, and O. Mangasarian, “Nuclear Feature Extraction for Breast Tumor Diagnosis,” \textit{International
+Symposium on Electronic Imaging: Science and Technology}, 1905 (1993): 861–870.
+\item For a more complete discussion of sampling schemes and appropriate tests see F. Ramsey and D. Schafer, \textit{The
+Statistical Sleuth} (Pacific Grove, CA: Duxbury, 2002) or A. Agresti, “A Survey of Exact Inference for Contingency
+Tables,” \textit{Statistical Science}, 7. 1 (1992): 131–177.
 \item T. R. Pedersen et al., “Randomized Trial of Cholesterol Lowering in 4444 Patients with Coronary Heart Disease:
-The Scandinavian Simvastatin Survival Study (4S),” Lancet, 344 (1994): 1383–1389.
-\item S. Woloshin, L. Schwartz, and H. G. Welch, Know Your Chances: Understanding Health Statistics (Berkeley: Uni-
+The Scandinavian Simvastatin Survival Study (4S),” \textit{Lancet}, 344 (1994): 1383–1389.
+\item S. Woloshin, L. Schwartz, and H. G. Welch, \textit{Know Your Chances: Understanding Health Statistics} (Berkeley: Uni-
 versity of California Press, 2008), p. 42.M06\_KUIP6018\_01\_SE\_C06.indd 202 18/08/11 3:59 PM Endnotes 203
-\item R. Doll and A. B. Hill, “Smoking and Carcinoma of the Lung: Preliminary Report,” British Medical Journal, 2.4682
+\item R. Doll and A. B. Hill, “Smoking and Carcinoma of the Lung: Preliminary Report,” \textit{British Medical Journal}, 2.4682
 (1950): 739–748.
-\item D. Salsburg, The Lady Tasting Tea (New York: Freeman, 2001).
-\item “Donner Party Deaths: A Demographic Assessment,” Journal of Anthropological Research, 46 (1990): 223–242.
-\item D. M. Barnes, “Breaking the Cycle of Addiction,” Science, 241 (1988): 1029–1030.
-\item A. Furdei, “The Public Health Implications of the 1995 ‘Pill Scare,’” Human Reproduction Update, 5.6 (1999): 621–626.
-\item G. Gigerenzer et al., “Helping Doctors and Patients Make Sense of Health Statistics,” Psychological Science in the
-Public Interest, Oct. 8, 2008.
-\item A. Furdei, “The Public Health Implications of the 1995 ‘Pill Scare,’” Human Reproduction Update, 5.6 (1999):
+\item D. Salsburg, \textit{The Lady Tasting Tea} (New York: Freeman, 2001).
+\item “Donner Party Deaths: A Demographic Assessment,” \textit{Journal of Anthropological Research}, 46 (1990): 223–242.
+\item D. M. Barnes, “Breaking the Cycle of Addiction,” \textit{Science}, 241 (1988): 1029–1030.
+\item A. Furdei, “The Public Health Implications of the 1995 ‘Pill Scare,’” \textit{Human Reproduction Update}, 5.6 (1999): 621–626.
+\item G. Gigerenzer et al., “Helping Doctors and Patients Make Sense of Health Statistics,” \textit{Psychological Science in the
+Public Interest}, Oct. 8, 2008.
+\item A. Furdei, “The Public Health Implications of the 1995 ‘Pill Scare,’” \textit{Human Reproduction Update}, 5.6 (1999):
 621–626.
 \item Ibid.
-\item Maternal Mortality in 2005, http://www.who.int/whosis/mme\_2005.pdf, accessed 11/3/10.
-\item N. J. Gotelli and G. R. Graves, Null Models in Ecology (Washington, DC: Smithsonian Institution Press, 1996).
+\item \textit{Maternal Mortality in 2005}, http://www.who.int/whosis/mme\_2005.pdf, accessed 11/3/10.
+\item N. J. Gotelli and G. R. Graves, \textit{Null Models in Ecology} (Washington, DC: Smithsonian Institution Press, 1996).
 Gotelli and Graves define their concept this way: “[A] null model is a pattern-generating model that is based on
 randomization of ecological data or random sampling from a known or imagined distribution. The null model is
 designed with respect to some ecological or evolutionary process of interest. Certain elements of the data are held
