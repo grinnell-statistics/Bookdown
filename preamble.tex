@@ -1,1 +1,9 @@
 \usepackage{booktabs}
+\makeatletter
+% undefine the internal counter
+\let\c@excount\relax
+\let\theexcount\relax
+% undefine the environment macros
+\let\exercise\relax
+\let\endexercise\relax
+\makeatother

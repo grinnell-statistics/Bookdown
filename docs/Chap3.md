@@ -456,10 +456,7 @@ y_i - \bar{y} = (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y})
 \tag{3.7}
 \end{equation}
 
-<div class="figure">
-<img src="Chap3_files/figure-epub3/df_1-plot-1.png" alt="Scatterplot and regression line for Chevrolet Cavalier Sedans: Price = 15,244 - 0.111(Mileage)."  />
-<p class="caption">(\#fig:df_1-plot)Scatterplot and regression line for Chevrolet Cavalier Sedans: Price = 15,244 - 0.111(Mileage).</p>
-</div>
+![(\#fig:df_1-plot)Scatterplot and regression line for Chevrolet Cavalier Sedans: Price = 15,244 - 0.111(Mileage).](Chap3_files/figure-latex/df_1-plot-1.pdf) 
 
 
 Using our highlighted observation (11,488, 14,678.1), we see that
@@ -539,15 +536,22 @@ The coefficient of determination, $R^2$, is a measure of the usefulness of the e
 
 The sum of squares calculations are often summarized in an analysis of variance (ANOVA) table, as shown in Table 1.
 
+\begin{table}
 
-
-Table: (\#tab:anova-table)ANOVA table for a least squares regression model, where n is the number of observations and p is the number of terms in the model (including the constant term).
-
-|Source     |      df       |                             SS                             |                        MS                        |     F.Statistic     |
-|:----------|:-------------:|:----------------------------------------------------------:|:------------------------------------------------:|:-------------------:|
-|Regression | $\quad p - 1$ | $\displaystyle SSR = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2$ |       $MS_{Regr} = \tfrac{SSR}{df_{Regr}}$       | $F = MS_{Regr}/MSE$ |
-|Error      | $\quad n - p$ |   $\displaystyle SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2$   | $MSE = \tfrac{SSE}{df_{Error}} = \hat{\sigma}^2$ |                     |
-|Total      | $\quad n - 1$ |    $\displaystyle SST = \sum_{i=1}^n (y_i - \bar{y})^2$    |                                                  |                     |
+\caption{(\#tab:anova-table)ANOVA table for a least squares regression model, where n is the number of observations and p is the number of terms in the model (including the constant term).}
+\centering
+\begin{tabular}[t]{l|c|c|c|c}
+\hline
+Source & df & SS & MS & F.Statistic\\
+\hline
+Regression & $\quad p - 1$ & $\displaystyle SSR = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2$ & $MS_{Regr} = \tfrac{SSR}{df_{Regr}}$ & $F = MS_{Regr}/MSE$\\
+\hline
+Error & $\quad n - p$ & $\displaystyle SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2$ & $MSE = \tfrac{SSE}{df_{Error}} = \hat{\sigma}^2$ & \\
+\hline
+Total & $\quad n - 1$ & $\displaystyle SST = \sum_{i=1}^n (y_i - \bar{y})^2$ &  & \\
+\hline
+\end{tabular}
+\end{table}
 
 
 
@@ -651,20 +655,14 @@ The data set $4-8Cyl$ includes several four- and eight-cylinder cars from the or
 
 In the same way, the $Mileage$ coefficient states that holding $Cyl$ constant, we expect $Price$ to decrease by $0.20$ for each additional mile on the car.
 
-<div class="figure">
-<img src="Chap3_files/figure-epub3/df_2-plot-1.png" alt="Scatterplot and least squares regression line: Price = 15,349 - 0.20(Mileage) + 3443(Cyl). For each cylinder size, an increase of one mile is expected to reduce price by $0.20."  />
-<p class="caption">(\#fig:df_2-plot)Scatterplot and least squares regression line: Price = 15,349 - 0.20(Mileage) + 3443(Cyl). For each cylinder size, an increase of one mile is expected to reduce price by $0.20.</p>
-</div>
+![(\#fig:df_2-plot)Scatterplot and least squares regression line: Price = 15,349 - 0.20(Mileage) + 3443(Cyl). For each cylinder size, an increase of one mile is expected to reduce price by $0.20.](Chap3_files/figure-latex/df_2-plot-1.pdf) 
 
 
 Figure 3 shows a scatterplot and regression line to predict $Price$ using $Mileage$, $Cyl$, and a $Mileage*Cyl$ interaction term (called $MileCyl$). The lack of parallel lines in the regression model $\text{Price} = 4533 + 0.340(\text{Mileage}) + 5431(\text{Cyl}) - 0.0995(\text{MileCyl})$ indicates an interaction effect.
 
 Caution should be used in interpreting coefficients when interaction terms are present. The coefficient for $Mileage$ can no longer be globally interpreted as reducing $Price$ by $0.20$ for each additional mile. Now, when there are four cylinders, $Price$ is reduced by $0.058\ [0.340(1) - 0.0995(1 \times 4) = -0.058]$ with each additional mile. When there are eight cylinders, $Price$ is reduced by $0.456\ [0.340(1) - 0.0995(1 \times 8) = -0.456]$ with each additional mile. Thus, an additional mile impacts $Price$ differently depending on the second variable, $Cyl$.
 
-<div class="figure">
-<img src="Chap3_files/figure-epub3/df_3-plot-1.png" alt="Scatterplot and and least squares regression line: Price = 4533 + 0.340(Mileage) + 5431(Cyl) + 0.0995(MileCyl). If the interaction term (MileCyl) is important, we expect to have regression lines that are not parallel."  />
-<p class="caption">(\#fig:df_3-plot)Scatterplot and and least squares regression line: Price = 4533 + 0.340(Mileage) + 5431(Cyl) + 0.0995(MileCyl). If the interaction term (MileCyl) is important, we expect to have regression lines that are not parallel.</p>
-</div>
+![(\#fig:df_3-plot)Scatterplot and and least squares regression line: Price = 4533 + 0.340(Mileage) + 5431(Cyl) + 0.0995(MileCyl). If the interaction term (MileCyl) is important, we expect to have regression lines that are not parallel.](Chap3_files/figure-latex/df_3-plot-1.pdf) 
 
 \vspace*{2cm}
 
@@ -717,10 +715,7 @@ c. What does the residual normal probability plot show?
 Data set: $Cars$
 The potential outliers identified in Question 11 can provide an interesting demonstration of an interaction. Figure 3.12 shows that the slope to predict $Price$ from $Mileage$ for the ten Cadillac XLR-V8s is much steeper than the slope found when using the other cars. This shows that depreciation for these high-end cars is almost 50 cents a mile, as opposed to 15 cents a mile on average for all car types combined.
 
-<div class="figure">
-<img src="Chap3_files/figure-epub3/df_4-plot-1.png" alt="Scatterplot and regression lines: For the Cadillac XLR-V8, the regression line is Price = 71,997 - 0.4827(Mileage). This is a much steeper line than the regression line for all other cars: Price = 23,894 - 0.1549(Mileage)."  />
-<p class="caption">(\#fig:df_4-plot)Scatterplot and regression lines: For the Cadillac XLR-V8, the regression line is Price = 71,997 - 0.4827(Mileage). This is a much steeper line than the regression line for all other cars: Price = 23,894 - 0.1549(Mileage).</p>
-</div>
+![(\#fig:df_4-plot)Scatterplot and regression lines: For the Cadillac XLR-V8, the regression line is Price = 71,997 - 0.4827(Mileage). This is a much steeper line than the regression line for all other cars: Price = 23,894 - 0.1549(Mileage).](Chap3_files/figure-latex/df_4-plot-1.pdf) 
 
 
 41. Create a quadratic mileage term. Create two models to predict $TPrice$, one with only $Mileage$ and another with both $Mileage$ and $(Mileage)^2$ (called $MileSq$).

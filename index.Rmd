@@ -8,6 +8,8 @@ output:
     toc: true
     toc_depth: 2
     keep_tex: true
+    includes:
+      in_header: preamble.tex
 documentclass: report
 bibliography:
   - book.bib
