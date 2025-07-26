@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Making Connections: The Two-Sample t-Test, Regression, and ANOVA
 
@@ -44,7 +44,7 @@ possible distractions.
 - The response variable would be the time in seconds from when the participant pressed the “start
 game” button to when he or she won the game.
 
-
+[[[IMPORTANT: Why is this figure so large?]]]
 
 ```{r echo=FALSE, fig.height = 2, fig.width =4}
   knitr::include_graphics("docs/Fig2_1Shapesplosion.jpg")
@@ -88,7 +88,7 @@ The key question in this study is whether or not the two types of games have dif
 
 The underlying model used in the two-sample t-test is designed to account for these two group means ($\mu_1$ and $\mu_2$) and random error. The statistical model for the first population, the color distracter group, is:
 
-
+[[[should we better align the eqn number?]]]
 
 ```{r, results='asis', echo=FALSE}
 library(knitr)
@@ -253,7 +253,7 @@ games?
 
 ### The Linear Regression Model
 
-The simple linear regression model discussed in introductory statistics courses typically has the followingcform:
+The simple linear regression model discussed in introductory statistics courses typically has the following form:
 
 \begin{equation}
 y_i = \beta_0 + \beta_1x_i + \epsilon_i ~\text{ for } i = 1, 2, ... , n ~\text{ where } \epsilon_i \sim N(0,\sigma^2)
