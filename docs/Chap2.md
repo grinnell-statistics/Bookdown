@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Making Connections: The Two-Sample t-Test, Regression, and ANOVA
 
 <span style="float:right;"> *In theory, there’s no difference between theory and practice. In practice, there is.*</span>  
@@ -41,11 +46,10 @@ game” button to when he or she won the game.
 
 
 
-[[[Insert Figure 2.1]]]
+![](docs/Fig2_1Shapesplosion.jpg)<!-- -->
 
-**Figure 2.1** A black and white image of the electronic Shapesplosion game
-with and without color distracters. The instructions for the game were to
-click and drag each peg to the space with the matching shape.
+
+**Figure 2.1** An image of the electronic Shapesplosion game with and without color distracters. The instructions for the game were to click and drag each peg to the space with the matching shape.
 
 >**NOTE**
 It is important to recognize that each subject in this study was assigned to exactly one treatment, either the standard game or the color distracter game. Some researchers may point out that a paired design (where each subject was assigned to both treatments) might have been more efficient. However, for the purposes of this chapter, this study will be treated as the students originally designed it: a study comparing two independent samples.
@@ -62,7 +66,7 @@ It is important to recognize that each subject in this study was assigned to exa
 4. Create an individual value plot or a boxplot of the Games1 data from this study. Describe the graph. For example, does it look as if the groups have equal means or equal standard deviations? Are there any unusual observations in the data set? Calculate the mean and standard deviation of the color distracter responses, $\bar{y}_1$ and $s_1$ , as well as the mean and standard deviation of the standard game responses, $\bar{y}_2$ and $s_2$.
 
 
-\newpage
+
 
 ## The Two-Sample t-Test to Compare Population Means
 
@@ -71,8 +75,9 @@ It is important to recognize that each subject in this study was assigned to exa
 
 Generally, **statistical models** have the following form:
 
-
-<p style="text-align: center;">observed value = mean response + random error</p>
+<p style="text-align: center; font-size: 1.2em; font-weight: bold;">
+  observed value = mean response + random error
+</p>
 
 
 The statistical model describes each observed value in a data set as the sum of a mean response for some subgroup of interest (often called a group mean) and a random error term. The mean response is fixed for each group, while the random error term is used to model the uncertainty of each individual outcome. The random error term for each individual outcome cannot be predicted, but in the long run there is a regular pattern that can be modeled with a distribution (such as the normal distribution).
@@ -81,19 +86,92 @@ The key question in this study is whether or not the two types of games have dif
 
 The underlying model used in the two-sample t-test is designed to account for these two group means ($\mu_1$ and $\mu_2$) and random error. The statistical model for the first population, the color distracter group, is:
 
-[[[Eq 2.1]]]
+
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:center;border-bottom: none;">  </th>
+   <th style="text-align:center;border-bottom: none;">  </th>
+   <th style="text-align:center;border-bottom: none;">  </th>
+   <th style="text-align:center;border-bottom: none;">  </th>
+   <th style="text-align:center;border-bottom: none;">  </th>
+   <th style="text-align:center;border-bottom: none;">  </th>
+   <th style="text-align:center;border-bottom: none;">  </th>
+   <th style="text-align:center;border-bottom: none;">  </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;border: none;"> observed </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> mean </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> error </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;border: none;"> value </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> response </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> term </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;border: none;"> (random) </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> (not random) </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> (random) </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;border: none;"> ↓ </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> ↓ </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> ↓ </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;border: none;"> $y_{1,j}$ </td>
+   <td style="text-align:center;border: none;"> = </td>
+   <td style="text-align:center;border: none;"> $\mu_1$ </td>
+   <td style="text-align:center;border: none;"> + </td>
+   <td style="text-align:center;border: none;"> $\epsilon_{1,j}$ </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;">  </td>
+   <td style="text-align:center;border: none;"> for $j = 1, 2, ... ,n_1$ </td>
+  </tr>
+</tbody>
+</table>
+
+<div style="text-align: right;">(2.1)</div>
 
 
 where j is used to represent each observation in the sample from the first population. For example, $y_{1, 9}$ represents the 9th observation in the first group (the color distracter group). In this data set, there were 20 observations taken from the first population; thus, $n_1$ = 20.
 
 This model states that the color distracter game is expected to be centered at the constant value $\mu_1$ . In addition, each observation is expected to have some variability (random error) that is typically modeled by a normal distribution with a mean equal to zero and a fixed variance s2. Similarly, each observation from the second group, the standard game, can be modeled as the sum of $\mu_2$ plus a random error term, $\epsilon_{2, j}$:
 
-$y_{2, j} = \mu_2 + \epsilon_{2, j}$  for $j = 1, 2, ... ,n_2$
+\begin{align}
+y_{2, j} = \mu_2 + \epsilon_{2, j}  ~~\text{ for }~ j = 1, 2, ... ,n_2
+\end{align}
 
 where $n_2 = 20$, $\mu_2$ is the mean of the standard group, and the $\epsilon_{2, j}$ are random variables (typically from a
 normal distribution) with a mean equal to zero and variance $\sigma^2$ . Often, this statistical model is more succinctly written as: 
 
-$y_{i, j} = \mu_i + \epsilon_{i, j}$  for $j = 1, 2$ and $j = 1, 2, ... ,n_2$ where $\epsilon_{i, j} \sim N(0,\sigma^2)$
+\begin{align}
+y_{i, j} = \mu_i + \epsilon_{i, j} ~~\text{ for }~ j = 1, 2 \text{ and } j = 1, 2, ... ,n_2 ~~\text{ where }~  \epsilon_{i, j} \sim N(0,\sigma^2)
+\end{align}
 
 
 >**MATHMATICAL NOTE**
