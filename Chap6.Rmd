@@ -40,8 +40,15 @@ theme_set(
 
 # Categorical Data Analysis: Is a Tumor Malignant or Benign?
 
-*It is commonly believed that anyone who tabulates numbers is a statistician. This is like believing that anyone who owns a scalpel is a surgeon.*
-—Robert Hooke1
+
+<span style="float:right;"> *It is commonly believed that anyone who tabulates numbers is a statistician. This is like believing that anyone who owns a scalpel is a surgeon.*</span>  
+<span style="float:right;"> —Robert Hooke1</span>
+
+<br> <br>
+
+
+
+
 
 This chapter introduces inference techniques for data in which both the explanatory and
 response variables are categorical. The term categorical data analysis often refers to
@@ -1060,7 +1067,7 @@ Chi-square tests for homogeneity and independence involve exactly the same mathe
 
 This chapter was limited to studies involving only one categorical explanatory variable and one categorical response variable. Additional tests such as the Mantel–Haenszel procedure can be used to test for equal proportions or odds with two explanatory variables. The following chapters discuss more general procedures, using logistic and Poisson regression to analyze data with a categorical response variable and multiple categorical or quantitative explanatory variables.
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
 \noindent\rule{\linewidth}{0.4pt}
@@ -1475,7 +1482,7 @@ that the cell counts in Part (b) are sufficient to be modeled by the chi-square 
   
 \end{list}
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## Endnotes {-}
 
 \begin{enumerate}

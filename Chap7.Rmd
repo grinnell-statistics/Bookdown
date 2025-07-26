@@ -42,8 +42,12 @@ theme_set(
 
 # Logistic Regression: The Space Shuttle Challenger
 
-*The best thing about being a statistician is that you get to play in everyone’s backyard.*  
-—John Tukey$^1$
+
+<span style="float:right;"> *The best thing about being a statistician is that you get to play in everyone’s backyard.*</span>  
+<span style="float:right;"> —John Tukey^[D. Leonhardt, “John Tukey, 85, Statistician, Coined the Word ‘Software’,” New York Times Archives on the Web, 7/28/2000, stat.bell-labs.com/who/tukey/nytimes.html. John Tukey (1915–2000) had a formal background in chemistry and mathematics. Conducting data analysis during World War II peaked his interest in statistics, and he became one of the most influential statisticians of the 20th century.]</span>
+
+<br> <br>
+
 
 There are many investigations where a researcher is interested in developing a regression model when the response variable is dichotomous (has only two categories). Dichotomous responses can be represented with binary data (data with values of only zero or one). Logistic regression is used to examine the relationship between one or more explanatory variables and a binary response variable.
 
@@ -1586,7 +1590,7 @@ The slope in logistic regression is typically described using the **odds ratio**
 **Variable selection** is a process of determining which explanatory variables should be included in a regression model. We prefer to select the model with the fewest number of terms that still best explains the response. The **drop-in-deviance** test compares the log-likelihood (or deviance) of a full model (a model with several terms) and a restricted model (a model with a smaller subset of the terms from the full model). If the test shows no significant difference between the full and the restricted model, we conclude that the additional terms in the full model can be eliminated. The drop-in-deviance test can be used sequentially until all terms that do not improve the model have been removed from the model.
 
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
 \noindent\rule{\linewidth}{0.4pt}
@@ -1785,7 +1789,7 @@ Number of SAG wins
 \end{list}
 
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## **Endnotes**{-}
 
 \begin{enumerate}
