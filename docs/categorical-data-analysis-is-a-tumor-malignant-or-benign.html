@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Categorical Data Analysis: Is a Tumor Malignant or Benign? | Chapter 4</title>
+<title>Chapter 6 Categorical Data Analysis: Is a Tumor Malignant or Benign? | A Book Chapter Example</title>
 <meta name="author" content="Your Name">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Categorical Data Analysis: Is a Tumor Malignant or Benign? | Chapter 4">
+<meta property="og:title" content="Chapter 6 Categorical Data Analysis: Is a Tumor Malignant or Benign? | A Book Chapter Example">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Categorical Data Analysis: Is a Tumor Malignant or Benign? | Chapter 4">
+<meta name="twitter:title" content="Chapter 6 Categorical Data Analysis: Is a Tumor Malignant or Benign? | A Book Chapter Example">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -54,7 +54,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">Chapter 4</a>
+        <a href="index.html" title="">A Book Chapter Example</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -76,8 +76,8 @@
 <h1>
 <span class="header-section-number">6</span> Categorical Data Analysis: Is a Tumor Malignant or Benign?<a class="anchor" aria-label="anchor" href="#categorical-data-analysis-is-a-tumor-malignant-or-benign"><i class="fas fa-link"></i></a>
 </h1>
-<p><em>It is commonly believed that anyone who tabulates numbers is a statistician. This is like believing that anyone who owns a scalpel is a surgeon.</em>
-—Robert Hooke1</p>
+<p><span style="float:right;"> <em>It is commonly believed that anyone who tabulates numbers is a statistician. This is like believing that anyone who owns a scalpel is a surgeon.</em></span><br><span style="float:right;"> —Robert Hooke1</span></p>
+<p><br><br></p>
 <p>This chapter introduces inference techniques for data in which both the explanatory and
 response variables are categorical. The term categorical data analysis often refers to
 analysis of data in which the response variable is categorical. However, in this chapter
@@ -192,7 +192,7 @@ nuclei are malignant.</p>
 </h2>
 <p>Figure 6.2 shows that our sample of 37 slides indicates a relationship between the shape of the cell nuclei and malignancy. However, statistical inference is needed to draw conclusions about the entire population from which these samples were selected. In this section, we will conduct a hypothesis test to determine if the sample data provide evidence that the proportion of malignant cells is greater for concave nuclei than for round nuclei.</p>
 <p>The hypothesis test in this example is one-sided because we have a medical reason to suspect that concave nuclei are more likely to be malignant. For this example, the null and alternative hypotheses can be written as</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}\label{6.1}
 H_0: p_C = p_R \quad\text{vs.}\quad H_a: p_C &gt; p_R
 \tag{6.1}
 \end{align}\]</span></p>
@@ -320,7 +320,7 @@ Fisher’s exact test uses the hypergeometric distribution to provide exact p-va
 </h2>
 <p>In Fisher’s exact test and the simulation study, 17 or more concave malignant cells corresponded to a difference in sample proportions of <span class="math inline">\(\hat p_C - \hat p_R = 0.8095 - 0.4375 = 0.372\)</span> or more. The <span class="math inline">\(p\)</span>-value was the probability of calculating a sample statistic <em>greater than or equal to</em> <span class="math inline">\(\hat p_C - \hat p_R = 0.372\)</span> given that <span class="math inline">\(p_C = p_R\)</span>.</p>
 <p>Before this sample was collected, the researchers had medical reasons to believe that the cells with concave nuclei (i.e., the malformed nuclei) might be more likely to be malignant. If there had been no specific reasoning to justify a one-sided hypothesis, a two-sided hypothesis test would have been more appropriate:</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}\label{6.2}
 H_0: p_C = p_R \quad\text{vs.}\quad H_a: p_C \neq p_R
 \tag{6.2}
 \end{align}\]</span></p>
@@ -435,7 +435,7 @@ overall total.</p>
 In a chi-square test, the expected counts are calculated from the totals of the observed data. Totals in the table of observed counts (like Table 6.1) and the table of expected values (like Table 6.4) are identical, except for possible round-off error.<br></p>
 <p>The chi-square test statistic is calculated to measure if the observed data are consistent with the null
 hypothesis. The chi-square statistic is</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align} \label{6.3}
 \chi^2 = \sum \frac{(\text{observed count} - \text{expected count})^2}{\text{expected count}}
 \tag{6.3}
 \end{align}\]</span></p>
@@ -530,16 +530,16 @@ In this example, some of the expected counts are just slightly greater than 5. I
 \end{align}\]</span></p>
 <p>Both studies could test whether an observed difference in proportions of 0.04 is significant. However, in the second study <em><span class="math inline">\(\hat p_1\)</span></em> is five times larger than <em><span class="math inline">\(\hat p_2\)</span></em>.</p>
 <p>An alternative calculation that is commonly used for data with categorical response and explanatory variables is the relative risk. In the following calculations, we arbitrarily decided to define a malignant cell as a success.</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}\label{6.4}
 \text{Relative risk} &amp;= \frac{\text{proportion of successes in group 1}}{\text{proportion of successes in group 2}} = \frac{\hat p_1}{\hat p_2} \tag{6.4}
 \end{align}\]</span></p>
 <p>In the cancer cell study, the relative risk is 0.8095/0.4375 = 1.85. Thus, the risk of malignancy is 1.85 times greater for the concave group than for the round group.</p>
 <p>The <strong>odds</strong> (more specifically, odds of success) can also be used to compare proportions and tend to have meaning over a broader range of potential outcomes.</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}\label{6.5}
 \text{Odds} &amp;= \frac{\text{number of successes}}{\text{number of failures}} \tag{6.5}
 \end{align}\]</span></p>
 <p>The odds of malignancy in the concave group are 17 to 4, meaning that we expect 17 successes (malignant cells) for every 4 failures (benign cells). This is often stated as follows: The odds of malignancy in the concave group are 4.25 (17 ÷ 4) to 1 (4 ÷ 4). The odds of malignancy in the round group are 7 to 9. The <strong>odds ratio</strong> is used to compare the odds of two groups.</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}\label{6.6}
 \text{Odds ratio} &amp;= \frac{\text{odds of group 1}}{\text{odds of group 2}} = \frac{\hat\theta_1}{\hat\theta_2} \tag{6.6}
 \end{align}\]</span></p>
 <p>The odds ratio in the cancer cell study is <span class="math inline">\(\frac{17/4}{7/9} = 5.5.\)</span>. Thus, the odds of malignancy are 5.5 times greater for the concave group than for the round group. When the odds ratio = 1, the odds for both groups are equal.</p>
@@ -740,7 +740,7 @@ indication of whether this level of dependence is of practical importance) is gi
 <ol style="list-style-type: lower-alpha">
 <li>State the null and alternative hypotheses in words.<br>
 </li>
-<li>Calculate the chi-square statistic using Equation (6.3).<br>
+<li>Calculate the chi-square statistic using Equation <span class="math inline">\(\ref{6.3}\)</span>.<br>
 </li>
 <li>In goodness-of-fit tests such as this, where all parameters are well defined, the <em>degrees of freedom is equal to the number of cells minus 1</em>. In this example, if we know how many 1s, 2s, 3s, 4s, and 5s were rolled, the number of 6s is fixed. Calculate the <em>p</em>-value for this study.<br>
 </li>
@@ -752,9 +752,9 @@ indication of whether this level of dependence is of practical importance) is gi
 The chi-square goodness-of-fit test is applied to grouped data (i.e., data put into classes). Continuous data can easily be placed into groups. However, it is important to recognize that the value of the chi-square test statistic depends on how the data are grouped.
 </p>
 </div>
-<div id="chapter-summary-1" class="section level2" number="6.12">
+<div id="chapter-summary-4" class="section level2" number="6.12">
 <h2>
-<span class="header-section-number">6.12</span> <strong>Chapter Summary</strong><a class="anchor" aria-label="anchor" href="#chapter-summary-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.12</span> <strong>Chapter Summary</strong><a class="anchor" aria-label="anchor" href="#chapter-summary-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>This chapter focused on analyzing and drawing conclusions from categorical data. Fisher’s exact test, simulation studies, and chi-square tests were used to analyze various data sets. Like most hypothesis tests, each of these tests is valid only if care is taken to ensure that the appropriate assumptions are met. All tests assume that the observations are independent.</p>
 <p><strong>Fisher’s exact test</strong> is appropriate for any sample size and any sampling design involving 2 × 2 contingency tables. <strong>Simulation studies</strong> are used to approximate Fisher’s exact test. While simulation studies are approximate, conducting 10,000 iterations will typically provide precise p‑values.</p>
@@ -774,26 +774,11 @@ The chi-square goodness-of-fit test is applied to grouped data (i.e., data put i
 <p>Testing the <strong>equivalence of two proportions</strong> (<span class="math inline">\(H_0: p_1 = p_2\)</span>) is mathematically equivalent to testing whether the <strong>odds ratio</strong> is equal to 1 (<span class="math inline">\(H_0: \theta_1/\theta_2 = 1\)</span>), where <span class="math inline">\(p\)</span> represents the proportion successful and <span class="math inline">\(\theta\)</span> represents the odds of success for any two groups (labeled 1 and 2). However, when the proportions of interest are very small, it may be more appropriate to look at the odds ratio than at the proportions. Tests for equal proportions are not appropriate for case-control studies, because the fixed response totals cause the sample proportions to not accurately represent the population.</p>
 <p>Chi-square tests for homogeneity and independence involve exactly the same mathematical calculations; however, the hypotheses and conclusions are different. A <strong>test of homogeneity of proportions</strong> is appropriate whenever the explanatory and response variables are clearly defined from the beginning of the study. While the explanatory totals may be known in advance, the response totals cannot be fixed before the data are collected. <strong>Tests of independence</strong> are appropriate if one sample is selected from one population, and thus neither explanatory nor response totals are known in advance (i.e., both explanatory and response totals can be considered random).</p>
 <p>This chapter was limited to studies involving only one categorical explanatory variable and one categorical response variable. Additional tests such as the Mantel–Haenszel procedure can be used to test for equal proportions or odds with two explanatory variables. The following chapters discuss more general procedures, using logistic and Poisson regression to analyze data with a categorical response variable and multiple categorical or quantitative explanatory variables.</p>
-<div id="this-part-not-working.-all-the-text-under-the-heading-is-not-showing-up-2" class="section level3" number="6.12.1">
-<h3>
-<span class="header-section-number">6.12.1</span> This part not working. All the text under the heading is not showing up<a class="anchor" aria-label="anchor" href="#this-part-not-working.-all-the-text-under-the-heading-is-not-showing-up-2"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-</div>
-<div id="exercises-2" class="section level2 unnumbered">
-<h2>
-<strong>Exercises</strong><a class="anchor" aria-label="anchor" href="#exercises-2"><i class="fas fa-link"></i></a>
-</h2>
+[[[ This part not working. All the text under the heading is not showing up
+## <strong>Exercises</strong>{-}
 
-<div id="this-part-not-working.-all-the-text-under-the-heading-is-not-showing-up-3" class="section level3" number="6.12.2">
-<h3>
-<span class="header-section-number">6.12.2</span> This part not working. All the text under the heading is not showing up<a class="anchor" aria-label="anchor" href="#this-part-not-working.-all-the-text-under-the-heading-is-not-showing-up-3"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-</div>
-<div id="endnotes-1" class="section level2 unnumbered">
-<h2>Endnotes<a class="anchor" aria-label="anchor" href="#endnotes-1"><i class="fas fa-link"></i></a>
-</h2>
+<p>[[[ This part not working. All the text under the heading is not showing up
+## Endnotes {-}</p>
 
 </div>
 </div>
@@ -819,7 +804,7 @@ The chi-square goodness-of-fit test is applied to grouped data (i.e., data put i
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Chapter 4</strong>" was written by Your Name. </p>
+    <p>"<strong>A Book Chapter Example</strong>" was written by Your Name. </p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

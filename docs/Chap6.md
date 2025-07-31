@@ -1,27 +1,17 @@
---- 
-title: "Chapter 4"
-output:
-  bookdown::pdf_book:
-    latex_engine: xelatex
-    number_sections: true
-    toc: true
-    toc_depth: 2
-    keep_tex: true
-documentclass: report
-bibliography:
-  - book.bib
-  - packages.bib
-biblio-style: apalike
-csl: "chicago-fullnote-bibliography.csl"
-site: bookdown::bookdown_site
 
----
 
 
 # Categorical Data Analysis: Is a Tumor Malignant or Benign?
 
-*It is commonly believed that anyone who tabulates numbers is a statistician. This is like believing that anyone who owns a scalpel is a surgeon.*
-—Robert Hooke1
+
+<span style="float:right;"> *It is commonly believed that anyone who tabulates numbers is a statistician. This is like believing that anyone who owns a scalpel is a surgeon.*</span>  
+<span style="float:right;"> —Robert Hooke1</span>
+
+<br> <br>
+
+
+
+
 
 This chapter introduces inference techniques for data in which both the explanatory and
 response variables are categorical. The term categorical data analysis often refers to
@@ -160,7 +150,7 @@ Figure 6.2 shows that our sample of 37 slides indicates a relationship between t
 
 The hypothesis test in this example is one-sided because we have a medical reason to suspect that concave nuclei are more likely to be malignant. For this example, the null and alternative hypotheses can be written as
 
-\begin{align}
+\begin{align}\label{6.1}
 H_0: p_C = p_R \quad\text{vs.}\quad H_a: p_C > p_R 
 \tag{6.1}
 \end{align}
@@ -331,7 +321,7 @@ In Fisher’s exact test and the simulation study, 17 or more concave malignant 
 
 Before this sample was collected, the researchers had medical reasons to believe that the cells with concave nuclei (i.e., the malformed nuclei) might be more likely to be malignant. If there had been no specific reasoning to justify a one-sided hypothesis, a two-sided hypothesis test would have been more appropriate:
 
-\begin{align}
+\begin{align}\label{6.2}
 H_0: p_C = p_R \quad\text{vs.}\quad H_a: p_C \neq p_R 
 \tag{6.2}
 \end{align}
@@ -475,7 +465,7 @@ In a chi-square test, the expected counts are calculated from the totals of the 
 The chi-square test statistic is calculated to measure if the observed data are consistent with the null
 hypothesis. The chi-square statistic is
 
-\begin{align}
+\begin{align} \label{6.3}
 \chi^2 = \sum \frac{(\text{observed count} - \text{expected count})^2}{\text{expected count}} 
 \tag{6.3}
 \end{align}
@@ -575,7 +565,7 @@ Both studies could test whether an observed difference in proportions of 0.04 is
 
 An alternative calculation that is commonly used for data with categorical response and explanatory variables is the relative risk. In the following calculations, we arbitrarily decided to define a malignant cell as a success.
 
-\begin{align}
+\begin{align}\label{6.4}
 \text{Relative risk} &= \frac{\text{proportion of successes in group 1}}{\text{proportion of successes in group 2}} = \frac{\hat p_1}{\hat p_2} \tag{6.4}
 \end{align}
 
@@ -584,14 +574,14 @@ In the cancer cell study, the relative risk is 0.8095/0.4375 = 1.85. Thus, the r
 
 The **odds** (more specifically, odds of success) can also be used to compare proportions and tend to have meaning over a broader range of potential outcomes.
 
-\begin{align}
+\begin{align}\label{6.5}
 \text{Odds} &= \frac{\text{number of successes}}{\text{number of failures}} \tag{6.5}
 \end{align}
 
 
 The odds of malignancy in the concave group are 17 to 4, meaning that we expect 17 successes (malignant cells) for every 4 failures (benign cells). This is often stated as follows: The odds of malignancy in the concave group are 4.25 (17 ÷ 4) to 1 (4 ÷ 4). The odds of malignancy in the round group are 7 to 9. The **odds ratio** is used to compare the odds of two groups.
 
-\begin{align}
+\begin{align}\label{6.6}
 \text{Odds ratio} &= \frac{\text{odds of group 1}}{\text{odds of group 2}} = \frac{\hat\theta_1}{\hat\theta_2} \tag{6.6}
 \end{align}
 
@@ -902,7 +892,7 @@ Expected &  &  &  &  &  & \\
 
 34. Conduct a chi-square test to determine if there is a significant difference between what was observed and what was expected.  
 a. State the null and alternative hypotheses in words.  
-b. Calculate the chi-square statistic using Equation (6.3).  
+b. Calculate the chi-square statistic using Equation \ref{6.3}.  
 c. In goodness-of-fit tests such as this, where all parameters are well defined, the *degrees of freedom is equal to the number of cells minus 1*. In this example, if we know how many 1s, 2s, 3s, 4s, and 5s were rolled, the number of 6s is fixed. Calculate the *p*-value for this study.  
 d. Are there enough observations to assume the chi-square distribution is appropriate?  
 e. Do you have evidence to believe your friend used an unfair die? Clearly state your conclusions.
@@ -939,7 +929,7 @@ Chi-square tests for homogeneity and independence involve exactly the same mathe
 
 This chapter was limited to studies involving only one categorical explanatory variable and one categorical response variable. Additional tests such as the Mantel–Haenszel procedure can be used to test for equal proportions or odds with two explanatory variables. The following chapters discuss more general procedures, using logistic and Poisson regression to analyze data with a categorical response variable and multiple categorical or quantitative explanatory variables.
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
 \noindent\rule{\linewidth}{0.4pt}
@@ -1291,7 +1281,7 @@ that the cell counts in Part (b) are sufficient to be modeled by the chi-square 
   
 \end{list}
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## Endnotes {-}
 
 \begin{enumerate}

@@ -1,22 +1,4 @@
---- 
-title: "Chapter 9"
-author: "Your Name"
-output:
-  bookdown::pdf_book:
-    latex_engine: xelatex
-    number_sections: true
-    toc: true
-    toc_depth: 2
-    keep_tex: true
-documentclass: report
-bibliography:
-  - book.bib
-  - packages.bib
-biblio-style: apalike
-csl: "chicago-fullnote-bibliography.csl"
-site: bookdown::bookdown_site
 
----
 
 
 # Survival Analysis: Melting Chocolate Chips
@@ -120,9 +102,7 @@ Time-to-event data are fundamentally different from time series data. **Time ser
 
 \large  
 \textbf{\textcolor{red}{Key Concept:}} 
-\color{red}
-The response variable in a survival analysis study is the time until the event of interest occurs. Survival analysis methods are appropriate for data from experiments or studies that possess a well-defined event of interest, a clearly defined beginning of time, and a meaningful scale for measuring time.  
-\color{black}
+\textcolor{red}{The response variable in a survival analysis study is the time until the event of interest occurs. Survival analysis methods are appropriate for data from experiments or studies that possess a well-defined event of interest, a clearly defined beginning of time, and a meaningful scale for measuring time.}
 \normalsize
 
 ## Incomplete Event Times: Censoring {-}
@@ -1460,26 +1440,4 @@ Consider the time to rearrest data introduced in Section 9.8.
 \item R. G. Pachella, “The Interpretation of Reaction Time in Information-Processing Research, in B. H. Kantowitx (ed.), \textit{Human Information Processing—Tutorials in Performance and Cognition} (Hillsdale, NJ: Erlbaum, 1974), pp. 41–82.
 
 \end{enumerate}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

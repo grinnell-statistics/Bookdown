@@ -1,29 +1,18 @@
---- 
-title: "Chapter 4"
-author: "Your Name"
-output:
-  bookdown::pdf_book:
-    latex_engine: xelatex
-    number_sections: true
-    toc: true
-    toc_depth: 2
-    keep_tex: true
-documentclass: report
-bibliography:
-  - book.bib
-  - packages.bib
-biblio-style: apalike
-csl: "chicago-fullnote-bibliography.csl"
-site: bookdown::bookdown_site
 
----
 
 
 
 # The Design and Analysis of Factorial Experiments: Microwave Popcorn
 
-*However beautiful the strategy, you should occasionally look at the results.*  
-— Winston Churchill
+
+
+
+<span style="float:right;"> *However beautiful the strategy, you should occasionally look at the results.*  </span>  
+<span style="float:right;"> - Winston Churchill</span>
+
+<br> <br>
+
+
 
 Statistics ought to be viewed as a whole: understanding the process of formulating *questions*, properly designing a study, actively collecting meaningful data, and then deciding how to properly organize and draw conclusions from the data. Advancements in technology have made data collection and computationally intensive statistical techniques much more feasible. At one time, many statisticians had narrowly defined roles and were considered as primarily “number crunchers.” Today, statisticians characteristically work on interdisciplinary teams that emphasize scientific inference and understanding data in context.
 
@@ -193,7 +182,7 @@ Treatment Combination & Popcorn Brand & Microwave Location & Cooking Time\\
 Table 4.1 lists the variables in standard order. Listing conditions in **standard order** is a simple technique that ensures that each factor combination is listed exactly once. The first variable alternates levels every row. For the second variable, levels alternate every other row. The third variable alternates every fourth row. This same process can work for multiple factors with multiple levels. If there were four factors, each with two levels, the fourth column would alternate every eight rows. For studies with more than two levels, simply ensure that the current variable lists each level exactly once for all prior combinations.
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Determining the Number of Treatment Combinations {‑}
 >1. Assume we want to use three cooking times for popping the popcorn instead of two. List the possible treatment combinations that can be assigned. How many are there?
 2. Without listing all possibilities, calculate how many treatment combinations would exist for a design that tested five brands with three microwaves at four cooking times.
@@ -213,25 +202,25 @@ Since several factors are included in this experiment, there are also several hy
 
 Factorial designs are efficient because much more information can be calculated, such as $p$-values for multiple hypothesis tests, without requiring more experimental units than for the typical two-sample $t$-test. Factorial designs are very beneficial in situations where experimental units are expensive or difficult to obtain. The next sections will discuss how to organize and draw conclusions for each of the above hypotheses in a factorial design with two factors, also called a **two-way factorial design**.
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Visualizing the Data {‑}
 >3. Use Figure 4.1 to compare the \textit{PopRate} for each of the four factor-level combinations. Do the four groups appear to have similar means or similar standard deviations? Are there any outliers (extreme observations that don't seem to fit the rest of the data)? Describe any patterns you see in the data.  
 4. Calculate the average *PopRate* for each *Brand* and each *Time*. Calculate the overall average *PopRate*.  
 5. Use the data set labeled `Popcorn` to calculate appropriate summary statistics (the median, mean, standard deviation, range, etc.) for each of the four groups. For the Fastco brand, calculate the difference between the average *PopRate* for the two cooking times. Do the same for the Pop Secret brand.
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Notation for Multiple Explanatory Variables {‑}
 
 Table 4.2 shows the `Popcorn` data set organized by the *Brand* and *Time* factors. Each of the four treatment combinations has eight observations. The data are also provided in the file `Popcorn`.
 
 <div class="figure">
-<img src="Chap4_files/figure-html/fig4.1-1.png" alt="Individual value plot of the PopRate (100 $	imes$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible." width="576" />
-<p class="caption">(\#fig:fig4.1)Individual value plot of the PopRate (100 $	imes$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible.</p>
+<img src="Chap4_files/figure-html/fig4.1-1.png" alt="Figure 4.1 Individual value plot of the PopRate (100 $	imes$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible." width="576" />
+<p class="caption">(\#fig:fig4.1)Figure 4.1 Individual value plot of the PopRate (100 $	imes$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible.</p>
 </div>
 
 \begin{table}[!h]
 \centering
-\caption{(\#tab:tab4.2)Table 4.2 Popcorn study data: the PopRate for each bag of popcorn with sample mean corresponding to each factor-level combination.}
+\caption{(\#tab:tab4_2)Table 4.2 Popcorn study data: the PopRate for each bag of popcorn with sample mean corresponding to each factor-level combination.}
 \centering
 \begin{tabular}[t]{lcccc}
 \toprule
@@ -279,12 +268,12 @@ Cooking Time Means & $\overline{y}_{.1.} = 78.3$ & $\overline{y}_{.2.} = 84.4$ &
 The dot in the subscript indicates that the average was taken over all values of that subscript. The key is to recognize that groups are identified by their subscripts. *Brand* is the first subscript, and *Time* is the second. Each individual observation for each *Brand* and *Time* factor-level combination is represented by the third subscript. For example, the 4th observation in Table 4.2 for the Fastco brand (brand 1) and the 135-second time (time 2) group is $y_{124} = 71.50$. The average of the 8 observations in the Fastco brand (brand 1) and 135-second time group is represented by $\bar{y}_{12} = 82.38$. In addition, $\bar{y}_{1.}$ is the average response of all 16 of the Fastco brand (brand 1) observations, while $\bar{y}_{.1}$ is the average response of all 16 of the 105-second times (time 1 observations). $\bar{y}_{..}$ is the average *PopRate*, averaged over all observations for both *Brand* and cooking *Time*. That is, $\bar{y}_{..}$ is the overall average *PopRate*.
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Understanding Notation {‑}
 >6. Which notation would be used to describe the sample average of the 135-second group?  
 7. Explain the difference between $\bar{y}_{21}$ and $\bar{y}_{12}$.
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Comparing Variances* {‑} ^[If you have studied ANOVA tables before, you may find it surprising that we focus on mean squares (MS) and do not discuss sums of squares (SS) or degrees of freedom (df). The focus of this section is the concepts and logic behind ANOVA. ANOVA is the process of comparing between group and within group variability. These types of variability are represented by the mean squares. Chapter 2 and the extended activities discuss sums of squares and degrees of freedom.]
 
 Figure 4.1 and Table 4.3 indicate that the difference between the *Time* means is much larger than the difference between the *Brand* means. In addition, the difference between *Time* means is much larger for the Pop Secret brand than for the Fastco brand. In this section, we will conduct an analysis, called analysis of variance, to find $p$-values for testing each of the three hypotheses stated earlier about the underlying mean responses.
@@ -374,7 +363,7 @@ An F-statistic is simply the ratio of the between-group variability to the withi
 \color{black}
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Calculating F-Statistics {‑}
 >8. Use Equation (4.1) to estimate $MS_{\text{Brand}}$, the variability between *Brand* means.  
 9. Calculate the variability between *Time* means, $MS_{\text{Time}}$. Explain the key differences between Equation (4.1) and Equation (4.2).  
@@ -401,7 +390,7 @@ c. Create a normal probability plot or histogram of the residuals from Question 
 Some statisticians will reject the equal variance assumption when the ratio of standard deviations is greater than 3 instead of 2. Others recommend that formal tests be used to test for equal variances. However, some tests, such as Bartlett’s test, are very sensitive to nonnormality. Box criticized using Bartlett’s test as a preliminary test for equal variances, saying, “To make the preliminary test on variances is rather like putting to sea in a rowing boat to find out whether conditions are sufficiently calm for an ocean liner to leave port.”$^4$ Levene’s test of homogeneity of variance is less sensitive to departures from normality.$^5$
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Interpreting Interaction Terms {-}
 
 In Question 13, the $p$-value corresponding to the third hypothesis test listed at the beginning of this section was 0.04. This demonstrates an interaction: the effect of one variable (*Time*) on the response depends on a second variable (*Brand*). Figure 4.2 provides a side-by-side boxplot and an interaction plot of the *Popcorn* data. **An interaction plot** is simply a plot of the four factor-level group means shown in Table 4.3. These plots show that for both brands, the average *PopRate* increases when the cooking time changes from 105 to 135 seconds. However, the change in means for the Fastco brand is very small compared to the change observed in the Pop Secret brand.
@@ -448,7 +437,7 @@ Using only the 32 observations from the *Popcorn* data, a three-way ANOVA will a
 It is also reasonable to test for a three-way interaction. $H_{a,7}$, the size of the effect of *Time* for each level of *Brand*, also depends on a third variable, *Microwave*. In practice, the three-way interaction effect may be difficult to interpret and some researchers choose not to include them in their analysis. The impacts of including additional tests are described in Chapter 5.
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Conducting a Three-Way ANOVA {‑}
 >16. Create individual value plots of the eight possible factor-level groups listed in Table 4.1.
 a. Do you see any patterns in the *PopRate* among these groups?
@@ -520,7 +509,7 @@ The three null hypotheses corresponding to this two-factor design are as follows
 
 Table 4.4 represents some of the data for the paper towel study. Each of the six cells has 26 observations. The complete data set is in the file `PaperTowels`. While not all observations are shown, Table 4.4 helps us understand the data structure. After the data have been collected, the averages for all meaningful groups of the data can be calculated as shown in Table 4.5.
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity: Algebraic Notation {‑}
 >Data set: $PaperTowels$    
 20. What values in Table 4.4 are represented by $y_{213}$ and $y_{122}$?    
@@ -571,7 +560,7 @@ Water Average & $\overline{y}_{.1.} = 2712.5$ &  & $\overline{y}_{.3.} = 423.6$ 
 \end{tabular}
 \end{table}
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Calculating Effects {‑}
 
 As the data structure becomes more complex, a statistical model becomes more useful for describing the population(s) from which the data may have come. Generally, statistical models consist of a mean response and a random error term (details are provided in Chapter 2). The mean response describes the expected (mean) breaking strength. Figure 4.4 is useful in visualizing the meaningful groups within this model that contribute to the mean response of the model: the grand mean, the two brand groups, the three water amount groups, and the six factor-level combination groups.
@@ -621,7 +610,7 @@ Table 4.5 shows that the *Strength* average changes from 1772.8 to 1123.4 with a
 $\mu$, $\alpha_i$, $\beta_j$, and $(\alpha\beta)_{ij}$ in Equation (4.5) are population parameters. Statistics such as $\hat{\alpha}_i$ and $\hat{\beta}_j$ in Equation (4.6) are used to estimate the population effect sizes.
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity: Estimating Main Effects {‑}
 >Data set: PaperTowels    
 24. Use the `PaperTowels` data to estimate the effect of Brand D and explain any symmetry that you find with the effect of Brand C calculated above.     
@@ -644,7 +633,7 @@ $= -347.3$ \hspace{1cm} (4.7)
 
 The estimate of the Brand C and 15 drops of water interaction effect in Equation (4.7) tells us that the best estimate of any paper towel strength from this group should be reduced by an additional 347.3 after we take into account all other influencing factors (the grand mean and main effects).
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Calculating Interaction Effects {‑}
 >Data set: $PaperTowels$    
 26. Show that $\bar{y}_{ij.} - \bar{y}_{i.} - \bar{y}_{.j} + \bar{y}_{..}$ is equivalent to the $j$th interaction effect.   
@@ -734,7 +723,7 @@ s^2 = \frac{\sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{n_{ij}} (y_{ijk} - \bar{y}
 where $N = 156$ is the total sample size.
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Degrees of Freedom {‑}
 
 **Degrees of freedom** (df) are determined by how many “free” pieces of information are available when calculating effects. For example, Equation (4.8) shows that each of the main effects must sum to zero. Thus, knowing the effects of any two levels of *water* forces a known effect for the last level. In our example, the effect of 0 drops of water increases the expected mean strength by 1264.4. Similarly, the effect of using 5 drops of water is -239.9. The the effects must sum to zero ($\hat{\beta}_1 + \hat{\beta}_2 + \hat{\beta}_3 = 1264.4 - 239.9 - 1024.5 = 0$).
@@ -746,7 +735,7 @@ For any main factor with $J$ levels, one effect is fixed if we know the other $J
 \color{red}
 \normalsize
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity: Calculating Degrees of Freedom for Interaction Terms {‑}
 >Data set: $PaperTowels$  
 31. Table 4.6 is a table with two rows and three columns, similar to the interaction effect term in the two-way factorial diagram in Figure 4.4. However, for this question we will assume that only two effects are known: $(\alpha\beta)_{11} = 2$ and $(\alpha\beta)_{12} = -5$.
@@ -843,7 +832,7 @@ Total & $N-1$ & $\displaystyle\sum_{i=1}^I\sum_{j=1}^J\sum_{k=1}^K (y_{ijk} - \o
 \end{tabular}
 \end{table}
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity: Analyzing the Paper Towel Data{‑}
 >Data set: $PaperTowels$  
 34. **Checking Assumptions** In the statistical model in Equation (4.5), the following assumptions need to be validated about the random error terms, $\varepsilon_{ijk}$, before any formal hypothesis test can be developed:
@@ -868,7 +857,7 @@ b. Without doing any statistical calculations, do you expect to reject the three
 
 Chapter 2 describes a study where researchers tested whether a color distracter influenced the completion time of an online computer game. In addition to a color distracter, they were also interested in whether subjects could play the game more quickly with their right or left hand. Chapter 2 was restricted to one-factor ANOVAs. Thus, in that chapter the data were sorted into four groups: StandardRight, ColorRight, StandardLeft, and ColorLeft. Instead of testing for evidence against a general hypothesis test ($H_0$: $\mu_{SR} = \mu_{CR} = \mu_{SL} = \mu_{CL}$), the two-way ANOVA allows us to test three more specific hypotheses of interest.
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity:*Comparing One-Way and Two-Way ANOVA*{‑}
 >Data set: *Games2*
 37. The data set **Games2** shows a column *Type2* with four types of games based on distracter and which hand was used. Conduct an ANOVA using *Type2* (just one explanatory variable with four levels) to test for differences in completion time. What is the $p$-value corresponding to the null hypothesis $H_0$: $\mu_{SR} = \mu_{CR} = \mu_{SL} = \mu_{CL}$ versus the alternative $H_a$: at least one mean is different from another?  
@@ -943,7 +932,7 @@ MS_{C1} &= \frac{1^2}{10} + \frac{(-1)^2}{10} + \frac{1^2}{10} + \frac{(-1)^2}{1
         &= 65.025 = MS_{\text{Type}} \notag
 \end{align}
 
-### This part not working. The heading is numbered, but it shouldnt be.
+[[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity: Calculating Contrasts{‑}
 >Data set: *Games2*  
 40. Use Equation (4.15) to calculate $MS_{C2}$ and $MS_{C3}$. Show your work.  
@@ -959,7 +948,29 @@ Orthogonal contrasts allow multiple comparisons of linear combinations of group 
 There are a few other common techniques for multiple comparisons. **Scheffé’s method** produces simultaneous confidence intervals for any and all contrasts, including contrasts suggested by the data (this is often called post hoc data exploration). Instead of the traditional formula for confidence intervals, Scheffé suggested using a wider confidence interval (i.e., one less likely to reject the null hypothesis) to account for the multiple testing. This method often fails to reject null hypotheses even when there are differences between groups, but it can be useful when other pairwise comparison tests are not appropriate. Remember from your introductory statistics course: If zero is in the confidence interval, you fail to reject the corresponding hypothesis test; if zero is not in the confidence interval, you should reject the corresponding hypothesis test. **Tukey’s honest significant difference (HSD)** uses a studentized range distribution instead of the F-distribution to create confidence intervals for differences between meaningful pairs. When there are a large number of pairwise comparisons, Tukey’s method is typically preferred over Bonferroni’s method.$^6$
 \normalsize
 
-### This part not working. All the text under the heading is not showing up
+## **Chapter Summary**{-}
+
+This chapter emphasized the importance of a well-designed experiment. A statistician often needs to communicate with people in other fields in order to properly define the research question, choose appropriate factors and levels, and determine the number of samples needed for the study.
+
+A $p$-value never tells the whole story; $p$-values can be meaningless if assumptions are not met or if there are extraneous variables in the data. Before any conclusions are drawn from a statistical analysis using ANOVA, it is important to use graphs or formal tests to validate the the equal variance and normality assumptions.
+
+When equal variance or normality assumptions are violated, the $F$-statistics do not follow an $F$-distribution and the $p$-values may not be accurate. Empirical studies have shown that ANOVA tends to be fairly “robust” to departures from the assumptions of equal variances and normality. If the model assumptions are not met, researchers should try transforming the data to better fit the model assumptions. If no transformation appears to help, researchers should clearly explain that the $p$-values may not be reliable.
+
+The independence and identically distributed assumptions are also essential. A good experimental design has the following characteristics:
+\begin{itemize}
+    \item It avoids systematic error (bias is minimized by controlling for extraneous variables and using randomization).
+    \item It has broad validity (results hold for more than just the units tested in the study).
+    \item It allows for direct comparison between treatment conditions.
+    \item It is precise (the chance unit-to-unit variability is small).
+    \item It allows estimation of unit-to-unit variability.
+    \item It can show causation (most observational studies cannot).
+\end{itemize}
+
+ANOVA tables are used to test for differences in means among meaningful groups of data. The analysis is called an analysis of variance because each mean square value is an estimate of a meaningful group within the data. The extended activities demonstrated how to calculate an ANOVA table; they emphasized main effects and interaction effects. An interaction between two variables occurs when the effect of one variable depends on the second variable. While this chapter emphasized a two-factor ANOVA, the same process holds for all completely randomized designs with fixed factors.
+
+This chapter introduced the basics of a very powerful statistical technique. The ability to simultaneously test for the effects of multiple variables on a response allows statisticians to better model real-world situations. A well-designed experiment can test multiple hypotheses with a relatively small sample size. If used properly, these techniques efficiently and reliably help us better understand the world we live in. The end-of-chapter exercises and future chapters provide the opportunity for you to experience for yourself how these techniques are used in biology, chemistry, engineering, psychology, and many other disciplines.
+
+[[[ This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
 \noindent\rule{\linewidth}{0.4pt}
@@ -1138,7 +1149,7 @@ The company agreed to conduct 32 tests, but wanted to test all six factors and a
   
 \end{list}
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## **Endnotes**{-}
 
 \begin{enumerate}

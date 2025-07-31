@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA | A Book Chapter Example</title>
+<title>Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA \(\label{2}\) | Chapter 2</title>
 <meta name="author" content="Your Name">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA | A Book Chapter Example">
+<meta property="og:title" content="Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA \(\label{2}\) | Chapter 2">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA | A Book Chapter Example">
+<meta name="twitter:title" content="Chapter 2 Making Connections: The Two-Sample t-Test, Regression, and ANOVA \(\label{2}\) | Chapter 2">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -43,9 +43,9 @@
     }
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra5  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
-<meta property="og:description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra5  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
-<meta name="twitter:description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra5  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
+<meta name="description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra1  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
+<meta property="og:description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra1  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
+<meta name="twitter:description" content="In theory, there’s no difference between theory and practice. In practice, there is. -Yogi Berra1  Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -55,7 +55,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">A Book Chapter Example</a>
+        <a href="index.html" title="">Chapter 2</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -66,28 +66,18 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></li>
-<li><a class="active" href="making-connections-the-two-sample-t-test-regression-and-anova.html"><span class="header-section-number">2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA</a></li>
-<li><a class="" href="multiple-regression-how-much-is-your-car-worth.html"><span class="header-section-number">3</span> Multiple Regression: How Much Is Your Car Worth?</a></li>
-<li><a class="" href="the-design-and-analysis-of-factorial-experiments-microwave-popcorn.html"><span class="header-section-number">4</span> The Design and Analysis of Factorial Experiments: Microwave Popcorn</a></li>
-<li><a class="" href="footnotes-and-citations.html"><span class="header-section-number">5</span> Footnotes and citations</a></li>
-<li><a class="" href="categorical-data-analysis-is-a-tumor-malignant-or-benign.html"><span class="header-section-number">6</span> Categorical Data Analysis: Is a Tumor Malignant or Benign?</a></li>
-<li><a class="" href="logistic-regression-the-space-shuttle-challenger.html"><span class="header-section-number">7</span> Logistic Regression: The Space Shuttle Challenger</a></li>
-<li><a class="" href="references.html">References</a></li>
-<li><a class="" href="survival-analysis-melting-chocolate-chips.html"><span class="header-section-number">8</span> Survival Analysis: Melting Chocolate Chips</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA \(\label{2}\)</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="making-connections-the-two-sample-t-test-regression-and-anova" class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="making-connections-the-two-sample-t-test-regression-and-anova-label2" class="section level1" number="2">
 <h1>
-<span class="header-section-number">2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA<a class="anchor" aria-label="anchor" href="#making-connections-the-two-sample-t-test-regression-and-anova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA <span class="math inline">\(\label{2}\)</span><a class="anchor" aria-label="anchor" href="#making-connections-the-two-sample-t-test-regression-and-anova-label2"><i class="fas fa-link"></i></a>
 </h1>
-<p><span style="float:right;"> <em>In theory, there’s no difference between theory and practice. In practice, there is.</em></span><br><span style="float:right;"> -Yogi Berra<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Yogi Berra was an American League Baseball player and manager. This quote has also been attributed to computer scientist Jan L. A. van de Snepscheut.&lt;/p&gt;"><sup>5</sup></a>
+<p><span style="float:right;"> <em>In theory, there’s no difference between theory and practice. In practice, there is.</em></span><br><span style="float:right;"> -Yogi Berra<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Yogi Berra was an American League Baseball player and manager. This quote has also been attributed to computer scientist Jan L. A. van de Snepscheut.&lt;/p&gt;"><sup>1</sup></a>
 </span></p>
 <p><br><br></p>
 <p>Statistics courses often teach the two-sample t-test, linear regression, and analysis of variance (ANOVA) as very distinct approaches to analyzing different types of data. However, this chapter makes connections among these three techniques by focusing on the statistical models. Statistical software has made it easy to calculate statistics and <span class="math inline">\(p\)</span>-values. But without understanding the underlying model assumptions, it is easy to draw incorrect conclusions from the sample data. As studies become more complex, models become fundamental to drawing appropriate conclusions. In this chapter, a simple student experiment involving games and several additional studies are used to do the following:</p>
@@ -105,10 +95,10 @@ ANOVA</li>
 <span class="header-section-number">2.1</span> Investigation: Do Distracting Colors Influence the Time to Complete a Game?<a class="anchor" aria-label="anchor" href="#investigation-do-distracting-colors-influence-the-time-to-complete-a-game"><i class="fas fa-link"></i></a>
 </h2>
 <p>In 1935, John Stroop published a paper presenting his research on the reaction time of undergraduate students identifying ink colors.2 He found that students took a longer time identifying ink colors when the ink was used to spell a different color. For example, if the word “yellow” was printed in blue ink, students took longer to identify the blue ink because they automatically read the word “yellow.” Even though students were told only to identify the ink color, the automatized behavior of reading interfered with the task and slowed their reaction time.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Note that many psychologists would call this procedural knowledge instead of automatized behavior. Both are processes that can be done without conscious thought, but automatized behaviors are processes that cannot be slowed down, do not
-decline with age, and show no gender differences.&lt;/p&gt;"><sup>6</sup></a> <em>Automatized behaviors</em> are behaviors that can be done automatically without carefully thinking through each step in the process. Stroop’s work, demonstrating that automatized behaviors can act as a distracter for other desired behaviors, is so well known that the effect is often called the <em>Stroop effect</em>.</p>
+decline with age, and show no gender differences.&lt;/p&gt;"><sup>2</sup></a> <em>Automatized behaviors</em> are behaviors that can be done automatically without carefully thinking through each step in the process. Stroop’s work, demonstrating that automatized behaviors can act as a distracter for other desired behaviors, is so well known that the effect is often called the <em>Stroop effect</em>.</p>
 <p>Several students in an introductory statistics class wanted to develop a final project that would test the impact of distracters. They decided to conduct a study to determine if students at their college would perform differently when a distracting color was incorporated into a computerized game. This game challenges people to place an assortment of shaped pegs into the appropriate spaces as quickly as possible. Before any data were collected, these students developed a clear set of procedures.</p>
 <ul>
-<li>40 students would be randomly selected from the college.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Since it was not possible to force college students to be involved in this study, these researchers randomly selected students from an online college directory until they had 40 students who were willing to play the game.&lt;/p&gt;"><sup>7</sup></a>
+<li>40 students would be randomly selected from the college.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Since it was not possible to force college students to be involved in this study, these researchers randomly selected students from an online college directory until they had 40 students who were willing to play the game.&lt;/p&gt;"><sup>3</sup></a>
 </li>
 <li>20 students would be assigned to the standard game and 20 would be assigned to a game with a color
 distracter. The student researchers would flip a coin to randomly assign subjects to a treatment. Once
@@ -353,7 +343,7 @@ based on a particular observation comes from a different population, the two-sam
 suffice. The two sample t-test actually requires only that the sample means (each <span class="math inline">\(\bar{y}_{i,j}\)</span>) be normally distributed. The central limit theorem allows us to assume this is true if group sample sizes are similar and large (<span class="math inline">\(n_1 \ge 15\)</span> and <span class="math inline">\(n_2 \ge 15\)</span>) and there does not appear to be any extreme skewness or outliers in the residuals.</p>
 <p>Since residuals are defined as the difference between each observed value and the corresponding group mean, they should always sum to zero. Thus, we cannot check residuals to determine whether each of the error
 terms is centered at zero. The assumption that the error terms are centered at zero is really stating that there are no other sources of variability that may be biasing our results. In essence, the only difference between the two population means is explained by the mean response.</p>
-<p>To check the assumption that the two populations have the same variance, an informal test can be used. If the ratio of the sample standard deviations is less than 2, we can proceed with the analysis.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Some texts suggest rejecting the equal variance assumption when the ratio is greater than 3 instead of 2. If the ratio is close to 2 (or 3), many statisticians would suggest conducting a more formal F-test for equal variances.&lt;/p&gt;"><sup>8</sup></a></p>
+<p>To check the assumption that the two populations have the same variance, an informal test can be used. If the ratio of the sample standard deviations is less than 2, we can proceed with the analysis.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Some texts suggest rejecting the equal variance assumption when the ratio is greater than 3 instead of 2. If the ratio is close to 2 (or 3), many statisticians would suggest conducting a more formal F-test for equal variances.&lt;/p&gt;"><sup>4</sup></a></p>
 <p><strong>Informal Test for Equal Variances</strong></p>
 <p><span class="math display">\[
 \text{if }~~  \frac{\max(s_1, s_2)}{\min(s_1,2)} &lt; 2
@@ -485,7 +475,7 @@ this study is the type of game; the two conditions, the two levels of the factor
 </h3>
 <p>The ANOVA model for the game study can be written as</p>
 <p><span class="math inline">\(\label{2.6} y_{i,j} = \mu + \alpha_i + \epsilon_{i,j}\)</span> for <span class="math inline">\(i = 1, 2\)</span> and <span class="math inline">\(j = 1, 2, ... , n\)</span> where <span class="math inline">\(\epsilon_{i,j} \sim N(0,\sigma^2) \tag{2.6}\)</span></p>
-<p>The mean response in the ANOVA model is <span class="math inline">\(\mu + \alpha_1\)</span> for the color distracter group and <span class="math inline">\(\mu + \alpha_2\)</span> for the standard group, where <span class="math inline">\(\mu\)</span> is the mean of all the completion times in the study. This overall mean is often called the grand mean or the benchmark value; <span class="math inline">\(\alpha_1\)</span> is the <strong>effect</strong>, or <strong>main effect</strong>, of the color distracter group. <strong>Effects</strong> are a measure of differences between group means. The effect <span class="math inline">\(\alpha_1\)</span> represents the change in the response from the grand mean to the color distracter group mean.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In this text m is always considered the overall mean of the data. Also throughout this chapter, we are always assuming balanced data.&lt;/p&gt;"><sup>9</sup></a></p>
+<p>The mean response in the ANOVA model is <span class="math inline">\(\mu + \alpha_1\)</span> for the color distracter group and <span class="math inline">\(\mu + \alpha_2\)</span> for the standard group, where <span class="math inline">\(\mu\)</span> is the mean of all the completion times in the study. This overall mean is often called the grand mean or the benchmark value; <span class="math inline">\(\alpha_1\)</span> is the <strong>effect</strong>, or <strong>main effect</strong>, of the color distracter group. <strong>Effects</strong> are a measure of differences between group means. The effect <span class="math inline">\(\alpha_1\)</span> represents the change in the response from the grand mean to the color distracter group mean.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In this text m is always considered the overall mean of the data. Also throughout this chapter, we are always assuming balanced data.&lt;/p&gt;"><sup>5</sup></a></p>
 <p>To summarize, here is what the symbols in the model represent:</p>
 <ul>
 <li>
@@ -743,7 +733,7 @@ Notice that although the log transformation was helpful, the data still have out
 <div id="back-transformations" class="section level2 unnumbered">
 <h2>Back Transformations<a class="anchor" aria-label="anchor" href="#back-transformations"><i class="fas fa-link"></i></a>
 </h2>
-<p>Transformations are not simply a way of playing around with the data until you get the answer you want. It is important to recognize that there is no reason to believe that the original scale used for the measurements is better than other scales. For example, in testing for differences in lengths, should it matter if the original data were collected in meters or in feet? One scale is not better than the other; we transform data simply so that it is easier for our audience to interpret. Some scales, such as pH levels,<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;pH is a measure of how acidic or how basic (alkaline) a solution is. It is measured as the negative logarithm (base 10) of the molar concentration of dissolved hydronium ions.&lt;/p&gt;"><sup>10</sup></a> are always presented using a logarithmic scale.</p>
+<p>Transformations are not simply a way of playing around with the data until you get the answer you want. It is important to recognize that there is no reason to believe that the original scale used for the measurements is better than other scales. For example, in testing for differences in lengths, should it matter if the original data were collected in meters or in feet? One scale is not better than the other; we transform data simply so that it is easier for our audience to interpret. Some scales, such as pH levels,<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;pH is a measure of how acidic or how basic (alkaline) a solution is. It is measured as the negative logarithm (base 10) of the molar concentration of dissolved hydronium ions.&lt;/p&gt;"><sup>6</sup></a> are always presented using a logarithmic scale.</p>
 <p>For testing for differences between groups, the <span class="math inline">\(p\)</span>-values of transformed data are reliable as long as model assumptions are satisfied. However, other statistical results, such as confidence intervals or the slope coefficient, are typically best understood in the original units. Thus, it is often desirable to back transform the results. <strong>Back transformations</strong> do the opposite of the mathematical function used in the original data transformation. For example, if the natural log transformation was used, a back transformation is conducted by taking the exponent of the number. Unfortunately, it can be very difficult to interpret some statistical results in either the transformed or the back-transformed scale.</p>
 <p>Consider conducting a t-test for the difference between the mean car emissions for the pre-63 and the 70–71 groups in Question 31. The standard deviation of the pre-63 group, 592, is more than double that of the 70–71 subgroup, 287.9. We will again assume equal variances in our t-test, but even if a different t-test were chosen, there would be clear evidence of nonnormality. Taking the natural log of Emission addresses the nonnormality problem and also makes the standard deviations very similar. The standard deviation is 0.57 for the transformed pre-63 group and is 0.678 for the transformed 70–71 group. The two-sided hypothesis test gives a <span class="math inline">\(p\)</span>-value of 0.001, which provides strong evidence that there is a difference between group means. This test is valid since the model assumptions are met.</p>
 <p>The 95% confidence interval for the transformed data is (<span class="math inline">\(-1.434\)</span>, <span class="math inline">\(-0.411\)</span>). However, this transformed confidence interval is not easy to interpret in terms of actual car emissions. The back-transformed confidence interval is
@@ -945,7 +935,6 @@ SS_{\text{Total}} &amp;= \sum (\text{distance between each observation and the g
 <p><strong>Mean square error (MSE)</strong> equals <span class="math inline">\(SS_{\text{Error}}/df_{\text{Error}}\)</span>. MSE is a pooled measure of the variability within each level, or the <strong>within-level variability</strong>. Remember that the variance is assumed to be the same for the responses within each level of the factor: <span class="math inline">\(\sigma_1^2 = \sigma_2^2 = \sigma^2\)</span>. When <span class="math inline">\(I = 2\)</span>, MSE is identical to the pooled variance (<span class="math inline">\(s_p^2\)</span>) used in the two-sample <span class="math inline">\(t\)</span>-statistic in Equation <span class="math inline">\(\ref{2.7}\)</span>.</p>
 <p>If <span class="math inline">\(MS_{\text{Group}}\)</span> is much larger than MSE, it is reasonable to conclude that there truly is a difference between level means and the difference we observed in our study was not simply due to chance variation (random error).</p>
 <p>The <span class="math inline">\(F\)</span>-statistic (<span class="math inline">\(MS_{\text{Group}}\)</span>/MSE) is a ratio of the between-level variability to the within-level variability. If indeed <span class="math inline">\(\mu_1 = \mu_2\)</span> (i.e., <span class="math inline">\(H_0\!:\! \alpha_1 = \alpha_2 = 0\)</span> is true), then we would expect the variation between the level means in our sample data to be about the same as the typical variation within levels and the <span class="math inline">\(F\)</span>-statistic would be close to one. Larger values of the <span class="math inline">\(F\)</span>-statistic would imply that the level means were farther apart than chance error alone could explain. These calculations are often summarized in an <strong>ANOVA table</strong>, as shown in Table 2.1.</p>
-[[[The table is not displaying. But it works when I knit on separate pdf]]]
 <p>Probability theory can be used to prove that if the model assumptions are true, the <span class="math inline">\(F\)</span>-statistic follows an <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(df_{\text{Group}}\)</span> and <span class="math inline">\(df_{\text{Error}}\)</span> degrees of freedom. The <span class="math inline">\(p\)</span>-value gives the likelihood of observing an <span class="math inline">\(F\)</span>-statistic at least this extreme (at least this large), assuming that the population means of the two game types are equal. Thus, when the <span class="math inline">\(p\)</span>-value is small (e.g., less than 0.05 or 0.01), the effect size of the type of game is conventionally determined to be statistically significant.</p>
 </div>
 <div id="extended-activity-calculating-an-anova-table" class="section level2 unnumbered">
@@ -1023,7 +1012,6 @@ Statistics based on sample data are estimates of population parameters. A confid
 <p>Throughout this chapter, you were asked to evaluate <strong>residual plots</strong> to determine whether the model assumptions were met. When model assumptions are not met, the test statistics do not follow the corresponding <span class="math inline">\(t\)</span>-distribution or <span class="math inline">\(F\)</span>-distribution. Thus, the <span class="math inline">\(p\)</span>-values may not be correct. No conclusions should be drawn from any statistical test without checking the appropriate assumptions.</p>
 <p>The statistical model and corresponding hypothesis tests assume there are <strong>no extraneous variables</strong> that are biasing the study. Since it is typically impossible to identify all possible sources of bias during a study, <strong>random sampling</strong> and <strong>random allocation</strong> should be used.</p>
 <p>In this chapter, we focused on testing the four assumptions about the <strong>error terms</strong> in each model. Table 2.2 shows the residual plots used in this chapter to check model assumptions.</p>
-[[[The table is not displaying. But it works when I knit on separate pdf]]]
 <p>If the model assumptions are violated, <strong>transformations</strong> can often be used to rescale the data to better fit some model assumptions. Several sophisticated mathematical tests are also available to test these model assumptions. While these tests are useful, plots are often just as effective and better assist in understanding the data. Plots should always be used to visualize the data before any conclusions are drawn. Later chapters will provide much more detail on checking assumptions for more complex models.</p>
 </div>
 <div id="exercises-1" class="section level2 unnumbered">
@@ -1041,73 +1029,15 @@ Statistics based on sample data are estimates of population parameters. A confid
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="index.html"><span class="header-section-number">1</span> An Introduction to Nonparametric Methods: Schistosomiasis</a></div>
-<div class="next"><a href="multiple-regression-how-much-is-your-car-worth.html"><span class="header-section-number">3</span> Multiple Regression: How Much Is Your Car Worth?</a></div>
+<div class="empty"></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#making-connections-the-two-sample-t-test-regression-and-anova"><span class="header-section-number">2</span> Making Connections: The Two-Sample t-Test, Regression, and ANOVA</a></li>
-<li>
-<a class="nav-link" href="#investigation-do-distracting-colors-influence-the-time-to-complete-a-game"><span class="header-section-number">2.1</span> Investigation: Do Distracting Colors Influence the Time to Complete a Game?</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#understanding-the-study-design"><span class="header-section-number">2.1.1</span> Understanding the Study Design</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#the-two-sample-t-test-to-compare-population-means"><span class="header-section-number">2.2</span> The Two-Sample t-Test to Compare Population Means</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-statistical-model"><span class="header-section-number">2.2.1</span> The Statistical Model</a></li>
-<li><a class="nav-link" href="#statistical-models-for-the-two-sample-t-test"><span class="header-section-number">2.2.2</span> Statistical Models for the Two-Sample t-Test</a></li>
-<li><a class="nav-link" href="#model-assumptions-for-the-two-sample-t-test"><span class="header-section-number">2.2.3</span> Model Assumptions for the Two-Sample t-Test</a></li>
-<li><a class="nav-link" href="#checking-assumptions-for-the-t-test">Checking Assumptions for the t-Test</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#the-regression-model-to-compare-population-means"><span class="header-section-number">2.3</span> The Regression Model to Compare Population Means</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-linear-regression-model"><span class="header-section-number">2.3.1</span> The Linear Regression Model</a></li>
-<li><a class="nav-link" href="#calculating-a-regression-model-and-hypothesis-test-for-the-slope">Calculating a Regression Model and Hypothesis Test for the Slope</a></li>
-<li><a class="nav-link" href="#model-assumptions-for-regression"><span class="header-section-number">2.3.2</span> Model Assumptions for Regression</a></li>
-<li><a class="nav-link" href="#checking-model-assumptions">Checking Model Assumptions</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#anova-to-compare-population-means"><span class="header-section-number">2.4</span> ANOVA to Compare Population Means</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-anova-model"><span class="header-section-number">2.4.1</span> The ANOVA Model</a></li>
-<li><a class="nav-link" href="#the-anova-model-1">The ANOVA Model</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#activity-estimating-the-model-values">Activity: Estimating the Model Values</a></li>
-<li><a class="nav-link" href="#model-assumptions-for-anova">Model Assumptions for ANOVA</a></li>
-<li><a class="nav-link" href="#activity-checking-assumptions">Activity: Checking Assumptions</a></li>
-<li><a class="nav-link" href="#comparing-planned-variability-to-random-variability"><span class="header-section-number">2.5</span> Comparing Planned Variability to Random Variability</a></li>
-<li><a class="nav-link" href="#random-sampling-and-random-allocation"><span class="header-section-number">2.6</span> Random Sampling and Random Allocation</a></li>
-<li><a class="nav-link" href="#what-can-we-conclude-from-the-game-study"><span class="header-section-number">2.7</span> What Can We Conclude from the Game Study?</a></li>
-<li><a class="nav-link" href="#a-closer-look-statistical-models">A Closer Look: Statistical Models</a></li>
-<li><a class="nav-link" href="#normal-probability-plots-to-assess-normality"><span class="header-section-number">2.8</span> Normal Probability Plots to Assess Normality</a></li>
-<li><a class="nav-link" href="#extended-activity-creating-probability-plots">Extended Activity: Creating Probability Plots</a></li>
-<li><a class="nav-link" href="#extended-activity-understanding-variability-in-random-samples">Extended Activity: Understanding Variability in Random Samples</a></li>
-<li><a class="nav-link" href="#transformations"><span class="header-section-number">2.9</span> Transformations</a></li>
-<li><a class="nav-link" href="#transformations-for-anova">Transformations for ANOVA</a></li>
-<li><a class="nav-link" href="#extended-activity-transforming-emissions-data">Extended Activity: Transforming Emissions Data</a></li>
-<li><a class="nav-link" href="#back-transformations">Back Transformations</a></li>
-<li><a class="nav-link" href="#transformations-for-regression">Transformations for Regression</a></li>
-<li><a class="nav-link" href="#extended-activity-transforming-brain-and-body-weight-data">Extended Activity: Transforming Brain and Body Weight Data</a></li>
-<li><a class="nav-link" href="#choosing-the-right-transformation">Choosing the Right Transformation</a></li>
-<li><a class="nav-link" href="#extended-activity-comparing-four-x-y-data-sets">Extended Activity: Comparing Four \((x, y)\) Data Sets</a></li>
-<li><a class="nav-link" href="#calculating-test-statistics"><span class="header-section-number">2.10</span> Calculating Test Statistics</a></li>
-<li><a class="nav-link" href="#the-two-sample-t-test-with-the-equal-variance-assumption">The Two-Sample \(t\)-Test with the Equal Variance Assumption</a></li>
-<li><a class="nav-link" href="#extended-activity-calculating-the-two-sample-t-test">Extended Activity: Calculating the Two-Sample t-Test</a></li>
-<li><a class="nav-link" href="#regression">Regression</a></li>
-<li><a class="nav-link" href="#extended-activity-testing-the-slope-coefficient">Extended Activity: Testing the Slope Coefficient</a></li>
-<li><a class="nav-link" href="#analysis-of-variance-anova">Analysis of Variance (ANOVA)</a></li>
-<li><a class="nav-link" href="#extended-activity-calculating-an-anova-table">Extended Activity: Calculating an ANOVA Table</a></li>
-<li><a class="nav-link" href="#confidence-intervals"><span class="header-section-number">2.11</span> Confidence Intervals</a></li>
-<li><a class="nav-link" href="#extended-activity-calculating-a-confidence-interval-for-the-regression-coefficient">Extended Activity: Calculating a Confidence Interval for the Regression Coefficient</a></li>
-<li><a class="nav-link" href="#chapter-summary-1">Chapter Summary</a></li>
-<li><a class="nav-link" href="#exercises-1">Exercises</a></li>
-<li><a class="nav-link" href="#endnotes">Endnotes</a></li>
-</ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/Chap2.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/Chap2.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>
@@ -1119,7 +1049,7 @@ Statistics based on sample data are estimates of population parameters. A confid
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>A Book Chapter Example</strong>" was written by Your Name. </p>
+    <p>"<strong>Chapter 2</strong>" was written by Your Name. </p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

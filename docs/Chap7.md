@@ -1,29 +1,14 @@
---- 
-title: "Chapter 7"
-author: "Your Name"
-output:
-  bookdown::pdf_book:
-    latex_engine: xelatex
-    number_sections: true
-    toc: true
-    toc_depth: 2
-    keep_tex: true
-documentclass: report
-bibliography:
-  - book.bib
-  - packages.bib
-biblio-style: apalike
-csl: "chicago-fullnote-bibliography.csl"
-site: bookdown::bookdown_site
-
----
 
 
 
 # Logistic Regression: The Space Shuttle Challenger
 
-*The best thing about being a statistician is that you get to play in everyone’s backyard.*  
-—John Tukey$^1$
+
+<span style="float:right;"> *The best thing about being a statistician is that you get to play in everyone’s backyard.*</span>  
+<span style="float:right;"> —John Tukey^[D. Leonhardt, “John Tukey, 85, Statistician, Coined the Word ‘Software’,” New York Times Archives on the Web, 7/28/2000, stat.bell-labs.com/who/tukey/nytimes.html. John Tukey (1915–2000) had a formal background in chemistry and mathematics. Conducting data analysis during World War II peaked his interest in statistics, and he became one of the most influential statisticians of the 20th century.]</span>
+
+<br> <br>
+
 
 There are many investigations where a researcher is interested in developing a regression model when the response variable is dichotomous (has only two categories). Dichotomous responses can be represented with binary data (data with values of only zero or one). Logistic regression is used to examine the relationship between one or more explanatory variables and a binary response variable.
 
@@ -1164,6 +1149,7 @@ The previous example did not address cases in logistic regression where the obse
 
 \[
 \pi_i = \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}.
+\notag
 \]  
 
 Replacing this value for $\pi$ in Equation (7.28) gives  
@@ -1182,7 +1168,32 @@ To find the maximum likelihood estimates of $\beta_0$ and $\beta_1$, take the de
 Finding estimates for $\beta_0$ and $\beta_1$ that maximize the log-likelihood function is an iterative technique that quickly becomes complex even for small data sets and is not typically done by hand. Iterative techniques start with initial estimates of $\beta_0$ and $\beta_1$. An iterative technique such as the Newton–Raphson method repeatedly provides new estimates for $\beta_0$ or $\beta_1$ that increase the log-likelihood until the log-likelihood does not notably change.$^{15}$  
 \normalsize
 
-### This part not working. All the text under the heading is not showing up
+## **Chapter Summary**{-}
+
+Throughout this chapter, we have discussed how to conduct logistic regression for binary response data. When the observed response variable is binary, $y_i = 1$ typically represents a success (or outcome of interest) and $y_i = 0$ represents a failure. In the logistic regression model, the estimated response is typically defined as the log-odds of the probability of a success:
+\begin{align}
+\ln\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_0 + \beta_1 x_i \quad \text{for} \quad i = 1, 2, \ldots, n
+\notag
+\end{align}
+
+where $\pi_i = E[y_i | x_i] = P(y_i = 1)$. Solving the above equation for $\pi_i$ shows that the \textbf{probability of success} can be calculated with the following equation:
+\begin{align}
+\hat{\pi}_i = \frac{e^{b_0 + b_1 x_i}}{1 + e^{b_0 + b_1 x_i}}
+\notag
+\end{align}
+
+where $b_0$ and $b_1$ are **maximum likelihood estimates** of the regression coefficients. While the logit transformation can create a nice S-shaped curve, the model assumptions for least squares regression are violated. \textit{Thus, hypothesis tests and confidence intervals should not be calculated using least squares regression.} For hypothesis testing, both logistic and least squares regression assume a linear predictor and independent observations. In addition, outliers and highly correlated explanatory variables can influence hypothesis test results in both logistic and least squares regression. However, logistic regression does not assume that the error terms are normally distributed or have equal variances. Logistic regression hypothesis tests are based on asymptotic tests and require large sample sizes.
+
+**Wald’s test** and the **likelihood ratio test** can be used to test the significance of individual explanatory variables. If Wald’s test and the likelihood ratio test provide different results, the results of the likelihood ratio test should be used. However, the likelihood ratio test can only test whether the slope is equal to zero ($H_0: \beta_1 = 0$ versus $H_a: \beta_1 \neq 0$) while Wald’s test allows us to test for any value of the slope and also allows for one-sided hypothesis tests and confidence intervals.
+
+Goodness-of-fit tests, such as the **Pearson chi-square test**, the **deviance test**, and the **Hosmer-Lemeshow test**, can be used to assess how well the model fits the data. Only the Hosmer-Lemeshow test should be used when an explanatory variable is continuous. Even though there is no widely accepted equivalent to $R^2$ in logistic regression, **Somers’ $D$**, **Goodman-Kruskal gamma**, and **Kendall’s tau-a** are used to measure the strength of association by means of a classification table showing correct and incorrect classifications of the response variable.
+
+The slope in logistic regression is typically described using the **odds ratio**, $e^{b_1}$. If we increase the explanatory variable by one unit, the predicted odds will be multiplied by $e^{b_1}$. If the explanatory variable is also categorical, $e^{b_1}$ is interpreted as the odds ratio between the two groups.
+
+**Variable selection** is a process of determining which explanatory variables should be included in a regression model. We prefer to select the model with the fewest number of terms that still best explains the response. The **drop-in-deviance** test compares the log-likelihood (or deviance) of a full model (a model with several terms) and a restricted model (a model with a smaller subset of the terms from the full model). If the test shows no significant difference between the full and the restricted model, we conclude that the additional terms in the full model can be eliminated. The drop-in-deviance test can be used sequentially until all terms that do not improve the model have been removed from the model.
+
+
+[[[ This part not working. All the text under the heading is not showing up
 ## **Exercises**{-}
 \vspace{-2em}
 \noindent\rule{\linewidth}{0.4pt}
@@ -1381,7 +1392,7 @@ Number of SAG wins
 \end{list}
 
 
-### This part not working. All the text under the heading is not showing up
+[[[ This part not working. All the text under the heading is not showing up
 ## **Endnotes**{-}
 
 \begin{enumerate}
