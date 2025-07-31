@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.28)  31 JUL 2025 12:33
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.28)  31 JUL 2025 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -993,21 +993,312 @@ LaTeX Warning: Reference `2.1' on page 52 undefined on input line 1888.
 
 [52]
 
-! Package amsmath Error: \tag not allowed here.
+LaTeX Warning: Reference `2.3' on page 53 undefined on input line 1931.
 
-See the amsmath package documentation for explanation.
+
+LaTeX Warning: Reference `2.4' on page 53 undefined on input line 1931.
+
+[53]
+
+LaTeX Warning: Reference `2.2' on page 54 undefined on input line 1946.
+
+File: docs/Fig2_3.png Graphic file (type bmp)
+<docs/Fig2_3.png>
+[54] [55] [56] [57]
+
+LaTeX Warning: Reference `2.6' on page 58 undefined on input line 2054.
+
+[58] [59] [60] [61]
+File: docs/Fig2_4.png Graphic file (type bmp)
+<docs/Fig2_4.png>
+[62] [63]
+File: docs/Fig2_5.png Graphic file (type bmp)
+<docs/Fig2_5.png>
+[64] [65]
+Underfull \hbox (badness 10000) in paragraph at lines 2289--2290
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2296--2298
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2298--2300
+
+ []
+
+[66] [67]
+Underfull \hbox (badness 3158) in paragraph at lines 2326--2327
+[]\TU/lmr/m/n/10 The \TU/lmr/bx/n/10 arcsine transformation \TU/lmr/m/n/10 ($[]
+[][][][]$) and \TU/lmr/bx/n/10 logit transformation
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 2339--2340
+[]\TU/lmr/m/n/10 The data set Emission provides hydrocarbon emission in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2339--2340
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2346--2348
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2348--2350
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2350--2352
+
+ []
+
+[68] [69] [70]
+Underfull \hbox (badness 1394) in paragraph at lines 2388--2388
+[][]\TU/lmr/bx/n/14.4 Extended Activity: Transforming Brain and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2399--2400
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2406--2408
+
+ []
+
+[71]
+File: docs/Fig2_6.png Graphic file (type bmp)
+<docs/Fig2_6.png>
+[72]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2453.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2463--2464
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2470--2472
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2472--2474
+
+ []
+
+[73]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2483.
+
+[74]
+
+LaTeX Warning: Reference `2.7' on page 75 undefined on input line 2509.
+
+
+LaTeX Warning: Reference `2.7' on page 75 undefined on input line 2522.
+
+
+LaTeX Warning: Reference `2.8' on page 75 undefined on input line 2537.
+
+[75]
+
+LaTeX Warning: Reference `2.9' on page 76 undefined on input line 2561.
+
+
+LaTeX Warning: Reference `2.9' on page 76 undefined on input line 2574.
+
+[76] [77]
+
+LaTeX Warning: Reference `2.7' on page 78 undefined on input line 2640.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[78] [79] [80] [81]
+Overfull \hbox (161.40005pt too wide) in paragraph at lines 2777--2788
+ [][] 
+ []
+
+\c@excountlr=\count333
+[82] [83] [84] [85] [86]
+Underfull \hbox (badness 2073) in paragraph at lines 2914--2915
+[]\TU/lmr/m/n/10 Create individual value plots or side-by-side boxplots of the
+ []
+
+[87] [88]
+Underfull \hbox (badness 4048) in paragraph at lines 2954--2955
+[]\TU/lmr/m/n/10 Transform the original data into $[]$, $[][][][]$,
+ []
+
+
+Underfull \hbox (badness 1314) in paragraph at lines 2954--2955
+[][][][][]$\TU/lmr/m/n/10 , and the reciprocal ($[][][]$). For each
+ []
+
+[89]
+File: docs/Fig2_7.png Graphic file (type bmp)
+<docs/Fig2_7.png>
+File: docs/Fig2_8.png Graphic file (type bmp)
+<docs/Fig2_8.png>
+
+Overfull \hbox (14.43513pt too wide) detected at line 2994
+[][] [] [][] [] [][][][] [] [][][][] [] [][][][] [] [][] [][] [] [][] [][] [] [
+] [][][][] [] [][][][] [][][]
+ []
+
+
+LaTeX Warning: Reference `2.10' on page 90 undefined on input line 2995.
+
+[90] [91] [92] [93]
+Chapter 3.
+[94
+
+] [95]
+
+LaTeX Warning: Reference `3.1' on page 96 undefined on input line 3078.
+
+File: docs/Fig3_1.png Graphic file (type bmp)
+<docs/Fig3_1.png>
+[96] [97] [98] [99] [100] [101]
+Missing character: There is no 𝛽 (U+1D6FD) in font [lmroman10-regular]:mapping=
+tex-text;!
+Missing character: There is no 𝛽 (U+1D6FD) in font [lmroman10-italic]:mapping=t
+ex-text;!
+Missing character: There is no 𝛽 (U+1D6FD) in font [lmroman10-italic]:mapping=t
+ex-text;!
+[102]
+File: docs/Fig3_2.png Graphic file (type bmp)
+<docs/Fig3_2.png>
+[103]
+File: docs/Fig3_3.png Graphic file (type bmp)
+<docs/Fig3_3.png>
+[104] [105]
+File: docs/Fig3_4.png Graphic file (type bmp)
+<docs/Fig3_4.png>
+[106]
+File: docs/Fig3_5.png Graphic file (type bmp)
+<docs/Fig3_5.png>
+[107]
+File: docs/Fig3_6.png Graphic file (type bmp)
+<docs/Fig3_6.png>
+[108]
+Overfull \hbox (161.40005pt too wide) in paragraph at lines 3425--3436
+ [][] 
+ []
+
+[109] [110]
+File: docs/Fig3_7.png Graphic file (type bmp)
+<docs/Fig3_7.png>
+[111] [112] [113] [114]
+File: docs/Fig3_8.png Graphic file (type bmp)
+<docs/Fig3_8.png>
+[115] [116]
+File: Chap3_files/figure-latex/df_1-plot-1.pdf Graphic file (type pdf)
+<use Chap3_files/figure-latex/df_1-plot-1.pdf>
+
+LaTeX Warning: Reference `3.7' on page 117 undefined on input line 3639.
+
+
+Overfull \hbox (82.70003pt too wide) detected at line 3653
+[][][][]
+ []
+
+[117]
+
+LaTeX Warning: Reference `3.8' on page 118 undefined on input line 3656.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3679--3681
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3681--3683
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3683--3685
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3689--3691
+
+ []
+
+[118]
+Overfull \hbox (65.21677pt too wide) in paragraph at lines 3720--3731
+ [][] 
+ []
+
+[119]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 3751.
+
+[120] [121] [122]
+File: Chap3_files/figure-latex/df_2-plot-1.pdf Graphic file (type pdf)
+<use Chap3_files/figure-latex/df_2-plot-1.pdf>
+File: Chap3_files/figure-latex/df_3-plot-1.pdf Graphic file (type pdf)
+<use Chap3_files/figure-latex/df_3-plot-1.pdf>
+[123] [124] [125]
+File: Chap3_files/figure-latex/df_4-plot-1.pdf Graphic file (type pdf)
+<use Chap3_files/figure-latex/df_4-plot-1.pdf>
+[126] [127]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 4032.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 4032.
+
+[128]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 4054.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 4054.
+
+[129] [130] [131] [132]
+Overfull \hbox (56.02325pt too wide) in paragraph at lines 4211--4221
+ [][] 
+ []
+
+[133]
+
+! LaTeX Error: Command \c@excountlr already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1921 ...0 + \beta_1(1)  = \beta_0 + \beta_1 \tag
-                                                  {2.3}\) 
+l.4239 \newcounter{excountlr}
+                              
 Here is how much of TeX's memory you used:
- 20439 strings out of 474773
- 372459 string characters out of 5757724
- 1937839 words of memory out of 5000000
- 42254 multiletter control sequences out of 15000+600000
- 565651 words of font info for 104 fonts, out of 8000000 for 9000
+ 20836 strings out of 474773
+ 380219 string characters out of 5757724
+ 1950839 words of memory out of 5000000
+ 42628 multiletter control sequences out of 15000+600000
+ 565667 words of font info for 106 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 90i,10n,121p,1011b,563s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,17n,121p,1120b,632s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-chap1.pdf (53 pages).
+Output written on bookdown-chap1.pdf (134 pages).

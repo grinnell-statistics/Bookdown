@@ -1766,15 +1766,21 @@ words, when $x = 1$ the mean response is a fixed value, and when $x = 0$ the mea
 
 Although the notation has changed, the regression model and the model used in the two-sample t-test are mathematically equivalent. When a subject is from the color distracter group, the mean response is $\mu_1$ in the t-test and the mean response sets $x = 1$ in the regression model. Thus,
 
-$\label{2.3} \mu_1 = \beta_0 + \beta_1(1)  = \beta_0 + \beta_1 \tag{2.3}$  
+\begin{equation}
+\label{2.3} \mu_1 = \beta_0 + \beta_1(1)  = \beta_0 + \beta_1 \tag{2.3}
+\end{equation}
 
 When a subject is from the standard group, the mean response is $\mu_2$ in the t-test and the mean response sets $x = 0$ in regression. Thus,
 
-$\label{2.4} \mu_2 = \beta_0 + \beta_1(0)  = \beta_0 \tag{2.4}$  
+\begin{equation}
+\label{2.4} \mu_2 = \beta_0 + \beta_1(0)  = \beta_0 \tag{2.4}
+\end{equation}
 
 Equations \ref{2.3} and \ref{2.4} can be combined to show the relationship between the two-sample t-test and regression hypotheses.
 
-$\label{2.5} \mu_1 - \mu_2 = (\beta_0 + \beta_1) -  \beta_0 = \beta_1 \tag{2.5}$ 
+\begin{equation}
+\label{2.5} \mu_1 - \mu_2 = (\beta_0 + \beta_1) -  \beta_0 = \beta_1 \tag{2.5}
+\end{equation}
 
 Thus, stating that $\mu_1 - \mu_2 = 0$ is equivalent to stating that $\beta_1 = 0$
 
@@ -1829,7 +1835,9 @@ this study is the type of game; the two conditions, the two levels of the factor
 
 The ANOVA model for the game study can be written as
 
-$\label{2.6} y_{i,j} = \mu + \alpha_i + \epsilon_{i,j}$ for $i = 1, 2$ and $j = 1, 2, ... , n$ where $\epsilon_{i,j} \sim N(0,\sigma^2) \tag{2.6}$
+\begin{equation}
+\label{2.6} y_{i,j} = \mu + \alpha_i + \epsilon_{i,j} for i = 1, 2 and j = 1, 2, ... , n where \epsilon_{i,j} \sim N(0,\sigma^2) \tag{2.6}
+\end{equation}
 
 The mean response in the ANOVA model is $\mu + \alpha_1$ for the color distracter group and $\mu + \alpha_2$ for the standard group, where $\mu$ is the mean of all the completion times in the study. This overall mean is often called the grand mean or the benchmark value; $\alpha_1$ is the **effect**, or **main effect**, of the color distracter group. **Effects** are a measure of differences between group means. The effect $\alpha_1$ represents the change in the response from the grand mean to the color distracter group mean.^[In this text m is always considered the overall mean of the data. Also throughout this chapter, we are always assuming balanced data.]
 
