@@ -66,10 +66,14 @@ lected at University of Wisconsin hospitals in Madison. We will start by determi
 nucleus can help us to determine whether a tumor is malignant or benign.
 Typically, healthy cell nuclei have round or ellipsoid shapes.Figure 6.1 shows a sample of malignant cells that appear to have grown such that the perimeters of the cell nuclei have somewhat concave points.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig6_1Cells.png" alt="Segmented bar graph of nucleus shape and malignancy." width="80%" />
-<p class="caption">(\#fig:fig6.1)Segmented bar graph of nucleus shape and malignancy.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{docs/Fig6_1Cells} 
+
+}
+
+\caption{Segmented bar graph of nucleus shape and malignancy.}(\#fig:fig6.1)
+\end{figure}
 
 Figure 6.1 An image of malignant cells where nuclei are outlined with a curve-fitting program.  Reprinted by permission. Mangasarian, Street & Wolberg, “Breast Cancer Diagnosis and Prognosis via Linear Programming,” INFORMS Journal Operations Research, 43.4, 1995. © 1995, Institute for Operations Research and the Management Sciences (INFORMS).
 
@@ -139,10 +143,7 @@ Bar graphs are often useful in comparing two categorical variables. Figure 6.1 s
 for each nucleus shape. About 80% of the concave nuclei are malignant, whereas about 45% of the round
 nuclei are malignant.
 
-<div class="figure">
-<img src="Chap6_files/figure-html/fig6.2-1.png" alt="Figure 6.2 Segmented bar graph of nucleus shape and malignancy." width="576" />
-<p class="caption">(\#fig:fig6.2)Figure 6.2 Segmented bar graph of nucleus shape and malignancy.</p>
-</div>
+![(\#fig:fig6.2)Figure 6.2 Segmented bar graph of nucleus shape and malignancy.](Chap6_files/figure-latex/fig6.2-1.pdf) 
 
 ## **A Simulation Study: How Likely Is It That the Observed Sample Would Occur by Chance?**
 

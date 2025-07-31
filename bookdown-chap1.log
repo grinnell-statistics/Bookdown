@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.28)  21 JUL 2025 22:39
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.8.28)  31 JUL 2025 12:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -953,477 +953,61 @@ Overfull \hbox (22.48pt too wide) in paragraph at lines 1043--1050
 Chapter 2.
 [43
 
-] [44] [45] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56]
-Chapter 3.
-[57
-
-] [58] [59] [60] [61] [62] [63]
-Missing character: There is no 𝛽 (U+1D6FD) in font [lmroman10-regular]:mapping=
-tex-text;!
-Missing character: There is no 𝛽 (U+1D6FD) in font [lmroman10-italic]:mapping=t
-ex-text;!
-Missing character: There is no 𝛽 (U+1D6FD) in font [lmroman10-italic]:mapping=t
-ex-text;!
-[64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74]
-File: Chap3_files/figure-latex/df_1-plot-1.pdf Graphic file (type pdf)
-<use Chap3_files/figure-latex/df_1-plot-1.pdf>
-[75]
-Overfull \hbox (82.70003pt too wide) detected at line 2619
-[][][][]
- []
-
-[76]
-Underfull \hbox (badness 10000) in paragraph at lines 2645--2647
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2647--2649
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2649--2651
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2655--2657
-
- []
-
-[77]
-Overfull \hbox (65.21677pt too wide) in paragraph at lines 2683--2694
+]
+File: docs/Fig2_1Shapesplosion.jpg Graphic file (type bmp)
+<docs/Fig2_1Shapesplosion.jpg>
+[44] [45]
+Overfull \hbox (43.95995pt too wide) in paragraph at lines 1705--1718
  [][] 
  []
 
-[78] [79] [80]
-File: Chap3_files/figure-latex/df_2-plot-1.pdf Graphic file (type pdf)
-<use Chap3_files/figure-latex/df_2-plot-1.pdf>
-File: Chap3_files/figure-latex/df_3-plot-1.pdf Graphic file (type pdf)
-<use Chap3_files/figure-latex/df_3-plot-1.pdf>
-[81] [82] [83] [84]
-File: Chap3_files/figure-latex/df_4-plot-1.pdf Graphic file (type pdf)
-<use Chap3_files/figure-latex/df_4-plot-1.pdf>
-[85] [86] [87] [88]
-Underfull \hbox (badness 10000) in paragraph at lines 3070--3070
-[]\TU/lmr/bx/n/14.4 Chapter Summary__[[[NEEDS SEV-
- []
+[46]
 
-[89] [90]
-Chapter 4.
-[91
+LaTeX Warning: Reference `2.1' on page 47 undefined on input line 1738.
 
-]
-Chapter 5.
-[92
 
-] [93]
-Chapter 6.
-[94
+LaTeX Warning: Reference `2.1' on page 47 undefined on input line 1741.
 
-] [95] [96] [97] [98]
-Overfull \hbox (24.93002pt too wide) in paragraph at lines 3382--3397
- [][] 
- []
 
+LaTeX Warning: Reference `2.1' on page 47 undefined on input line 1745.
 
-Underfull \hbox (badness 10000) in paragraph at lines 3413--3416
+[47]
 
- []
+LaTeX Warning: Reference `2.1' on page 48 undefined on input line 1776.
 
-[99] [100]
-Underfull \hbox (badness 10000) in paragraph at lines 3458--3460
 
- []
+LaTeX Warning: Reference `2.1' on page 48 undefined on input line 1783.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3460--3462
+LaTeX Warning: Reference `2.1' on page 48 undefined on input line 1804.
 
- []
+[48] [49]
+File: docs/Fig2_2.png Graphic file (type bmp)
+<docs/Fig2_2.png>
 
-[101] [102] [103]
-Overfull \hbox (43.07816pt too wide) detected at line 3595
-[][][][][] [] []
- []
+LaTeX Warning: Reference `2.7' on page 50 undefined on input line 1869.
 
-[104]
-Overfull \hbox (111.88759pt too wide) detected at line 3621
-[][][][] [] [] [] []
- []
+[50] [51]
 
-[105]
-Underfull \hbox (badness 10000) in paragraph at lines 3684--3686
+LaTeX Warning: Reference `2.1' on page 52 undefined on input line 1888.
 
- []
+[52]
 
-[106]
-Underfull \hbox (badness 10000) in paragraph at lines 3699--3705
+! Package amsmath Error: \tag not allowed here.
 
- []
-
-[107]
-Underfull \hbox (badness 10000) in paragraph at lines 3754--3757
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3757--3760
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3760--3763
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3763--3766
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3766--3769
-
- []
-
-[108] [109]
-Chapter 7.
-[110
-
-]
-Chapter 8.
-[111
-
-]
-Overfull \hbox (6.55998pt too wide) in paragraph at lines 3919--3938
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Overfull \hbox (9.12708pt too wide) in paragraph at lines 3944--3955
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[112]
-Underfull \hbox (badness 10000) in paragraph at lines 3968--3970
-
- []
-
-[113]
-Underfull \hbox (badness 10000) in paragraph at lines 3970--3972
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3972--3974
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3974--3976
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3976--3978
-
- []
-
-
-Overfull \hbox (53.38615pt too wide) detected at line 4002
-[] [] [] [] [] [] [] [] [] [] [] [] [][][][][][] [] [][][][][][] [] [][][][][][
-]
- []
-
-
-Overfull \hbox (95.44615pt too wide) detected at line 4011
-[] [] [] [] [] [] [] [] [] [] [] [] [][][][][] [] [][][][][][] [] [][][][][][][
-]
- []
-
-[114]
-Overfull \hbox (152.33174pt too wide) detected at line 4060
-[]
- []
-
-[115] [116]
-Chapter 9.
-
-Overfull \hbox (11.2417pt too wide) detected at line 4121
-[][][] [] [][][][][] [] [] [][] [][] [] [][][][]
- []
-
-[117
-
-]
-Overfull \hbox (92.86334pt too wide) detected at line 4137
-[][][] [] [][][][][] [] [] [][] [][] [] [][][] [] [] [][] [][] [] [][][]
- []
-
-[118]
-Underfull \hbox (badness 10000) in paragraph at lines 4171--4173
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4173--4175
-
- []
-
-[119]
-Underfull \hbox (badness 10000) in paragraph at lines 4253--4255
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4255--4258
-
- []
-
-[120] [121]
-Overfull \hbox (110.17287pt too wide) in paragraph at lines 4300--4311
- [][] 
- []
-
-[122]
-Underfull \hbox (badness 1715) in paragraph at lines 4337--4338
-[]\TU/lmr/m/n/10 Transform the response variable using natural log (Strength) a
-nd
- []
-
-
-Underfull \hbox (badness 1168) in paragraph at lines 4337--4338
-[]$\TU/lmr/m/n/10 . Did both transformations improve the equal variance
- []
-
-[123]
-Chapter 10.
-[124
-
-] [125]
-Overfull \hbox (38.22527pt too wide) detected at line 4420
-[][] [] [][][][] [] [][][][][] [] [][][][] [] [][][][][] [] [][][] [][] [] [][]
-[][] [][] [] [][][] [][][][] [] [][][][] [][][][] [] [][][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4441--4443
-
- []
-
-[126] [127]
-Chapter 11.
-
-Package natbib Warning: Citation `R-bookdown' on page 128 undefined on input li
-ne 4462.
-
-
-Package natbib Warning: Citation `xie2015' on page 128 undefined on input line 
-4462.
-
-[128
-
-]
-Chapter 12.
-[129
-
-] [130] [131] [132]
-Chapter 13.
-File: Chap6_files/figure-latex/fig6.2-1.pdf Graphic file (type pdf)
-<use Chap6_files/figure-latex/fig6.2-1.pdf>
-[133
-
-] [134] [135]
-Overfull \hbox (136.2455pt too wide) in paragraph at lines 4694--4701
- [][] 
- []
-
-[136] [137] [138]
-Underfull \hbox (badness 10000) in paragraph at lines 4868--4869
-
- []
-
-[139]
-Underfull \hbox (badness 10000) in paragraph at lines 4875--4877
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4877--4879
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4886--4888
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4894--4897
-
- []
-
-[140] [141]
-Underfull \hbox (badness 10000) in paragraph at lines 4979--4981
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5017--5020
-
- []
-
-[142] [143]
-Underfull \hbox (badness 10000) in paragraph at lines 5099--5102
-
- []
-
-[144]
-Underfull \hbox (badness 10000) in paragraph at lines 5118--5120
-
- []
-
-[145] [146]
-Underfull \hbox (badness 10000) in paragraph at lines 5176--5179
-
- []
-
-[147]
-Underfull \hbox (badness 10000) in paragraph at lines 5203--5206
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5223--5224
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5230--5232
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5232--5234
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5234--5236
-
- []
-
-[148]
-Underfull \hbox (badness 10000) in paragraph at lines 5244--5245
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5251--5253
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5253--5255
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5255--5257
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5277--5279
-
- []
-
-[149]
-Underfull \hbox (badness 10000) in paragraph at lines 5279--5281
-
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5313--5315
-
- []
-
-[150]
-Underfull \hbox (badness 10000) in paragraph at lines 5327--5329
-
- []
-
-[151] [152] [153]
-Overfull \hbox (116.20609pt too wide) detected at line 5419
-[]
- []
-
-
-Overfull \hbox (139.58566pt too wide) in paragraph at lines 5435--5452
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[154] [155] [156]
-Underfull \hbox (badness 10000) in paragraph at lines 5517--5519
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5543--5544
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5550--5552
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5552--5554
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5554--5556
-
- []
-
-[157]
-Underfull \hbox (badness 10000) in paragraph at lines 5556--5558
-
- []
-
-[158]
-
-! LaTeX Error: Command \c@excount already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
+See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.5614 \newcounter{excount}
-                            
+l.1921 ...0 + \beta_1(1)  = \beta_0 + \beta_1 \tag
+                                                  {2.3}\) 
 Here is how much of TeX's memory you used:
- 20508 strings out of 474773
- 373914 string characters out of 5757724
- 1955839 words of memory out of 5000000
- 42321 multiletter control sequences out of 15000+600000
+ 20439 strings out of 474773
+ 372459 string characters out of 5757724
+ 1937839 words of memory out of 5000000
+ 42254 multiletter control sequences out of 15000+600000
  565651 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 90i,18n,121p,1240b,563s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,10n,121p,1011b,563s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-chap1.pdf (159 pages).
+Output written on bookdown-chap1.pdf (53 pages).

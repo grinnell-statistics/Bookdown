@@ -29,10 +29,14 @@ Investigations showed that an O-ring seal in the right solid rocket booster fail
 
 An O-ring seal was used to stop the gases inside the solid rocket booster from escaping. However, the cold outside air temperature caused the O-rings to become brittle and fail to seal properly. Gases at 5800 °F escaped and burned a hole through the side of the rocket booster.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig7_1Rocket.png" alt="Picture of the space shuttle Challenger just after ignition. Each solid rocket booster had six O-rings, two at each field joint. The O-rings at the right aft field joint failed." width="100%" />
-<p class="caption">(\#fig:fig7.1)Picture of the space shuttle Challenger just after ignition. Each solid rocket booster had six O-rings, two at each field joint. The O-rings at the right aft field joint failed.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig7_1Rocket} 
+
+}
+
+\caption{Picture of the space shuttle Challenger just after ignition. Each solid rocket booster had six O-rings, two at each field joint. The O-rings at the right aft field joint failed.}(\#fig:fig7.1)
+\end{figure}
 
 *The Report of the Presidential Commission on the Space Shuttle Challenger Accident*, also known as the Rogers’ Commission Report, states:
 
@@ -48,10 +52,14 @@ temperatures of 61 degrees Fahrenheit or greater, only four showed signs of O-ri
 i.e., erosion or blow-by and soot. Each of the launches below 61 degrees Fahrenheit resulted in one
 or more O-rings showing signs of thermal distress.”$^2$
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig7_2Rocket2.png" alt="Diargam of a solid rocket booster." width="100%" />
-<p class="caption">(\#fig:fig7.2)Diargam of a solid rocket booster.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig7_2Rocket2} 
+
+}
+
+\caption{Diargam of a solid rocket booster.}(\#fig:fig7.2)
+\end{figure}
 
 A lamentable aspect of this disaster is that the problem with the O-rings was already understood by
 some engineers prior to the Challenger launch. In February 1984, the Marshall Configuration Control
@@ -214,10 +222,7 @@ Similarly, the odds are 6 to 1 against Saturday being selected (any day but Satu
 \normalsize
 
 
-<div class="figure">
-<img src="Chap7_files/figure-html/fig7.3-1.png" alt="Figure 7.3 Space shuttle data with a simple linear regression model and a logistic regression model." width="576" />
-<p class="caption">(\#fig:fig7.3)Figure 7.3 Space shuttle data with a simple linear regression model and a logistic regression model.</p>
-</div>
+![(\#fig:fig7.3)Figure 7.3 Space shuttle data with a simple linear regression model and a logistic regression model.](Chap7_files/figure-latex/fig7.3-1.pdf) 
 
 *?Throughout this chapter, we will use terms such as \textit{log-odds} or \textit{log-likelihood}, but we actually use natural logs (ln) in
 our calculations.
@@ -239,10 +244,7 @@ Residuals (observed values minus expected values) are used to estimate the error
 
 In logistic regression, the residuals are $y_i - \hat\pi_i$. If the observed response $y_i = 0$, then the residual value is $-\hat\pi_i$. If the observed response $y_i = 1$, then the residual value is $1 - \hat\pi_i$. This leads to the two curves shown in Figure 7.4. When the temperature is low in the space shuttle data (around 55°F, as seen in Figure 7.3), the observed responses tend to be zero and the predicted responses ($\hat\pi_i$’s) are small positive numbers. Thus, the residual values ($-\hat\pi_i$’s) are negative and close to zero. When the temperature is high, the observed responses tend to be one, the predicted responses are close to one, and the residual values are positive and close to zero.
 
-<div class="figure">
-<img src="Chap7_files/figure-html/fig7.4-1.png" alt="Figure 7.4 A scatterplot of the residuals from the space shuttle logistic regression model and a sample of what a scatterplot of normally distributed residuals might look like." width="576" />
-<p class="caption">(\#fig:fig7.4)Figure 7.4 A scatterplot of the residuals from the space shuttle logistic regression model and a sample of what a scatterplot of normally distributed residuals might look like.</p>
-</div>
+![(\#fig:fig7.4)Figure 7.4 A scatterplot of the residuals from the space shuttle logistic regression model and a sample of what a scatterplot of normally distributed residuals might look like.](Chap7_files/figure-latex/fig7.4-1.pdf) 
 
 \Large
 \textbf{\textcolor{red}{Key Concept:}}
@@ -437,10 +439,14 @@ b. How did the regression coefficients change?
 c. How did the odds ratio change?
 d. Create a 95% Wald confidence interval for the new odds ratio and interpret the results.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig7_5Minitab.png" alt="Minitab output for the space shuttle study." width="100%" />
-<p class="caption">(\#fig:fig7.5)Minitab output for the space shuttle study.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig7_5Minitab} 
+
+}
+
+\caption{Minitab output for the space shuttle study.}(\#fig:fig7.5)
+\end{figure}
 
 ## The Likelihood Ratio Test {-}
 
@@ -569,10 +575,7 @@ the $\chi^2$ distribution with 3 - 2 = 1 degree of freedom that exceeds $G$. The
 the model when $Radius$ is already included. Thus, the logistic regression model in Question 15 is preferred
 over the model in Question 16.
 
-<div class="figure">
-<img src="Chap7_files/figure-html/fig7.7-1.png" alt="Figure 7.7 A scatterplot of the observed data and estimated probabilities for both round cells (Concave= 0) and concave cells (Concave= 1)." width="576" />
-<p class="caption">(\#fig:fig7.7)Figure 7.7 A scatterplot of the observed data and estimated probabilities for both round cells (Concave= 0) and concave cells (Concave= 1).</p>
-</div>
+![(\#fig:fig7.7)Figure 7.7 A scatterplot of the observed data and estimated probabilities for both round cells (Concave= 0) and concave cells (Concave= 1).](Chap7_files/figure-latex/fig7.7-1.pdf) 
 
 When the LRT is used for variable selection, it is often called the **change-in-deviance test** or **drop-in-deviance test**. This test is valid only when the restricted model is nested within the full model. A
 restricted model is **nested** in a full model when every explanatory variable in the restricted model is also
@@ -685,10 +688,14 @@ few tied pairs. There are no $p$-values corresponding to these measures, but the
 ing different models with different explanatory variables or comparing models based on different link
 functions.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig7_8MinitabPairs.png" alt="Minitab output showing measures of association for the space shuttle data." width="100%" />
-<p class="caption">(\#fig:fig7.8)Minitab output showing measures of association for the space shuttle data.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig7_8MinitabPairs} 
+
+}
+
+\caption{Minitab output showing measures of association for the space shuttle data.}(\#fig:fig7.8)
+\end{figure}
 
 
 ## **Review of Means and Variances of Binary and Binomial Data**
@@ -810,10 +817,7 @@ Figure 7.9 plots the observed percentages of malignant cells and the correspondi
 Notice that the observed and expected probabilities are fairly close. However, the observed percentage of
 malignant cells was higher than expected when the cell radius was 4.5.
 
-<div class="figure">
-<img src="Chap7_files/figure-html/fig7.9-1.png" alt="Figure 7.9 A logistic regression model, with $\hat \pi_i$ estimated from Equation (7.8) using maximum likelihood estimates, plotted with the observed probability of malignancy for the grouped data in Table 7.3." width="576" />
-<p class="caption">(\#fig:fig7.9)Figure 7.9 A logistic regression model, with $\hat \pi_i$ estimated from Equation (7.8) using maximum likelihood estimates, plotted with the observed probability of malignancy for the grouped data in Table 7.3.</p>
-</div>
+![(\#fig:fig7.9)Figure 7.9 A logistic regression model, with $\hat \pi_i$ estimated from Equation (7.8) using maximum likelihood estimates, plotted with the observed probability of malignancy for the grouped data in Table 7.3.](Chap7_files/figure-latex/fig7.9-1.pdf) 
 
 ## Calculating Residuals for Logistic Models with Binomial Counts
 
@@ -946,10 +950,14 @@ or log) of the explanatory variable(s).
 * The binomial model may not appropriately model the response variable or a transformation other
 than the logit transformation may need to be tried. *Notice that the logit model assumes symmetry; the curves in the S are the same shape and symmetric around the midpoint of the data.*   
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig7_10MinitabLog.png" alt="Minitab output for the Cancercells study" width="100%" />
-<p class="caption">(\#fig:fig7.10)Minitab output for the Cancercells study</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig7_10MinitabLog} 
+
+}
+
+\caption{Minitab output for the Cancercells study}(\#fig:fig7.10)
+\end{figure}
 
 * A few outliers may be significantly influencing the results. For example, when the median radius is
 4.5, the observed probability is not very close to the expected value. This point greatly contributes to
@@ -1028,17 +1036,11 @@ square is $\Delta D^2_i = D^2 \;-\; D^2_{(i)}$, where $D^2_{(i)}$ is the devianc
 Figure 7.11 shows the delta chi‐square, delta deviance, and delta beta values plotted against the expected probabilities ($\hat\pi_i$). The determination as to whether or not an observation (covariate pattern) is an outlier or overly influential is somewhat subjective. Outliers typically appear as extreme values in the upper corners of the scatterplot. As a rough estimate, $\Delta\chi^2$ or $\Delta D^2$ greater than 4 and delta beta values greater than 1 may be considered unusual observations. With large sample sizes, $\Delta\chi^2$ and $\Delta D^2$ approximately follow the chi‐square distribution, and the 95th percentile of the chi‐square distribution with 1 degree of freedom equals 3.84. Figure 7.11 has one covariate pattern that has a fairly large $\Delta\chi^2$ and $\Delta D^2$ values. It corresponds to the two launches that occurred at 75°F. Notice in Figure 7.11 that a failure at 75°F appears to be somewhat unusual. In this example, the $\Delta\chi^2$ and $\Delta D^2$ values are not extreme enough to be of major concern (all values are close to or less than 4).
 
 
-<div class="figure">
-<img src="Chap7_files/figure-html/fig7.11-1.png" alt="Figure 7.11 Scatterplots of delta deviance, delta chi-square, and delta beta values versus the expected probabilities from the space shuttle data. Circled values represent launches at 75°F." width="576" />
-<p class="caption">(\#fig:fig7.11)Figure 7.11 Scatterplots of delta deviance, delta chi-square, and delta beta values versus the expected probabilities from the space shuttle data. Circled values represent launches at 75°F.</p>
-</div>
+![(\#fig:fig7.11)Figure 7.11 Scatterplots of delta deviance, delta chi-square, and delta beta values versus the expected probabilities from the space shuttle data. Circled values represent launches at 75°F.](Chap7_files/figure-latex/fig7.11-1.pdf) 
 
 Figure 7.12 shows the delta chi‐square and delta beta values plotted against the **leverage** values. Leverages are values between 0 and 1 that depend only on the explanatory variables (not the response). Large leverage values indicate that the observation (covariate pattern) has extreme explanatory values and may have a large influence on the regression coefficients.
 
-<div class="figure">
-<img src="Chap7_files/figure-html/fig7.12-1.png" alt="Figure 7.12 Scatterplots of delta chi-square and delta beta values versus leverage from the space shuttle data. The extreme value along the y-axis represents the launches at 75°F. There do not appear to be any extreme leverage values." width="576" />
-<p class="caption">(\#fig:fig7.12)Figure 7.12 Scatterplots of delta chi-square and delta beta values versus leverage from the space shuttle data. The extreme value along the y-axis represents the launches at 75°F. There do not appear to be any extreme leverage values.</p>
-</div>
+![(\#fig:fig7.12)Figure 7.12 Scatterplots of delta chi-square and delta beta values versus leverage from the space shuttle data. The extreme value along the y-axis represents the launches at 75°F. There do not appear to be any extreme leverage values.](Chap7_files/figure-latex/fig7.12-1.pdf) 
 
 \large  
 \textbf{\textcolor{red}{Key Concept:}}  

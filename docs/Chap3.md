@@ -59,10 +59,14 @@ where b1 is the estimated slope calculated from the data and $\hat{\sigma}_{b_1}
 The t-statistic for the slope coefficient indicates that Mileage is an important variable. However, the $R^2$ value (the percentage of variation explained by the regression line) indicates that the regression line is not very useful in predicting retail price. (A review of the $R^2$ value is given in the extended activities.) As is always the case with statistics, we need to visualize the data rather than focus solely on a $p$-value. Figure 3.1 shows that the expected price decreases as mileage increases, but the observed points do not appear to be close to the regression line. Thus, it seems reasonable that including additional explanatory variables in the regression model might help to better explain the variation in retail price.
 
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_1.png" alt="Scatterplot and least squares regression model: $Price = 24,765 - 0.1725(Mileage)$. The regression line shows that for each additional mile a car is driven, the expected price of the car decreases by about 17 cents. However, many points are not close to the regression line, indicating that the expected price is not an accurate estimate of the actual observed price." width="100%" />
-<p class="caption">(\#fig:fig3.1)Scatterplot and least squares regression model: $Price = 24,765 - 0.1725(Mileage)$. The regression line shows that for each additional mile a car is driven, the expected price of the car decreases by about 17 cents. However, many points are not close to the regression line, indicating that the expected price is not an accurate estimate of the actual observed price.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_1} 
+
+}
+
+\caption{Scatterplot and least squares regression model: $Price = 24,765 - 0.1725(Mileage)$. The regression line shows that for each additional mile a car is driven, the expected price of the car decreases by about 17 cents. However, many points are not close to the regression line, indicating that the expected price is not an accurate estimate of the actual observed price.}(\#fig:fig3.1)
+\end{figure}
 
 In this chapter, you will build a linear combination of explanatory variables that explains the response variable, retail price. As you work through the chapter, you will find that there is not one technique, or “recipe,” that will give the best model. In fact, you will come to see that there isn’t just one “best” model for these data.
 
@@ -197,10 +201,14 @@ likely that we have unreliable estimates of our model coefficients. The followin
 Note that in single-variable regression models, residual plots show the same information as the initial fitted line plot. However, the residual plots often emphasize violations of model assumptions better than the fitted line plot. In addition, multivariate regression lines are very difficult to visualize. Thus, residual plots are essential
 when multiple explanatory variables are used.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_2.png" alt="Common shapes of residual plots. Ideally, residual plots should look like a randomly scattered set of dropped coins, as seen in the oval-shaped plot. If a pattern exists, it is usually best to try other regression models." width="100%" />
-<p class="caption">(\#fig:fig3.2)Common shapes of residual plots. Ideally, residual plots should look like a randomly scattered set of dropped coins, as seen in the oval-shaped plot. If a pattern exists, it is usually best to try other regression models.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_2} 
+
+}
+
+\caption{Common shapes of residual plots. Ideally, residual plots should look like a randomly scattered set of dropped coins, as seen in the oval-shaped plot. If a pattern exists, it is usually best to try other regression models.}(\#fig:fig3.2)
+\end{figure}
 
 ## Heteroskedasticity {-}
 
@@ -228,10 +236,14 @@ While other transformations could be tried, throughout this investigation we wil
 Figure 3.3 shows residual plots that were created to answer Questions 7 and 8. Notice that when the response variable is Price, the residual versus fit plot has a clear wedge-shaped pattern. The residuals have much more spread when the fitted value is large (i.e., expected retail price is close to \$40,000) than when the fitted value is near \$10,000. Using TPrice as a response did improve the residual versus fit plot. Although
 there is still a faint wedge shape, the variability of the residuals is much more consistent as the fitted value changes. Figure 3.3 reveals another pattern in the residuals. The following section will address why points in both plots appear in clusters.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_3.png" alt="**Figure 3.3** Residual versus fit plots using Price and TPrice (the log10 transformation), as responses. The residual plot with Price as the response has a much stronger wedge-shaped pattern than the one with TPrice." width="100%" />
-<p class="caption">(\#fig:fig3.3)**Figure 3.3** Residual versus fit plots using Price and TPrice (the log10 transformation), as responses. The residual plot with Price as the response has a much stronger wedge-shaped pattern than the one with TPrice.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_3} 
+
+}
+
+\caption{**Figure 3.3** Residual versus fit plots using Price and TPrice (the log10 transformation), as responses. The residual plot with Price as the response has a much stronger wedge-shaped pattern than the one with TPrice.}(\#fig:fig3.3)
+\end{figure}
 
 
 ## Examining Residual Plots Across Time/Order {-}
@@ -251,10 +263,14 @@ While ordered plots make sense in model checking only when there is a meaningful
 We do not have a time variable in this data set, so reordering the data would not change the meaning of the data. Reordering the data could eliminate the pattern; however, the clear pattern seen in the residual versus order plots should not be ignored because it indicates that we could create a model with a much higher $R^2$ value if we could account for this pattern in our model. This type of autocorrelation is called taxonomic autocorrelation, meaning that the relationship seen in this residual plot is due to
 how the items in the data set are classified. Suggestions on how to address this issue are given in later sections.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_4.png" alt="**Figure 3.4** Residual versus order plots using TPrice as the response. The first graph uses Mileage as the explanatory variable, and the second graph uses Mileage, Cyl, Doors, Cruise, Sound, and Leather as explanatory variables." width="100%" />
-<p class="caption">(\#fig:fig3.4)**Figure 3.4** Residual versus order plots using TPrice as the response. The first graph uses Mileage as the explanatory variable, and the second graph uses Mileage, Cyl, Doors, Cruise, Sound, and Leather as explanatory variables.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_4} 
+
+}
+
+\caption{**Figure 3.4** Residual versus order plots using TPrice as the response. The first graph uses Mileage as the explanatory variable, and the second graph uses Mileage, Cyl, Doors, Cruise, Sound, and Leather as explanatory variables.}(\#fig:fig3.4)
+\end{figure}
 
 ## Outliers and Influential Observations {-}
 
@@ -269,10 +285,14 @@ b. Is this cluster of outliers helpful in identifying the patterns that were fou
 If the coefficients change dramatically between the regression models, these points are considered influential. If any observations are influential, great care should be taken to verify their accuracy. In addition to reducing heterskedasticity, transformations can often reduce the effect of outliers. Figure 3.5 shows the residual versus fit plots using Price and TPrice, respectively. The cluster of outliers corresponding to the Cadillac convertibles is much more visible in the plot with the untransformed (Price) response
 variable. Even though there is still clustering in the transformed data, the residuals corresponding to the Cadillac convertibles are no longer unusually large.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_5.png" alt="**Figure 3.5** Residual versus fit plots using Price and TPrice as the response. The circled observations in the plot using Price are no longer clear outliers in the plot using TPrice." width="100%" />
-<p class="caption">(\#fig:fig3.5)**Figure 3.5** Residual versus fit plots using Price and TPrice as the response. The circled observations in the plot using Price are no longer clear outliers in the plot using TPrice.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_5} 
+
+}
+
+\caption{**Figure 3.5** Residual versus fit plots using Price and TPrice as the response. The circled observations in the plot using Price are no longer clear outliers in the plot using TPrice.}(\#fig:fig3.5)
+\end{figure}
 
 
 In some situations, clearly understanding outliers can be more time consuming (and possibly more interesting) than working with the rest of the data. It can be quite difficult to determine if an outlier was accurately recorded or whether the outliers should be included in the analysis.
@@ -296,10 +316,14 @@ b. Are the ten outliers visible on the normal probability plot and the histogram
 
 Figure 3.6 shows the normal probability plot using six explanatory variables to estimate TPrice. While the outliers are not visible, both plots still show evidence of lack of normality. Simply plugging data into a software package and using an iterative variable selection technique will not reliably create a “best” model.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_6.png" alt="**Figure 3.6** Normal probability plot and histogram of residuals from the model using TPrice as the response and Mileage, Cyl, Doors, Cruise, Sound, and Leather as the explanatory variables." width="100%" />
-<p class="caption">(\#fig:fig3.6)**Figure 3.6** Normal probability plot and histogram of residuals from the model using TPrice as the response and Mileage, Cyl, Doors, Cruise, Sound, and Leather as the explanatory variables.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_6} 
+
+}
+
+\caption{**Figure 3.6** Normal probability plot and histogram of residuals from the model using TPrice as the response and Mileage, Cyl, Doors, Cruise, Sound, and Leather as the explanatory variables.}(\#fig:fig3.6)
+\end{figure}
 
 >**Key Concept**
 Before a final model is selected, the residuals should be plotted against fitted (estimated) values, observation order, the theoretical normal distribution, and each explanatory variable in the model. Table 3.1 shows how each residual plot is used to check model assumptions. If a pattern exists in any of the residual plots, the $R^2$ value is likely to improve if different explanatory variables or transformations are included in the model.
@@ -352,10 +376,14 @@ Figure 3.7 shows that Liter and Cyl are highly correlated. Within the context of
 If your goal is to create a model to describe or predict, then multicollinearity really is not a problem. Note that multicollinearity has very little impact on the $R^2$ value. However, if your goal is to understand how a specific explanatory variable influences the response, as is often done when confirming a theory, then multicollinearity can cause coefficients (and their corresponding $p$-values when testing their significance) to be unreliable.
 
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_7.png" alt="**Figure 3.7** Scatterplot showing a clear association between Liter and Cyl." width="100%" />
-<p class="caption">(\#fig:fig3.7)**Figure 3.7** Scatterplot showing a clear association between Liter and Cyl.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_7} 
+
+}
+
+\caption{**Figure 3.7** Scatterplot showing a clear association between Liter and Cyl.}(\#fig:fig3.7)
+\end{figure}
 
 
 The following approaches are commonly used to address multicollinearity:
@@ -432,10 +460,14 @@ To determine a final model, you should attempt to maximize the $R^2$ value while
 
 21. Create a regression model that is simple (i.e., does not have too many terms) and still accurately predicts retail price. Validate the model assumptions. Look at residual plots and check for heteroskedasticity, multicollinearity, autocorrelation, and outliers. Your final model should not have significant clusters, skewness, outliers, or heteroskedasticity appearing in the residual plots. Submit your suggested least squares regression formula along with a limited number of appropriate graphs that provide justification for your model. Describe why you believe this model is “best.”
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig3_8.png" alt="**Figure 3.8** Residual versus order plots show that incorporating the indicator variables into the regression model improves the random behavior and reduces the sizes of the residuals." width="100%" />
-<p class="caption">(\#fig:fig3.8)**Figure 3.8** Residual versus order plots show that incorporating the indicator variables into the regression model improves the random behavior and reduces the sizes of the residuals.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig3_8} 
+
+}
+
+\caption{**Figure 3.8** Residual versus order plots show that incorporating the indicator variables into the regression model improves the random behavior and reduces the sizes of the residuals.}(\#fig:fig3.8)
+\end{figure}
 
 ## **What Can We Conclude from the 2005 GM Car Study?**
 
@@ -461,10 +493,7 @@ y_i - \bar{y} = (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y})
 \tag{3.7}
 \end{equation}
 
-<div class="figure">
-<img src="Chap3_files/figure-html/df_1-plot-1.png" alt="Scatterplot and regression line for Chevrolet Cavalier Sedans: Price = 15,244 - 0.111(Mileage)." width="576" />
-<p class="caption">(\#fig:df_1-plot)Scatterplot and regression line for Chevrolet Cavalier Sedans: Price = 15,244 - 0.111(Mileage).</p>
-</div>
+![(\#fig:df_1-plot)Scatterplot and regression line for Chevrolet Cavalier Sedans: Price = 15,244 - 0.111(Mileage).](Chap3_files/figure-latex/df_1-plot-1.pdf) 
 
 
 Using our highlighted observation (11,488, 14,678.1), we see that
@@ -546,15 +575,22 @@ The coefficient of determination, $R^2$, is a measure of the usefulness of the e
 The sum of squares calculations are often summarized in an analysis of variance (ANOVA) table, as shown in Table 1.
 
 [[[The table not displaying. But it works when I knit on separate pdf]]]
+\begin{table}
 
-
-Table: (\#tab:anova-table)ANOVA table for a least squares regression model, where n is the number of observations and p is the number of terms in the model (including the constant term).
-
-|Source     |      df       |                             SS                             |                        MS                        |     F.Statistic     |
-|:----------|:-------------:|:----------------------------------------------------------:|:------------------------------------------------:|:-------------------:|
-|Regression | $\quad p - 1$ | $\displaystyle SSR = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2$ |       $MS_{Regr} = \tfrac{SSR}{df_{Regr}}$       | $F = MS_{Regr}/MSE$ |
-|Error      | $\quad n - p$ |   $\displaystyle SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2$   | $MSE = \tfrac{SSE}{df_{Error}} = \hat{\sigma}^2$ |                     |
-|Total      | $\quad n - 1$ |    $\displaystyle SST = \sum_{i=1}^n (y_i - \bar{y})^2$    |                                                  |                     |
+\caption{(\#tab:anova-table)ANOVA table for a least squares regression model, where n is the number of observations and p is the number of terms in the model (including the constant term).}
+\centering
+\begin{tabular}[t]{l|c|c|c|c}
+\hline
+Source & df & SS & MS & F.Statistic\\
+\hline
+Regression & $\quad p - 1$ & $\displaystyle SSR = \sum_{i=1}^n (\hat{y}_i - \bar{y})^2$ & $MS_{Regr} = \tfrac{SSR}{df_{Regr}}$ & $F = MS_{Regr}/MSE$\\
+\hline
+Error & $\quad n - p$ & $\displaystyle SSE = \sum_{i=1}^n (y_i - \hat{y}_i)^2$ & $MSE = \tfrac{SSE}{df_{Error}} = \hat{\sigma}^2$ & \\
+\hline
+Total & $\quad n - 1$ & $\displaystyle SST = \sum_{i=1}^n (y_i - \bar{y})^2$ &  & \\
+\hline
+\end{tabular}
+\end{table}
 
 
 
@@ -656,20 +692,14 @@ The data set $4-8Cyl$ includes several four- and eight-cylinder cars from the or
 
 In the same way, the $Mileage$ coefficient states that holding $Cyl$ constant, we expect $Price$ to decrease by $0.20$ for each additional mile on the car.
 
-<div class="figure">
-<img src="Chap3_files/figure-html/df_2-plot-1.png" alt="Scatterplot and least squares regression line: Price = 15,349 - 0.20(Mileage) + 3443(Cyl). For each cylinder size, an increase of one mile is expected to reduce price by $0.20." width="576" />
-<p class="caption">(\#fig:df_2-plot)Scatterplot and least squares regression line: Price = 15,349 - 0.20(Mileage) + 3443(Cyl). For each cylinder size, an increase of one mile is expected to reduce price by $0.20.</p>
-</div>
+![(\#fig:df_2-plot)Scatterplot and least squares regression line: Price = 15,349 - 0.20(Mileage) + 3443(Cyl). For each cylinder size, an increase of one mile is expected to reduce price by $0.20.](Chap3_files/figure-latex/df_2-plot-1.pdf) 
 
 
 Figure 3 shows a scatterplot and regression line to predict $Price$ using $Mileage$, $Cyl$, and a $Mileage*Cyl$ interaction term (called $MileCyl$). The lack of parallel lines in the regression model $\text{Price} = 4533 + 0.340(\text{Mileage}) + 5431(\text{Cyl}) - 0.0995(\text{MileCyl})$ indicates an interaction effect.
 
 Caution should be used in interpreting coefficients when interaction terms are present. The coefficient for $Mileage$ can no longer be globally interpreted as reducing $Price$ by $0.20$ for each additional mile. Now, when there are four cylinders, $Price$ is reduced by $0.058\ [0.340(1) - 0.0995(1 \times 4) = -0.058]$ with each additional mile. When there are eight cylinders, $Price$ is reduced by $0.456\ [0.340(1) - 0.0995(1 \times 8) = -0.456]$ with each additional mile. Thus, an additional mile impacts $Price$ differently depending on the second variable, $Cyl$.
 
-<div class="figure">
-<img src="Chap3_files/figure-html/df_3-plot-1.png" alt="Scatterplot and and least squares regression line: Price = 4533 + 0.340(Mileage) + 5431(Cyl) + 0.0995(MileCyl). If the interaction term (MileCyl) is important, we expect to have regression lines that are not parallel." width="576" />
-<p class="caption">(\#fig:df_3-plot)Scatterplot and and least squares regression line: Price = 4533 + 0.340(Mileage) + 5431(Cyl) + 0.0995(MileCyl). If the interaction term (MileCyl) is important, we expect to have regression lines that are not parallel.</p>
-</div>
+![(\#fig:df_3-plot)Scatterplot and and least squares regression line: Price = 4533 + 0.340(Mileage) + 5431(Cyl) + 0.0995(MileCyl). If the interaction term (MileCyl) is important, we expect to have regression lines that are not parallel.](Chap3_files/figure-latex/df_3-plot-1.pdf) 
 
 \vspace*{2cm}
 
@@ -722,10 +752,7 @@ c. What does the residual normal probability plot show?
 Data set: $Cars$
 The potential outliers identified in Question 11 can provide an interesting demonstration of an interaction. Figure 3.12 shows that the slope to predict $Price$ from $Mileage$ for the ten Cadillac XLR-V8s is much steeper than the slope found when using the other cars. This shows that depreciation for these high-end cars is almost 50 cents a mile, as opposed to 15 cents a mile on average for all car types combined.
 
-<div class="figure">
-<img src="Chap3_files/figure-html/df_4-plot-1.png" alt="Scatterplot and regression lines: For the Cadillac XLR-V8, the regression line is Price = 71,997 - 0.4827(Mileage). This is a much steeper line than the regression line for all other cars: Price = 23,894 - 0.1549(Mileage)." width="576" />
-<p class="caption">(\#fig:df_4-plot)Scatterplot and regression lines: For the Cadillac XLR-V8, the regression line is Price = 71,997 - 0.4827(Mileage). This is a much steeper line than the regression line for all other cars: Price = 23,894 - 0.1549(Mileage).</p>
-</div>
+![(\#fig:df_4-plot)Scatterplot and regression lines: For the Cadillac XLR-V8, the regression line is Price = 71,997 - 0.4827(Mileage). This is a much steeper line than the regression line for all other cars: Price = 23,894 - 0.1549(Mileage).](Chap3_files/figure-latex/df_4-plot-1.pdf) 
 
 
 41. Create a quadratic mileage term. Create two models to predict $TPrice$, one with only $Mileage$ and another with both $Mileage$ and $(Mileage)^2$ (called $MileSq$).

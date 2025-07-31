@@ -99,10 +99,7 @@ Treatment & Control & Treatment & Control\\
 
 
 
-<div class="figure">
-<img src="index_files/figure-html/graph1-1.png" alt="Individual value plot of the worm count data" width="672" />
-<p class="caption">(\#fig:graph1)Individual value plot of the worm count data</p>
-</div>
+![(\#fig:graph1)Individual value plot of the worm count data](index_files/figure-latex/graph1-1.pdf) 
 
 
 \newpage
@@ -350,10 +347,7 @@ of iterations (i.e., randomizations) within a simulation study, the more precise
 
 
 
-<div class="figure">
-<img src="index_files/figure-html/graph2-1.png" alt="Histogram showing the results of a schistosomiasis simulation study. In this simulation, 281 out of 10,000 resulted in a difference greater than or equal to 7.6. " width="672" />
-<p class="caption">(\#fig:graph2)Histogram showing the results of a schistosomiasis simulation study. In this simulation, 281 out of 10,000 resulted in a difference greater than or equal to 7.6. </p>
-</div>
+![(\#fig:graph2)Histogram showing the results of a schistosomiasis simulation study. In this simulation, 281 out of 10,000 resulted in a difference greater than or equal to 7.6. ](index_files/figure-latex/graph2-1.pdf) 
 
 
 
@@ -537,10 +531,7 @@ laid off were 55, 55, and 64.
 Robert Martin may have a case: It appears as if older workers were more likely to be laid off. But we know
 enough about variability to be cautious.
 
-<div class="figure">
-<img src="index_files/figure-html/graph3-1.png" alt="Dotplot of age in years of worker versus layoff (whether he or she was laid off)" width="672" />
-<p class="caption">(\#fig:graph3)Dotplot of age in years of worker versus layoff (whether he or she was laid off)</p>
-</div>
+![(\#fig:graph3)Dotplot of age in years of worker versus layoff (whether he or she was laid off)](index_files/figure-latex/graph3-1.pdf) 
 
 
 
@@ -643,10 +634,7 @@ we would obtain an observed difference as large as or larger than 1.857.
 #> better value with `binwidth`.
 ```
 
-<div class="figure">
-<img src="index_files/figure-html/graph4-1.png" alt="Dotplot of the difference in pulse rates for each of the 28 subjects." width="672" />
-<p class="caption">(\#fig:graph4)Dotplot of the difference in pulse rates for each of the 28 subjects.</p>
-</div>
+![(\#fig:graph4)Dotplot of the difference in pulse rates for each of the 28 subjects.](index_files/figure-latex/graph4-1.pdf) 
 
 
 
@@ -933,39 +921,48 @@ $H_a$: the distribution of the salaries is different for pitchers and first base
 
 
 
+\begin{table}
+
+\caption{(\#tab:table2)Randomly selected pitchers and first baseman from 2005 National League baseball teams.}
+\centering
+\begin{tabular}[t]{lllr}
+\toprule
+Team & Position & Name & Salary(\textbackslash{}\$)\\
+\midrule
+Milwaukee Brewers & Pitcher & Obermueller, Wes & 342000\\
+Houston Astros & Pitcher & Backe, Brandon & 350000\\
+Atlanta Braves & Pitcher & Sosa, Jorge & 650000\\
+Atlanta Braves & Pitcher & Thomson, John & 4250000\\
+Cincinnati Reds & First Baseman & Casey, Sean & 7800000\\
+\addlinespace
+Arizona Diamondbacks & First Baseman & Green, Shawn & 7833333\\
+San Diego Padres & First Baseman & Nevin, Phil & 9625000\\
+New York Mets & Pitcher & Glavine, Tom & 10765608\\
+Colorado Rockies & First Baseman & Helton, Todd & 12600000\\
+Philadelphia Phillies & First Baseman & Thome, Jim & 13166667\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
-Table: (\#tab:table2)Randomly selected pitchers and first baseman from 2005 National League baseball teams.
-
-|Team                  |Position      |Name             | Salary(\$)|
-|:---------------------|:-------------|:----------------|----------:|
-|Milwaukee Brewers     |Pitcher       |Obermueller, Wes |     342000|
-|Houston Astros        |Pitcher       |Backe, Brandon   |     350000|
-|Atlanta Braves        |Pitcher       |Sosa, Jorge      |     650000|
-|Atlanta Braves        |Pitcher       |Thomson, John    |    4250000|
-|Cincinnati Reds       |First Baseman |Casey, Sean      |    7800000|
-|Arizona Diamondbacks  |First Baseman |Green, Shawn     |    7833333|
-|San Diego Padres      |First Baseman |Nevin, Phil      |    9625000|
-|New York Mets         |Pitcher       |Glavine, Tom     |   10765608|
-|Colorado Rockies      |First Baseman |Helton, Todd     |   12600000|
-|Philadelphia Phillies |First Baseman |Thome, Jim       |   13166667|
 
 
 
 
 
 
+\begin{table}
 
-
-
-
-Table: (\#tab:table3)Ranking the 10 randomly selected 2005 National League baseball players.
-
-|         |    |    |    |     |     |     |     |      |      |      |
-|:--------|:---|:---|:---|:----|:----|:----|:----|:-----|:-----|:-----|
-|Position |Pr  |Pr  |Pr  |Pr   |FB   |FB   |FB   |Pr    |FB    |FB    |
-|Salary   |342 |350 |650 |4250 |7800 |7833 |9625 |10766 |12600 |13167 |
-|Rank     |1   |2   |3   |4    |5    |6    |7    |8     |9     |10    |
+\caption{(\#tab:table3)Ranking the 10 randomly selected 2005 National League baseball players.}
+\centering
+\begin{tabular}[t]{lllllllllll}
+\toprule
+Position & Pr & Pr & Pr & Pr & FB & FB & FB & Pr & FB & FB\\
+Salary & 342 & 350 & 650 & 4250 & 7800 & 7833 & 9625 & 10766 & 12600 & 13167\\
+Rank & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 
@@ -1035,17 +1032,22 @@ $H_0$: the distribution of the response variable is the same for all groups
 $H_a$: some responses are systematically higher in some groups than in others
 
 
+\begin{table}
 
-
-Table: (\#tab:table4)Randomly selected catchers from 2005 National League baseball teams.
-
-|Team                 |Position |Name             | Salary(\$)|
-|:--------------------|:--------|:----------------|----------:|
-|Pittsburgh Pirates   |Catcher  |Ross, David      |     338500|
-|Los Angeles Dodgers  |Catcher  |Phillips, Jason  |     339000|
-|Atlanta Braves       |Catcher  |Perez, Eddie     |     625000|
-|Washington Nationals |Catcher  |Bennett, Gary    |     750000|
-|Pittsburgh Pirates   |Catcher  |Santiago, Benito |    2150000|
+\caption{(\#tab:table4)Randomly selected catchers from 2005 National League baseball teams.}
+\centering
+\begin{tabular}[t]{lllr}
+\toprule
+Team & Position & Name & Salary(\textbackslash{}\$)\\
+\midrule
+Pittsburgh Pirates & Catcher & Ross, David & 338500\\
+Los Angeles Dodgers & Catcher & Phillips, Jason & 339000\\
+Atlanta Braves & Catcher & Perez, Eddie & 625000\\
+Washington Nationals & Catcher & Bennett, Gary & 750000\\
+Pittsburgh Pirates & Catcher & Santiago, Benito & 2150000\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 
@@ -1125,17 +1127,21 @@ same data set? Does this mean that we’re sure to be wrong at least once? And i
     \begin{enumerate}
       \item Each test will either reject (R) or fail to reject (F). List all eight possible outcomes in the table below.
 
-
-| Case|Test_1 |Test_2 |Test_3 |Probability |
-|----:|:------|:------|:------|:-----------|
-|    1|F      |F      |F      |            |
-|    2|F      |F      |R      |            |
-|    3|F      |R      |F      |            |
-|    4|       |       |       |            |
-|    5|       |       |       |            |
-|    6|       |       |       |            |
-|    7|       |       |       |            |
-|    8|       |       |       |            |
+\begin{tabular}{rllll}
+\toprule
+Case & Test\_1 & Test\_2 & Test\_3 & Probability\\
+\midrule
+1 & F & F & F & \\
+2 & F & F & R & \\
+3 & F & R & F & \\
+4 &  &  &  & \\
+5 &  &  &  & \\
+\addlinespace
+6 &  &  &  & \\
+7 &  &  &  & \\
+8 &  &  &  & \\
+\bottomrule
+\end{tabular}
 
 
       

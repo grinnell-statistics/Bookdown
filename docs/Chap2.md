@@ -42,10 +42,14 @@ possible distractions.
 - The response variable would be the time in seconds from when the participant pressed the “start
 game” button to when he or she won the game.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_1Shapesplosion.jpg" alt="An image of the electronic Shapesplosion game with and without color distracters. The instructions for the game were to click and drag each peg to the space with the matching shape." width="100%" />
-<p class="caption">(\#fig:fig2.1)An image of the electronic Shapesplosion game with and without color distracters. The instructions for the game were to click and drag each peg to the space with the matching shape.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_1Shapesplosion} 
+
+}
+
+\caption{An image of the electronic Shapesplosion game with and without color distracters. The instructions for the game were to click and drag each peg to the space with the matching shape.}(\#fig:fig2.1)
+\end{figure}
 
 >**NOTE**
 It is important to recognize that each subject in this study was assigned to exactly one treatment, either the standard game or the color distracter game. Some researchers may point out that a paired design (where each subject was assigned to both treatments) might have been more efficient. However, for the purposes of this chapter, this study will be treated as the students originally designed it: a study comparing two independent samples.
@@ -80,72 +84,22 @@ The key question in this study is whether or not the two types of games have dif
 
 The underlying model used in the two-sample t-test is designed to account for these two group means ($\mu_1$ and $\mu_2$) and random error. The statistical model for the first population, the color distracter group, is:
 
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:center;border-bottom: none;">  </th>
-   <th style="text-align:center;border-bottom: none;">  </th>
-   <th style="text-align:center;border-bottom: none;">  </th>
-   <th style="text-align:center;border-bottom: none;">  </th>
-   <th style="text-align:center;border-bottom: none;">  </th>
-   <th style="text-align:center;border-bottom: none;">  </th>
-   <th style="text-align:center;border-bottom: none;">  </th>
-   <th style="text-align:center;border-bottom: none;">  </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;border: none;"> observed </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> mean </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> error </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;border: none;"> value </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> response </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> term </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;border: none;"> (random) </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> (not random) </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> (random) </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;border: none;"> ↓ </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> ↓ </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> ↓ </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;border: none;"> $y_{1,j}$ </td>
-   <td style="text-align:center;border: none;"> = </td>
-   <td style="text-align:center;border: none;"> $\mu_1$ </td>
-   <td style="text-align:center;border: none;"> + </td>
-   <td style="text-align:center;border: none;"> $\epsilon_{1,j}$ </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;">  </td>
-   <td style="text-align:center;border: none;"> for $j = 1, 2, ... ,n_1$ </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}
+\centering
+\begin{tabular}{>{}c|>{}c|>{}c|>{}c|>{}c|>{}c|>{}c|>{}c}
+\hline
+observed &  & mean &  & error &  &  & \\
+\hline
+value &  & response &  & term &  &  & \\
+\hline
+(random) &  & (not random) &  & (random) &  &  & \\
+\hline
+↓ &  & ↓ &  & ↓ &  &  & \\
+\hline
+\$y\_\{1,j\}\$ & = & \$\textbackslash{}mu\_1\$ & + & \$\textbackslash{}epsilon\_\{1,j\}\$ &  &  & for \$j = 1, 2, ... ,n\_1\$\\
+\hline
+\end{tabular}
+\end{table}
 
 
 
@@ -246,10 +200,14 @@ Several key observations should be made about the individual value plot shown in
 >**Key Concept**
 Every statistical hypothesis test has basic underlying conditions that need to be checked before any valid conclusions can be drawn.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_2.png" alt="Individual value plot of the data from the color distracter and standard games." width="100%" />
-<p class="caption">(\#fig:fig2.2)Individual value plot of the data from the color distracter and standard games.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_2} 
+
+}
+
+\caption{Individual value plot of the data from the color distracter and standard games.}(\#fig:fig2.2)
+\end{figure}
 
 ### Checking Assumptions for the t-Test {-}
 
@@ -334,10 +292,14 @@ In regression, assumptions about the error terms are also checked by residual pl
 
 Figure 2.3 shows a histogram of the residuals and a plot of the residuals by type of game. The histogram shows that the residuals approximately follow the shape of a normal distribution. The residual versus game type graph shows that there are no obvious outliers and that the spread of both groups is roughly equivalent. Since residuals are just the mean response subtracted from the observed value, the center of the residual plots has shifted to zero. However, the spread of the residual versus game plot is identical to the spread of the individual value plot in Figure 2.2.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_3.png" alt="Histogram of residuals and plot of residuals versus color." width="100%" />
-<p class="caption">(\#fig:fig2.3)Histogram of residuals and plot of residuals versus color.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_3} 
+
+}
+
+\caption{Histogram of residuals and plot of residuals versus color.}(\#fig:fig2.3)
+\end{figure}
 
 >**Key Concept**
 No assumptions are needed about the error terms to calculate estimates ($b_1 = \hat{\beta}_1$ and $b_0 = \hat{\beta}_0$) of the slope and intercept of the regression line. These estimates are simply well-known mathematical calculations. However, all the model assumptions should be satisfied in order to properly conduct a hypothesis test or create a confidence interval for $\beta_1$.
@@ -487,10 +449,14 @@ Essentially all studies have numerous extraneous variables that may be biasing t
 
 - *Random allocation:* How were units assigned to treatments? If the units were randomly allocated to treatment groups, a statistically significant result in a well-designed study shows that the treatment *causes* changes in the response variable.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_4.png" alt="Dotplots representing data from two studies. The difference between the group means is the same in both data sets, but the random variation is not the same. The variability in the residuals is much larger for 'Results A' than for 'Results B'." width="100%" />
-<p class="caption">(\#fig:fig2.4)Dotplots representing data from two studies. The difference between the group means is the same in both data sets, but the random variation is not the same. The variability in the residuals is much larger for 'Results A' than for 'Results B'.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_4} 
+
+}
+
+\caption{Dotplots representing data from two studies. The difference between the group means is the same in both data sets, but the random variation is not the same. The variability in the residuals is much larger for 'Results A' than for 'Results B'.}(\#fig:fig2.4)
+\end{figure}
 
 In the computer game study, students were “randomly” selected from the college. If the 40 students were truly a simple random sample of all students currently attending the college, the results of this study would hold for all students in the college. However, even if the researchers used a **sampling frame** (list of the population of all current students at their college) to randomly select 40 students, it would be unlikely that the first 40 subjects selected would agree to participate in the study. Thus, the population for the study would be all current college students who would agree to participate in the study. If the researchers’ version of “random sample” meant a collection of friends who agreed to participate in their study, the conclusions would hold only for the 40 students who volunteered.
 
@@ -518,10 +484,14 @@ These graphs are provided to illustrate that histograms are not always reliable 
 
 An alternative to histograms is normal probability plots. A **normal probability plot** is a scatter-plot of observed data versus the corresponding percentiles of the normal distribution. If the scatterplot forms a straight line, the percentiles of observed data match the percentiles of a normal distribution and we make the assumption that the observed data could have come from a population with a normal distribution.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_5.png" alt="Two histograms of the computer game study residuals." width="100%" />
-<p class="caption">(\#fig:fig2.5)Two histograms of the computer game study residuals.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_5} 
+
+}
+
+\caption{Two histograms of the computer game study residuals.}(\#fig:fig2.5)
+\end{figure}
 
 ## Extended Activity: Creating Probability Plots {-}
 Data set: $Normal$
@@ -636,10 +606,14 @@ Notice that $\log(y)$ replaces the transformation $y^0 = 1$, since setting every
 
 The bulging rule provides a visual method for determining appropriate transformations. Figure 2.6 shows four different curves (bulges) and indicates which powers of $y$ and $x$ would likely straighten the line. For example, the upper left quadrant of Figure 2.6 shows a curve that tends to become more linear if $y$ is transformed to a power greater than one (such as $y^2$ or $y^3$) and $x$ is transformed to a power less than one (such as $\sqrt{x}$, $\log(x)$, or $x^{-1}$).
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_6.png" alt="Bulge rule showing appropriate transformations to linearize curved data." width="100%" />
-<p class="caption">(\#fig:fig2.6)Bulge rule showing appropriate transformations to linearize curved data.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_6} 
+
+}
+
+\caption{Bulge rule showing appropriate transformations to linearize curved data.}(\#fig:fig2.6)
+\end{figure}
 
 Performing a transformation to control problems with unequal variances can increase the nonlinearity between the explanatory and response variables. Transforming the response variable influences both the variation and the linearity, but transforming the explanatory variable influences only the linearity. Thus, it is best to transform the response variable first to deal with nonconstant variance and then consider additional transformations on the explanatory variable to make the model linear. The following steps are useful for choosing an appropriate transformation:
 
@@ -1102,15 +1076,23 @@ If you completed the helicopter research project, this series of questions will 
 
 Figure 2.7 shows an individual value plot of the data, with five observations for each of the six wing length groups. The curved pattern is quite pronounced, and this makes sense. At some point, the wings are so long that the helicopter does not spin stably or is simply too heavy and falls faster. It appears that there is some optimal wing length around 9 or 10 cm.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_7.png" alt="Flight times for paper helicopters when dropped from a height of 8 feet, each with a small paperclip attached at the bottom of the base of the helicopter." width="100%" />
-<p class="caption">(\#fig:fig2.7)Flight times for paper helicopters when dropped from a height of 8 feet, each with a small paperclip attached at the bottom of the base of the helicopter.</p>
-</div>
+\begin{figure}
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig2_8.png" alt="Residuals from an ANOVA and linear regression analysis of the flight times for paper helicopters from six groups: wing lengths 5.5 cm, 6.5 cm (standard), 7.5 cm, 8.5 cm, 19.5 cm, and 10.5 cm." width="100%" />
-<p class="caption">(\#fig:fig2.8)Residuals from an ANOVA and linear regression analysis of the flight times for paper helicopters from six groups: wing lengths 5.5 cm, 6.5 cm (standard), 7.5 cm, 8.5 cm, 19.5 cm, and 10.5 cm.</p>
-</div>
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_7} 
+
+}
+
+\caption{Flight times for paper helicopters when dropped from a height of 8 feet, each with a small paperclip attached at the bottom of the base of the helicopter.}(\#fig:fig2.7)
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig2_8} 
+
+}
+
+\caption{Residuals from an ANOVA and linear regression analysis of the flight times for paper helicopters from six groups: wing lengths 5.5 cm, 6.5 cm (standard), 7.5 cm, 8.5 cm, 19.5 cm, and 10.5 cm.}(\#fig:fig2.8)
+\end{figure}
 
     \begin{enumerate}
       \item Using the \texttt{WingLength2} data set, try several transformations of either the response or the explanatory variable to see if you can alleviate the problem of nonlinearity.

@@ -213,10 +213,7 @@ Factorial designs are efficient because much more information can be calculated,
 
 Table 4.2 shows the `Popcorn` data set organized by the *Brand* and *Time* factors. Each of the four treatment combinations has eight observations. The data are also provided in the file `Popcorn`.
 
-<div class="figure">
-<img src="Chap4_files/figure-html/fig4.1-1.png" alt="Figure 4.1 Individual value plot of the PopRate (100 $	imes$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible." width="576" />
-<p class="caption">(\#fig:fig4.1)Figure 4.1 Individual value plot of the PopRate (100 $	imes$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible.</p>
-</div>
+![(\#fig:fig4.1)Figure 4.1 Individual value plot of the PopRate (100 $	imes$ count of popped kernels/total kernels) for each Brand and cooking Time factor-level combination. Points have jittering (small fluctuations) so that all values are visible.](Chap4_files/figure-latex/fig4.1-1.pdf) 
 
 \begin{table}[!h]
 \centering
@@ -287,12 +284,12 @@ MS_{\text{Brand}} = \frac{\sum_{i=1}^{2} n_i \times (\bar{y}_{i.} - \bar{y}_{..}
 \notag
 \end{align}
 
-\begin{align}
+\begin{align}\label{4.1}
 = \frac{16 \times (81.8 - 81.3)^2 + 16 \times (80.9 - 81.3)^2}{2-1}
 \tag{4.1}
 \end{align}
 
-where $n_i$ is the number of observations for brand $i$. In this study, $n_i = 16$ observations are taken for each brand. Notice that Equation (4.1) looks similar to a typical variance calculation:
+where $n_i$ is the number of observations for brand $i$. In this study, $n_i = 16$ observations are taken for each brand. Notice that Equation \ref{4.1} looks similar to a typical variance calculation:
 
 - There are two observed group means: 81.8 and 80.9.
 - The spread is measured by summing the squared distance between each observed group mean and the overall mean and then dividing by the number of group means minus one.
@@ -306,9 +303,9 @@ As with any variance calculation, we are finding an average squared distance (me
 In our study, we have a balanced design (i.e., equal sample sizes in every group). However, the formulas throughout this section allow for studies with unequal sample sizes (called unbalanced designs).
 \normalsize
 
-The calculation of the variability between the *Time* means ($MS_{\text{Time}}$) is very similar to Equation (4.1):
+The calculation of the variability between the *Time* means ($MS_{\text{Time}}$) is very similar to Equation \ref{4.1}:
 
-\begin{align}
+\begin{align}\label{4.2}
 MS_{\text{Time}} = \frac{\sum_{j=1}^{2} n_j \times (\bar{y}_{.j} - \bar{y}_{..})^2}{2-1}
 \tag{4.2}
 \end{align}
@@ -319,14 +316,14 @@ Table 4.3 provides some evidence of interaction between *Brand* and *Time*. For 
 
 To test for an interaction effect (the third hypothesis), we first measure the variability between all four groups (each *Brand* and *Time* combination) and then subtract the squared values for the main factors.
 
-\begin{align}
+\begin{align}\label{4.3}
 MS_{\text{BrandTime}} = \frac{\sum_{i=1}^{2}\sum_{j=1}^{2} n_{ij}(\bar{y}_{ij.} - \bar{y}_{..})^2 - \sum_{i=1}^{2} n_{i.}(\bar{y}_{i.} - \bar{y}_{..})^2 - \sum_{j=1}^{2} n_{.j}(\bar{y}_{.j} - \bar{y}_{..})^2}{4 - 1 - 1 - 1}
 \tag{4.3}
 \end{align}
 
-The key aspect of Equation (4.3) is that it calculates the squared distance between the four factor-level group means and the overall mean after accounting for the main factor group means. Thus, this calculation is an estimate of how spread out the four group means are after accounting for any influence of the main factor means.
+The key aspect of Equation \ref{4.3} is that it calculates the squared distance between the four factor-level group means and the overall mean after accounting for the main factor group means. Thus, this calculation is an estimate of how spread out the four group means are after accounting for any influence of the main factor means.
 
-The denominator of the mean square for interaction is based on the denominators from $MS_{\text{Brand}}$ in Equation (4.1) and $MS_{\text{Time}}$ in Equation (4.2). In this example, there are four factor-level group means. Thus, the denominator is calculated as $4 - 1 -$ (denominator from $MS_{\text{Brand}}$) $-$ (denominator from $MS_{\text{Time}}$) $= 4 - 1 - 1 - 1$. Details for deriving mean squares are provided in the extended activities.
+The denominator of the mean square for interaction is based on the denominators from $MS_{\text{Brand}}$ in Equation \ref{4.1} and $MS_{\text{Time}}$ in Equation \ref{4.2}. In this example, there are four factor-level group means. Thus, the denominator is calculated as $4 - 1 -$ (denominator from $MS_{\text{Brand}}$) $-$ (denominator from $MS_{\text{Time}}$) $= 4 - 1 - 1 - 1$. Details for deriving mean squares are provided in the extended activities.
 
 \large  
 \textbf{\textcolor{red}{Key Concept:}}  
@@ -337,7 +334,7 @@ The interaction term is not simply a measure of the spread between the four fact
 
 **Within-Group Variability** The best estimate of the variability within each group (MSE) is simply a weighted average of the sample variances within each of the four factor-level groups:
 
-\begin{align}
+\begin{align}\label{4.4}
 \text{MSE} &= 
 \frac{\sum_{i=1}^{2}\sum_{j=1}^{2}(n_{ij} - 1)s_{ij}^2}{(n_{11} - 1) + (n_{12} - 1) + (n_{21} - 1) + (n_{22} - 1)} \notag \\
 &= \frac{(8 - 1)s_{11}^2 + (8 - 1)s_{12}^2 + (8 - 1)s_{21}^2 + (8 - 1)s_{22}^2}
@@ -352,7 +349,7 @@ where $s_{ij}^2$ is the sample variance for the group representing brand $i$ and
 If groups of data from each factor-level combination have very different sample sizes and at least one group has a small sample size (e.g., less than 5 units per group), then ANOVA may not be appropriate. If the group(s) with the smallest sample size (s) has an unusually high variance, the MSE is likely to underestimate the true variance and ANOVA is likely to incorrectly reject the null hypothesis (conclude that there are differences when there really are no differences between group means). If the group(s) with the smallest sample size(s) has an unusually small variance, the **MSE** is likely to overestimate the true variance. The larger MSE may cause us to incorrectly fail to reject the null hypothesis (fail to detect true differences).
 \normalsize
 
-Equation (4.4) is often called the **mean square error** (MSE) of the responses, because “error” represents the unit-to-unit variability in the response that can’t be explained by any of the main factors or interactions. We are now ready to calculate a test statistic corresponding to each of the three hypotheses at the beginning of this section.
+Equation \ref{4.4} is often called the **mean square error** (MSE) of the responses, because “error” represents the unit-to-unit variability in the response that can’t be explained by any of the main factors or interactions. We are now ready to calculate a test statistic corresponding to each of the three hypotheses at the beginning of this section.
 
 **The F-Statistic** The F-statistic is a ratio of the between-group variability (variation between factor-level averages) to the within-group variability (pooled estimate of variability within each factor-level combination): (MS for factor)/MSE. Mathematical theory proves that if the assumptions of the ANOVA model hold, the F-statistic follows an F-distribution with degrees of freedom corresponding to the denominators of the MS for the factor being tested and the MSE. The $p$-value gives the likelihood of observing an F-statistic at least this large, assuming that the true population factor has equal level means. Thus, when the $p$-value is small, we conclude that there is a difference between the level means. Additional details are provided in the extended activities at the end of the chapter.
 
@@ -365,9 +362,9 @@ An F-statistic is simply the ratio of the between-group variability to the withi
 
 [[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Calculating F-Statistics {‑}
->8. Use Equation (4.1) to estimate $MS_{\text{Brand}}$, the variability between *Brand* means.  
-9. Calculate the variability between *Time* means, $MS_{\text{Time}}$. Explain the key differences between Equation (4.1) and Equation (4.2).  
-10. Use Equation (4.3) to estimate $MS_{\text{BrandTime}}$.  
+>8. Use Equation \ref{4.1} to estimate $MS_{\text{Brand}}$, the variability between *Brand* means.  
+9. Calculate the variability between *Time* means, $MS_{\text{Time}}$. Explain the key differences between Equation \ref{4.1} and Equation \ref{4.2}.  
+10. Use Equation \ref{4.3} to estimate $MS_{\text{BrandTime}}$.  
 11. Calculate the $F$-statistics corresponding to the three hypothesis tests: $\frac{MS_{\text{Brand}}}{\text{MSE}}$, $\frac{MS_{\text{Time}}}{\text{MSE}}$, $\frac{MS_{\text{BrandTime}}}{\text{MSE}}$.  
 12. What do you think are the largest and smallest possible values of any $F$-statistic?  
 13. Use the technology instructions provided on the CD to check your answers. Submit the software output. Note that a $p$-value for each $F$-statistic is provided. State your conclusions about each of the three hypotheses based on these $p$-values.  
@@ -395,10 +392,7 @@ Some statisticians will reject the equal variance assumption when the ratio of s
 
 In Question 13, the $p$-value corresponding to the third hypothesis test listed at the beginning of this section was 0.04. This demonstrates an interaction: the effect of one variable (*Time*) on the response depends on a second variable (*Brand*). Figure 4.2 provides a side-by-side boxplot and an interaction plot of the *Popcorn* data. **An interaction plot** is simply a plot of the four factor-level group means shown in Table 4.3. These plots show that for both brands, the average *PopRate* increases when the cooking time changes from 105 to 135 seconds. However, the change in means for the Fastco brand is very small compared to the change observed in the Pop Secret brand.
 
-<div class="figure">
-<img src="Chap4_files/figure-html/fig4.2-1.png" alt="Figure 4.2 Side-by-side boxplots and an interaction plot of the PopRate for each Brand and cooking Time factor-level combination." width="576" />
-<p class="caption">(\#fig:fig4.2)Figure 4.2 Side-by-side boxplots and an interaction plot of the PopRate for each Brand and cooking Time factor-level combination.</p>
-</div>
+![(\#fig:fig4.2)Figure 4.2 Side-by-side boxplots and an interaction plot of the PopRate for each Brand and cooking Time factor-level combination.](Chap4_files/figure-latex/fig4.2-1.pdf) 
 
 The interaction plot is helpful in visualizing how the effect of one factor can depend on another factor, especially when there are multiple factors in the study. When the lines in an interaction plot are essentially parallel, the effect of the first variable is not influenced by a second variable. Nonparallel lines indicate an interaction between main factors (e.g., the effect of *Time* depends on *Brand*). However, the interaction plot does not show the within group variability, so only the $p$-value from the ANOVA can be used to determine if the interaction is significant. The $p$-value of 0.04 shows that the observed interaction effect is so large that it is unlikely to have occurred just by chance. We conclude that $H_{a,3}$ is true: *Brand* influences the effect of *Time* on *PopRate*.
 
@@ -453,10 +447,14 @@ d. Address how random sampling and random allocation influence your conclusions.
 
 In completely randomized designs, all $F$-statistics corresponding to the tests for each main factor and interaction use the same denominator. The mean square for each main factor ($MS_{\text{Brand}}$, $MS_{\text{Time}}$, and $MS_{\text{Microwave}}$) is a measurement of the variability between level means. Since this is a balanced design, when the level means for a factor are farther apart, the corresponding mean square and $F$-statistics are larger. Thus, the main effects plot shown in Figure 4.3 allows us to quickly see that the *Time* factor is the most significant (has the smallest $p$-value) and the *Brand* factor is the least significant.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig4_3MainInteractionPlots.jpg" alt="Main effect plots and interaction plots for a three-factor ANOVA." width="80%" />
-<p class="caption">(\#fig:fig4.3)Main effect plots and interaction plots for a three-factor ANOVA.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{docs/Fig4_3MainInteractionPlots} 
+
+}
+
+\caption{Main effect plots and interaction plots for a three-factor ANOVA.}(\#fig:fig4.3)
+\end{figure}
 
 Figure 4.3 also provides interaction plots corresponding to the three hypotheses tests about interactions. Using the same logic, Figure 4.3 shows that the hypothesis test corresponding to the *Brand* and *Time* interaction will have the smallest $p$-value. While both the effect of *Time* and the effect of *Brand* are somewhat influenced by *Microwave*, the effect of *Time* is most influenced by changing *Brand*.
 
@@ -576,13 +574,17 @@ $\beta_j$: amount of water effect ($j = 1, 2, 3$), where $\beta_1$ represents th
 $(\alpha\beta)_{ij}$: interaction effect, where $(\alpha\beta)_{23}$ represents the Brand D/15 drops of water interaction effect  
 $\varepsilon_{ijk}$: the random error—the difference between the $k$th observed value ($k = 1, 2, \ldots, 26$) and the population mean breaking strength for brand $i$ and water amount $j$
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig4_4TwoWayDiagram.jpg" alt="Two-way factorial diagram." width="80%" />
-<p class="caption">(\#fig:fig4.4)Two-way factorial diagram.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{docs/Fig4_4TwoWayDiagram} 
+
+}
+
+\caption{Two-way factorial diagram.}(\#fig:fig4.4)
+\end{figure}
 
 Notice that each of the $2 \times 3 \times 26 = 156$ observed strength measurements represents one of the 156 equations in Figure 4.4. The structure of the data is now used to write down a statistical model for the data:
-\begin{align}
+\begin{align}\label{4.5}
 y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk} \quad \text{for } i = 1,2,\ j = 1,2,3, \text{ and } k = 1,2,\ldots,26 \tag{4.5}
 \end{align}
 
@@ -600,14 +602,14 @@ Table 4.5 shows that the *Strength* average changes from 1772.8 to 1123.4 with a
 &= \bar{y}_{1.} - \bar{y}_{..} = 1772.8 - 1448.1 = 324.7 \notag
 \end{align}
 
-\begin{align}
+\begin{align}\label{4.6}
 \hat{\beta}_3 &= \text{effect of 15 drops of water} = \text{15 drops mean} - \text{grand mean} \notag \\
 &= \bar{y}_{.3} - \bar{y}_{..} = 423.6 - 1448.1 = -1024.5 \tag{4.6}
 \end{align}
 
 \large  
 \textbf{NOTE:}  
-$\mu$, $\alpha_i$, $\beta_j$, and $(\alpha\beta)_{ij}$ in Equation (4.5) are population parameters. Statistics such as $\hat{\alpha}_i$ and $\hat{\beta}_j$ in Equation (4.6) are used to estimate the population effect sizes.
+$\mu$, $\alpha_i$, $\beta_j$, and $(\alpha\beta)_{ij}$ in Equation \ref{4.4} are population parameters. Statistics such as $\hat{\alpha}_i$ and $\hat{\beta}_j$ in Equation \ref{4.6} are used to estimate the population effect sizes.
 \normalsize
 
 [[[ This part not working. The heading is numbered, but it shouldnt be.
@@ -629,9 +631,9 @@ Interaction effect of Brand C and 15 drops of water interaction effect
 $= \bar{y}_{13.} - [\hat{\alpha}_1 + \hat{\beta}_3 + \bar{y}_{..}]$  
 $= \bar{y}_{13.} - [(\bar{y}_{1.} - \bar{y}_{..}) + (\bar{y}_{.3} - \bar{y}_{..}) + \bar{y}_{..}]$  
 $= 401.0 - [324.7 + (-1024.5) + 1448.1]$  
-$= -347.3$ \hspace{1cm} (4.7)
+$= -347.3 \hspace{1cm} \tag\ref{4.7}$ 
 
-The estimate of the Brand C and 15 drops of water interaction effect in Equation (4.7) tells us that the best estimate of any paper towel strength from this group should be reduced by an additional 347.3 after we take into account all other influencing factors (the grand mean and main effects).
+The estimate of the Brand C and 15 drops of water interaction effect in Equation \ref{4.7} tells us that the best estimate of any paper towel strength from this group should be reduced by an additional 347.3 after we take into account all other influencing factors (the grand mean and main effects).
 
 [[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Activity: Calculating Interaction Effects {‑}
@@ -639,12 +641,12 @@ The estimate of the Brand C and 15 drops of water interaction effect in Equation
 26. Show that $\bar{y}_{ij.} - \bar{y}_{i.} - \bar{y}_{.j} + \bar{y}_{..}$ is equivalent to the $j$th interaction effect.   
 27. Calculate the other five interaction effects. Hand draw Figure 4.4 and fill out the effect sizes with observed values (i.e., replace $\mu$, $\alpha_i$, $\beta_j$, and $(\alpha\beta)_{ij}$ with estimates from the data). Do not fill out the observations or the error terms ($y_{ijk}$ or $\varepsilon_{ijk}$).   
 28. Create an interaction plot. Does there appear to be evidence of an interaction effect?   
-29. Draw a diagram similar to Figure 4.4 for a two-way factorial design with four levels of the first factor, three levels of the second factor, and two observations per factor-level combination in Equation (4.5).   
+29. Draw a diagram similar to Figure 4.4 for a two-way factorial design with four levels of the first factor, three levels of the second factor, and two observations per factor-level combination in Equation \ref{4.4}.   
 30. Residuals, or observed random error terms, are defined as the observed responses, $y_{ijk}$, minus the estimate for the mean response (the sum of the grand mean, the two main effects, and the interaction effect). Calculate the residual values for $y_{213}$ and $y_{122}$.
 
-The effect for Brand C might be positive (Brand C has a higher average breaking strength than Brand D), but then the effect for Brand D must be negative and exactly the same size as the effect for Brand C. The two effects sum to zero. This is called a **restriction** on the model terms. The entire set of restrictions for the model in Equation (4.5) is provided below.
+The effect for Brand C might be positive (Brand C has a higher average breaking strength than Brand D), but then the effect for Brand D must be negative and exactly the same size as the effect for Brand C. The two effects sum to zero. This is called a **restriction** on the model terms. The entire set of restrictions for the model in Equation \ref{4.4} is provided below.
 
-\begin{align}
+\begin{align}\label{4.8}
 \sum_{i=1}^{2} \alpha_i = \alpha_1 + \alpha_2 = 0, \qquad \sum_{j=1}^{3} \beta_j = \beta_1 + \beta_2 + \beta_3 = 0 \notag
 \end{align}
 \begin{align}
@@ -668,14 +670,14 @@ The **sum of squares** (SS) for a main factor in the multi-factor ANOVA is ident
 
 This equation can be generalized. Instead of 78 elements in each *Brand* group, we can indicate $n_i$ elements. Instead of 2 levels for *Brand*, we can indicate $I$ levels. The first factor, *Brand*, can be labeled factor $A$; the second factor, *Water*, can be labeled factor $B$; etc. Then
 
-\begin{align}
+\begin{align}\label{4.9}
 \text{SS}_{\text{Brand}} = \text{SS}_A = \sum_{i=1}^{I} n_i(\bar{y}_{i..} - \bar{y}_{...})^2 \qquad \text{for} \quad I=2 \text{ (number of Brand levels)}
 \tag{4.9}
 \end{align}
 
 Similarly, $\text{SS}_{\text{Water}} = \text{SS}_B$ is the sum of squares for the *Water* effect on each observation.
 
-\begin{align}
+\begin{align}\label{4.10}
 \text{SS}_{\text{Water}} = \text{SS}_B = \sum (\text{Water effect on each of the 156 observations})^2 \notag \\
 = \sum_{j=1}^{3} 52(\bar{y}_{.j.} - \bar{y}_{...})^2 \notag \\
 = \sum_{j=1}^{J} n_j(\bar{y}_{.j.} - \bar{y}_{...})^2 \qquad \text{for} \quad J=3 \text{ (number of Water levels)}
@@ -684,7 +686,7 @@ Similarly, $\text{SS}_{\text{Water}} = \text{SS}_B$ is the sum of squares for th
 
 The sum of squares for the interaction term, $\text{SS}_{AB}$, is
 
-\begin{align}
+\begin{align}\label{4.11}
 \text{SS}_{AB} &= \sum (\text{interaction effect on each of the 156 observations})^2 \notag \\
 &= \sum_{i=1}^{I} \sum_{j=1}^{J} n_{ij} (\text{ith level effect})^2 \notag \\
 &= \sum_{i=1}^{2} \sum_{j=1}^{3} 26 (\bar{y}_{ij.} - \bar{y}_{i..} - \bar{y}_{.j.} + \bar{y}_{...})^2
@@ -693,7 +695,7 @@ The sum of squares for the interaction term, $\text{SS}_{AB}$, is
 
 The **error sum of squares** ($\text{SS}_{\text{Error}}$) measures the spread of the observed residuals. Each residual is defined as an observed value minus the estimated value: $\hat{\epsilon}_{ijk} = y_{ijk} - \bar{y}_{ij.}$.
 
-\begin{align}
+\begin{align}\label{4.12}
 \text{SS}_{\text{Error}} &= \sum (\text{each residual effect})^2 \notag \\
 &= \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{n_{ij}} (y_{ijk} - \bar{y}_{ij.})^2 \notag \\
 &= \sum_{i=1}^{I} \sum_{j=1}^{J} \left[(n_{ij} - 1) \times s_{ij}^2 \right] \notag \\
@@ -703,7 +705,7 @@ The **error sum of squares** ($\text{SS}_{\text{Error}}$) measures the spread of
 
 The **total sum of squares** ($\text{SS}_{\text{Total}}$) measures the overall spread of the responses in the full data set.
 
-\begin{align}
+\begin{align}\label{4.13}
 \text{SS}_{\text{Total}} &= \sum (\text{distance between each observation and the grand mean})^2 \notag \\
 &= \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{n_{ij}} (y_{ijk} - \bar{y}_{...})^2 \notag \\
 &= (N-1) \times s^2
@@ -726,7 +728,7 @@ where $N = 156$ is the total sample size.
 [[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Degrees of Freedom {‑}
 
-**Degrees of freedom** (df) are determined by how many “free” pieces of information are available when calculating effects. For example, Equation (4.8) shows that each of the main effects must sum to zero. Thus, knowing the effects of any two levels of *water* forces a known effect for the last level. In our example, the effect of 0 drops of water increases the expected mean strength by 1264.4. Similarly, the effect of using 5 drops of water is -239.9. The the effects must sum to zero ($\hat{\beta}_1 + \hat{\beta}_2 + \hat{\beta}_3 = 1264.4 - 239.9 - 1024.5 = 0$).
+**Degrees of freedom** (df) are determined by how many “free” pieces of information are available when calculating effects. For example, Equation \ref{4.8} shows that each of the main effects must sum to zero. Thus, knowing the effects of any two levels of *water* forces a known effect for the last level. In our example, the effect of 0 drops of water increases the expected mean strength by 1264.4. Similarly, the effect of using 5 drops of water is -239.9. The the effects must sum to zero ($\hat{\beta}_1 + \hat{\beta}_2 + \hat{\beta}_3 = 1264.4 - 239.9 - 1024.5 = 0$).
 
 \large  
 \textbf{\textcolor{red}{Key Concept:}}  
@@ -754,13 +756,13 @@ Brand D &  &  & \\
 \end{tabular}
 \end{table}
 
-a. Equation (4.8) states that all the $AB$ effects within Brand C add up to zero [$(\alpha\beta)_{11} + (\alpha\beta)_{12} + (\alpha\beta)_{13} = 0$]. Use this rule to calculate $(\alpha\beta)_{13}$.
+a. Equation \ref{4.8} states that all the $AB$ effects within Brand C add up to zero [$(\alpha\beta)_{11} + (\alpha\beta)_{12} + (\alpha\beta)_{13} = 0$]. Use this rule to calculate $(\alpha\beta)_{13}$.
 
-b. Equation (4.8) also states that all the $AB$ effects within 0 water amount add up to zero (the same for 5 and 15 drops of water). Use this rule to calculate $(\alpha\beta)_{21}$, $(\alpha\beta)_{22}$, and $(\alpha\beta)_{23}$.
+b. Equation \ref{4.8} also states that all the $AB$ effects within 0 water amount add up to zero (the same for 5 and 15 drops of water). Use this rule to calculate $(\alpha\beta)_{21}$, $(\alpha\beta)_{22}$, and $(\alpha\beta)_{23}$.
 
-c. Consider a different interaction table with two rows and three columns. Explain why it is not possible to have effects of $(\alpha\beta)_{11} = 4$, $(\alpha\beta)_{13} = -4$, and $(\alpha\beta)_{22} = 6$ and still follow the restrictions in Equation (4.8).
+c. Consider a different interaction table with two rows and three columns. Explain why it is not possible to have effects of $(\alpha\beta)_{11} = 4$, $(\alpha\beta)_{13} = -4$, and $(\alpha\beta)_{22} = 6$ and still follow the restrictions in Equation \ref{4.8}.
 
-d. What are the degrees of freedom corresponding to any interaction term (in a balanced completely randomized design) with two levels of factor $A$ and three levels of factor $B$? In other words, under the restrictions in Equation (4.8), what is the number of free pieces of information (the number of cells in Table 4.6 that are not fixed)?
+d. What are the degrees of freedom corresponding to any interaction term (in a balanced completely randomized design) with two levels of factor $A$ and three levels of factor $B$? In other words, under the restrictions in Equation \ref{4.8}, what is the number of free pieces of information (the number of cells in Table 4.6 that are not fixed)?
 
 32. Table 4.7 is another table of interaction effects, with five rows and three columns (five levels of factor $A$ and three levels of factor $B$). Again, we will assume that only some of the effects are known.
 
@@ -781,11 +783,11 @@ $-2$ & 6 & \\
 \end{tabular}
 \end{table}
 
-a. Use Equation (4.8) to calculate the effect corresponding to each of the remaining cells.
+a. Use Equation \ref{4.8} to calculate the effect corresponding to each of the remaining cells.
 
 b. In Table 4.7, eight cells are filled. If only seven cells were filled, would it be possible to calculate the effects corresponding to all remaining cells?
 
-c. What are the degrees of freedom corresponding to any interaction term (in a balanced completely randomized design) with five levels of factor $A$ and three levels of factor $B$? In other words, what is the minimum number of cells that must be filled in order to allow us to use Equation (4.8) to estimate all other effects?
+c. What are the degrees of freedom corresponding to any interaction term (in a balanced completely randomized design) with five levels of factor $A$ and three levels of factor $B$? In other words, what is the minimum number of cells that must be filled in order to allow us to use Equation \ref{4.8} to estimate all other effects?
 
 33. Use the previous two questions to determine the degrees of freedom for an interaction term for a balanced completely randomized design using three levels of factor $A$ and four levels of factor $B$.
 
@@ -795,7 +797,7 @@ For the $AB$ interaction term, there are $I \times J$ effects that are calculate
 - Similarly, all the $AB$ effects within 0 water amount add up to zero [$(\alpha\beta)_{11} + (\alpha\beta)_{21} = 0$]. The same restriction holds for all other levels of factor $B$ (for 5 and 15 drops of water). Thus, an additional $J = 3$ pieces of information are no longer free. However, one piece of information is already fixed from the requirement that the sum of all brand effects is zero. Thus, only $J-1 = 3-1=2$ free pieces of information are taken for water amounts.
 
 The degrees of freedom for the interaction effect are
-\begin{align}
+\begin{align}\label{4.14}
 \text{df}_{AB} &= \text{number of interaction effects} - [\text{df}_A + \text{df}_B + 1] \notag \\
 &= IJ - [(I-1) + (J-1) + 1] \notag \\
 &= IJ - I - J + 1 \notag \\
@@ -805,7 +807,7 @@ The degrees of freedom for the interaction effect are
 
 \large
 \textbf{MATHEMATICAL NOTE:}
-Calculating interaction degrees of freedom as $(I-1)(J-1)$ in Equation (4.14) is quite easy. However, the reason Equation (4.14) also shows interaction df $= IJ - [(I-1) + (J-1) + 1]$ is that this follows the calculation of the interaction effect shown in Equation (4.7): $\bar{y}_{ij.} - [(\bar{y}_{i.} - \bar{y}_{...}) + (\bar{y}_{.j.} - \bar{y}_{...}) + \bar{y}_{...}]$. The key point is to recognize that knowing how the effects are calculated drives formulas for both sum of squares and degrees of freedom. This is also true for more complex designs beyond the scope of this chapter.
+Calculating interaction degrees of freedom as $(I-1)(J-1)$ in Equation \ref{4.14} is quite easy. However, the reason Equation \ref{4.14} also shows interaction df $= IJ - [(I-1) + (J-1) + 1]$ is that this follows the calculation of the interaction effect shown in Equation \ref{4.7}: $\bar{y}_{ij.} - [(\bar{y}_{i.} - \bar{y}_{...}) + (\bar{y}_{.j.} - \bar{y}_{...}) + \bar{y}_{...}]$. The key point is to recognize that knowing how the effects are calculated drives formulas for both sum of squares and degrees of freedom. This is also true for more complex designs beyond the scope of this chapter.
 \normalsize
 
 \large  
@@ -835,7 +837,7 @@ Total & $N-1$ & $\displaystyle\sum_{i=1}^I\sum_{j=1}^J\sum_{k=1}^K (y_{ijk} - \o
 [[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity: Analyzing the Paper Towel Data{‑}
 >Data set: $PaperTowels$  
-34. **Checking Assumptions** In the statistical model in Equation (4.5), the following assumptions need to be validated about the random error terms, $\varepsilon_{ijk}$, before any formal hypothesis test can be developed:
+34. **Checking Assumptions** In the statistical model in Equation \ref{4.4}, the following assumptions need to be validated about the random error terms, $\varepsilon_{ijk}$, before any formal hypothesis test can be developed:
 - The error terms are independent and identically distributed.
 - The error terms follow a normal probability distribution, denoted as $\epsilon \sim N(0, \sigma^2)$.
 
@@ -911,7 +913,7 @@ Any set of $G$ group means (four group means in our case; $H_0$: $\mu_{SR} = \mu
 
 Often contrasts are incorporated into the ANOVA analysis. The $F$-statistic for a contrast is simply the mean square for a particular between groups measure (for example, $MS_{C1}$ is the mean square for $C_1$) divided by the pooled within group variances (MSE). We can write the mean square for a contrast as
 
-\begin{align}
+\begin{align}\label{4.15}
 MS_{C1} = \frac{(C1)^2}{\sum_{g=1}^{G} \frac{C_{g1}^2}{n_g}}
 \tag{4.15}
 \end{align}
@@ -935,7 +937,7 @@ MS_{C1} &= \frac{1^2}{10} + \frac{(-1)^2}{10} + \frac{1^2}{10} + \frac{(-1)^2}{1
 [[[ This part not working. The heading is numbered, but it shouldnt be.
 ## Extended Activity: Calculating Contrasts{‑}
 >Data set: *Games2*  
-40. Use Equation (4.15) to calculate $MS_{C2}$ and $MS_{C3}$. Show your work.  
+40. Use Equation \ref{4.15} to calculate $MS_{C2}$ and $MS_{C3}$. Show your work.  
 41. Compare $MS_{C2}$ and $MS_{C3}$, the mean squares found in Question 38.
 
 \large
@@ -1064,10 +1066,14 @@ Two students, Isaac and Courtney, sampled surfaces around their campus to analyz
 
 Data were collected by wiping surfaces with a wet Q-tip and swabbing the result on a standard nutrient agar plate. Locations were all tested on April 24, 2009 over the course of a two-hour period. The plates were incubated at 37°C for 48 hours before colony-forming units (CFUs) were counted as a measure of bacteria levels. Figure 4.5 shows several of the plates from this study. When CFUs exceeded 400 per plate, one fourth of the plate was counted and the total was calculated from that sample.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig4_5_Bacteria.jpg" alt="Pictures of representative plates from Isaac and Courtney’s samples around campus: (A) a bathroom door handle in Norris, (B) a desk in Noyce (the large cluster is a mold spot, not counted as a CFU), (C) a desk in Yellow House (the white film is a fungus, not counted as a CFU), (D) a desk in ARH, and (E) a bathroom door handle in the Cowles apartment. Photos courtesy of Derek R. Blanchette." width="80%" />
-<p class="caption">(\#fig:fig4.5)Pictures of representative plates from Isaac and Courtney’s samples around campus: (A) a bathroom door handle in Norris, (B) a desk in Noyce (the large cluster is a mold spot, not counted as a CFU), (C) a desk in Yellow House (the white film is a fungus, not counted as a CFU), (D) a desk in ARH, and (E) a bathroom door handle in the Cowles apartment. Photos courtesy of Derek R. Blanchette.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{docs/Fig4_5_Bacteria} 
+
+}
+
+\caption{Pictures of representative plates from Isaac and Courtney’s samples around campus: (A) a bathroom door handle in Norris, (B) a desk in Noyce (the large cluster is a mold spot, not counted as a CFU), (C) a desk in Yellow House (the white film is a fungus, not counted as a CFU), (D) a desk in ARH, and (E) a bathroom door handle in the Cowles apartment. Photos courtesy of Derek R. Blanchette.}(\#fig:fig4.5)
+\end{figure}
 
 
 Six different buildings were swabbed, with two buildings representing each type of facility:

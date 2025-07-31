@@ -192,7 +192,7 @@ calculate the sample proportion:
 
 When all observations are complete, we can generalize this calculation to any time $t$ using an estimator of $S(t)$ called the empirical survival function, denoted by $\hat S(t)_{E}$ and given by
 
-\begin{align}
+\begin{align}\label{9.1}
 \hat S(t)_{E}
 &= \frac{\text{number of individuals yet to experience the event at time }t}{\text{total number of individuals in the study}} \notag \\
 &= \frac{\text{number of event times greater than }t}{\text{total number of individuals in the study}}
@@ -221,10 +221,10 @@ Time & 35+ & 30 & 60+ & 45 & 25 & 55 & 30+\\
 
 ## Activity: Empirical Survival Function {-}
 
-4. Use Equation (9.1) and the 7 milk chocolate melting times in Table 9.1 to compute $\hat S(25)_{E}$, $\hat S(30)_{E}$, $\hat S(40)_{E}$, and $\hat S(60)_{E}$.  
+4. Use Equation \ref{9.1} and the 7 milk chocolate melting times in Table 9.1 to compute $\hat S(25)_{E}$, $\hat S(30)_{E}$, $\hat S(40)_{E}$, and $\hat S(60)_{E}$.  
 5. With the melting times provided in Table 9.2, use the following two approaches to calculate the estimated probability that it takes more than 45 seconds for a chocolate chip to melt, based on the empirical survival function $\hat S(45)_{E}$:  
-   a. Treat all the censored times as complete (actual observed) times, and use Equation (9.1) to calculate $\hat S(45)_{E}$.  
-   b. Eliminate all censored observations, and then use Equation (9.1) and the remaining complete observations to calculate $\hat S(45)_{E}$.  
+   a. Treat all the censored times as complete (actual observed) times, and use Equation \ref{9.1} to calculate $\hat S(45)_{E}$.  
+   b. Eliminate all censored observations, and then use Equation \ref{9.1} and the remaining complete observations to calculate $\hat S(45)_{E}$.  
 
 Note the different answers obtained in Parts (a) and (b) of Question 5. By treating the censored times as complete times, we assume that the event times are shorter than they actually are, thereby underestimating the true probability of survival (not melting). By disregarding the censored times, we lose information about melting times from the sample (consider the extreme case where all melting times are 60+). Treating the censored observations as complete or ignoring them will _bias_ any estimates based on the remaining complete times.
 
@@ -328,7 +328,7 @@ The Kaplan–Meier estimator provides the proportions of subjects in the sample 
   
 Then the Kaplan–Meier estimator of the survival function is given by
 
-\begin{align}
+\begin{align}\label{9.2}
 \hat S(t)_{\mathrm{KM}} &= \prod_{t_i \le t} \bigl(1 - d_i/n_i\bigr)
 \tag{9.2}
 \end{align}
@@ -371,10 +371,14 @@ You’ll notice a box to the right of the graph, labeled “Table of Statistics,
 median survival times for the sample, as well as the interquartile range (IQR). We’ll discuss these descriptive
 statistics in Section 9.4.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_1.png" alt="Kaplan-Meier estimated proportions (estimated survival probabilities) of chocolate chips." width="100%" />
-<p class="caption">(\#fig:fig9.1)Kaplan-Meier estimated proportions (estimated survival probabilities) of chocolate chips.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_1} 
+
+}
+
+\caption{Kaplan-Meier estimated proportions (estimated survival probabilities) of chocolate chips.}(\#fig:fig9.1)
+\end{figure}
 
 ## Activity: Kaplan–Meier Curves {-}
 >18. Compare the values of $\hat S(t)_{\mathrm{KM}}$ in Table 9.3 to those in Figure 9.1. How would the Kaplan–Meier curve in Figure 9.1 change if the largest observed melting time were not censored?  
@@ -390,10 +394,14 @@ The Kaplan–Meier curve corresponding to the second melting scenario, displayed
 
 Part (c) displays the Kaplan–Meier curve for the third melting scenario, and we can observe that the chips do not begin completely melting until after 35 seconds. Then during the next 5 seconds, the estimated proportion of chips that remain unmelted declines rapidly (approximately 50% of the chips melt between the 35th and the 40th second). Then for an extended period of time between the 40th and the 85th second, the melting stabilizes, so the proportions of chips that survive are identical. Then melting resumes for the next 15 seconds. For any time beyond the 100th second, it is estimated that about 9% of the chips have not melted.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_2.png" alt="Kaplan-Meier survival curves for different chip melting experiences." width="100%" />
-<p class="caption">(\#fig:fig9.2)Kaplan-Meier survival curves for different chip melting experiences.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_2} 
+
+}
+
+\caption{Kaplan-Meier survival curves for different chip melting experiences.}(\#fig:fig9.2)
+\end{figure}
 
 ## Activity: Chip Melting Experiences {-}
 >20. Discuss the fourth chip melting scenario, illustrated by the Kaplan–Meier curve in Part (d) of Figure 9.2.
@@ -412,7 +420,7 @@ The estimated mean survival time is the total area under the Kaplan–Meier curv
 
 If the largest observed event time is complete (i.e., $t_n = t_m$), then the estimator of the mean survival time, denoted by $\hat \mu$, is given by
 
-\begin{align}
+\begin{align}\label{9.3}
 \hat \mu 
 &= \sum_{i=0}^{m-1} \hat S(t_i)_{\mathrm{KM}} \,\bigl(t_{i+1} - t_i\bigr) \notag \\
 &= \hat S(t_0)_{\mathrm{KM}}(t_1 - t_0) + \hat S(t_1)_{\mathrm{KM}}(t_2 - t_1) + \dots + \hat S(t_{m-1})_{\mathrm{KM}}(t_m - t_{m-1})
@@ -421,18 +429,22 @@ If the largest observed event time is complete (i.e., $t_n = t_m$), then the est
 
 If the largest event time $t_n$ is censored (i.e., $t_n > t_m$), then the estimator of the mean survival time is given by
 
-\begin{align}
+\begin{align}\label{9.4}
 \hat \mu 
 &= \sum_{i=0}^{m-1} \hat S(t_i)_{\mathrm{KM}} \,(t_{i+1} - t_i) + \hat S(t_m)_{\mathrm{KM}}(t_n - t_m)
 \tag{9.4}
 \end{align}
 
-Equations (9.3) and (9.4) can be thought of as a weighted average of the time-to-event data, where the Kaplan–Meier curve $\hat S(t_i)_{\mathrm{KM}}$ acts as weights (probabilities) for the time-to-event intervals. Each term in the summation of Equations (9.3) and (9.4) represents the area of a rectangle formed by the width of the $i$th time interval $t_{i+1} - t_i$ and the height of the Kaplan–Meier curve $\hat S(t_i)_{\mathrm{KM}}$. For example, the width of the left-most rectangle in Figure 9.3 outlined by the vertical dotted line is 25 seconds, and the height of the rectangle is 1. So the first term in the sum of Equation (9.3) is $\hat S(t_0)_{\mathrm{KM}}(25 - 0) = (1)(25) = 25$.
+Equations \ref{9.3} and \ref{9.4} can be thought of as a weighted average of the time-to-event data, where the Kaplan–Meier curve $\hat S(t_i)_{\mathrm{KM}}$ acts as weights (probabilities) for the time-to-event intervals. Each term in the summation of Equations \ref{9.3} and \ref{9.4} represents the area of a rectangle formed by the width of the $i$th time interval $t_{i+1} - t_i$ and the height of the Kaplan–Meier curve $\hat S(t_i)_{\mathrm{KM}}$. For example, the width of the left-most rectangle in Figure 9.3 outlined by the vertical dotted line is 25 seconds, and the height of the rectangle is 1. So the first term in the sum of Equation \ref{9.3} is $\hat S(t_0)_{\mathrm{KM}}(25 - 0) = (1)(25) = 25$.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_3.png" alt="Kaplan-Meier estimated proportions. Vertical lines appear at the complete melting times, and grid marks are overlaid on the graph. The dimension of each square in the grid is 5 seconds (width) by 0.1 (height)." width="100%" />
-<p class="caption">(\#fig:fig9.3)Kaplan-Meier estimated proportions. Vertical lines appear at the complete melting times, and grid marks are overlaid on the graph. The dimension of each square in the grid is 5 seconds (width) by 0.1 (height).</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_3} 
+
+}
+
+\caption{Kaplan-Meier estimated proportions. Vertical lines appear at the complete melting times, and grid marks are overlaid on the graph. The dimension of each square in the grid is 5 seconds (width) by 0.1 (height).}(\#fig:fig9.3)
+\end{figure}
 
 \large  
 \textbf{\textcolor{red}{Key Concept:}}  
@@ -443,7 +455,7 @@ The mean survival time is estimated using the time intervals and the Kaplan–Me
 
 ## Activity: Estimated Mean Chip Melting Time {-}
 >21. Examine Figure 9.3. Visually estimate the mean survival time (i.e., the estimated average time taken for the chocolate chips in the sample to melt) by computing a rough approximation to the area under the Kaplan–Meier curve.  
->22. For the sample of chocolate chip melting times in Table 9.2, which equation, (9.3) or (9.4), is appropriate for estimating the mean survival time of the chips? Based on your answer, calculate the estimated mean using the quantities in Table 9.3.
+>22. For the sample of chocolate chip melting times in Table 9.2, which equation, \ref{9.3} or \ref{9.4}, is appropriate for estimating the mean survival time of the chips? Based on your answer, calculate the estimated mean using the quantities in Table 9.3.
 
 ## Estimating Percentiles of the Survival Time Distribution {-}
 
@@ -451,7 +463,7 @@ Suppose we want the time at which 50% of the chocolate chips have melted. This q
 
 The $p$th percentile of the distribution for the survival time random variable $T$ is defined to be the time by which $p\%$ of the subjects in the population have experienced the target event. The estimate of the $p$th percentile, denoted by $\hat t_{(p)}$, is defined to be the smallest *complete* event time in the sample such that at least $p\%$ of the subjects in the sample have experienced the event of interest before $\hat t_{(p)}$, and no more than $(100 - p)\%$ of the subjects in the sample experience the event after $\hat t_{(p)}$. Depending on the number of distinct complete event times, the value of $\hat t_{(p)}$ can be found either by inspecting the Kaplan–Meier curve or by finding the solution to the following equation:
 
-\begin{align}
+\begin{align}\label{9.5}
 \hat t_{(p)} &= \text{smallest complete event time }t_i\text{ in the sample such that } \hat S(t_i)_{\mathrm{KM}} \le 1 - \frac{p}{100}
 \tag{9.5}
 \end{align}
@@ -470,14 +482,18 @@ Percentile estimates of the survival time distribution are found using the Kapla
 >24. Refer back to the Kaplan–Meier curve displayed in Figure 9.1. The mean and median survival times for the sample of chip melting times are provided in the “Table of Statistics” box on the graph. The interquartile range (IQR) is also provided. Recall that the IQR is the third quartile (75th percentile) minus the first quartile (25th percentile). Verify by hand that the IQR for the sample of times is 25 seconds.  
 >25. Use the technology instructions provided on the CD to determine the estimated mean and median survival times separately for the milk and white chocolate chip melting time data from your class activity. Discuss the differences you observe between the two descriptive measures and between the two types of chips.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_4.png" alt="Kaplan-Meier estimated proportions. The horizontal dotted line represents $\hat S(55)_{\mathrm{KM}} = 0.3$ and the vertical dotted line represents $\hat t_{(70)} = t_4 = 55$." width="100%" />
-<p class="caption">(\#fig:fig9.4)Kaplan-Meier estimated proportions. The horizontal dotted line represents $\hat S(55)_{\mathrm{KM}} = 0.3$ and the vertical dotted line represents $\hat t_{(70)} = t_4 = 55$.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_4} 
+
+}
+
+\caption{Kaplan-Meier estimated proportions. The horizontal dotted line represents $\hat S(55)_{\mathrm{KM}} = 0.3$ and the vertical dotted line represents $\hat t_{(70)} = t_4 = 55$.}(\#fig:fig9.4)
+\end{figure}
 
 \large  
 \textbf{MATHEMATICAL NOTE}  
-Based on the definition of the estimated percentile in Equation (9.5), it is possible that particular estimated percentiles do not exist. The $p$th percentile will not exist (and your software may return NA) if there does not exist a complete time $t_p$ such that $\hat S(t_p)_{\mathrm{KM}} \le 1 - \tfrac{p}{100}$. For example, in the MeltingChipsJS data set, more than 25% of the milk chocolate chips had not melted by the end of the study (75 seconds). Thus, there is no estimate of the 75th percentile and the IQR cannot be calculated.
+Based on the definition of the estimated percentile in Equation \ref{9.5}, it is possible that particular estimated percentiles do not exist. The $p$th percentile will not exist (and your software may return NA) if there does not exist a complete time $t_p$ such that $\hat S(t_p)_{\mathrm{KM}} \le 1 - \tfrac{p}{100}$. For example, in the MeltingChipsJS data set, more than 25% of the milk chocolate chips had not melted by the end of the study (75 seconds). Thus, there is no estimate of the 75th percentile and the IQR cannot be calculated.
 \normalsize
 
 ## **Confidence Intervals for Survival Probabilities**
@@ -486,7 +502,7 @@ Just like any other sample statistic (e.g., the sample mean $\bar x$), the estim
 
 In your first course in statistics, you saw that a confidence interval for a population parameter (e.g., a population mean $\mu$) has the following form:
 
-\begin{align}
+\begin{align}\label{9.6}
 \text{point estimate} \;\pm\; \text{critical value}\;\times\;\text{standard error of the estimate}
 \tag{9.6}
 \end{align}
@@ -499,7 +515,7 @@ Using the critical value from a standard normal distribution and the standard er
 
 The 100$(1-\alpha)\%$ confidence interval for $S(t)$ at a fixed time $t$ is given by
 
-\begin{align}
+\begin{align}\label{9.7}
 \hat S(t)_{\mathrm{KM}} \;\pm\; Z_{\alpha/2}\,\mathrm{se}\bigl(\hat S(t)_{\mathrm{KM}}\bigr)
 \tag{9.7}
 \end{align}
@@ -510,7 +526,7 @@ where $Z_{\alpha/2}$ is the critical value from the standard normal distribution
 
 The variability in the values of $\hat S(t)_{\mathrm{KM}}$ at a fixed time $t$ in each interval $[t_{i-1},\,t_i)$ is measured by the estimated **variance of the Kaplan–Meier estimator**, denoted $\widehat{\mathrm{Var}}\bigl(\hat S(t)_{\mathrm{KM}}\bigr)$ and calculated using the expression
 
-\begin{align}
+\begin{align}\label{9.8}
 \widehat{\mathrm{Var}}\bigl(\hat S(t)_{\mathrm{KM}}\bigr)
 &= \bigl(\hat S(t)_{\mathrm{KM}}\bigr)^2 \;\biggl(\sum_{t_i \le t}\frac{d_i}{n_i(n_i - d_i)}\biggr)
 \tag{9.8}
@@ -520,7 +536,7 @@ where $d_i$ is the number of subjects who experienced the event of interest in t
 
 The **standard error of the Kaplan–Meier estimator** at time $t$, denoted by $\mathrm{se}\bigl(\hat S(t)_{\mathrm{KM}}\bigr)$, is the square root of $\widehat{\mathrm{Var}}\bigl(\hat S(t)_{\mathrm{KM}}\bigr)$:
 
-\begin{align}
+\begin{align}\label{9.9}
 \mathrm{se}\bigl(\hat S(t)_{\mathrm{KM}}\bigr)
 &= \sqrt{\widehat{\mathrm{Var}}\bigl(\hat S(t)_{\mathrm{KM}}\bigr)}
 \tag{9.9}
@@ -532,7 +548,7 @@ As we will see, when we construct the confidence intervals for $S(t)$, the estim
 \widehat{\mathrm{Var}}\bigl(\hat S(t_1)_{\mathrm{KM}}\bigr),\;\widehat{\mathrm{Var}}\bigl(\hat S(t_2)_{\mathrm{KM}}\bigr),\;\dots,\;\widehat{\mathrm{Var}}\bigl(\hat S(t_m)_{\mathrm{KM}}\bigr).\notag
 \end{align}
 
-For example, the Kaplan–Meier estimated survival probability at the complete time $t=25$ for the data in Table 9.2 is $\hat S(25)_{\mathrm{KM}} = 6/7$. Using Equation (9.8) and the quantities in Table 9.3, we find that the variance estimate $\widehat{\mathrm{Var}}\bigl(\hat S(25)_{\mathrm{KM}}\bigr)$ at time $t=25$ is given by
+For example, the Kaplan–Meier estimated survival probability at the complete time $t=25$ for the data in Table 9.2 is $\hat S(25)_{\mathrm{KM}} = 6/7$. Using Equation \ref{9.8} and the quantities in Table 9.3, we find that the variance estimate $\widehat{\mathrm{Var}}\bigl(\hat S(25)_{\mathrm{KM}}\bigr)$ at time $t=25$ is given by
 
 \begin{align}
 \widehat{\mathrm{Var}}\bigl(\hat S(25)_{\mathrm{KM}}\bigr)
@@ -544,7 +560,7 @@ For example, the Kaplan–Meier estimated survival probability at the complete t
 
 Then the standard error of $\hat S(25)_{\mathrm{KM}}$ at time $t=25$ is $\mathrm{se}\bigl(\hat S(25)_{\mathrm{KM}}\bigr) = \sqrt{0.0175} = 0.1323$. 
 
-With the computed standard error, we can use Formula (9.7) to construct a confidence interval for a survival probability. For example, the 95% confidence interval for $S(25)$—the probability that a randomly selected milk chocolate chip takes longer than 25 seconds to melt—is calculated as
+With the computed standard error, we can use Formula \ref{9.7} to construct a confidence interval for a survival probability. For example, the 95% confidence interval for $S(25)$—the probability that a randomly selected milk chocolate chip takes longer than 25 seconds to melt—is calculated as
 
 \begin{align}
 \hat S(25)_{\mathrm{KM}} \;\pm\; Z_{0.025}\,\mathrm{se}\bigl(\hat S(25)_{\mathrm{KM}}\bigr)
@@ -555,16 +571,20 @@ With the computed standard error, we can use Formula (9.7) to construct a confid
 \notag
 \end{align}
 
-Observe that the upper limit for the confidence interval for $S(25)$ exceeds 1. Since the confidence interval given by Formula (9.7) is for a *survival probability*, the interval limits should technically not fall outside the range [0,1]. However, it is possible to obtain a lower limit less than 0 and/or an upper limit greater than 1, especially for smaller sample sizes. This is a drawback of using Formula (9.7) to construct confidence intervals. When confronted with a situation (as is the case here) where the interval limit(s) is (are) outside the range [0,1], it is common practice to truncate the limit(s) at the appropriate minimum value of 0 or maximum value of 1.
+Observe that the upper limit for the confidence interval for $S(25)$ exceeds 1. Since the confidence interval given by Formula \ref{9.7} is for a *survival probability*, the interval limits should technically not fall outside the range [0,1]. However, it is possible to obtain a lower limit less than 0 and/or an upper limit greater than 1, especially for smaller sample sizes. This is a drawback of using Formula \ref{9.7} to construct confidence intervals. When confronted with a situation (as is the case here) where the interval limit(s) is (are) outside the range [0,1], it is common practice to truncate the limit(s) at the appropriate minimum value of 0 or maximum value of 1.
 
 The interpretation of confidence interval limits for *survival probabilities* is similar to the standard interpretation of confidence intervals for other parameters of interest (think back to confidence intervals for a population mean or proportion). For the chip melting times provided in Table 9.2, we can state with 95% confidence that the probability that a chocolate chip will take longer than 25 seconds to melt is between 0.60 and 1.00. Or, equivalently, we are 95% confident that the true proportion of chips that have not melted after 25 seconds is between 60% and 100%.
 
 The Kaplan–Meier curve and associated 95% confidence intervals for the chocolate chip melting time data are displayed in Figure 9.5. Observe the times where the upper limit has been constrained to equal 1 and the lower limit has been constrained to equal 0.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_5.png" alt="Kaplan-Meier curve with 95% confidence intervals. Note that Minitab graphs use the same line type and color for both the Kaplan-Meier curve and the confidence limits; however, the middle line will always be the Kaplan-Meier curve." width="100%" />
-<p class="caption">(\#fig:fig9.5)Kaplan-Meier curve with 95% confidence intervals. Note that Minitab graphs use the same line type and color for both the Kaplan-Meier curve and the confidence limits; however, the middle line will always be the Kaplan-Meier curve.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_5} 
+
+}
+
+\caption{Kaplan-Meier curve with 95\% confidence intervals. Note that Minitab graphs use the same line type and color for both the Kaplan-Meier curve and the confidence limits; however, the middle line will always be the Kaplan-Meier curve.}(\#fig:fig9.5)
+\end{figure}
 
 \large  
 \textbf{NOTE:}  
@@ -584,12 +604,12 @@ Confidence intervals provide a range of values that we can be reasonably sure co
 27. Find the remaining standard errors of $\hat S(t)_{\mathrm{KM}}$ at times $t = 30$, $t = 45$, and $t = 55$ for the chocolate chip melting time data.  
 28. Using your above answers and the appropriate entries in Table 9.3, construct 95% confidence intervals for the survival probabilities $S(t)$ at each of the remaining complete melting times, and interpret their values.  
 29. Use software to construct the 95% confidence intervals for the survival probabilities for the milk chocolate chip melting time data from your class activity. Graph the Kaplan–Meier curve and the confidence intervals for $S(t)$.  
-30. Based on the width of the confidence intervals (upper limit minus lower limit), how useful do you think these intervals are for providing estimates of the true melting times? How could we improve the usefulness of these intervals? (Hint: Refer back to Equation (9.8). What could you change to make the intervals narrower?)  
+30. Based on the width of the confidence intervals (upper limit minus lower limit), how useful do you think these intervals are for providing estimates of the true melting times? How could we improve the usefulness of these intervals? (Hint: Refer back to Equation \ref{9.8}. What could you change to make the intervals narrower?)  
 31. On the same graph, plot both Kaplan–Meier estimates and 95% confidence intervals for the white and milk chocolate chip melting time data from your class activity. Explain whether or not the two types of chocolate appear to have different survival functions.  
 
 \large  
 \textbf{NOTE:}  
-The confidence interval for $S(t)$ is valid for a single fixed time at which the inference is to be made. For this reason, confidence intervals are sometimes referred to as *pointwise intervals*. Each interval constructed using Formula (9.7) is relevant only for $t$ within the $i$th interval. Therefore, it is not correct to state that we are 95% confident that the entire true survival curve $S(t)$ falls between the confidence bands in Figure 9.5. If we want a confidence band for an entire survival function $S(t)$ within which we can guarantee with a specified level of confidence that the entire curve falls, alternative confidence bands need to be computed.  
+The confidence interval for $S(t)$ is valid for a single fixed time at which the inference is to be made. For this reason, confidence intervals are sometimes referred to as *pointwise intervals*. Each interval constructed using Formula \ref{9.7} is relevant only for $t$ within the $i$th interval. Therefore, it is not correct to state that we are 95% confident that the entire true survival curve $S(t)$ falls between the confidence bands in Figure 9.5. If we want a confidence band for an entire survival function $S(t)$ within which we can guarantee with a specified level of confidence that the entire curve falls, alternative confidence bands need to be computed.  
 \normalsize
 
 ## **Comparing Survival Functions**
@@ -605,10 +625,14 @@ To illustrate the comparison techniques, we’ll use a sample of *white* chocola
 
 First, we visually inspect the Kaplan–Meier curves for both groups. Figure 9.6 shows that the Kaplan–Meier curve for the white chocolate chip melting times tends to be above the milk chocolate chip curve. This means that, over time, the proportion of unmelted white chocolate chips is generally larger than the proportion of unmelted milk chocolate chips; that is, white chocolate chips generally take longer to melt than milk chocolate chips. While Figure 9.6 appears to show a difference in the curves based on our sample data, a formal hypothesis test is needed to determine if the difference in the *sample data* is large enough to conclude that the survival curves for the *populations* of white and milk chocolate chips are different.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_6.png" alt="Kaplan-Meier curves for the hypothetical melting times of milk and white chocolate chips." width="100%" />
-<p class="caption">(\#fig:fig9.6)Kaplan-Meier curves for the hypothetical melting times of milk and white chocolate chips.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_6} 
+
+}
+
+\caption{Kaplan-Meier curves for the hypothetical melting times of milk and white chocolate chips.}(\#fig:fig9.6)
+\end{figure}
 
 
 ## The Log-Rank Test {-}
@@ -669,7 +693,7 @@ Interval i & Time Interval & $n_i$ & Number Censored & $d_i$ & $d_{1i}$ & $d_i/n
 
 The expected number of event occurrences in group 1 at time $t_i$, denoted $E_{1i}$, is given by
 
-\begin{align}
+\begin{align}\label{9.10}
 E_{1i} &= \frac{n_{1i}\,d_i}{n_i}
 \tag{9.10}
 \end{align}
@@ -679,7 +703,7 @@ number of individuals in group 1 who are at risk at time $t_i$.
 
 \large  
 \textbf{MATHEMATICAL NOTE:}  
-Equation (9.10) is based on the assumption that the number of occurrences for group 1 at time $t_i$ follows a hypergeometric distribution.$^6$
+Equation \ref{9.10} is based on the assumption that the number of occurrences for group 1 at time $t_i$ follows a hypergeometric distribution.$^6$
 \normalsize
 
 Next, we need to compare the observed and expected counts at time $t_i$, which can be done by taking the
@@ -700,16 +724,16 @@ Refer to the entries in Table 9.5.
 
 Table 9.5 contains values of $E_{1i}$ and $V_{1i}$ for the first six time intervals for the milk chocolate chip and white chocolate chip melting time data. Remember that we need to compare the total observed and total expected counts over all the complete event times, so we compare $\sum_{i=1}^m d_{1i}$, and the sum of the expected event occurrences, $\sum_{i=1}^m E_{1i}$, over all $m$ complete event times. We put this together to obtain the statistic
 
-\begin{align}
+\begin{align}\label{9.11}
 \chi &= \frac{\sum_{i=1}^m d_{1i} - \sum_{i=1}^m E_{1i}}{\sqrt{\sum_{i=1}^m V_{1i}}}
 \tag{9.11}
 \end{align}
 
-where $\sum_{i=1}^m V_{1i}$ is the variance of the total number of event occurrences over the $m$ complete event times. Basically, Equation (9.11) is nothing more than a $z$-score; i.e., it tells us how many standard deviations the total observed number of event occurrences is above or below its mean.
+where $\sum_{i=1}^m V_{1i}$ is the variance of the total number of event occurrences over the $m$ complete event times. Basically, Equation \ref{9.11} is nothing more than a $z$-score; i.e., it tells us how many standard deviations the total observed number of event occurrences is above or below its mean.
 
-Although we can use Equation (9.11) to make our decision regarding the null hypothesis of equal survival functions, it is more common to see the square of the statistic in Equation (9.11) reported in statistical software output. The square of the statistic in Equation (9.11), called the log-rank test statistic (for two groups), is given by
+Although we can use Equation \ref{9.11} to make our decision regarding the null hypothesis of equal survival functions, it is more common to see the square of the statistic in Equation \ref{9.11} reported in statistical software output. The square of the statistic in Equation \ref{9.11}, called the log-rank test statistic (for two groups), is given by
 
-\begin{align}
+\begin{align}\label{9.12}
 \chi^2 &= \frac{\bigl(\text{total observed events in group 1} - \text{total expected events in group 1}\bigr)^{2}}%
              {\text{variance in the total number of all complete events}} \notag \\
        &= \frac{\left(\sum_{i=1}^m d_{1i} - \sum_{i=1}^m E_{1i}\right)^{2}}{\sum_{i=1}^m V_{1i}}
@@ -726,7 +750,7 @@ The test statistic $\chi^2$ is said to *asymptotically* follow a chi-square dist
 ## Activity: Log-Rank Test Statistic {-}
 
 34. Calculate the missing quantities in Table 9.5. Note that $E_{19}$, $E_{1,10}$, $V_{19}$, and $V_{1,10}$ are all equal to 0. This is because all the milk chocolate chips have melted by 62 seconds.  
-35. Use Equation (9.12) and the entries in Table 9.5 to verify that the value of the log-rank test statistic is 1.007. Note that your answer may vary slightly because of rounding.
+35. Use Equation \ref{9.12} and the entries in Table 9.5 to verify that the value of the log-rank test statistic is 1.007. Note that your answer may vary slightly because of rounding.
 
 The $p$-value corresponding to the value of $\chi^2$ is 0.316. Hence, we do not have strong enough evidence to conclude that the melting experiences (survival curves) of the populations of white and milk chocolate chips significantly differ. Note that we should be cautious about interpreting the results of this test because the sample size of 16 is fairly small. We should always supplement the results of the test with graphs of the Kaplan–Meier curves.
 
@@ -746,10 +770,14 @@ Although the results of the log-rank and Wilcoxon tests will typically agree, it
 
 The log-rank test and the Wilcoxon test can be implemented with many statistical packages. For the chip melting data in Table 9.4, the results for the tests comparing survival curves are shown in Figure 9.7.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_7.png" alt="Software output for the log-rank and Wilcoxon tests." width="100%" />
-<p class="caption">(\#fig:fig9.7)Software output for the log-rank and Wilcoxon tests.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_7} 
+
+}
+
+\caption{Software output for the log-rank and Wilcoxon tests.}(\#fig:fig9.7)
+\end{figure}
 
 Observe that the results of the two different tests are in agreement. Thus, even though the two curves
 based on the sample data look fairly different, we do not have enough evidence to conclude that the popula-
@@ -812,7 +840,7 @@ If the notion of an “instantaneous” rate troubles you, imagine the situation
 
 To reiterate, the population hazard function, $h(t)$, is the rate at which individuals in the population experience the target event in the next *instant* of time (time $t$), conditional on having survived (not experienced the event) up to time $t$. Although you are probably comfortable with the idea of a small interval of time like one second or even a tenth of a second, it may be a bit harder to imagine an interval of time that lasts an instant. In calculus, an instant of time is regarded as an interval of time whose width approaches (but never reaches) 0. The hazard function, $h(t)$, is defined as
 
-\begin{align}
+\begin{align}\label{9.13}
 h(t) &= \lim_{\Delta t \to 0} \frac{P\bigl(t \le T < t + \Delta t \mid T \ge t\bigr)}{\Delta t}
 \tag{9.13}
 \end{align}
@@ -825,14 +853,18 @@ In some situations, a graph of $h(t)$ can be constructed and examined for period
 
 Although we will not provide any computational examples of $h(t)$, we’ll provide two hypothetical hazard curves and describe them in the context of melting chocolate chips.^[Calculus is suggested for this section] Figure 9.8 displays two hazard functions that are used in practice when simplifying assumptions about the data can be made. The hazard function in Part (a) illustrates constant risk, while the hazard function in Part (b) illustrates increasing risk. Part (a) displays a situation or study where the subjects have a constant risk of experiencing the target event. In the context of melting chips, the constant hazard rate of 0.40 (i.e., $h(t)=0.4$) shown in Part (a) would correspond to a period throughout which events (melting chips) occur with equal frequency during any equal period of time. Now examine Part (b). The hazard function is increasing over time; furthermore, the hazard rate is linearly related to time. This implies that the risk of chips melting increases as a function of time, corresponding to a period of time during which the proportion of unmelted chips is decreasing.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_8.png" alt="Possible forms of the population hazard function." width="100%" />
-<p class="caption">(\#fig:fig9.8)Possible forms of the population hazard function.</p>
-</div>
+\begin{figure}
 
-Equation (9.13) may look something like the formal definition of the derivative of some function (although it probably isn’t clear what that function is). It turns out that $h(t)$ is related to the derivative of a function of the (population) survival function $S(t)$ by the expression
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_8} 
 
-\begin{align}
+}
+
+\caption{Possible forms of the population hazard function.}(\#fig:fig9.8)
+\end{figure}
+
+Equation \ref{9.13} may look something like the formal definition of the derivative of some function (although it probably isn’t clear what that function is). It turns out that $h(t)$ is related to the derivative of a function of the (population) survival function $S(t)$ by the expression
+
+\begin{align}\label{9.14}
 h(t) &= -\frac{d}{dt}\,\ln\bigl[S(t)\bigr]
 \tag{9.14}
 \end{align}
@@ -868,7 +900,7 @@ for $i=0,1,\dots,m-1$. Recall that $\hat p_i$ represents the proportion of remai
 
 If we divide $\hat p_i = d_i/n_i$ by the width of the time interval $t_{i+1}-t_i$, then the resulting quantity
 
-\begin{align}
+\begin{align}\label{9.15}
 \frac{\hat p_i}{t_{i+1} - t_i}
 \tag{9.15}
 \end{align}
@@ -885,14 +917,18 @@ Table 9.3 contained the observed number of melted chips, number of chips at risk
 
 We can plot the estimated hazard rates versus time to view the estimated **hazard curve** for the sample of survival times. The Kaplan–Meier curve and estimated hazard function for the chocolate chip melting times are shown in Figure 9.9. Note that, because of the small sample size, the plot is extremely rough and the pattern is somewhat erratic. This curve is an approximation to the corresponding true hazard function for the population of all chocolate chip melting times. From Figure 9.9 we observe that the lowest risk of melting occurs between 30 and 45 seconds (among chips that have remain unmelted up through 30 seconds). The highest risk of melting occurs between the 45th and the 55th second. Note that the estimated hazard rate is not defined before the first complete event time and after the last complete time.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_9.png" alt="Estimated survival probabilities and estimated hazard rates for the chocolate chip data." width="100%" />
-<p class="caption">(\#fig:fig9.9)Estimated survival probabilities and estimated hazard rates for the chocolate chip data.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_9} 
+
+}
+
+\caption{Estimated survival probabilities and estimated hazard rates for the chocolate chip data.}(\#fig:fig9.9)
+\end{figure}
 
 
 ## Extended Activity: Estimated Hazard Rates {-}
-Examine Figure 9.9, the entries in Table 9.6, and Formula (9.15) to address the following questions:  
+Examine Figure 9.9, the entries in Table 9.6, and Formula \ref{9.15} to address the following questions:  
   41. In general, can $\hat h(t)_{\mathrm{KM}}$ take on a negative value in any time interval? Briefly explain. What does this suggest about the minimum value of $\hat h(t)_{\mathrm{KM}}$?  
   42. Is there a maximum value that $\hat h(t)_{\mathrm{KM}}$ can take on within a (finite) interval of time? Briefly explain.
 
@@ -908,7 +944,7 @@ When do individuals have their first drink of alcohol? The legal age for consumi
 ## Extended Activity: Age at First Alcoholic Drink {-}
 Data set: $Firstdrink$  
 43. Investigate the time until first drink by creating a Kaplan–Meier curve (with a confidence interval) for the data. What do you observe about the survival probabilities?  
-44. Use the software instructions provided to plot the estimated hazard rates for the age at first drink data. We will examine the plot in the following paragraphs. Note that Minitab computes the estimated hazard rates using an expression different from Formula (9.15) (it restricts the rate to fall between 0 and 1), so it is recommended that the R software be used to construct the plot of the estimated hazard function.  
+44. Use the software instructions provided to plot the estimated hazard rates for the age at first drink data. We will examine the plot in the following paragraphs. Note that Minitab computes the estimated hazard rates using an expression different from Formula \ref{9.15} (it restricts the rate to fall between 0 and 1), so it is recommended that the R software be used to construct the plot of the estimated hazard function.  
 
 From the Kaplan–Meier curve in Figure 9.10, we can observe that the estimated proportion of individuals who had not taken their first drink decreases rapidly after age 13. What does this mean in terms of the estimated hazard rates? Examine Figure 9.10, which was produced using the R statistical software. Part (a) displays the Kaplan–Meier curve $\hat S(t)_{\mathrm{KM}}$, while Part (b) displays the estimated hazard curve $\hat h(t)_{\mathrm{KM}}$.
 
@@ -925,10 +961,14 @@ that drinking is likely to occur among 21-year-olds who have never had alcohol b
 estimated hazard decreases until about 25 years, when there is another sudden increase. The curve generally
 decreases after age 26 and levels off at about 34 years of age.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_10.png" alt="Estimated survival probabilities and estimated hazard rates for the age at first drink data." width="100%" />
-<p class="caption">(\#fig:fig9.10)Estimated survival probabilities and estimated hazard rates for the age at first drink data.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_10} 
+
+}
+
+\caption{Estimated survival probabilities and estimated hazard rates for the age at first drink data.}(\#fig:fig9.10)
+\end{figure}
 
 \large  
 \textbf{\textcolor{red}{Key Concept:}}  
@@ -959,10 +999,14 @@ Have you ever been frustrated because you were stuck behind a car that was stopp
 
 The Kaplan–Meier survival curve and the estimated hazard function for the motorist reaction time data are displayed in Figure 9.11. The estimated hazard function behaves erratically and displays several spikes, making it very difficult to assess how the hazard rate is changing over time.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_11.png" alt="Estimated survival probabilities and estimated hazard rates for the time until the motorist displays aggressive behavior." width="100%" />
-<p class="caption">(\#fig:fig9.11)Estimated survival probabilities and estimated hazard rates for the time until the motorist displays aggressive behavior.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_11} 
+
+}
+
+\caption{Estimated survival probabilities and estimated hazard rates for the time until the motorist displays aggressive behavior.}(\#fig:fig9.11)
+\end{figure}
 
 Similar to the survival function and hazard function, we can define a cumulative hazard function for a population and a sample. We will denote the population cumulative hazard function by $H(t)$, and the estimator of the cumulative hazard function by $\widehat H(t)_{\mathrm{KM}}$. The definition of $H(t)$ is given by
 
@@ -974,10 +1018,14 @@ An important point to make is that the cumulative hazard function $H(t)$ is neit
 
 To better understand what is meant by an increase or decrease in the rate of change in $H(t)$, consider Figure 9.12. The dashed line represents the population cumulative hazard function $H(t)$, and the values of the slopes of the four solid lines represent estimates of the rates of increase in $H(t)$ over the corresponding four time periods. Observe that $H(t)$ increases over the entire range of time, but the rates of increase (the values of the four slopes) vary over the course of time. The slopes of the first three lines are decreasing, implying that the rate of change in $H(t)$ decreases until about time $t = 4$. The slope of the fourth line is greater than the previous slope, indicating that the rate of change _increases_ after time $t = 4$.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_12.png" alt="Cumulative hazard function displaying various rates of change over time" width="100%" />
-<p class="caption">(\#fig:fig9.12)Cumulative hazard function displaying various rates of change over time</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_12} 
+
+}
+
+\caption{Cumulative hazard function displaying various rates of change over time}(\#fig:fig9.12)
+\end{figure}
 
 In general, we can examine how the rate of change in the cumulative hazard function changes over time to understand how the hazard function, $h(t)$, changes over time.
 
@@ -991,17 +1039,21 @@ Figure 9.13 presents the hazard functions originally shown in Figure 9.8 and the
 \large  
 \textbf{MATHEMATICAL NOTE:}  
 Assuming a particular probability distribution for $T$, the mathematical definition of $H(t)$ requires integral calculus and is given by
-\begin{align}
+\begin{align}\label{9.16}
 H(t) &= \int_{0}^{t} h(x)\,dx
 \tag{9.16}
 \end{align}
 In general, $H(t)$ increases as $t$ increases [$H(t)$ is constant only when $h(t) = 0$]. Also note that $H(t)$ is neither a rate nor a probability (it is an accumulation of rate over time).  
 \normalsize
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_13.png" alt="Population hazard functions and their corresponding cumulative hazard functions." width="100%" />
-<p class="caption">(\#fig:fig9.13)Population hazard functions and their corresponding cumulative hazard functions.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_13} 
+
+}
+
+\caption{Population hazard functions and their corresponding cumulative hazard functions.}(\#fig:fig9.13)
+\end{figure}
 
 ## Estimator of the Cumulative Hazard Function{-}
 
@@ -1015,7 +1067,7 @@ Once again, we will start with intervals of time defined as if we were computing
 
 where $\hat h(t)_{\mathrm{KM}}$ is the estimated hazard rate for $t_i \le t < t_{i+1}$ and $t_{i+1} - t_i$ is the width of the $i$th interval.  Then the Nelson–Aalen estimator of $H(t)$, denoted $\widehat H(t)_{\mathrm{NA}}$, is simply the sum of these total estimated hazard quantities up to a particular time $t$, given by
 
-\begin{align}
+\begin{align}\label{9.17}
 \widehat H(t)_{\mathrm{NA}} &= \sum_{t_i \le t} \bigl[\hat h(t)_{\mathrm{KM}}\times (t_{i+1} - t_i)\bigr]
 \tag{9.17}
 \end{align}
@@ -1028,14 +1080,18 @@ interval [$t_m$, $t_n$) (see Figure 9.14 for example).
 • Otherwise, if the last observed event time is complete, then $\widehat H(t)_{\mathrm{NA}}$ will simply reach its highest value
 at the complete time, $t_m$.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_14.png" alt="Estimated hazard function and estimated cumulative hazard function for the chip melting data." width="100%" />
-<p class="caption">(\#fig:fig9.14)Estimated hazard function and estimated cumulative hazard function for the chip melting data.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_14} 
+
+}
+
+\caption{Estimated hazard function and estimated cumulative hazard function for the chip melting data.}(\#fig:fig9.14)
+\end{figure}
 
 ## Extended Activity: Estimated Cumulative Hazard Function {-}
 
-48. Use Equation (9.17) and the quantities in Table 9.6 to compute $\widehat H(t)_{\mathrm{NA}}$ for the chip melting times from Table 9.2 by hand.  
+48. Use Equation \ref{9.17} and the quantities in Table 9.6 to compute $\widehat H(t)_{\mathrm{NA}}$ for the chip melting times from Table 9.2 by hand.  
 
 As discussed earlier in connection with the population cumulative hazard function $H(t)$, we can also examine how the rate of change in the estimated cumulative hazard, $\widehat H(t)_{\mathrm{NA}}$, changes over time, to investigate changes in the estimated hazard function over time.
 
@@ -1050,10 +1106,14 @@ Let’s return to the motorist reaction time data. As we’ve already seen, the 
 played several spikes, but the overall pattern was difficult to summarize. Figure 9.15 displays the estimated
 hazard and cumulative hazard functions.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_15.png" alt="Estimated hazard function and estimated cumulative hazard function for the aggressive motorist behavior." width="100%" />
-<p class="caption">(\#fig:fig9.15)Estimated hazard function and estimated cumulative hazard function for the aggressive motorist behavior.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_15} 
+
+}
+
+\caption{Estimated hazard function and estimated cumulative hazard function for the aggressive motorist behavior.}(\#fig:fig9.15)
+\end{figure}
 
 We can summarize the rates of increase and decrease in the estimated cumulative hazard function
 shown in Part (b) of Figure 9.15 and describe the changes in the estimated hazard function. The rate of
@@ -1104,10 +1164,14 @@ Throughout our discussions of survival analysis techniques, we’ve assumed that
 
 To see the difference between right censoring and left censoring, examine Figure 9.16. Figure 9.16 displays the target event times of four subjects. For now, we’ll assume that time is measured in months. We’ll discuss subjects 1, 3, and 4 first. Subject 1 entered the study at time 2 and experienced the target event at time 8, so subject 1 has a complete target event time of 6 months. Subject 3 entered the study at time 3, but dropped out of the study at time 7. Hence, subject 3 has a right-censored event time of 4 months. This means that subject 3’s event time is _at least_ 4 months. Finally, subject 4 entered the study at time 2 and had not experienced the event by the end of the study at time 9. Subject 4 has a right-censored event time of 7 months.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_16.png" alt="Observed survival times for four subjects. X indicates the target event occurred at displayed time; O indicates the target event was not observed (event time is censored); &lt; indicates when Subject 2 was first observed in the study." width="100%" />
-<p class="caption">(\#fig:fig9.16)Observed survival times for four subjects. X indicates the target event occurred at displayed time; O indicates the target event was not observed (event time is censored); < indicates when Subject 2 was first observed in the study.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_16} 
+
+}
+
+\caption{Observed survival times for four subjects. X indicates the target event occurred at displayed time; O indicates the target event was not observed (event time is censored); < indicates when Subject 2 was first observed in the study.}(\#fig:fig9.16)
+\end{figure}
 
 Subject 2 is rather interesting. Subject 2 experienced the event prior to the beginning of the study but was not observed until time 2. In other words, subject 2’s observed event time is _greater_ than her exact event time. Her event time is left censored.
 
@@ -1133,33 +1197,28 @@ The goal of this chapter was to provide an overview of time-to-event data and ex
 The Kaplan–Meier estimator of the probability of survival beyond time $t$ is given by
 \begin{align}
 \hat S(t)_{\mathrm{KM}} &= \prod_{t_i \le t} \Bigl(1 - \frac{d_i}{n_i}\Bigr).
-\tag{9.2}
 \end{align}
 
 Other descriptive statistics can be computed for the observed event times, including the mean survival time and percentiles of survival time.  If the largest complete event time is identical to the largest observed event time, the estimator of the mean survival time is
 \begin{align}
 \hat \mu &= \sum_{i=0}^{m-1} \hat S(t_i)_{\mathrm{KM}}\,(t_{i+1} - t_i).
-\tag{9.3}
 \end{align}
 
 If the largest event time is censored, the estimator of the mean survival time is
 \begin{align}
 \hat \mu &= \sum_{i=0}^{m-1} \hat S(t_i)_{\mathrm{KM}}\,(t_{i+1} - t_i)
 + \hat S(t_m)_{\mathrm{KM}}\,(t_n - t_m).
-\tag{9.4}
 \end{align}
 
 To estimate the time at which $p\%$ of the subjects had yet to experience the target event, the $p$th percentile of survival time can be calculated as
 \begin{align}
 \hat t_{(p)} &= \text{smallest complete event time }t_i\text{ such that }
 \hat S(t_i)_{\mathrm{KM}} \le 1 - \frac{p}{100}.
-\tag{9.5}
 \end{align}
 
 To provide a range of possible values for the true survival probabilities, confidence intervals based on the Kaplan–Meier estimates can be constructed for $S(t)$ at fixed points in time.  The $100(1 - \alpha)\%$ confidence interval for the survival probability $S(t)$ at fixed time $t$ is given by
 \begin{align}
 \hat S(t)_{\mathrm{KM}} \pm Z_{\alpha/2}\,\mathrm{se}\bigl(\hat S(t)_{\mathrm{KM}}\bigr),
-\tag{9.7}
 \end{align}
 where
 \begin{align}
@@ -1168,14 +1227,12 @@ where
 \bigl(\hat S(t)_{\mathrm{KM}}\bigr)^2 
 \sum_{t_i \le t} \frac{d_i}{n_i\,(n_i - d_i)}
 }.
-\tag{9.9}
 \end{align}
 
 The survival experiences of two or more groups of subjects can be compared with the log-rank test or Wilcoxon test.  Given sample event times for two groups, the log-rank test statistic for comparing the survival curves for two independent populations is
 \begin{align}
 \chi^2 &= \frac{\Bigl(\sum_{i=1}^m d_{1i} - \sum_{i=1}^m E_{1i}\Bigr)^2}
 {\sum_{i=1}^m V_{1i}}.
-\tag{9.12}
 \end{align}
 
 The hazard function assesses the risk that a subject will experience a target event in the next instant given that the subject has not previously experienced the event.  The estimated hazard function, constructed from a sample of event times, is given by
@@ -1189,7 +1246,6 @@ One drawback of the estimated hazard function is that it can exhibit a very erra
 \widehat H(t)_{\mathrm{NA}}
 &= \sum_{t_i \le t}
 \bigl[\hat h(t_i)_{\mathrm{KM}}\,(t_{i+1} - t_i)\bigr].
-\tag{9.17}
 \end{align}
 
 The estimated cumulative hazard function provides the accumulation of estimated hazard up to a particular time $t$.  These formulas assume right censoring only.  If left or interval censoring or left or right truncation are present in your data, alternative methods must be used.
@@ -1262,10 +1318,14 @@ Select an article that implements survival analysis methods, and answer the foll
     \item Use the curve to estimate the mean time until death due to brain cancer.
   \end{enumerate}
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_17.png" alt="Kaplan-Meier curve for survival times after brain cancer diagnosis." width="100%" />
-<p class="caption">(\#fig:fig9.17)Kaplan-Meier curve for survival times after brain cancer diagnosis.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_17} 
+
+}
+
+\caption{Kaplan-Meier curve for survival times after brain cancer diagnosis.}(\#fig:fig9.17)
+\end{figure}
 
   \item Acute myelogenous leukemia (AML) is a cancer that starts inside bone marrow (the soft tissue inside bones that helps form blood cells). The cancer grows from cells that would normally turn into white blood cells. A clinical trial to evaluate the efficacy of maintenance chemotherapy for AML was conducted at Stanford University. After reaching a status of remission through treatment by chemotherapy, the patients who entered the study were randomly assigned to two groups; the first group received maintenance chemotherapy, and the second group did not. The objective of the study was to investigate whether maintenance chemotherapy prolonged time until relapse (measured in weeks from the time of randomization to the two groups). Table 9.7 contains quantities related to the construction of the Kaplan-Meier estimates for survival probabilities of patients with AML who received maintenance chemotherapy.
   \begin{enumerate}
@@ -1300,14 +1360,18 @@ i & Interval & $t_i$ & $n_i$ & $d_i$ & $n_i - d_i$ & $\hat{p}_i$ & $\hat{S}(t)_{
   \item Using the information in Table 9.7, answer the following:
   \begin{enumerate}
     \item Compute the standard error for the estimate of the probability that a patient receiving maintenance chemotherapy will relapse after 15 weeks.
-    \item Compute and interpret a 95\% confidence interval [based on Equation (9.8)] for the probability that a patient receiving maintenance chemotherapy will relapse after 15 weeks. Note that the critical value is 1.96.
+    \item Compute and interpret a 95\% confidence interval [based on Equation \ref{9.8}] for the probability that a patient receiving maintenance chemotherapy will relapse after 15 weeks. Note that the critical value is 1.96.
     \item Suppose a doctor claims that fewer than 50\% of patients receiving maintenance chemotherapy will relapse after 15 weeks. Based on your answer to Part (b), how would you respond to this claim?
   \end{enumerate}
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_18.png" alt="Kaplan-Meier curves for AML relapse times for patients who did and did not receive maintenance chemotherapy." width="100%" />
-<p class="caption">(\#fig:fig9.18)Kaplan-Meier curves for AML relapse times for patients who did and did not receive maintenance chemotherapy.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_18} 
+
+}
+
+\caption{Kaplan-Meier curves for AML relapse times for patients who did and did not receive maintenance chemotherapy.}(\#fig:fig9.18)
+\end{figure}
 
   \item Sketch hazard functions that would correspond to the following time-to-event random variables. (You may want to do a little background research.)
   \begin{enumerate}
@@ -1318,10 +1382,14 @@ i & Interval & $t_i$ & $n_i$ & $d_i$ & $n_i - d_i$ & $\hat{p}_i$ & $\hat{S}(t)_{
 
   \item The graphs displayed in Figure 9.19 are population cumulative hazard functions for three distributions of the time-to-event random variable $T$. For each one, sketch a possible corresponding hazard function $h(t)$. Be sure to label the same time points on your sketches as are provided on the graphs of $H(t)$.
 
-<div class="figure" style="text-align: center">
-<img src="docs/Fig9_19.png" alt="Population cumulative hazard functions for three distributions of $T$" width="100%" />
-<p class="caption">(\#fig:fig9.19)Population cumulative hazard functions for three distributions of $T$</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{docs/Fig9_19} 
+
+}
+
+\caption{Population cumulative hazard functions for three distributions of $T$}(\#fig:fig9.19)
+\end{figure}
 
   \item \textbf{Male Fruit Fly Longevity}\\
   Data set: \texttt{Fruitfly}
